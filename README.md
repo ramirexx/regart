@@ -1,3 +1,2 @@
 # regart
-1 frontEnd Angular
-2 backend php
+Angular2  & php
