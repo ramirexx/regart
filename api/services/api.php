@@ -8,6 +8,7 @@
       const DB_SERVER = "localhost";
       const DB_USER = "root";
       const DB_PASSWORD = "vertrigo";
+      /*const DB = "angularcode_customer";*/
       const DB = "cultura_artistas2014";
 
       private $db = NULL;
@@ -39,6 +40,72 @@
  
 
 #################### REST COLECTIVOS ###################
+//servicio para insertar registro colectivo
+//http://localhost/api/regart/insertColectivo
+/*{
+      "ci_usuarios": "1121212",
+      "gestion":"1988",
+      "d_fecha":"2134123",
+      "id_dpto":1,
+      "d_provincia":"234",
+      "d_municipio":"sadsad",
+      "d_comunidad":"sdas",
+      "d_denominacion":"ADASD",
+      "d_representantes":"SDFSADAD",
+      "d_nom_rep_legal":"SADASDAS",
+      "d_ape_rep_legal":"SDASDASD",
+      "d_cedula_rep_legal":"SDASASDA",
+      "d_exp":"ASD",
+      "d_lugar_nac_rep_legal":213123,
+      "d_fecha_nac_rep_legal":"sadasdas",
+        "d_dom_rep_legal":"asdasd",
+        "d_telefono_grupo":"234234",
+        "d_celular_grupo":"33333",
+        "d_email_grupo":"sdfsdf",
+        "d_antecedentes_grupo":"sadfasd",
+        "id_cat":null,
+        "id_sub_cat":null,
+        "d_especialidad_grupo":"sdfsdf",
+        "d_biografia_grupo":"sadasd",
+        "id_doc_resp":1,
+        "d_doc_respaldo":"ASDSAD",
+        "d_logo_grupo":"SADFSAD",
+        "id_estado":1
+  }*/
+
+  private function insertColectivo(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('ci_usuarios', 'd_modificador', 'gestion', 'd_fecha', 'id_dpto', 'd_provincia', 'd_municipio', 'd_comunidad', 'd_denominacion',
+      'd_representantes','d_nom_rep_legal','d_ape_rep_legal','d_cedula_rep_legal','d_exp','d_lugar_nac_rep_legal','d_fecha_nac_rep_legal','d_dom_rep_legal',
+      'd_telefono_grupo','d_celular_grupo','d_email_grupo','d_antecedentes_grupo','id_cat','id_sub_cat','d_especialidad_grupo','d_biografia_grupo',' 	id_doc_resp',
+      'd_doc_respaldo','d_logo_grupo','id_estado');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO tb_colectivo(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Colectivo Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('error',204);   //"No Content" status
+   }
+
+
+   
 //Servicio para recuperar colectivos
 //http://localhost/api/regart/listacolectivos
       private function listacolectivos(){
@@ -130,13 +197,77 @@
                     $this->response($this->json($success),200);
                  }else
                     $this->response('',204);   //"No Content" status
-              }
+      }
 
 
 
-      
 
+#####################USUARIO###########################
+//Servicioo prta listar los usuarios
 
+      private function listaUsuarios(){
+            if($this->get_request_method() != "GET"){
+               $this->response('',406);
+               }
+               $query="SELECT * FROM usuarios  ORDER BY ci_usuarios";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+   
+            if($r->num_rows > 0){
+               $result = array();
+               while($row = $r->fetch_assoc()){
+                  $result[] = $row;
+               }
+               $this->response($this->json($result), 200); // send user details
+            }
+            $this->response('',204);   // If no records "No Content" status
+         }
+
+//servicio para insertar un usuario
+private function insertUsusario(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('ci_usuarios','nom_ape_usuarios','nick_usuario','pass_usuario','id_nivel','id_dpto');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO usuarios(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "User Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
+
+//servicio que recupera usuario por ci
+//http://localhost/api/regart/usuario?ci=3395116
+private function usuario(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+      }
+      $id = (int)$this->_request['ci'];
+      if($id > 0){   
+         $query="SELECT distinct * FROM usuarios u where u.ci_usuarios=$id";
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         if($r->num_rows > 0) {
+            $result = $r->fetch_assoc();   
+            $this->response($this->json($result), 200); // send user details
+         }
+      }
+      $this->response('',204);   // If no records "No Content" status
+   }
 
 
 
