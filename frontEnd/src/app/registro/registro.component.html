@@ -1,3 +1,51 @@
-<p>
-  registro works!
-</p>
+
+  <div class="col-md-12">
+    <h2>Registro </h2>
+    <legend>Ficha de Registro</legend>
+      <p-panel header="Datos Geográficos">
+          <fieldset>
+              <div class="row">
+                <div class="col-sm-3">
+                    <label>Fecha</label>
+                    <p-calendar [(ngModel)]="artista.d_fecha" dateFormat="dd/mm/yy" class="form-control"
+                    placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Registrado en</label>
+                        <select class="form-control">
+                    <option *ngFor="let obj of departamentos" [ngValue]="obj">{{obj.descripcion}}</option>
+                    </select>
+
+                    </div>
+                </div>
+              </div>
+            </fieldset> 
+          
+            <fieldset>
+                <div class="row">
+                  <div class="col-sm-3">
+                      <label>Provincia </label>
+                      <input type="text" class="form-control" 
+                              [(ngModel)]="artista.d_comunidad" maxlength="36" />
+                  </div>
+                  <div class="col-sm-3">
+                      <div class="form-group">
+                          <label>Municipio </label>
+                          <input type="text" class="form-control" 
+                              [(ngModel)]="artista.d_comunidad" maxlength="36" />
+                      </div>
+                  </div>
+                  <div class="col-sm-3">
+                      <div class="form-group">
+                          <label>A2. Número de Referencia</label>
+                          <input type="text" class="form-control" 
+                              [(ngModel)]="artista.d_comunidad" maxlength="36" />
+                      </div>
+                  </div>
+                </div>
+              </fieldset> 
+            
+      </p-panel>
+</div>
+
