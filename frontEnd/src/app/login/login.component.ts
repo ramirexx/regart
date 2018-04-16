@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    let link = ['/register'];
+    let link = ['/tipo-registro'];
     this.router.navigate(link);
 
   }
