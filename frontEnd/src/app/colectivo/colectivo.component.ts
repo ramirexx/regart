@@ -7,6 +7,7 @@ import {
   FormArray,
   FormControl
 } from '@angular/forms';
+import {FormularioService} from '../servicios/formulario.service';
 import { Artista } from '../modelo/artista.model';
 import {MenuModule} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
@@ -26,9 +27,19 @@ export class ColectivoComponent implements OnInit {
   es: any;
 
   //listas
-  departamentos = [{ codigo: 1, descripcion: 'LA PAZ' }, { codigo: 2, descripcion: 'ORURO' }];
+  departamentos = [{ codigo: 1, descripcion: 'Chuquisaca' },
+                   { codigo: 2, descripcion: 'La Paz' },
+                   { codigo: 3, descripcion: 'Cochabamaba' },
+                   { codigo: 4, descripcion: 'Oruro' },
+                   { codigo: 5, descripcion: 'Potosi' },
+                   { codigo: 6, descripcion: 'Tarija' },
+                   { codigo: 7, descripcion: 'Santa Cruz' },
+                   { codigo: 8, descripcion: 'Beni' },
+                   { codigo: 9, descripcion: 'Pando' }]
+  categorias: any[];
 
   constructor(private _fb: FormBuilder,
+    private formularioService: FormularioService
     ) { 
     this.artForm = this._fb.group({
       //'seltipoOperacion': [{ value: '' }, Validators.required],
@@ -78,6 +89,12 @@ export class ColectivoComponent implements OnInit {
       today: 'Hoy',
       clear: 'Borrar'
   }
+
+  this.formularioService.getCategorias()
+  .subscribe(data => {this.categorias = data},
+  err => console.log(err),
+()=>console.log("done loanding",this.categorias));
+      
     
   }
 
