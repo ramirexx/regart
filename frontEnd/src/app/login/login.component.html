@@ -1,6 +1,76 @@
-<p>
-  login works! ***** dfgfdgdfgdfg
 
-  <button class="btn btn-primary" (click)="login()">Login</button>
+<header id="header" class="animated fadeInDown" style="height: 120px; padding: 10px">
+    
+  <div id="logo-group" style="text-align: center;  display:block; ; margin-left:20px;">
+    <!--<span id="logo"> <img src="assets/img/logo.png" alt="SmartAdmin"> </span>-->
+    <img src="assets/img/logo.png"  alt="" style="display: block; margin-left: auto; margin-right: auto;">
+  </div>
+
   
-</p>
+
+</header>
+<div id="main" role="main" class="animated fadeInDown" style="margin-left: 0px">
+    
+  <div id="content" class="container">
+    <div class="row">
+        
+      <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+          
+        <h1 class="login-header-big">Registro Plurinacional de Artistas</h1>
+
+        <div class="hero">
+          <div class="pull-left login-desc-box-l">
+            <!--<h4 class="paragraph-header">It's Okay to be Smart. Experience the simplicity of SmartAdmin,
+              everywhere you go!</h4>-->
+
+            
+          </div>
+          
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+        <div class="well no-padding">
+          <form class="smart-form client-form">
+            <header>
+              Iniciar Sesión
+            </header>
+            <fieldset>
+              <section>
+                <label class="label">E-mail</label>
+                <label class="input"> <i class="icon-append fa fa-user"></i>
+                  <input type="email" name="email" data-smart-validate-input="" data-required="" data-email="" data-message-required="Please enter your email address" data-message-email="Please enter a VALID email address">
+                  <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>
+                    Please enter email address/username</b></label>
+              </section>
+              <section>
+                <label class="label">Password</label>
+                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                  <input type="password" name="password" data-smart-validate-input="" data-required="" data-minlength="3" data-maxnlength="20" data-message="Please enter your email password">
+                  <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter
+                    your password</b> </label>
+
+                <div class="note">
+                  <a routerLink="/auth/forgot-password">Olvidó contraseña?</a>
+                </div>
+              </section>
+              <!--<section>
+                <label class="checkbox">
+                  <input type="checkbox" name="remember" checked>
+                  <i></i>Stay signed in</label>
+              </section>-->
+            </fieldset>
+            <footer>
+                
+              <button (click)="login()" class="btn btn-primary">
+                Acceder
+              </button>
+            </footer>
+          </form>
+        </div>
+        <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Necesita una cuenta?</span> <a routerLink="/auth/register" class="btn btn-danger">Crear Cuenta</a> </span>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
