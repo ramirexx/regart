@@ -98,4 +98,15 @@ export class ColectivoComponent implements OnInit {
     
   }
 
+  public saveDraft(): void {
+    this.formularioService.saveColectivo(this.artista).subscribe(response => {
+      console.log(response.ok +"--"+response.body);
+  }, (error: any) => {
+    alert("error")
+    console.log("error");
+  });
+}
+  
+  
+
 }

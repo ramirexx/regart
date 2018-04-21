@@ -98,7 +98,7 @@
                   <div class="col-sm-3">
                       <label>Categoría </label>
                       <select class="form-control" [formControl]="artForm.controls['id_cat']">
-                          <option *ngFor="let obj of departamentos" [ngValue]="obj">{{obj.descripcion}}</option>
+                          <option *ngFor="let obj of categorias" [ngValue]="obj">{{obj.d_desc_cat}}</option>
                       </select>
                   </div>
                   <div class="col-sm-3">
@@ -233,7 +233,7 @@
   <div class="col-md-12">
       <p-toolbar>
           <div class="ui-toolbar-group-right">
-              <button pButton type="button" label="Guardar" icon="fa-save"></button>
+              <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveDraft()"></button>
               <button pButton type="button" label="Cancelar" icon="fa-times"></button>
           </div>
       </p-toolbar>

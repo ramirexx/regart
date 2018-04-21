@@ -11,8 +11,11 @@ import { Auth } from './auth/index';
 export const appRoutes: Routes = [
     
     //{ path: '', component: HomeComponent, canActivate: [Auth] },
-    { path: '', component: HomeComponent},
-    { path: 'login', component: LoginComponent },
+    { path: '', component: LoginComponent },
+    { path: 'home', component: HomeComponent,
+    children:[
+        { path: 'registro-colectivo', component: ColectivoComponent },
+    ]},
     { path: 'tipo-registro', component: RegistroComponent },
     { path: 'registro-individual', component: IndividualComponent },
     { path: 'registro-colectivo', component: ColectivoComponent },

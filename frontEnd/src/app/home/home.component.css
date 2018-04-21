@@ -1,0 +1,14 @@
+header>:first-child{
+    width: 500px !important;
+    margin-left: 10px;
+    padding: 10px;;
+    
+}
+
+nav li{
+    padding-top: 10px;
+}
+
+#page-wrapper{
+    background: #eeeeee
+}

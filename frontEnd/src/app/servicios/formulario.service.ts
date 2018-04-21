@@ -5,11 +5,13 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Artista} from '../modelo';
 
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  
 };
 
 
@@ -25,10 +27,22 @@ export class FormularioService {
       .catch(this.handleError);
   }
 
+
+  saveColectivo (data:Artista): Observable<HttpResponse<Object>> {
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this.http.post<HttpResponse<Object>>(environment.urlApi+'insertColectivo', data,{observe:'response', headers:headers}).map(this.extractDataHttpResponse) 
+      .catch(this.handleError);
+      
+  }
+
   private extractData(res: Response) {
     let data = res;
     console.log(data)
     return data;
+  }
+
+  private extractDataHttpResponse(res: HttpResponse<Object>) {
+    return res;
   }
 
   private handleError(error: any) {
