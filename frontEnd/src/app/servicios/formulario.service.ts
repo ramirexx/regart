@@ -1,49 +1,69 @@
 import { Injectable } from '@angular/core';
+import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/Rx';
-import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { environment }     from '../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import { HttpClient,HttpHandler, HttpHeaders, HttpResponse } from '@angular/common/http';
+
 import { Artista} from '../modelo';
+import { Individual } from '../modelo/individual.model';
 
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  
-};
+
 
 
 @Injectable()
 export class FormularioService {
 
-  constructor(public http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
+  
 
-
-  getCategorias(): Observable<any> {
+  getCategorias(): Observable<any[]> {
     return this.http.get(environment.urlApi + 'listaCategorias').map(this.extractData)
       .catch(this.handleError);
   }
 
+  
 
-  saveColectivo (data:Artista): Observable<HttpResponse<Object>> {
-    let headers = new HttpHeaders().set('Content-Type','application/json');
-    return this.http.post<HttpResponse<Object>>(environment.urlApi+'insertColectivo', data,{observe:'response', headers:headers}).map(this.extractDataHttpResponse) 
+ 
+  
+
+  saveColectivo (data:Artista): Observable<any> {
+    //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+    //let options = new RequestOptions( {method: RequestMethod.Post, headers: headers });
+    return this.http.post(environment.urlApi + 'insertColectivo', data).map(this.extractData) 
+      .catch(this.handleError);
+      
+  }
+  
+  saveIndividual (data:Individual): Observable<any> {
+    //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+    //let options = new RequestOptions( {method: RequestMethod.Post, headers: headers });
+    return this.http.post(environment.urlApi + 'insertIndividual', data).map(this.extractData) 
       .catch(this.handleError);
       
   }
 
-  private extractData(res: Response) {
-    let data = res;
-    console.log(data)
-    return data;
+  getArtistasIndividual(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'listaIndividual').map(this.extractData)
+      .catch(this.handleError);
   }
 
-  private extractDataHttpResponse(res: HttpResponse<Object>) {
-    return res;
+
+
+  private extractData(res: Response) {
+    let body = res;
+    return body || {};
+    //console.log(body)
   }
+
+  /*private extractDataHttpResponse(res: HttpResponse<Object>) {
+    return res;
+  }*/
 
   private handleError(error: any) {
 
@@ -52,5 +72,7 @@ export class FormularioService {
     console.error(errMsg);
     return Observable.throw(errMsg);
   }
+
+  
 
 }

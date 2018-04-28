@@ -1,0 +1,89 @@
+
+<h4 class="page-title txt-color-blueDark">
+    <i class="fa-fw fa fa-user"></i> 
+        LISTADO DE ARTISTAS
+        <span>>  
+            Individual
+  </span>
+</h4>
+
+    <!--<pre>{{listaIndividual | json}}</pre>-->
+
+    <!--<div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
+          <i class="fa fa-search" style="float:left;margin:4px 4px 0 0"></i>
+          <input #gb type="text" pInputText size="50" style="float:left" placeholder="Buscar">
+        </div>-->
+
+<div class="row">
+  <div class="col-md-12">
+    <p-dataTable [value]="listaIndividual" [rows]="10" [paginator]="true" [globalFilter]="gb" emptyMessage="No se encontraron registros">
+      <p-column [style]="{'width':'5%'}" header="N°">
+        <ng-template let-index="rowIndex" pTemplate type="body">
+          <span>{{index+1}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="ci_usuarios" header="Cedula de Identidad"></p-column>
+      <p-column field="d_nombres" header="Nombres"></p-column>
+      <p-column field="d_apellidos" header="Apelidos"></p-column>
+      <p-column [style]="{'width':'10%'}" header="Acciones">
+        <ng-template let-doc="rowData" pTemplate type="body">
+            <button type="button" pButton (click)="selectCar(car)" icon="fa-search"></button>
+
+          <!--<div class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="btn btn-primary btn-sm dropdown-toggle">
+    Acción <span class="caret"></span>
+  </button>
+
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem"><a class="dropdown-item" (click)="ver(doc.id_individual)">Ver</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="deleteDoc(doc.id)">Eliminar</a></li>
+            </ul>
+          </div>-->
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+  </div>
+  </div>
+  <br>
+  <!--<tab class="nav-item" heading="EN PROCESO">
+    <p-dataTable [value]="listEnProceso" [rows]="10" [paginator]="true" [globalFilter]="gb" emptyMessage="No se encontraron registros">
+      <p-column [style]="{'width':'5%'}" header="N°">
+        <ng-template let-index="rowIndex" pTemplate type="body">
+          <span>{{index+1}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="numMic" header="Numero Manifiesto"></p-column>
+      <p-column field="tipoDoc" header="Tipo Documento"></p-column>
+      <p-column field="est" header="Estado"></p-column>
+      <p-column field="razSoc" header="Razon Social"></p-column>
+
+      <p-column [style]="{'width':'10%'}" field="" header="Fecha de Aceptación">
+            <ng-template let-manifiesto="rowData" pTemplate="type" type="body" let-index="rowIndex">
+              {{manifiesto.fecTra | date:'yyyy-MM-dd HH:mm:ss a' }}
+            </ng-template>
+          </p-column>
+
+      <p-column [style]="{'width':'10%'}" header="Acciones">
+        <ng-template let-documento="rowData" pTemplate type="body">
+          <div class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="btn btn-primary btn-sm dropdown-toggle">
+    Acción <span class="caret"></span>
+  </button>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem" *ngIf="documento.firPen==false"><a class="dropdown-item" (click)="editDoc(documento.id, documento.num)">Editar</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="anularDocProcesado(documento.id)">Solicitar Anulacion</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="ver(documento.id)">Ver</a></li>
+            </ul>
+          </div>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+  </tab>-->
+
+
+<!--<app-modal-confirmacion (aceptarModalConfirmacion) = "aceptarModalConfirmacionFormularioDam();"></app-modal-confirmacion>-->
+
+
+<!--<div *ngIf="loading">
+        <loading-indicator></loading-indicator>
+</div>-->

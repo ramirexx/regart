@@ -1,14 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import { HttpModule, XHRBackend,Request, RequestOptionsArgs, Response, RequestOptions, ConnectionBackend, Headers,
+  Http} from '@angular/http';
 import { NgModule, ApplicationRef } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule} from '@angular/router';
 import { AppRoutingModule} from './app.routing';
-//import { HTTP_INTERCEPTORS } from '@angular/common/http';
-//import { HttpLogInterceptor} from './http-interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpLogInterceptor} from './http-interceptor';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpClientModule }    from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/operator/catch";
@@ -20,6 +23,10 @@ import "rxjs/add/observable/empty";
 import { LocationStrategy, HashLocationStrategy,APP_BASE_HREF } from '@angular/common';
 
 import { Auth } from './auth/index';
+
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { SortableModule } from 'ngx-bootstrap/sortable';
 
 import {InputTextModule,DataTableModule,ButtonModule,DialogModule,MultiSelectModule,
   PanelModule, GrowlModule, CalendarModule, InputMaskModule, CheckboxModule, AutoCompleteModule,
@@ -36,6 +43,7 @@ import { HomeComponent } from './home/home.component';
 import { RegistroComponent } from './registro/registro.component';
 import { ColectivoComponent } from './colectivo/colectivo.component';
 import { IndividualComponent } from './individual/individual.component';
+import { ListadoArtistasComponent } from './listado-artistas/listado-artistas.component';
 
 import { FormularioService } from './servicios/formulario.service';
 
@@ -47,7 +55,8 @@ import { FormularioService } from './servicios/formulario.service';
     HomeComponent,
     RegistroComponent,
     ColectivoComponent,
-    IndividualComponent
+    IndividualComponent,
+    ListadoArtistasComponent
   ],
   imports: [
     
@@ -60,14 +69,17 @@ import { FormularioService } from './servicios/formulario.service';
     HttpClientModule,
     InputTextModule, DataTableModule, ButtonModule, DialogModule, PanelModule, 
     CalendarModule, InputMaskModule, ConfirmDialogModule, OverlayPanelModule,
-    MenuModule, ToolbarModule
+    MenuModule, ToolbarModule,
+    TabsModule.forRoot(),
+    BsDropdownModule.forRoot(),
     
   ],
   providers: [
     Auth,
     FormularioService,
-    {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: APP_BASE_HREF, useValue: '/'}
     //{ provide: HTTP_INTERCEPTORS, useClass: HttpLogInterceptor, multi: true }  
+    
     
   ],
   bootstrap: [AppComponent]

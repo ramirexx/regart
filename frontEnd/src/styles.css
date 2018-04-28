@@ -2,3 +2,384 @@
 label {
     margin-bottom: .2rem !important;
 }
+
+/*.ui-hack .form-control{
+    padding: 0px
+}
+
+.ui-hack .ui-autocomplete .ui-autocomplete-dropdown .ui-button-text {
+    padding: 0em;}
+
+    .ui-hack .ui-button {
+    padding: 0.4em;
+    }
+  */  
+
+ /* .ui-calendar button {
+    right: 0;
+    top: 0;
+}*/
+.ui-calendar {
+    width: 100%;
+}
+.form-control {
+    padding: .375rem .75rem !important;
+}
+
+
+/**************************************************/
+/* custom*/
+
+
+    
+    .bg-gray-lighter {
+        background-color: #f5f5f5
+    }
+    
+    .bg-white {
+        background-color: #ffffff
+    }
+    
+    .form-wizard[_ngcontent-npp-3] .tab-pane[_ngcontent-npp-3] {
+        padding: 0px;
+    }
+    /*.form-control  {
+font-size: 12px;
+height: 25ºpx;
+padding: 2px 4px !important;
+border-radius: 0px;*/
+    
+    th {
+        color: #555
+    }
+    
+    .card-primary>.card-header {
+        background-color: #5090c1;
+        border-color: #5090c1;
+    }
+    
+    h3 {
+        color: #4c8fbd;
+    }
+    
+    legend {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        color: #4c8fbd;
+    }
+    
+    .info-name {
+        font-weight: bold;
+        color: #707070;
+        border-top: 1px solid #F7FBFF;
+        margin-bottom: 3px;
+    }
+    
+    .info-value {
+        padding: 2px 4px;
+        background-color: #eceeef;
+        border: 1px dotted #DCEBF7;
+        border-top: 1px solid #F7FBFF;
+        border: 1px solid #d5d5d5;
+        min-height: 25px;
+        border-radius: 3px;
+    }
+    /*label {
+font-weight: normal;
+font-size: 12px;
+margin-bottom: 3px;
+}*/
+    
+    .nav-tabs>li.active>a,
+    .nav-tabs>li.active>a:focus,
+    .nav-tabs>li.active>a:hover {
+        color: #ffffff;
+        background-color: #7db4d8;
+    }
+    
+    .pager {
+        background: #eeeeee;
+        padding: 10px
+    }
+    
+  
+    .center {
+        text-align: center
+    }
+
+
+    /*#################ESTILOS DE VALIDACION#################*/
+    
+    .error {
+        color: #B94A48;
+        font-size: .85rem;
+        border: none;
+    }
+    
+    input.ng-touched.ng-invalid {
+        border-color: #B94A48;
+        background-color: #f9dbdb;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(169,68,66,.6) !important;
+    }
+    
+    select.ng-touched.ng-invalid {
+        border-color: #B94A48;
+        background-color: #f9dbdb;
+    }
+
+    /**input.ng-touched.ng-valid {
+        background-color:green;
+    }*/
+
+
+    .ui-inputtext.ng-dirty.ng-invalid, p-dropdown.ng-dirty.ng-invalid > .ui-dropdown, p-autocomplete.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext, p-calendar.ng-dirty.ng-invalid > .ui-inputtext, p-inputmask.ng-dirty.ng-invalid > .ui-inputtext, p-checkbox.ng-dirty.ng-invalid .ui-chkbox-box, p-radiobutton.ng-dirty.ng-invalid .ui-radiobutton-box, p-inputswitch.ng-dirty.ng-invalid .ui-inputswitch, p-listbox.ng-dirty.ng-invalid .ui-inputtext, p-multiselect.ng-dirty.ng-invalid > .ui-multiselect, p-spinner.ng-dirty.ng-invalid > .ui-inputtext, p-selectbutton.ng-dirty.ng-invalid .ui-button, p-togglebutton.ng-dirty.ng-invalid .ui-button{
+        border:1px solid  #B94A48;
+        background-color: #f9dbdb;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(169,68,66,.6) !important;
+    }
+
+    
+    .white {
+        color: #ffffff;
+    }
+    
+    .form-control {
+        font-size: 0.8rem;
+        padding: .3rem;
+    }
+    
+ 
+    
+   
+
+    input[type=date] {
+        padding: 0.2rem;
+    }
+    
+    label {
+        margin-bottom: .3rem;
+    }
+    /*DATATABLE*/
+
+
+
+
+
+/*Mensages*/
+.ui-growl-item-container {
+opacity: .85;
+filter: alpha(opacity=85);
+top: 100px;
+}
+
+.validator .ng-invalid {
+border-left: 5px solid #a94442; /* red */
+/*border-color:  #a94442 !important; /* red */
+/*box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(169,68,66,.6) !important;
+}*/
+}
+ .validator .ng-valid {
+  border-left: 5px solid #42A948; /* green */
+}
+
+
+/*##########################
+ESTILO GENERICO SUMA
+############################*/
+
+
+.btn-primary {
+color: #fff;
+background-color: #428bca ;
+border-color: #428bca;
+}
+
+.pager {
+background: #eff3f8;
+padding: 10px;
+border: 1px solid #C5D0DC;
+}
+
+.blue {
+color: #478fca !important;
+}
+.white{
+color: #ffffff !important;
+}
+
+.strong{
+font-weight: bold
+}
+.header{
+font-size: 1.143rem;
+line-height: 28px;
+/*margin-bottom: 16px;*/
+margin-top: 18px;
+padding-bottom: 4px;
+border-bottom: 1px solid #CCC;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.nav-tabs {
+border-bottom: 1px solid #ddd;
+background: #ffffff;
+margin-bottom: 10px;
+}
+
+.card-header {
+padding: .75rem 1.25rem;
+background-color: #7db4d8;
+border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-caption{
+text-align: left;
+} 
+
+
+
+.gray .ui-panel .ui-panel-titlebar.ui-widget-header{
+background:#818a91 !important; 
+color: #ffffff;
+font-size: 15px
+}
+
+
+.center{
+text-align: center !important;
+}
+
+
+
+
+.nav-pills .nav-item.open .nav-link, .nav-pills .nav-item.open .nav-link:focus, .nav-pills .nav-item.open .nav-link:hover, .nav-pills .nav-link.active, .nav-pills .nav-link.active:focus, .nav-pills .nav-link.active:hover {
+color: #5293C4;
+cursor: default;
+background-color: #fff;
+font-size: 13px;
+
+}
+
+.header {
+line-height: 28px;
+margin-bottom: 16px;
+margin-top: 18px;
+padding-bottom: 4px;
+border-bottom: 1px solid #CCC;
+}
+
+/*.tab-content{
+padding-top: 10px;
+background: #ffffff
+}*/
+
+
+/*estilos  caldendario*/
+.input-group-addon {
+padding: .1rem .75rem;
+}
+
+
+
+
+.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-caption, .ui-datatable .ui-datatable-footer{
+background: linear-gradient(to bottom, #f6f7f9 0%, #ebedf0 100%);
+   /*color:white   ;*/
+   text-align: center;
+   
+   /*font-size: 1rem*/
+}
+
+.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-caption {
+/*text-align: left;
+height: 40px;*/
+}
+
+.ui-datatable .ui-datatable-thead > tr > th, body .ui-datatable .ui-datatable-tfoot > tr > td {
+/*background: linear-gradient(to bottom, #f6f7f9 0%, #ebedf0 100%) !important;*/
+background-color: #f5f5f5;
+background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+padding: .25em;
+border-color: #c7c7c7;
+color: #373a3c;
+text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+font-weight: bold;
+}
+
+body .ui-paginator {
+/*background: linear-gradient(to bottom, #f6f7f9 0%, #ebedf0 100%);*/
+background: #EEF2F7
+}
+
+body .ui-datatable .ui-datatable-thead > tr > th, body .ui-datatable .ui-datatable-tfoot > tr > td {
+padding: .50em;
+}
+
+.ui-datatable .ui-datatable-footer {
+text-align: right !important;
+padding: 5px !important;
+}
+
+
+/*ESTILO TABLAS ANGULAR*/
+
+thead{
+color: #333333;
+text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+background-color: #f5f5f5;
+background-image: -ms-linear-gradient(to bottom, #ffffff, #e6e6e6);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+background-image: -webkit-linear-gradient(to bottom, #ffffff, #e6e6e6);
+background-image: -o-linear-gradient(to bottom, #ffffff, #e6e6e6);
+background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+background-image: -moz-linear-gradient(to bottom, #ffffff, #e6e6e6);
+background-repeat: repeat-x;
+border: 1px solid #cccccc;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+border-bottom-color: #b3b3b3;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+th{
+border-color: #ccc;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+
+table thead th {
+vertical-align: bottom;
+border-bottom: 2px solid #c6cacd !important;
+}
+
+table-bordered td, .table-bordered th {
+border: 1px solid #cbcdcf;
+}
+
+
+
+/*DIV BUSCADOR*/
+.ui-widget-header .ui-helper-clearfix{
+padding: 0px !important;
+border: none;
+background: none;
+}
+
+/*MODAL*/
+.modal-header{
+background: #7DB4D8; 
+color: #f3f3f3
+}
+
+
+
+
