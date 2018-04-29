@@ -7,6 +7,7 @@ import { RegistroComponent } from './registro/index';
 import { ColectivoComponent } from './colectivo/colectivo.component';
 import { IndividualComponent } from './individual/individual.component';
 import { ListadoArtistasComponent } from './listado-artistas/listado-artistas.component';
+import { VerIndividualComponent } from './ver-individual/ver-individual.component';
 import { Auth } from './auth/index';
 
 export const appRoutes: Routes = [
@@ -18,6 +19,7 @@ export const appRoutes: Routes = [
         { path: 'registro-colectivo', component: ColectivoComponent },
         { path: 'registro-individual', component: IndividualComponent },
         { path: 'listado-artistas', component: ListadoArtistasComponent },
+        { path: 'ver-artista/:id', component: VerIndividualComponent },
     ]},
     { path: 'tipo-registro', component: RegistroComponent },
     { path: 'registro-individual', component: IndividualComponent },

@@ -27,7 +27,7 @@
       <p-column field="d_apellidos" header="Apelidos"></p-column>
       <p-column [style]="{'width':'10%'}" header="Acciones">
         <ng-template let-doc="rowData" pTemplate type="body">
-            <button type="button" pButton (click)="selectCar(car)" icon="fa-search"></button>
+            <button type="button" pButton (click)="ver(doc.id_individual)" icon="fa-search"></button>
 
           <!--<div class="btn-group" dropdown>
             <button dropdownToggle type="button" class="btn btn-primary btn-sm dropdown-toggle">

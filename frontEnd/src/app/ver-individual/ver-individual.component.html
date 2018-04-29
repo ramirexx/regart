@@ -1,0 +1,257 @@
+<h4 class="page-title txt-color-blueDark">
+  <i class="fa-fw fa fa-user"></i>
+  REGISTRO INDIVIDUAL
+  <span>> Ficha de Registro
+  </span>
+</h4>
+<div class="col-md-12">
+  <fieldset>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="info-name">Número de Registro</div>
+        <div class="info-value">{{artista.numero_registro}}</div>
+      </div>
+      <div class="col-sm-3">
+        <div class="info-name">Fecha de registro</div>
+          <div class="info-value">{{d_fecha_registro}}</div>
+        </div>
+        <div class="col-sm-3" *ngIf="renovacion">
+          <div class="info-name">Fecha de renovacion</div>
+            <div class="info-value">{{d_fecha_renovacion}}</div>
+          </div>
+    
+        </div>
+  </fieldset>
+  <p-panel header="Lugar de Registro">
+    <fieldset>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="info-name">Departamento</div>
+            <div class="info-value">{{artista.id_dpto}}</div>
+          </div>
+          <div class="col-sm-3">
+            <div class="info-name">Provincia </div>
+              <div class="info-value">{{artista.d_provincia}}</div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <div class="info-name">Municipio </div>
+                  <div class="info-value">{{artista.d_municipio}}</div>
+                </div>
+              </div>
+            </div>
+    </fieldset>
+  </p-panel>
+  <p-panel header="Datos Personales">
+    <fieldset>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="info-name">Cedula de identidad</div>
+            <div class="info-value">{{artista.d_cedula}}</div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <div class="info-name">Lugar de expedicion</div>
+                <div class="info-value">{{artista.d_exp}}</div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <div class="info-name">Sexo</div>
+                  <div class="info-value">{{artista.d_sexo}}</div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="info-name">Fecha de nacimiento</div>
+                  <div class="info-value">{{artista.d_fecha_nacimiento}}</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <div class="info-name">Nombres</div>
+                      <div class="info-value">{{artista.d_nombres}}</div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <div class="info-name">Apellidos</div>
+                        <div class="info-value">{{artista.d_apellidos}}</div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <div class="info-name">Lugar de Nacimiento</div>
+                          <div class="info-value">{{artista.d_nacimiento}}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <div class="info-name">Estado civil</div>
+                            <div class="info-value">{{artista.d_estado_civil}}</div>
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="form-group">
+                            <div class="info-name">Nº Hijos</div>
+                              <div class="info-value">{{artista.d_nro_hijos}}</div>
+                            </div>
+                          </div>
+                          <div class="col-sm-3">
+                            <div class="form-group">
+                              <div class="info-name">Profesión </div>
+                                <div class="info-value">{{artista.d_profesion}}</div>
+                              </div>
+                            </div>
+                          </div>
+    </fieldset>
+  </p-panel>
+  <p-panel header="Datos del Contacto">
+    <fieldset>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="info-name">Domicilio actual </div>
+            <div class="info-value">{{artista.d_domicilio}}</div>
+          </div>
+          <div class="col-sm-4">
+            <div class="info-name">Número de telefono fijo </div>
+              <div class="info-value">{{artista.d_telefono}}</div>
+            </div>
+            <div class="col-sm-4">
+              <div class="info-name">Número de celular </div>
+                <div class="info-value">{{artista.d_celular}}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="info-name">Correo electrónico </div>
+                  <div class="info-value">{{artista.d_email}}</div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="info-name">Página Web </div>
+                    <div class="info-value">{{artista.d_pagina_web}}</div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="info-name">Yotube Blog </div>
+                      <div class="info-value">{{artista.d_youtube}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="info-name">Otros </div>
+                        <div class="info-value">{{artista.d_otros}}</div>
+                      </div>
+                    </div>
+
+    </fieldset>
+  </p-panel>
+  <p-panel header="Datos Artisticos">
+    <fieldset>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="info-name">Institución/Sindicato </div>
+            <div class="info-value">{{artista.d_institucion}}</div>
+          </div>
+          <div class="col-sm-4">
+            <div class="info-name">Agrupación </div>
+              <div class="info-value">{{artista.id_cat}}</div>
+            </div>
+            <div class="col-sm-4">
+              <div class="info-name">Sector cultural </div>
+                <div class="info-value">{{artista.id_sub_cat}}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="info-name">Sub sector cultural </div>
+                  <div class="info-value">{{artista.id_sub_sector}}</div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="info-name">Actividad </div>
+                    <div class="info-value">{{artista.d_actividad}}</div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="info-name">Producto </div>
+                      <div class="info-value">{{artista.d_producto}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="info-name">Experiencia </div>
+                        <div class="info-value">{{artista.d_experiencia}}</div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="info-name">Ingresos </div>
+                          <div class="info-value">{{artista.d_ingresos}}</div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="info-name">Gastos </div>
+                            <div class="info-value">{{artista.d_gastos}}</div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <div class="info-name">Empleos directos </div>
+                              <div class="info-value">{{artista.d_empleos_directos}}</div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="info-name">Empleos indirectos </div>
+                                <div class="info-value">{{artista.d_empleos_indirectos}}</div>
+                              </div>
+                              <div class="col-sm-4">
+                                <div class="info-name">Fuentes de financiamiento </div>
+                                  <div class="info-value">{{artista.d_fuente_financiamiento}}</div>
+                                </div>
+                              </div>
+    </fieldset>
+  </p-panel>
+  <p-panel header="Archivos Digitales">
+    <fieldset>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="info-name">Fotografia </div>
+            <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px" />
+            <!--<img *ngIf="base64Image" [src]="domSanitizer.bypassSecurityTrustUrl(base64Image)" />-->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="info-name">Tipo de respaldo </div>
+              <div class="info-value">{{artista.id_doc_resp}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="info-name">Documento de respaldo </div>
+                <div class="info-name">Fotografia </div>
+                  <!--<input type="file" id="filePicker" [formControl]="artForm.controls['d_doc_respaldo']">-->
+
+                  <!--<select class="form-control" [formControl]="artForm.controls['d_doc_respaldo']">
+                      <option *ngFor="let obj of documentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
+                  </select>-->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <div class="info-name">Estado del Registro</div>
+                      <div class="info-value">{{artista.id_estado}}</div>
+                    </div>
+                  </div>
+                </div>
+    </fieldset>
+  </p-panel>
+  </div>
+  <br>
+  <div class="col-md-12">
+    <p-toolbar>
+      <div class="ui-toolbar-group-right">
+        <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveDraft()"></button>
+        <button pButton type="button" label="Cancelar" icon="fa-times"></button>
+      </div>
+    </p-toolbar>
+  </div>
+
+  <pre>{{artista | json}}</pre>

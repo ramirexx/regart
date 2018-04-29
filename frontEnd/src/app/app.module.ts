@@ -46,6 +46,7 @@ import { IndividualComponent } from './individual/individual.component';
 import { ListadoArtistasComponent } from './listado-artistas/listado-artistas.component';
 
 import { FormularioService } from './servicios/formulario.service';
+import { VerIndividualComponent } from './ver-individual/ver-individual.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { FormularioService } from './servicios/formulario.service';
     RegistroComponent,
     ColectivoComponent,
     IndividualComponent,
-    ListadoArtistasComponent
+    ListadoArtistasComponent,
+    VerIndividualComponent
   ],
   imports: [
     

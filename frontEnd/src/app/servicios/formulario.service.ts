@@ -53,6 +53,11 @@ export class FormularioService {
       .catch(this.handleError);
   }
 
+  getIndividual(id: string): Observable<Individual> {
+    return this.http.get(environment.urlApi + 'individual?id='+id).map(this.extractData)
+      .catch(this.handleError);
+  }
+
 
 
   private extractData(res: Response) {
