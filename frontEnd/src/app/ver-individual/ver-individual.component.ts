@@ -12,8 +12,12 @@ export class VerIndividualComponent implements OnInit {
 
   artista: Individual = new Individual();
 
+  qr: string = "";
+  
   constructor(private formularioService: FormularioService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router, 
+  ) { }
 
   ngOnInit() {
     
@@ -28,8 +32,14 @@ export class VerIndividualComponent implements OnInit {
         this.formularioService.getIndividual(id)
           .subscribe(artista => {
             this.artista = artista;
+            this.qr = this.artista.d_nombres + this.artista.d_apellidos 
           })
       }
     })
+  }
+
+  volver(){
+    let link = ['home/listado-artistas/'];
+    this.router.navigate(link);
   }
 }

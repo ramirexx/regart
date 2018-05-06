@@ -27,8 +27,13 @@ export class IndividualComponent implements OnInit {
   //calendario idioma;
   es: any;
 
+  qr: string = "sdfsdfsd";
   renovacion: boolean;
   private base64Foto:String="";
+  year: any;
+
+  
+
   
 
   imagePath:string="/9j/4AAQSkZJRgABAQEAkACQAAD/4QBgRXhpZgAASUkqAAgAAAACADEBAgAHAAAAJgAAAGmHBAABAAAALgAAAAAAAABHb29nbGUAAAMAAJAHAAQAAAAwMjIwAqAEAAEAAACQAQAAA6AEAAEAAACQAQAAAAAAAP/bAEMAEA"+
@@ -141,14 +146,20 @@ export class IndividualComponent implements OnInit {
         err => console.log(err),
         () => console.log("done loanding", this.categorias));
 
+        let date = new Date();
+        this.year = date.getFullYear();
+
   }
 
+  
   public saveDraft(): void {
+    this.artista.numero_registro = "MC"+this.year+"I";
+    this.artista.id_estado = "REGISTRADO";
     this.formularioService.saveIndividual(this.artista).subscribe(response => {
       console.log(response);
-      this.artista.id_estado = "REGISTRADO";
+      //this.artista.numero_registro = 
       if (response.status=="Success"){
-        alert("Artista Registrado");
+        alert("Artista Registrado, Formulario:"+this.artista.numero_registro );
         let link = ['home/listado-artistas/'];
         this.router.navigate(link);  
     this.router.navigate(link);
@@ -158,9 +169,14 @@ export class IndividualComponent implements OnInit {
     }, err => {
       alert(err)
       console.log("error", err);
-      let link = ['home/listado-artistas/'];
-      this.router.navigate(link);
+      //let link = ['home/listado-artistas/'];
+      //this.router.navigate(link);
     });
+  }
+
+  cancel(){
+    let link = ['home/listado-artistas/'];
+    this.router.navigate(link);
   }
 
   handleFileSelect(evt){

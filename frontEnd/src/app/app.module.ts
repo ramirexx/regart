@@ -36,6 +36,9 @@ import {InputTextModule,DataTableModule,ButtonModule,DialogModule,MultiSelectMod
 
 import {MenuItem} from 'primeng/api';
 
+//import { QRCodeModule } from 'angular2-qrcode';
+import { QRCodeModule } from 'ng-qrcode';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -47,6 +50,7 @@ import { ListadoArtistasComponent } from './listado-artistas/listado-artistas.co
 
 import { FormularioService } from './servicios/formulario.service';
 import { VerIndividualComponent } from './ver-individual/ver-individual.component';
+import { UsuariosComponent } from './administracion/usuarios/usuarios.component';
 
 
 @NgModule({
@@ -58,7 +62,8 @@ import { VerIndividualComponent } from './ver-individual/ver-individual.componen
     ColectivoComponent,
     IndividualComponent,
     ListadoArtistasComponent,
-    VerIndividualComponent
+    VerIndividualComponent,
+    UsuariosComponent
   ],
   imports: [
     
@@ -74,6 +79,7 @@ import { VerIndividualComponent } from './ver-individual/ver-individual.componen
     MenuModule, ToolbarModule,
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
+    QRCodeModule
     
   ],
   providers: [

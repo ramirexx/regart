@@ -1,0 +1,120 @@
+<h4 class="page-title txt-color-blueDark">
+  <i class="fa-fw fa fa-user"></i>
+  USUARIOS DE SISTEMA
+  <span>> Listado - Registro
+  </span>
+</h4>
+<div class="row" *ngIf="!panelForm">
+    <div class="col-md-12">
+        <p-toolbar>
+            <div class="ui-toolbar-group-right">
+                <button pButton type="button" label="Nuevo usuario" icon="fa-plus" (click)="showForm()"></button>
+            </div>
+        </p-toolbar>
+    </div>
+    
+  <div class="col-md-12">
+    <p-dataTable [value]="listaUsuarios" [rows]="10" [paginator]="true" [globalFilter]="gb" emptyMessage="No se encontraron registros">
+      <p-column [style]="{'width':'5%'}" header="N°">
+        <ng-template let-index="rowIndex" pTemplate type="body">
+          <span>{{index+1}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="ci_usuarios" header="Cedula de Identidad"></p-column>
+      <p-column field="nom_ape_usuarios" header="Nombres y Apellidos"></p-column>
+      <p-column field="nick_usuario" header="Nombre usuario"></p-column>
+      <p-column field="id_nivel" header="Nivel"></p-column>
+      <p-column [style]="{'width':'10%'}" header="Acciones">
+        <ng-template let-doc="rowData" pTemplate type="body">
+          <button type="button" pButton (click)="ver(doc.ci_usuarios)" icon="fa-search"></button>
+
+          <!--<div class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="btn btn-primary btn-sm dropdown-toggle">
+    Acción <span class="caret"></span>
+  </button>
+
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem"><a class="dropdown-item" (click)="ver(doc.id_individual)">Ver</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="deleteDoc(doc.id)">Eliminar</a></li>
+            </ul>
+          </div>-->
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>
+
+<br>
+<div class="row" *ngIf="panelForm">
+  <div class="col-md-12">
+  <p-panel header="Registro de Usuario">
+    <form [formGroup]="userForm" novalidate>
+      <fieldset>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label>Cedula de Identidad </label>
+              <input type="text" class="form-control" [formControl]="userForm.controls['ci_usuarios']" [(ngModel)]="usuario.ci_usuarios"
+                maxlength="36" />
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label>Nombres y apellidos </label>
+              <input type="text" class="form-control" [formControl]="userForm.controls['nom_ape_usuarios']" [(ngModel)]="usuario.nom_ape_usuarios"
+                maxlength="36" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label>Nombre se usuario </label>
+              <input type="text" class="form-control" [formControl]="userForm.controls['nick_usuario']" [(ngModel)]="usuario.nick_usuario"
+                maxlength="36" />
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label>Contraseña </label>
+              <input type="password" class="form-control" [formControl]="userForm.controls['pass_usuario']" [(ngModel)]="usuario.pass_usuario"
+                maxlength="36" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label>Nivel de Acceso al sistema </label>
+              <select class="form-control" [formControl]="userForm.controls['id_nivel']" [(ngModel)]="usuario.id_nivel" >
+                  <option *ngFor="let obj of niveles" [ngValue]="obj.id_nivel">{{obj.nivel_desc}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label>Departamento</label>
+              <select class="form-control" [formControl]="userForm.controls['id_dpto']" [(ngModel)]="usuario.id_dpto" >
+                  <option *ngFor="let obj of departamentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
+              </select>
+            </div>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p-toolbar>
+              <div class="ui-toolbar-group-right">
+                  <button pButton type="button" label="Guardar" icon="fa-save" (click)="save()"></button>
+                  <button pButton type="button" label="Cancelar" icon="fa-times"(click)="cancel()"></button>
+              </div>
+          </p-toolbar>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+      
+  
+  </p-panel>
+</div>
+</div>

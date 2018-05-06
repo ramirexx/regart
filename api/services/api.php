@@ -29,6 +29,7 @@
        */
       public function processApi(){
          $func = strtolower(trim(str_replace("/","",$_REQUEST['x'])));
+         //print_r($_REQUEST); exit();
          if((int)method_exists($this,$func) > 0)
             $this->$func();
          else
@@ -72,6 +73,24 @@
         "d_logo_grupo":"SADFSAD",
         "id_estado":1
   }*/
+
+private function test(){
+
+//      echo json_encode($response); //T\u00e9cnologia
+ //     echo json_encode($response, JSON_UNESCAPED_UNICODE); //Técnologia
+
+
+      if($this->get_request_method() != "GET"){
+            $this->response('',406);
+         }
+         
+
+            $response = "{'aaa':'Tecnologia'}";
+            //      echo json_encode($response); //T\u00e9cnologia
+            $this->response($this->json($response), 200); // send user details
+            
+}
+
 
   private function insertColectivo(){
       if($this->get_request_method() != "POST"){
@@ -143,8 +162,108 @@
             $this->response('',204);   // If no records "No Content" status
          }
 
-   
-    
+##############INDIVIDUAL###################
+//Servicio para registrar individiual
+//http://localhost/api/regart/insertIndividual
+/*{
+      "numero_registro": "1121212",
+      "ci_usuarios": "1121212",
+      "gestion":"1988",
+      "d_fecha_registro":"2134123",
+      "d_fecha_renovacion":"2134123",
+      "id_dpto":1,
+      "d_provincia":"234",
+      "d_municipio":"sadsad",
+      "d_nombres":"ADASD",
+      "d_apellidos":"SDFSADAD",
+      "d_cedula":"SADASDAS",
+      "d_exp":"SDASDASD",
+      "d_sexo":"SDASASDA",
+      "d_nacimiento":"ASD",
+      "d_fecha_nacimiento":23424234,
+      "d_estado_civil":"asdsadsad",
+        "d_domicilio":"asdasd",
+        "d_telefono":"234234",
+        "d_celular":"33333",
+        "d_email":"sdfsdf",
+        "id_cat":null,
+        "id_sub_cat":null,
+        "id_doc_resp":1,
+        "d_doc_respaldo":"ASDSAD",
+        "d_foto_individual":"SADFSAD",
+        "id_estado":1
+  }*/
+
+private function insertIndividual(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','id_dpto', 'd_provincia', 'd_municipio',
+      'd_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
+      'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_cat','id_sub_cat','id_sub_sector','d_actividad',
+      'd_producto','d_experiencia','d_ingresos','d_gastos','d_empleos_directos','d_empleos_indirectos','d_fuente_financiamiento',
+      'id_doc_resp','d_doc_respaldo','d_foto','id_estado');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO tb_individual(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Artista Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('error',204);   //"No Content" status
+   }
+
+   //Servicio para recuperar individual por id
+//http://localhost/api/regart/individual?id=1
+private function individual(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+      }
+      $id = (int)$this->_request['id'];
+      if($id > 0){   
+         $query="SELECT distinct * FROM tb_individual c where c.id_individual=$id";
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         if($r->num_rows > 0) {
+            $result = $r->fetch_assoc();   
+            $this->response($this->json($result), 200); // send user details
+         }
+      }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
+   //Servicio para recuperar colectivos
+//http://localhost/api/regart/listacolectivos
+private function listaIndividual(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+      }
+      $query="SELECT * FROM tb_individual order by id_individual";
+      $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+
+      if($r->num_rows > 0){
+         $result = array();
+         while($row = $r->fetch_assoc()){
+            $result[] = $row;
+         }
+         $this->response($this->json($result), 200); // send user details
+      }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
+      
 ##############CATEGORIAS##################
 //Servicio para recuperar categorias
 //http://localhost/api/regart/listaCategorias
@@ -165,6 +284,29 @@
          }
          $this->response('',204);   // If no records "No Content" status
       }
+
+
+
+      //subcategorias
+      //http://localhost/api/regart/subCategorias?id=1
+      private function subCategorias(){
+            if($this->get_request_method() != "GET"){
+               $this->response('',406);
+               }
+               $id = (int)$this->_request['id'];
+               if($id >0){
+                  $query="SELECT id_sub_cat, d_desc_sub_cat FROM tb_sub_cat WHERE id_cat =$id";
+                  $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+                  if($r->num_rows > 0){
+                        $result = array();
+                        while($row = $r->fetch_assoc()){
+                           $result[] = $row;
+                        }
+                        $this->response($this->json($result), 200); // send user details
+                     }
+               }
+            $this->response('',204);   // If no records "No Content" status
+         }
 
 //Servicios para guardar categoria
 //http://localhost/api/regart/insertCategorias
@@ -268,6 +410,48 @@ private function usuario(){
       }
       $this->response('',204);   // If no records "No Content" status
    }
+
+   private function accesAuth(){
+      // Cross validation if the request method is POST else it will return "Not Acceptable" status
+      if($this->get_request_method() != "POST"){
+            $this->response('',406);
+      }
+      $obj = json_decode(file_get_contents("php://input"),true);
+      //$user = $obj.nick_usuario;
+      $keys = array($obj);
+      foreach ($keys as $row)
+      {
+      $user= $row["nick_usuario"];
+      $pass= $row["pass_usuario"];
+      }		
+      //$password = $this->_request['pass_usuario'];
+      
+      // Input validations
+      if(!empty($user) and !empty($pass)){
+            //if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+                  //$query="SELECT distinct * FROM usuarios u where u.ci_usuarios=$id";
+         //$r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         //if($r->num_rows > 0) {
+
+                  $query = "SELECT ci_usuarios, nom_ape_usuarios, nick_usuario, id_nivel, id_dpto FROM usuarios WHERE nick_usuario = '$user' AND pass_usuario = '$pass' LIMIT 1";
+                  //$query = "SELECT ci_usuarios, nom_ape_usuarios, nick_usuario, id_nivel, id_dpto FROM usuarios";
+                  $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+                  if($r->num_rows > 0){
+                        $result = $r->fetch_assoc();   
+                        //$result = mysql_fetch_array($sql,MYSQL_ASSOC);
+                        
+                        // If success everythig is good send header as "OK" and user details
+                        $this->response($this->json($result), 200);
+                  }
+                  $error = array('status' => "Error", "msg" => "Invalid User or Password");
+                  $this->response('', 204);	// If no records "No Content" status
+            //}
+      }
+      
+      // If invalid inputs "Bad Request" status message and reason
+      $error = array('status' => "Error", "msg" => "Invalid User or Password");
+      $this->response($this->json($error), 400);
+}
 
 
 

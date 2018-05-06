@@ -11,6 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Artista} from '../modelo';
 import { Individual } from '../modelo/individual.model';
+import { Usuario} from '../modelo/usuarios.model';
 
 
 
@@ -26,11 +27,6 @@ export class FormularioService {
     return this.http.get(environment.urlApi + 'listaCategorias').map(this.extractData)
       .catch(this.handleError);
   }
-
-  
-
- 
-  
 
   saveColectivo (data:Artista): Observable<any> {
     //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
@@ -57,6 +53,18 @@ export class FormularioService {
     return this.http.get(environment.urlApi + 'individual?id='+id).map(this.extractData)
       .catch(this.handleError);
   }
+
+
+  getUsuarios(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'listaUsuarios').map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  saveUsuario (data:Usuario): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertUsusario', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
 
 
 

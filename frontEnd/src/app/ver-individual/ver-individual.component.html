@@ -1,3 +1,4 @@
+
 <h4 class="page-title txt-color-blueDark">
   <i class="fa-fw fa fa-user"></i>
   REGISTRO INDIVIDUAL
@@ -11,16 +12,26 @@
         <div class="info-name">Número de Registro</div>
         <div class="info-value">{{artista.numero_registro}}</div>
       </div>
+
       <div class="col-sm-3">
+
         <div class="info-name">Fecha de registro</div>
-          <div class="info-value">{{d_fecha_registro}}</div>
+        <div class="info-value">{{artista.d_fecha_registro}}</div>
+      </div>
+
+      <div class="col-sm-3" *ngIf="renovacion">
+        <div class="info-name">Fecha de renovacion</div>
+        <div class="info-value">{{d_fecha_renovacion}}</div>
+      </div>
+      <div class="col-sm-3">
+        <div class="info-name">Estado del Registro</div>
+          <div class="info-value">{{artista.id_estado}}</div>
         </div>
-        <div class="col-sm-3" *ngIf="renovacion">
-          <div class="info-name">Fecha de renovacion</div>
-            <div class="info-value">{{d_fecha_renovacion}}</div>
-          </div>
-    
+
+      <div class="col-sm-3">
+          <qr-code [value]="qr" [size]="100"></qr-code>
         </div>
+    </div>
   </fieldset>
   <p-panel header="Lugar de Registro">
     <fieldset>
@@ -233,14 +244,6 @@
                   </select>-->
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="form-group">
-                    <div class="info-name">Estado del Registro</div>
-                      <div class="info-value">{{artista.id_estado}}</div>
-                    </div>
-                  </div>
-                </div>
     </fieldset>
   </p-panel>
   </div>
@@ -248,10 +251,9 @@
   <div class="col-md-12">
     <p-toolbar>
       <div class="ui-toolbar-group-right">
-        <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveDraft()"></button>
-        <button pButton type="button" label="Cancelar" icon="fa-times"></button>
+        <button pButton type="button" label="Volver" icon="fa fa-arrow-circle-left" (click)="volver()"></button>
       </div>
     </p-toolbar>
   </div>
 
-  <pre>{{artista | json}}</pre>
+  <!--<pre>{{artista | json}}</pre>-->
