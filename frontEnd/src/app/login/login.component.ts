@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormArray,
+  FormControl
+} from '@angular/forms';
+import { FormularioService } from '../servicios/formulario.service';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +16,65 @@ import { Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  logForm: any;
+  usuario: string;
+  password: string;
+  constructor(private router: Router,
+    private _fb: FormBuilder,
+    private formularioService: FormularioService,) {
+  
+  this.logForm = this._fb.group({
+    'usuario': ['', Validators.required],
+    'password': ['', Validators.required]
+  })
+
+
+     }
 
   ngOnInit() {
     
   }
 
-  login(){
-    let link = ['/home'];
-    this.router.navigate(link);
+  public login() {
+    let data = {
+      usuario: this.usuario,
+      password: this.password
+    }
+    if (this.validForm()) {
+      this.formularioService.loginUsuario(data).subscribe(response => {
+        console.log(response)
+        if (response.status == "ok"){
+          
+          console.log(response.data);
+          let data = response.data 
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('usuario', data.nick_usuario);
+          localStorage.setItem('rol', data.id_nivel);
+          localStorage.setItem('nombre', data.nom_ape_usuarios);
+          let link = ['/home'];
+          this.router.navigate(link);
+        }else{
+          alert(response.msg);
+        }
+      },(error: any) => {
+        alert(error)
+      }
+      )
+    }else{
+      alert("Complete los datos")
+    }
+
+    
+
+  }
+
+  validForm(): boolean {
+    if (this.logForm.valid) {
+      return true;
+    } else {
+      
+      return false;
+    }
 
   }
 

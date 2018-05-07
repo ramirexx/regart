@@ -30,24 +30,24 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
         <div class="well no-padding">
-          <form class="smart-form client-form">
+          <form class="smart-form client-form" [formGroup]="logForm" novalidate>
             <header>
               Iniciar Sesión
             </header>
             <fieldset>
               <section>
-                <label class="label">E-mail</label>
+                <label class="label">Nombre Usuario</label>
                 <label class="input"> <i class="icon-append fa fa-user"></i>
-                  <input type="email" name="email" data-smart-validate-input="" data-required="" data-email="" data-message-required="Please enter your email address" data-message-email="Please enter a VALID email address">
+                  <input type="text" name="email" [formControl]="logForm.controls['usuario']" [(ngModel)]="usuario">
                   <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>
-                    Please enter email address/username</b></label>
+                    Por favor ingrese el nombre de usuario</b></label>
               </section>
               <section>
                 <label class="label">Password</label>
                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                  <input type="password" name="password" data-smart-validate-input="" data-required="" data-minlength="3" data-maxnlength="20" data-message="Please enter your email password">
-                  <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter
-                    your password</b> </label>
+                  <input type="password" [formControl]="logForm.controls['password']" [(ngModel)]="password">
+                  <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingrese su password
+                    </b> </label>
 
                 <div class="note">
                   <a routerLink="/auth/forgot-password">Olvidó contraseña?</a>

@@ -83,9 +83,9 @@ private function test(){
       if($this->get_request_method() != "GET"){
             $this->response('',406);
          }
-         
-
-            $response = "{'aaa':'Tecnologia'}";
+         $x =  md5(uniqid(rand(), true));
+         $response = array('status' => $x, "msg" => "Colectivo Created Successfully.", "data" => null);
+             //"{'aaa':'Tecnologia'}";
             //      echo json_encode($response); //T\u00e9cnologia
             $this->response($this->json($response), 200); // send user details
             
@@ -421,8 +421,9 @@ private function usuario(){
       $keys = array($obj);
       foreach ($keys as $row)
       {
-      $user= $row["nick_usuario"];
-      $pass= $row["pass_usuario"];
+      
+      $pass= $row["password"];
+      $user= $row["usuario"];
       }		
       //$password = $this->_request['pass_usuario'];
       
@@ -437,14 +438,26 @@ private function usuario(){
                   //$query = "SELECT ci_usuarios, nom_ape_usuarios, nick_usuario, id_nivel, id_dpto FROM usuarios";
                   $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
                   if($r->num_rows > 0){
-                        $result = $r->fetch_assoc();   
-                        //$result = mysql_fetch_array($sql,MYSQL_ASSOC);
+                        $result = $r->fetch_assoc();  
+                        $token =  md5(uniqid(rand(), true)); 
+                        //$result = mysql_fetch_array($sql,MYSQL_ASSOC);("'.$date.'"
+                        $query2 = "INSERT INTO usuario_log (token, usuario) VALUES('$token','$user')";
+                        $r2 = $this->mysqli->query($query2) or die($this->mysqli->error.__LINE__);
                         
+                        //$query3 = "SELECT ci_usuarios, nom_ape_usuarios, nick_usuario, id_nivel, id_dpto, token FROM usuarios, usuario_log WHERE nick_usuario.usuarios = '$user' AND usuario.usuario_log = '$user' LIMIT 1";
+                        $query3 =" SELECT a.nom_ape_usuarios, a.nick_usuario, a.id_nivel, a.id_dpto, b.token FROM usuarios a , usuario_log  b WHERE a.nick_usuario = b.usuario AND a.nick_usuario = '$user' LIMIT 1";
+                        $r3 = $this->mysqli->query($query3) or die($this->mysqli->error.__LINE__);
+                        if($r3->num_rows>0){
+                              $result = $r3->fetch_assoc();   
+
+                              $response = array('status' => "ok", "data" => $result);
+                        }
                         // If success everythig is good send header as "OK" and user details
-                        $this->response($this->json($result), 200);
+                        $this->response($this->json($response), 200);
+                        
                   }
-                  $error = array('status' => "Error", "msg" => "Invalid User or Password");
-                  $this->response('', 204);	// If no records "No Content" status
+                  $error = array('status' => "Error", "msg" => "Datos invalidos");
+                  $this->response($this->json($error), 202);	// If no records "No Content" status
             //}
       }
       

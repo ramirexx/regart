@@ -65,6 +65,11 @@ export class FormularioService {
       .catch(this.handleError);
   }
 
+  loginUsuario (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'accesAuth', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
 
 
 
