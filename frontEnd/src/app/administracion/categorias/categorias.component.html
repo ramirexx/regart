@@ -1,0 +1,191 @@
+<h4 class="page-title txt-color-blueDark">
+  <i class="fa-fw fa fa-user"></i>
+  SECTOR - SUBSECTOR - ACTIVIDAD - ESPECIALIDAD
+  <span>> Listado - Registro
+  </span>
+</h4>
+<div class="row" >
+  <div class="col-md-6">
+  <p-panel header="Registro de Sector">
+      <fieldset>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Nombre </label>
+              <input type="text" class="form-control" [(ngModel)]="categoria.d_desc_cat"
+                maxlength="36" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p-toolbar>
+              <div class="ui-toolbar-group-right">
+                  <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveCat()"></button>
+                  <button pButton type="button" label="Cancelar" icon="fa-times"(click)="cancel()"></button>
+              </div>
+          </p-toolbar>
+          </div>
+        </div>
+      </fieldset>
+    <p-dataTable [value]="listaCategorias" [rows]="10" [paginator]="true" [globalFilter]="gb" emptyMessage="No se encontraron registros">
+      <p-column [style]="{'width':'5%'}" header="N°">
+        <ng-template let-index="rowIndex" pTemplate type="body">
+          <span>{{index+1}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="d_desc_cat" header="Descripciopn" [sortable]="true"></p-column>
+      <p-column [style]="{'width':'10%'}" header="Acciones">
+        <ng-template let-doc="rowData" pTemplate type="body">
+          <button type="button" pButton (click)="editCat()" icon="fa-search"></button>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+  </p-panel>
+</div>
+<div class="col-md-6">
+  <p-panel header="Registro de Sub Sector">
+      <fieldset>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Sector </label>
+                  <select class="form-control" [(ngModel)]="subCategoria.id_cat" >
+                      <option *ngFor="let obj of listaCategorias" [ngValue]="obj.id_cat">{{obj.d_desc_cat}}</option>
+                  </select>
+                </div>
+              </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Nombre Sub Sector</label>
+              <input type="text" class="form-control" [(ngModel)]="subCategoria.d_desc_sub_cat"
+                maxlength="36" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p-toolbar>
+              <div class="ui-toolbar-group-right">
+                  <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveSubCat()"></button>
+                  <button pButton type="button" label="Cancelar" icon="fa-times"(click)="cancelSub()"></button>
+              </div>
+          </p-toolbar>
+          </div>
+        </div>
+      </fieldset>
+    <p-dataTable [value]="listaSubCategorias" [rows]="10" [paginator]="true" [globalFilter]="gb" emptyMessage="No se encontraron registros">
+      <p-column [style]="{'width':'5%'}" header="N°">
+        <ng-template let-index="rowIndex" pTemplate type="body">
+          <span>{{index+1}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="d_desc_cat" header="Sector" [sortable]="true"></p-column>
+      <p-column field="d_desc_sub_cat" header="Sub Sector" [sortable]="true"></p-column>
+      <p-column [style]="{'width':'10%'}" header="Acciones">
+        <ng-template let-doc="rowData" pTemplate type="body">
+          <button type="button" pButton (click)="editSub(doc.ci_usuarios)" icon="fa-search"></button>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+  </p-panel>
+</div>
+</div>
+
+<div class="row" >
+  <div class="col-md-6">
+  <p-panel header="Registro de Actividades">
+      <fieldset>
+          <div class="row">
+          <div class="col-sm-6">
+              <div class="form-group">
+                <label>Sub Sector </label>
+                <select class="form-control" [(ngModel)]="actividad.id_sub_cat">
+                    <option *ngFor="let obj of listaSubCategorias" [ngValue]="obj.id_sub_cat">{{obj.d_desc_sub_cat}}</option>
+                </select>
+              </div>
+            </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Nombre Actividad</label>
+            <input type="text" class="form-control" [(ngModel)]="actividad.d_desc_act"
+              maxlength="36" />
+          </div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p-toolbar>
+              <div class="ui-toolbar-group-right">
+                  <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveActividad()"></button>
+                  <!--<button pButton type="button" label="Cancelar" icon="fa-times"(click)="cancel()"></button>-->
+              </div>
+          </p-toolbar>
+          </div>
+        </div>
+      </fieldset>
+    <p-dataTable [value]="listaActividad" [rows]="10" [paginator]="true" [globalFilter]="gb" emptyMessage="No se encontraron registros">
+      <p-column [style]="{'width':'5%'}" header="N°">
+        <ng-template let-index="rowIndex" pTemplate type="body">
+          <span>{{index+1}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="d_desc_sub_cat" header="Sub Sector" [sortable]="true"></p-column>
+      <p-column field="d_desc_act" header="Actividad" [sortable]="true"></p-column>
+      <p-column [style]="{'width':'10%'}" header="Acciones">
+        <ng-template let-doc="rowData" pTemplate type="body">
+          <button type="button" pButton (click)="editCat()" icon="fa-search"></button>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+  </p-panel>
+</div>
+<div class="col-md-6">
+  <p-panel header="Registro de Especialidad">
+      <fieldset>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Actividad </label>
+                  <select class="form-control" [(ngModel)]="especialidad.id_actividad" >
+                      <option *ngFor="let obj of listaActividad" [ngValue]="obj.id_actividad">{{obj.d_desc_act}}</option>
+                  </select>
+                </div>
+              </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Nombre Especialidad</label>
+              <input type="text" class="form-control" [(ngModel)]="especialidad.d_desc_esp"
+                maxlength="36" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p-toolbar>
+              <div class="ui-toolbar-group-right">
+                  <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveEspecialidad()"></button>
+                  <button pButton type="button" label="Cancelar" icon="fa-times"(click)="cancelSub()"></button>
+              </div>
+          </p-toolbar>
+          </div>
+        </div>
+      </fieldset>
+    <p-dataTable [value]="listaEspecialidad" [rows]="10" [paginator]="true" [globalFilter]="gb" emptyMessage="No se encontraron registros">
+      <p-column [style]="{'width':'5%'}" header="N°">
+        <ng-template let-index="rowIndex" pTemplate type="body">
+          <span>{{index+1}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="d_desc_act" header="Actividad" [sortable]="true"></p-column>
+      <p-column field="d_desc_esp" header="Especialidad" [sortable]="true"></p-column>
+      <p-column [style]="{'width':'10%'}" header="Acciones">
+        <ng-template let-doc="rowData" pTemplate type="body">
+          <button type="button" pButton (click)="editSub(doc.ci_usuarios)" icon="fa-search"></button>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+  </p-panel>
+</div>
+</div>
+

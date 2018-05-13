@@ -200,11 +200,10 @@ private function insertIndividual(){
       }
 
       $customer = json_decode(file_get_contents("php://input"),true);
-      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','id_dpto', 'd_provincia', 'd_municipio',
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto', 'd_provincia', 'd_municipio',
       'd_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
-      'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_cat','id_sub_cat','id_sub_sector','d_actividad',
-      'd_producto','d_experiencia','d_ingresos','d_gastos','d_empleos_directos','d_empleos_indirectos','d_fuente_financiamiento',
-      'id_doc_resp','d_doc_respaldo','d_foto','id_estado');
+      'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','id_especialidad',
+      'd_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','id_estado');
       $keys = array_keys($customer);
       $columns = '';
       $values = '';
@@ -268,6 +267,39 @@ private function listaIndividual(){
 //Servicio para recuperar categorias
 //http://localhost/api/regart/listaCategorias
 
+//Servicios para guardar categoria
+//http://localhost/api/regart/insertCategorias
+/*{
+   "d_desc_cat": "Artes marciales"
+}*/
+private function insertCategorias(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('d_desc_cat');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO tb_categoria(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Customer Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
+
       private function listaCategorias(){
          if($this->get_request_method() != "GET"){
             $this->response('',406);
@@ -285,15 +317,48 @@ private function listaIndividual(){
          $this->response('',204);   // If no records "No Content" status
       }
 
+  //Servicios para guardar subcategoria
+//http://localhost/api/regart/insertCategorias
+/*{
+      "id_cat": 1,
+   "d_desc_sub_cat":"sdfsadsa"
+   }*/
+   private function insertSubCategorias(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('id_cat', 'd_desc_sub_cat');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO tb_sub_cat(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Customer Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
 
 
       //subcategorias
-      //http://localhost/api/regart/subCategorias?id=1
+      //http://localhost/api/regart/subCategorias?cat=1
       private function subCategorias(){
             if($this->get_request_method() != "GET"){
                $this->response('',406);
                }
-               $id = (int)$this->_request['id'];
+               $id = (int)$this->_request['sec'];
                if($id >0){
                   $query="SELECT id_sub_cat, d_desc_sub_cat FROM tb_sub_cat WHERE id_cat =$id";
                   $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
@@ -303,43 +368,176 @@ private function listaIndividual(){
                            $result[] = $row;
                         }
                         $this->response($this->json($result), 200); // send user details
+                     }else{
+                        $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                        $this->response($this->json($error), 202); // send user details
                      }
                }
             $this->response('',204);   // If no records "No Content" status
          }
 
-//Servicios para guardar categoria
-//http://localhost/api/regart/insertCategorias
-/*{
-   "d_desc_cat": "Artes marciales"
-}*/
-      private function insertCategorias(){
-                 if($this->get_request_method() != "POST"){
-                    $this->response('',406);
-                 }
+      private function listaSubCategorias(){
+         if($this->get_request_method() != "GET"){
+            $this->response('',406);
+            }
+            $query="SELECT a.id_sub_cat, a.id_cat, a.d_desc_sub_cat, b.d_desc_cat FROM tb_sub_cat a, tb_categoria b WHERE a.id_cat = b.id_cat ORDER BY id_cat";
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
 
-                 $customer = json_decode(file_get_contents("php://input"),true);
-                 $column_names = array('d_desc_cat');
-                 $keys = array_keys($customer);
-                 $columns = '';
-                 $values = '';
-                 foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
-                    if(!in_array($desired_key, $keys)) {
-                           $$desired_key = '';
-                    }else{
-                       $$desired_key = $customer[$desired_key];
-                    }
-                    $columns = $columns.$desired_key.',';
-                    $values = $values."'".$$desired_key."',";
-                 }
-                 $query = "INSERT INTO tb_categoria(".trim($columns,',').") VALUES(".trim($values,',').")";
-                 if(!empty($customer)){
-                    $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
-                    $success = array('status' => "Success", "msg" => "Customer Created Successfully.", "data" => $customer);
-                    $this->response($this->json($success),200);
-                 }else
-                    $this->response('',204);   //"No Content" status
+         if($r->num_rows > 0){
+            $result = array();
+            while($row = $r->fetch_assoc()){
+               $result[] = $row;
+            }
+            $this->response($this->json($result), 200); // send user details
+         }
+         $this->response('',204);   // If no records "No Content" status
       }
+
+
+/*
+{
+   "id_sub_cat": 1,
+"d_desc_act":"SADA"
+}
+*/
+private function insertActividad(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('id_sub_cat', 'd_desc_act');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO tb_actividad(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Actividad Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
+
+
+      //http://localhost/api/regart/actividades?id=1
+      private function actividades(){
+            if($this->get_request_method() != "GET"){
+               $this->response('',406);
+               }
+               $id = (int)$this->_request['sub'];
+               if($id >0){
+                  $query="SELECT * FROM tb_actividad WHERE id_sub_cat =$id";
+                  $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+                  if($r->num_rows > 0){
+                        $result = array();
+                        while($row = $r->fetch_assoc()){
+                           $result[] = $row;
+                        }
+                        $this->response($this->json($result), 200); // send user details
+                     }else{
+                        $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                        $this->response($this->json($error), 202); // send user details
+                     }
+               }
+            $this->response('',204);   // If no records "No Content" status
+         }
+
+         private function listaActividades(){
+            if($this->get_request_method() != "GET"){
+               $this->response('',406);
+               }
+               $query="SELECT a.id_actividad, a.id_sub_cat, a.d_desc_act,  b.d_desc_sub_cat FROM tb_actividad a, tb_sub_cat  b WHERE a.id_sub_cat = b.id_sub_cat ORDER BY id_cat";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+   
+            if($r->num_rows > 0){
+               $result = array();
+               while($row = $r->fetch_assoc()){
+                  $result[] = $row;
+               }
+               $this->response($this->json($result), 200); // send user details
+            }
+            $this->response('',204);   // If no records "No Content" status
+         }   
+
+
+
+private function insertEspecialidad(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('id_actividad', 'd_desc_esp');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO tb_especialidad(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Actividad Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
+
+private function listaEspecialidades(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $query="SELECT a.id_especialidad, a.d_desc_esp,  b.d_desc_act FROM tb_especialidad a, tb_actividad  b WHERE a.id_actividad = b.id_actividad ORDER BY id_especialidad";
+      $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+
+      if($r->num_rows > 0){
+         $result = array();
+         while($row = $r->fetch_assoc()){
+            $result[] = $row;
+         }
+         $this->response($this->json($result), 200); // send user details
+      }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
+   //http://localhost/api/regart/espacialidad?act=1
+   private function especialidad(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $id = (int)$this->_request['act'];
+         if($id >0){
+            $query="SELECT * FROM tb_especialidad WHERE id_actividad =$id";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0){
+                  $result = array();
+                  while($row = $r->fetch_assoc()){
+                     $result[] = $row;
+                  }
+                  $this->response($this->json($result), 200); // send user details
+               }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                  $this->response($this->json($error), 202); // send user details
+               }
+         }
+      $this->response('',204);   // If no records "No Content" status
+   }
 
 
 

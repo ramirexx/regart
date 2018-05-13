@@ -27,6 +27,59 @@ export class FormularioService {
     return this.http.get(environment.urlApi + 'listaCategorias').map(this.extractData)
       .catch(this.handleError);
   }
+  //http://localhost/api/regart/subCategorias?cat=1
+  getSubSector(cod:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'subCategorias?sec='+cod).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  //http://localhost/api/regart/actividades?id=1
+  getActividad(cod:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'actividades?sub='+cod).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  //http://localhost/api/regart/especialidad?act=1
+  getEspecialidad(cod:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'especialidad?act='+cod).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  saveCategoria (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertCategorias', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+  getSubCategorias(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'listaSubCategorias').map(this.extractData)
+      .catch(this.handleError);
+  }
+  
+  saveSubCategoria (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertSubCategorias', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+  getActividades(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'listaActividades').map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  saveActividad (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertActividad', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+  getEspecialidades(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'listaEspecialidades').map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  saveEspecialidad (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertEspecialidad', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
 
   saveColectivo (data:Artista): Observable<any> {
     //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });

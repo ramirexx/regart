@@ -1,12 +1,15 @@
 export class Individual {
 
     id_individual: number;
+
     numero_registro: string;
     d_fecha_registro: Date;
     d_fecha_renovacion: Date;
+    vigencia: string = "Vigencia de 5 años"
     id_dpto: number;
     d_provincia: string;
     d_municipio: string;
+
     d_cedula: string;
     d_exp: string;
     d_sexo: string;
@@ -25,21 +28,20 @@ export class Individual {
     d_pagina_web: string;
     d_youtube: string;
     d_otros: string;
-     d_institutucion: string;
-    id_cat: number;
-    id_sub_cat: number;
+
+    d_institutucion: string;
+    d_agrupaciones: string;
+    id_sector: number;
     id_sub_sector: number;
-    d_actividad: string;
-    d_producto: string;
+    id_actividad: number;
+    id_especialidad: string;
     d_experiencia: string;
-    d_ingresos: string;
-    d_gastos: string;
-    d_empleos_directos:string;
-    d_empleos_indirectos:string;
-    d_fuente_financiamiento: string
+    caegorizacion:string;
+
     d_foto: any;
-    id_respaldo: number;
+    id_doc_respaldo: number;
     d_doc_respaldo: string;
+    
     id_estado: string;
     id_log: number;
 

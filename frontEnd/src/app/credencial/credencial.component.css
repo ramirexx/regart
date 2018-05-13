@@ -1,0 +1,9 @@
+/*http://190.129.73.203/artistas/Styles/Blueprint/Images/minculturas/cara_reducida_final.jpg*/
+
+.bgimg {
+    background-image: url('http://190.129.73.203/artistas/Styles/Blueprint/Images/minculturas/cara_reducida_final.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 220px;
+    margin-top: 10px;
+}

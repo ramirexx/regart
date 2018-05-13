@@ -64,14 +64,32 @@ export class IndividualComponent implements OnInit {
   { codigo: 8, descripcion: 'Beni' },
   { codigo: 9, descripcion: 'Pando' }]
   categorias: any[];
+  subSector: any[];
+  actividad:any[];
+  especialidad: any[];
 
   generos = ['Femenino', 'Masculino']
 
   estadoCivil = ['Soltero', 'Casado', 'Divorciado', 'Viuda']
 
   documentos = [{ codigo: 1, descripcion: 'Curriculum Vitae' },
-  { codigo: 2, descripcion: 'Acreditante Registrado' },
-  { codigo: 5, descripcion: 'Certificado de Comunidad' }]
+  { codigo: 2, descripcion: 'Certificado/Credencial de Institución' },
+  { codigo: 3, descripcion: 'Título/Certificado Académico' },
+  { codigo: 4, descripcion: 'Otros Documentos' }
+  ]
+
+  categorizacion = [{ codigo: 'Emergente', descripcion: '2 a 6 años'},
+  { codigo: 'Consecuente', descripcion: '7 a 14 años' },
+  { codigo: 'Consagrado', descripcion: '15 a 25 años' },
+  { codigo: 'Maestro', descripcion: '25 año adelante' }
+  ]
+  
+  listaCategorizacion = [
+    'Emergente -- 2 a 6 años',
+    'Consecuente --7 a 14 años',
+    'Consagrado -- 15 a 25 años',
+    'Maestro -- 25 año adelante'
+  ]
 
   constructor(private _fb: FormBuilder,
     private formularioService: FormularioService,
@@ -82,9 +100,12 @@ export class IndividualComponent implements OnInit {
       'numero_registro': [{ value: '',disabled: true }],
       'd_fecha_registro': ['', Validators.required],
       'd_fecha_renovacion': [''],
+      'vigencia': [{ value: '', disabled: true}, Validators.required],
+
       'id_dpto': [{ value: '' }, Validators.required],
       'd_provincia': [{ value: '' }, Validators.required],
       'd_municipio': [{ value: '' }, Validators.required],
+
       'd_cedula': [{ value: '' }, Validators.required],
       'd_exp': [{ value: '' }, Validators.required],
       'd_sexo': [{ value: '' }, Validators.required],
@@ -93,9 +114,9 @@ export class IndividualComponent implements OnInit {
       'd_nacimiento': [{ value: '' }, Validators.required],
       'd_fecha_nacimiento': ['', Validators.required],
       'd_estado_civil': [{ value: '' }, Validators.required],
-
       'd_nro_hijos': [{ value: '' }, Validators.required],
       'd_profesion': [{ value: '' }, Validators.required],
+
       'd_domicilio': [{ value: '' }, Validators.required],
       'd_telefono': [{ value: '' }, Validators.required],
       'd_celular': [{ value: '' }, Validators.required],
@@ -105,18 +126,15 @@ export class IndividualComponent implements OnInit {
       'd_otros': [{ value: '' }, Validators.required],
 
       'd_institucion': [{ value: '' }, Validators.required],
-      'id_cat': [{ value: '' }, Validators.required],
-      'id_sub_cat': [{ value: '' }, Validators.required],
+      'd_agrupaciones': [{ value: '' }, Validators.required],
+      'id_sector': [{ value: '' }, Validators.required],
       'id_sub_sector': [{ value: '' }, Validators.required],
-      'd_actividad': [{ value: '' }, Validators.required],
-      'd_producto': [{ value: '' }, Validators.required],
+      'id_actividad': [{ value: '' }, Validators.required],
+      'id_especialidad': [{ value: '' }, Validators.required],
+      
       'd_experiencia': [{ value: '' }, Validators.required],
-      'd_ingresos': [{ value: '' }, Validators.required],
-      'd_gastos': [{ value: '' }, Validators.required],
-      'd_empleos_directos': [{ value: '' }, Validators.required],
-      'd_empleos_indirectos': [{ value: '' }, Validators.required],
-      'd_fuente_financiamiento': [{ value: '' }, Validators.required],
-
+      'categorizacion': [{ value: '' }, Validators.required],
+    
       'd_foto_individual':[''],
       'id_doc_resp': [{ value: '' }, Validators.required],
       'd_doc_respaldo': [{ value: '' }, Validators.required],
@@ -149,6 +167,62 @@ export class IndividualComponent implements OnInit {
         let date = new Date();
         this.year = date.getFullYear();
 
+  }
+  onselectSector(objSelected){
+    console.log(objSelected)
+    if (objSelected != undefined) {
+      this.formularioService.getSubSector(objSelected)
+      .subscribe(data => {
+        let res: any = data
+        if(res.length>0){
+          this.subSector = res 
+        }else{
+          this.subSector = [];
+          alert(res.msg)
+          console.log(data)
+        } 
+        },
+        err => console.log(err)
+        );
+    }
+  }
+  onselectSubSector(objSelected){
+    console.log(objSelected)
+    if (objSelected != undefined) {
+      this.formularioService.getActividad(objSelected)
+      .subscribe(data => {
+        let res: any = data
+        if(res.length>0){
+          this.actividad = res 
+        }else{
+          this.actividad = [];
+          alert(res.msg)
+          console.log(data)
+        } 
+        },
+        err => console.log(err)
+        );
+    }
+  }
+
+  onselectActividad(objSelected){
+    console.log(objSelected)
+    if (objSelected != undefined) {
+      this.formularioService.getEspecialidad(objSelected)
+      .subscribe(data => {
+        let res: any = data
+        
+        if(res.length>0){
+          this.especialidad = res 
+        }else{
+          this.especialidad = [];
+          alert(res.msg)
+          console.log(data)
+        } 
+        },
+        err => console.log(err)
+        );
+    }
   }
 
   
