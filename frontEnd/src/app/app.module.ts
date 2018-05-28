@@ -53,6 +53,9 @@ import { VerIndividualComponent } from './ver-individual/ver-individual.componen
 import { UsuariosComponent } from './administracion/usuarios/usuarios.component';
 import { CategoriasComponent } from './administracion/categorias/categorias.component';
 import { CredencialComponent } from './credencial/credencial.component';
+import { FormularioComponent } from './formulario/formulario.component';
+import { PublicoComponent } from './publico/publico.component';
+import { EnviarFormularioComponent } from './enviar-formulario/enviar-formulario.component';
 
 
 @NgModule({
@@ -67,7 +70,10 @@ import { CredencialComponent } from './credencial/credencial.component';
     VerIndividualComponent,
     UsuariosComponent,
     CategoriasComponent,
-    CredencialComponent
+    CredencialComponent,
+    FormularioComponent,
+    PublicoComponent,
+    EnviarFormularioComponent
   ],
   imports: [
     

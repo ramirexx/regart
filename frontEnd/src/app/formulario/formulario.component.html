@@ -1,0 +1,91 @@
+<div style="padding: 10px 20px 10px 20px; margin-top: 20px;">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 style="text-align: center"> REGISTRO INDIVIDUAL </h3>
+      <table class="table table-sm">
+
+        <tbody>
+          <tr>
+            <td>
+              <div class="col-md-12">
+                <div class="info-name">Fecha de Registro:
+                  <span class="value">{{artista.d_fecha_registro}}</span>
+                </div>
+                <div class="info-name">Departamento:
+                  <span class="value">{{depto}}</span>
+                </div>
+                <div class="info-name">Provincia:
+                  <span class="value">{{artista.id_dpto}}</span>
+                </div>
+                <div class="info-name">Municipio:
+                  <span class="value">{{artista.d_municipio}}</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="info-name">Artista: 
+                <span class="value"> {{artista.d_nombres}} {{artista.d_apellidos}} </span>
+              </div>
+              <div class="info-name">C.I.: <span class="value">{{artista.d_cedula}}</span></div>
+              <div class="info-name">Lugar de Nacimiento: <span class="value">{{depto}} {{artista.d_provincia}} {{artista.d_fecha_nacimiento}}</span></div>
+              <div class="info-name">Domicilio: <span class="value">{{artista.d_domicilio}} {{artista.d_fecha_nacimiento}}</span></div>
+              <div class="info-name">Teléfono/Celular: <span class="value">{{artista.d_telefono}} {{artista.d_celular}}</span></div>
+              <div class="info-name">Correo Electrónico:  <span class="value">{{artista.d_email}}</span></div>
+            </td>
+            <td>
+                <div class="col-sm-6">
+                    <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px" class="img-responsive img-thumbnail"/>
+                    <div class="info-name">{{artista.numero_registro}}</div>
+                    <!--<img [src]="'data:image/jpg;base64,'+imagePath"/> -->
+                </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+      <br>
+      <table class="table table-sm table-bordered">
+
+        <tbody>
+          <tr>
+            <td>
+              <div class="col-md-12">
+                <div class="info-name">Sector: <span class="value">{{artista.id_sector}}</span> Sub Sector: <span class="value">{{artista.id_sub_sector}}</span></div>
+                <div class="info-name">Actividad: <span class="value">{{artista.id_actividad}}</span> Especialidad: <span class="value">{{artista.id_especialidad}}</span></div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="col-md-12">
+              <div class="info-name">Agrupaciones/Instituciones: : <span class="value">{{artista.d_cedula}}</span></div>
+              <div class="info-name">Biografía: : <span class="value">{{artista.d_experiencia}}</span></div>
+            </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-6" style="padding-top:120px">
+        <div style="text-align: center">
+          <span class="firma"> {{artista.d_nombres}} {{artista.d_apellidos}} </span>
+          <p class="firma"> Artista </p>
+        </div>
+      </div>
+      <div class="col-md-6" style="padding-top:20px">
+        <img src="assets/img/firma.png" alt="" style="display: block; margin-left: auto; margin-right: auto;">
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="col-md-12">
+  El presente documento constituye una declaración jurada, por tanto yo Daniela Milagros Cordero Ramos juro que todos los datos declarados en el presente documento, corresponden a la verdad. De comprobarse la falsedad de alguno de ellos, seré sujeto(a) a las sanciones que establece la ley. 
+</div>
+
+    </div>
+  </div>
+</div>

@@ -7,3 +7,11 @@
     height: 220px;
     margin-top: 10px;
 }
+
+.bgimg2 {
+    background-image: url('assets/img/firma.png');
+    background-repeat: no-repeat;
+    background-position: center left ;
+    width: 312px;
+    height: 95px;
+}

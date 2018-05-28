@@ -4,24 +4,22 @@ import { FormularioService } from '../servicios/formulario.service';
 import { Router, ActivatedRoute} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 
-
 @Component({
-  selector: 'app-credencial',
-  templateUrl: './credencial.component.html',
-  styleUrls: ['./credencial.component.css']
+  selector: 'app-formulario',
+  templateUrl: './formulario.component.html',
+  styleUrls: ['./formulario.component.css']
 })
-export class CredencialComponent implements OnInit {
+export class FormularioComponent implements OnInit {
 
   artista: Individual = new Individual();
   private base64Foto:String="";
   imagePath:string;
-  qr: string = "";
   depto: string;
 
   constructor(private formularioService: FormularioService,
     private route: ActivatedRoute,
     private router: Router,
-    private _sanitizer: DomSanitizer) { }
+    private _sanitizer: DomSanitizer ) { }
 
   ngOnInit() {
   }
@@ -35,17 +33,17 @@ export class CredencialComponent implements OnInit {
         this.formularioService.getIndividual(id)
           .subscribe(artista => {
             this.artista = artista;
-
+            
             this.imagePath = this.artista.d_foto;
             this.base64Foto = this.artista.d_foto
-            this.qr = this.artista.d_nombres + this.artista.d_apellidos 
             this.depto = this.getDepto(this.artista.id_dpto);
-
-            
+            console.log(this.artista.id_dpto)
+            console.log(this.depto)
           })
       }
     })
   }
+
 
   getDepto(x){
     switch (x) {
@@ -81,5 +79,14 @@ export class CredencialComponent implements OnInit {
     console.log(this.depto)
     return this.depto;
   }
+ 
+
+_handleReaderLoaded(readerEvt) {
+  var binaryString = readerEvt.target.result;
+         this.base64Foto= btoa(binaryString);
+         
+         this.artista.d_foto = this.base64Foto
+         console.log(btoa(binaryString));
+ }
 
 }

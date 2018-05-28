@@ -29,7 +29,30 @@ export class ListadoArtistasComponent implements OnInit {
     let link = ['home/ver-artista/' + id];
     console.log(link)
     this.router.navigate(link);
+  }
 
+  editarFormulario(id: string) {
+    let link = ['home/registro-individual/' + id];
+    console.log(link)
+    this.router.navigate(link);
+  }
+
+  enviarFormulario(id: string, estado:string="ENVIAR") {
+    let link = ['home/enviar-formulario/' + id];
+    console.log(link)
+    this.router.navigate(link);
+  }
+
+  verFormulario(id: string) {
+    let link = ['/formulario/' + id];
+    console.log(link)
+    this.router.navigate(link);
+  }
+
+  verCredencial(id: string) {
+    let link = ['/credencial/' + id];
+    console.log(link)
+    this.router.navigate(link);
   }
 
   

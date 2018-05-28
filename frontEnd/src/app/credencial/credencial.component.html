@@ -1,6 +1,99 @@
+<div class="bgimg">
+  <table style="WIDTH: 312px; HEIGHT: 195px" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tbody>
+      <tr>
+        <td style="HEIGHT: 52px; FONT-SIZE: 10px" valign="bottom" align="center">
+          <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; ESTADO PLURINACIONAL DE BOLIVIA
+            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; MINISTERIO DE CULTURAS Y TURISMO
+            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;REGISTRO PLURINACIONAL DE ARTISTAS</strong>
+        </td>
+      </tr>
 
+      <tr>
+        <td style="HEIGHT: 90px; FONT-SIZE: 2px" valign="top" align="left">
+          <table style="WIDTH: 296px; HEIGHT: 100px" border="0" cellspacing="0" cellpadding="0" width="296" align="center">
+            <tbody>
+              <tr>
+                <td valign="top" colspan="4" align="left"></td>
+              </tr>
 
+              <tr>
+                <td style="WIDTH: 4px; FONT-SIZE: 2px" align="center">&nbsp;</td>
+                <td style="WIDTH: 80px" align="center">&nbsp;</td>
+                <td style="WIDTH: 4px; FONT-SIZE: 2px" valign="top" align="left">&nbsp;</td>
+                <td valign="top" align="left">&nbsp;</td>
+              </tr>
 
-  <div class="bgimg">
-      div with background
-  </div>
+              <tr>
+                <td style="WIDTH: 4px; FONT-SIZE: 2px" align="center" >&nbsp;</td>
+                <td style="WIDTH: 80px" align="center" v="">
+                  <p align="center">
+                    <font color="#ffffff" size="1">
+                        <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="80px" class="img-responsive img-thumbnail" alt="Fotografia"/>
+                      <!--<img style="WIDTH: 80px; HEIGHT: 80px" id="datos1Image1" border="1" align="middle" src="fotos_individual/201805141933590.Daniela cordero.jpg"
+                        height="80">-->
+                    </font>
+                    <br>
+                    <font color="#ffffff" size="1">{{artista.numero_registro}}</font>
+                  </p>
+                </td>
+                <td style="WIDTH: 4px; HEIGHT: 90px; FONT-SIZE: 2px" valign="top" align="left">&nbsp;</td>
+                <td valign="top" align="center" v="">
+                  <font size="1">
+                    <p align="left" style="margin-bottom:0px">
+                      <font size="2">
+                        <strong>Nombre: </strong>{{artista.d_nombres}} {{artista.d_apellidos}}
+                        <br>
+                        <strong>C.I.: </strong>{{artista.d_cedula}}&nbsp;
+                        <br>
+                        <strong>Departamento: </strong>{{depto}}
+                        <br>
+                        <strong>Categoría: </strong>{{artista.id_sector}}
+                        <br>
+                        <strong>Expedido: </strong>{{artista.d_fecha_registro}} </font>
+                    </p>
+                  </font>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <!--<tr>
+        <td style="FONT-SIZE: 8px" align="center" v="">
+            <font size="2">www.minculturas.gob.bo</font>
+        </td>
+      </tr>-->
+    </tbody>
+  </table>
+</div>
+
+<table style="WIDTH: 312px; HEIGHT: 195px;" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tbody><tr>
+    <td style="FONT-SIZE: 4px" valign="top" align="center"></td>
+  </tr>
+ 
+  <tr>
+    <td style="FONT-SIZE: 10px" valign="top" align="center">
+
+      <p align="center" style="margin-bottom: 0px"><span class="Estilo1">La Presente credencial personal e itransferible, acredita</span><br>
+        La Presente credencial personal e intransferible, acredita al portador como artista inscrito en el Sistema de Registro<br>
+        Plurinacional de Artistas Bolivianos.<br>
+        Se solicita a las autoridades y ciudadanía en general brindar<br>
+      la colaboración para el ejercicio de sus funciones. </p>
+      <div class="bgimg2"> <div style="float:right;"><qr-code [value]="qr" [size]="100"></qr-code></div></div>
+      
+    </td>
+  </tr>
+ 
+  <tr>
+    <td style="HEIGHT: 20px; FONT-SIZE: 10px" valign="bottom" align="center" v="">
+        
+
+        <!--<img src="assets/img/firma.png" alt="" style="display: block; margin-left: auto; margin-right: auto;">-->
+
+      <!--<p align="center">Wilma Alanoca Mamani <br>
+      <strong>MINISTRA DE CULTURAS Y TURISMO</strong></p>-->
+    </td>
+  </tr>
+</tbody></table>

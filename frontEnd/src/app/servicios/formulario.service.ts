@@ -12,6 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Artista} from '../modelo';
 import { Individual } from '../modelo/individual.model';
 import { Usuario} from '../modelo/usuarios.model';
+import { Publico} from '../modelo/usuarios.model';
 
 
 
@@ -21,6 +22,21 @@ import { Usuario} from '../modelo/usuarios.model';
 export class FormularioService {
 
   constructor(private http: HttpClient) { }
+
+  getDepartamentos(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'departamentos').map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getProvincias(cod:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'provincias?dep='+cod).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getMunicipios(cod:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'localidades?pro='+cod).map(this.extractData)
+      .catch(this.handleError);
+  }
   
 
   getCategorias(): Observable<any[]> {
@@ -97,12 +113,25 @@ export class FormularioService {
       
   }
 
+//  obj.updateAlumno = function (id,alumno) {
+  //  return $http.post(serviceBase + 'updateAlumno', {id:id, alumno:alumno})
+  updateIndividual (id: number, data:Individual): Observable<any> {
+    return this.http.post(environment.urlApi + 'updateIndividual', {id,data}).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+
+  updateEstadoIndividual (obj: any): Observable<any> {
+    return this.http.post(environment.urlApi + 'updateEstado', obj).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
   getArtistasIndividual(): Observable<any[]> {
     return this.http.get(environment.urlApi + 'listaIndividual').map(this.extractData)
       .catch(this.handleError);
   }
 
-  getIndividual(id: string): Observable<Individual> {
+  getIndividual(id: any): Observable<Individual> {
     return this.http.get(environment.urlApi + 'individual?id='+id).map(this.extractData)
       .catch(this.handleError);
   }
@@ -115,6 +144,11 @@ export class FormularioService {
 
   saveUsuario (data:Usuario): Observable<any> {
     return this.http.post(environment.urlApi + 'insertUsusario', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+  saveUsuarioPublico (data:Publico): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertUsuarioPublico', data).map(this.extractData) 
       .catch(this.handleError);
   }
 

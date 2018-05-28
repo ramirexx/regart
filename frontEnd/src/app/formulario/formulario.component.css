@@ -1,0 +1,16 @@
+.info{
+    font-weight: bold;
+}
+
+.value{
+    font-style: normal;
+    color: black;
+    font-weight: bold;
+    
+}
+
+.firma{
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+}

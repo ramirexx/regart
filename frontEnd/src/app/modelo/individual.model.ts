@@ -7,8 +7,8 @@ export class Individual {
     d_fecha_renovacion: Date;
     vigencia: string = "Vigencia de 5 años"
     id_dpto: number;
-    d_provincia: string;
-    d_municipio: string;
+    id_prov: number;
+    id_mun: number;
 
     d_cedula: string;
     d_exp: string;
@@ -34,7 +34,10 @@ export class Individual {
     id_sector: number;
     id_sub_sector: number;
     id_actividad: number;
-    id_especialidad: string;
+    id_actividad_sec: number;
+    id_especialidad: number;
+    id_especialidad_sec: number;
+    id_especialidad_ter: number;
     d_experiencia: string;
     caegorizacion:string;
 

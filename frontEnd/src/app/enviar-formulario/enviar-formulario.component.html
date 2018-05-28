@@ -1,0 +1,57 @@
+<h4 class="page-title txt-color-blueDark">
+  <i class="fa-fw fa fa-user"></i>
+  REGISTRO INDIVIDUAL
+  <span>> Enviar Formulario para APROBACION
+  </span>
+</h4>
+<div class="col-md-12">
+  <table class="table table-sm">
+
+    <tbody>
+      <tr>
+        <td>
+          <div class="col-md-12">
+            <div class="info-name">Número de Registro
+              <span class="value">{{artista.numero_registro}}</span>
+            </div>
+            <div class="info-name">Estado del Registro
+              <span class="value">{{artista.id_estado}}</span>
+            </div>
+
+            <div class="info-name">Vigencia
+              <span class="value">{{artista.vigencia}}</span>
+            </div>
+
+          </div>
+        </td>
+        <td>
+          <div class="info-name">Artista:
+            <span class="value"> {{artista.d_nombres}} {{artista.d_apellidos}} </span>
+          </div>
+          <div class="info-name">C.I.:
+            <span class="value">{{artista.d_cedula}}</span>
+          </div>
+        </td>
+        <td>
+          <div class="col-sm-6">
+            <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px" class="img-responsive img-thumbnail" />
+            <div class="info-name">{{artista.numero_registro}}</div>
+            <!--<img [src]="'data:image/jpg;base64,'+imagePath"/> -->
+          </div>
+        </td>
+      </tr>
+
+    </tbody>
+    
+  </table>
+  <div class="col-md-12">
+      <p-toolbar>
+          <div class="ui-toolbar-group-right">
+              <button pButton type="button" label="Enviar" icon="fa-save" (click)="enviar()"></button>
+              <button pButton type="button" label="Cancelar" icon="fa-times"(click)="cancel()"></button>
+          </div>
+      </p-toolbar>
+  </div>
+  
+
+</div>

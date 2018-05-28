@@ -13,6 +13,7 @@ export class VerIndividualComponent implements OnInit {
   artista: Individual = new Individual();
 
   qr: string = "";
+  depto: string;
   
   constructor(private formularioService: FormularioService,
     private route: ActivatedRoute,
@@ -32,7 +33,36 @@ export class VerIndividualComponent implements OnInit {
         this.formularioService.getIndividual(id)
           .subscribe(artista => {
             this.artista = artista;
-            this.qr = this.artista.d_nombres + this.artista.d_apellidos 
+            this.qr = this.artista.numero_registro + this.artista.d_nombres + this.artista.d_apellidos 
+            switch (this.artista.id_dpto) {
+              case 1:
+                this.depto = "Chuquisaca"
+                break;
+              case 2:
+                this.depto = "La Paz"
+                break;
+              case 3:
+                this.depto = "Cochabamaba"
+                break;
+              case 4:
+                this.depto = "Oruro"
+                break;
+              case 5:
+                this.depto = "Potosi"
+                break;
+              case 6:
+                this.depto = "Tarija"
+                break;
+              case 7:
+                this.depto = "Santa Cruz"
+                break;
+              case 8:
+                this.depto = "Beni"
+                break;
+              case 9:
+                this.depto = "Pando"
+                break;
+            }
           })
       }
     })

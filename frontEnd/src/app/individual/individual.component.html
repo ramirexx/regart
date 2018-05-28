@@ -26,6 +26,13 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Estado del Registro</label>
+                            <input type="text" class="form-control" [formControl]="artForm.controls['id_estado']" [(ngModel)]="artista.id_estado" maxlength="36"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
                         <label>Fecha de registro</label>
                         <p-calendar [(ngModel)]="artista.d_fecha_registro" [formControl]="artForm.controls['d_fecha_registro']" dateFormat="dd/mm/yy"
                             inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
@@ -49,7 +56,8 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Departamento</label>
-                            <select class="form-control" [formControl]="artForm.controls['id_dpto']" [(ngModel)]="artista.id_dpto" >
+                            <select class="form-control" [formControl]="artForm.controls['id_dpto']" [(ngModel)]="artista.id_dpto" 
+                            (ngModelChange)="onselectDepartamento($event)">
                                 <option *ngFor="let obj of departamentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
                             </select>
 
@@ -57,14 +65,17 @@
                     </div>
                     <div class="col-sm-3">
                         <label>Provincia </label>
-                        <input type="text" class="form-control" [formControl]="artForm.controls['d_provincia']" [(ngModel)]="artista.d_provincia"
-                            maxlength="36" />
+                        <select class="form-control" [formControl]="artForm.controls['d_provincia']" [(ngModel)]="artista.id_prov"
+                        (ngModelChange)="onselectMunicipio($event)">
+                            <option *ngFor="let obj of provincias" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
+                        </select>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Municipio </label>
-                            <input type="text" class="form-control" [formControl]="artForm.controls['d_municipio']" [(ngModel)]="artista.d_municipio"
-                                maxlength="36" />
+                            <select class="form-control" [formControl]="artForm.controls['d_municipio']" [(ngModel)]="artista.id_mun">
+                            <option *ngFor="let obj of municipios" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
+                        </select>
                         </div>
                     </div>
                     <!--<div class="col-sm-3">
@@ -237,20 +248,46 @@
                         </select>
                     </div>
                     <div class="col-sm-4">
-                        <label>Actividad </label>
+                        <label>Actividad Principal</label>
                         <select class="form-control" [formControl]="artForm.controls['id_actividad']" [(ngModel)]="artista.id_actividad"
                         (ngModelChange)="onselectActividad($event)">
                             <option *ngFor="let obj of actividad" [ngValue]="obj.id_actividad">{{obj.d_desc_act}}</option>
                         </select>
                     </div>
                     <div class="col-sm-4">
-                        <label>Especialidad </label>
-                        <select class="form-control" [formControl]="artForm.controls['id_especialidad']" [(ngModel)]="artista.id_especialidad">
-                                <option *ngFor="let obj of especialidad" [ngValue]="obj.id_especialidad">{{obj.d_desc_esp}}</option>
+                            <label>Actividad Secundaria</label>
+                            <select class="form-control" [formControl]="artForm.controls['id_actividad_sec']" [(ngModel)]="artista.id_actividad_sec"
+                            (ngModelChange)="onselectActividad($event)">
+                                <option *ngFor="let obj of actividad" [ngValue]="obj.id_actividad">{{obj.d_desc_act}}</option>
                             </select>
-                    </div>
+                        </div>
+                    
                 </div>
                 <div class="row">
+                        <div class="col-sm-4">
+                                <label>Especialidad Principal</label>
+                                <select class="form-control" [formControl]="artForm.controls['id_especialidad']" [(ngModel)]="artista.id_especialidad">
+                                        <option *ngFor="let obj of especialidad" [ngValue]="obj.id_especialidad">{{obj.d_desc_esp}}</option>
+                                    </select>
+                            </div>
+                            <div class="col-sm-4">
+                                    <label>Especialidad Secundaria </label>
+                                    <select class="form-control" [formControl]="artForm.controls['id_especialidad_sec']" [(ngModel)]="artista.id_especialidad_sec">
+                                            <option *ngFor="let obj of especialidad" [ngValue]="obj.id_especialidad">{{obj.d_desc_esp}}</option>
+                                        </select>
+                                </div>
+                                <div class="col-sm-4">
+                                        <label>Especialidad Terciaria </label>
+                                        <select class="form-control" [formControl]="artForm.controls['id_especialidad_ter']" [(ngModel)]="artista.id_especialidad_ter">
+                                                <option *ngFor="let obj of especialidad" [ngValue]="obj.id_especialidad">{{obj.d_desc_esp}}</option>
+                                            </select>
+                                    </div>
+                </div>
+                
+
+
+                <div class="row">
+                    
                     <div class="col-sm-8">
                         <label>Experiencia </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_experiencia']" [(ngModel)]="artista.d_experiencia"
@@ -305,13 +342,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Estado del Registro</label>
-                            <input type="text" class="form-control" [formControl]="artForm.controls['id_estado']" [(ngModel)]="artista.id_estado" maxlength="36"
-                            />
-                        </div>
-                    </div>
+                    
                 </div>
             </fieldset>
         </p-panel>
@@ -327,4 +358,4 @@
     </p-toolbar>
 </div>
 
-<!--<pre>{{artista | json}}</pre>-->
+<pre>{{artista | json}}</pre>
