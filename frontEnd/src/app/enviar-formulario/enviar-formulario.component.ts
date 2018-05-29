@@ -24,6 +24,8 @@ export class EnviarFormularioComponent implements OnInit {
   ngOnInit() {
   }
 
+  showMsg: boolean;
+
   ngAfterContentInit() {
     console.log('-ngAfterViewInit');
 
@@ -35,7 +37,11 @@ export class EnviarFormularioComponent implements OnInit {
       this.formularioService.getIndividual(this.id)
             .subscribe(data => {
               this.artista = data;
-              this.base64Foto = this.artista.d_foto
+              this.base64Foto = this.artista.d_foto;
+              if (this. artista.id_estado == "ENVIADO"){
+                this.showMsg = true;  
+              }
+              
             })
     })
   }
@@ -51,6 +57,7 @@ export class EnviarFormularioComponent implements OnInit {
           alert("Se envio el Formulario:" + this.artista.numero_registro + " para su REVISION");
           //let link = ['home/listado-artistas/'];
           //this.router.navigate(link);
+          this.showMsg = true;
         } else {
           alert("No se pudo realizar la actualizacion!")
         }
@@ -62,6 +69,13 @@ export class EnviarFormularioComponent implements OnInit {
       });
 
   }
+
+  cancel() {
+    let link = ['home/listado-artistas/'];
+    this.router.navigate(link);
+  }
+
+
 
 
   

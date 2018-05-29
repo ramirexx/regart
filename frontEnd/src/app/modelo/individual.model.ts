@@ -5,7 +5,8 @@ export class Individual {
     numero_registro: string;
     d_fecha_registro: Date;
     d_fecha_renovacion: Date;
-    vigencia: string = "Vigencia de 5 años"
+    vigencia: string = "Vigencia de 2 años";
+    estado_credencial: string;
     id_dpto: number;
     id_prov: number;
     id_mun: number;
@@ -46,6 +47,7 @@ export class Individual {
     d_doc_respaldo: string;
     
     id_estado: string;
+    
     id_log: number;
 
 }

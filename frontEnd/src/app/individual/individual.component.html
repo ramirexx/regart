@@ -49,6 +49,15 @@
                     </div>
 
                 </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>Tipo de Registro </label>
+                        <select class="form-control" [formControl]="artForm.controls['estado_credencial']" [(ngModel)]="artista.estado_credencial">
+                            <option *ngFor="let obj of estadosCredencial" [ngValue]="obj">{{obj}}</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
             </fieldset>
             <p-panel header="Lugar de Registro">
             <fieldset>
@@ -67,7 +76,7 @@
                         <label>Provincia </label>
                         <select class="form-control" [formControl]="artForm.controls['d_provincia']" [(ngModel)]="artista.id_prov"
                         (ngModelChange)="onselectMunicipio($event)">
-                            <option *ngFor="let obj of provincias" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
+                            <option *ngFor="let obj of provincias" [ngValue]="obj.DepProv">{{obj.Provincia}}</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
@@ -358,4 +367,4 @@
     </p-toolbar>
 </div>
 
-<pre>{{artista | json}}</pre>
+<!--<pre>{{artista | json}}</pre>-->

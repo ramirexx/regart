@@ -33,7 +33,7 @@ export class IndividualComponent implements OnInit {
   year: any;
 
 
-
+  provincia: any;
 
 
   imagePath: string = "/9j/4AAQSkZJRgABAQEAkACQAAD/4QBgRXhpZgAASUkqAAgAAAACADEBAgAHAAAAJgAAAGmHBAABAAAALgAAAAAAAABHb29nbGUAAAMAAJAHAAQAAAAwMjIwAqAEAAEAAACQAQAAA6AEAAEAAACQAQAAAAAAAP/bAEMAEA" +
@@ -95,6 +95,13 @@ export class IndividualComponent implements OnInit {
     'Maestro -- 25 año adelante'
   ]
 
+  estadosCredencial = [
+    "NUEVO REGISTRO",
+    "RENOVACION",
+    "DUPLICADO POR EXTRAVIO",
+    "DUPLICADO POR ROBO"
+  ]
+
   constructor(private _fb: FormBuilder,
     private formularioService: FormularioService,
     private router: Router,
@@ -106,10 +113,11 @@ export class IndividualComponent implements OnInit {
       'd_fecha_registro': ['', Validators.required],
       'd_fecha_renovacion': [''],
       'vigencia': [{ value: '', disabled: true }, Validators.required],
+      'estado_credencial': [{ value: '', disabled: false }, Validators.required],
 
-      'id_dpto': [{ value: '' }, Validators.required],
-      'd_provincia': [{ value: '' }, Validators.required],
-      'd_municipio': [{ value: '' }, Validators.required],
+      'id_dpto': [ Validators.required],
+      'd_provincia': [ Validators.required],
+      'd_municipio': [ Validators.required],
 
       'd_cedula': [{ value: '' }, Validators.required],
       'd_exp': [{ value: '' }, Validators.required],
@@ -222,6 +230,8 @@ export class IndividualComponent implements OnInit {
 
 
   onselectDepartamento(objSelected) {
+    //this.artista.id_mun = null;
+    //this.artista.id_prov = null;
     console.log(objSelected)
     if (objSelected != undefined) {
       this.formularioService.getProvincias(objSelected)
@@ -230,7 +240,7 @@ export class IndividualComponent implements OnInit {
           if (res.length > 0) {
             this.provincias = res
           } else {
-            this.subSector = [];
+            this.provincias = [];
             alert("DEPARTAMENTO:"+res.msg)
             console.log("DEPARTAMENTO",data)
           }
@@ -243,7 +253,7 @@ export class IndividualComponent implements OnInit {
   onselectMunicipio(objSelected) {
     console.log(objSelected)
     if (objSelected != undefined) {
-      this.formularioService.getMunicipios(objSelected)
+      this.formularioService.getMunicipios(objSelected, this.artista.id_dpto)
         .subscribe(data => {
           let res: any = data
           if (res.length > 0) {
@@ -338,6 +348,7 @@ export class IndividualComponent implements OnInit {
         //this.router.navigate(link);
       });
     } else {
+      this.artista.numero_registro = this.artista.numero_registro+"-"+this.artista.id_individual;
       this.formularioService.updateIndividual(this.artista.id_individual, this.artista).subscribe(response => {
         console.log(response);
         if (response.status == "Success") {

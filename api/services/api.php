@@ -6,10 +6,15 @@
       public $data = "";
       
       const DB_SERVER = "localhost";
+      //const DB_USER = "id5857866_root";
       const DB_USER = "root";
       const DB_PASSWORD = "vertrigo";
-      /*const DB = "angularcode_customer";*/
+      //const DB = "id5857866_cultura_artistas2014";
       const DB = "cultura_artistas2014";
+
+
+      
+      
 
       private $db = NULL;
       private $mysqli = NULL;
@@ -74,20 +79,71 @@
         "id_estado":1
   }*/
 
+  
+  
+  
+
 private function test(){
+
+      function randomPassword() {
+            $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+            $pass = array(); //remember to declare $pass as an array
+            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+            for ($i = 0; $i < 8; $i++) {
+                $n = rand(0, $alphaLength);
+                $pass[] = $alphabet[$n];
+            }
+            return implode($pass); //turn the array into a string
+        }
 
 //      echo json_encode($response); //T\u00e9cnologia
  //     echo json_encode($response, JSON_UNESCAPED_UNICODE); //Técnologia
 
 
       if($this->get_request_method() != "GET"){
+            /*$to = "ramirolozacmj@gmail.com";
+            $subject = "My subject";
+            $txt = "Hello world!";
+            $headers = "From: webmaster@example.com" . "\r\n" .
+            "CC: somebodyelse@example.com";
+            mail($to,$subject,$txt,$headers);*/
             $this->response('',406);
          }
-         $x =  md5(uniqid(rand(), true));
-         $response = array('status' => $x, "msg" => "Colectivo Created Successfully.", "data" => null);
+      $x =  md5(uniqid(rand(), true));
+
+      $ci       = "555";//=$this->_request['ci_usuario'];
+      $nombres  = "Ramiro";  //= $this->_request['nombre_usuario'];
+      $apellidos = "Loza ";  // = $this->_request['apellido_usuario'];
+      
+      $sub3 = substr($nombres,0,1);
+      // $array sólo estará compuesto de 2 elementos:
+      $array = explode(" ", $apellidos, 2);
+      
+      $sub1 = $array[0]; // Devuelve ?
+      $sub1 = substr($sub1,0,1);
+      $sub2 = $array[1]; // Devuelve ?
+      $sub2 = substr($sub2,0,1);
+      $res = $sub1 . $sub2 . $sub3 . $ci;
+
+      $pass = randomPassword();
+
+         $response = array('res' => $res, "msg" => $pass, "data" => null);
              //"{'aaa':'Tecnologia'}";
             //      echo json_encode($response); //T\u00e9cnologia
             $this->response($this->json($response), 200); // send user details
+            
+}
+//http://localhost/api/regart/test2?id=1
+private function test2(){
+
+      if($this->get_request_method() != "POST"){
+            $this->response('',406);
+         }
+         $customer = json_decode(file_get_contents("php://input"),true);
+
+      $id = $customer['id'];
+      $response = array('res' => $id, "msg" => "sadasdas", "data" => null);
+      $this->response($this->json($response), 200); // send user details
             
 }
 
@@ -200,10 +256,10 @@ private function insertIndividual(){
       }
 
       $customer = json_decode(file_get_contents("php://input"),true);
-      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto', 'd_provincia', 'd_municipio',
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto', 'id_prov', 'id_mun',
       'd_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
-      'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','id_especialidad',
-      'd_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','id_estado');
+      'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','id_actividad_sec', 'id_especialidad',
+      'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','id_estado','estado_credencial');
       $keys = array_keys($customer);
       $columns = '';
       $values = '';
@@ -224,6 +280,41 @@ private function insertIndividual(){
       }else
          $this->response('error',204);   //"No Content" status
    }
+
+
+   
+   private function updateIndividual(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+      $customer = json_decode(file_get_contents("php://input"),true);
+      //$id = (int)$this->customer['id'];
+      $id = $customer['id'];
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto', 'id_prov', 'id_mun',
+      'd_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
+      'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','id_actividad_sec', 'id_especialidad',
+      'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','id_estado');
+      $keys = array_keys($customer['data']);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer['data'][$desired_key];
+         }
+         $columns = $columns.$desired_key."='".$$desired_key."',";
+      }
+      $query = "UPDATE tb_individual SET ".trim($columns,',')." WHERE id_individual=$id";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Artista Actualizado Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('error',204);   //"No Content" status
+   }
+
+
 
    //Servicio para recuperar individual por id
 //http://localhost/api/regart/individual?id=1
@@ -251,6 +342,7 @@ private function listaIndividual(){
       }
       $query="SELECT * FROM tb_individual order by id_individual";
       $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+      
 
       if($r->num_rows > 0){
          $result = array();
@@ -262,6 +354,25 @@ private function listaIndividual(){
       $this->response('',204);   // If no records "No Content" status
    }
 
+
+   private function updateEstado(){
+      if($this->get_request_method() != "POST"){
+            $this->response('',406);
+      }
+         $obj = json_decode(file_get_contents("php://input"),true);
+         //$id = (int)$this->customer['id'];
+         $id = $obj['id'];
+
+         $query="UPDATE tb_individual SET id_estado='ENVIADO' WHERE id_individual=$id";
+
+         if(!empty($id)){
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            $success = array('status' => "Success", "msg" => "Estado Actualizado Successfully.", "data" => $id);
+            $this->response($this->json($success),200);
+         }else
+            $this->response('error',204);   //"No Content" status
+
+   }
       
 ##############CATEGORIAS##################
 //Servicio para recuperar categorias
@@ -609,6 +720,84 @@ private function usuario(){
       $this->response('',204);   // If no records "No Content" status
    }
 
+
+   private function insertUsuarioPublico(){
+
+      function randomPassword() {
+            $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+            $pass = array(); //remember to declare $pass as an array
+            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+            for ($i = 0; $i < 8; $i++) {
+                $n = rand(0, $alphaLength);
+                $pass[] = $alphabet[$n];
+            }
+            return implode($pass); //turn the array into a string
+        }
+
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+      $obj = json_decode(file_get_contents("php://input"),true);
+      $keys = array($obj);
+      foreach ($keys as $input)
+      {
+            $ci         = $input['ci'];
+            $nombres    = $input['nombre'];
+            $apellidos  = $input['apellido'];
+            $email      = $input['email'];
+            $tipo       = $input['tipo'];
+            $id_dpto    = $input['id_dpto'];
+      }
+                  // $array sólo estará compuesto de 2 elementos:
+                  $array = explode(" ", $apellidos, 2);
+                  $sub1 = $array[0]; // Devuelve x    
+                  $sub1 = substr($sub1,0,1);
+                  $sub2 = $array[1]; // Devuelve x
+                  $sub2 = substr($sub2,0,1);
+                  $sub3 = substr($nombres,0,1);
+                  $nickUsuario = $sub1 . $sub2 . $sub3 . $ci;
+                  $passUsuario = randomPassword();
+            
+			$query = "INSERT INTO usuarios (ci_usuario,nombre_usuario, apellido_usuario, email_usuario, nick_usuario, pass_usuario, id_nivel, id_dpto, tipo_registro) VALUES ('$ci','$nombres','$apellidos','$email','$nickUsuario','$passUsuario',4,'$id_dpto','$tipo')";
+                  if(!empty($obj)){
+
+                                         
+                  $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+                  
+                  $response = array('res' => $r, "msg" => "Usuario Creado", "data" => $obj);
+
+                  $to = "ramirolozacmj@gmail.com"; // this is your Email address
+                  $from = "Ministerio de Culturas y Turismo"; // this is the sender's Email address
+                  $first_name = $nombres;
+                  $last_name = $apellidos;
+                  $subject = "Creación de Cuenta Sistema REGART";
+                  //$subject2 = "Copy of your form submission";
+                  $message = "Estimado(a) ".$nombres . " " . $apellidos . "\n\n".
+                  "La creación de su cuenta fue realizada con exito"."\n\n". 
+                  "Estas son sus credenciales para acceder al sistema:" . "\n\n" ."Usuario:".$nickUsuario. "\n\n". "Contraseña:".$passUsuario."\n\n". 
+                  "https://regart.000webhostapp.com"."\n\n". 
+                  "Ministerio de Culturas y Turismo";
+                  $headers = "De:" . $from;
+                  mail($to,$subject,$message,$headers);
+                  //mail($from,$subject2,$message2,$headers2); // sends a copy of the message to the sender
+                  //echo "Mail Sent. Thank you " . $first_name . ", we will contact you shortly.";
+    // You can also use header('Location: thank_you.php'); to redirect to another page.
+    
+ 
+                  $this->response($this->json($response), 200);
+                  
+			}else
+			
+			// If invalid inputs "Bad Request" status message and reason
+			$error = array("msg" => "Invalid input parameter");
+			$arr_res = array();
+			$arr_res['error']  = $error;
+			$arr_res['result'] = array('status' => "Failed");
+                  $this->response($this->json($arr_res), 400);
+                  
+      
+}   
+
    private function accesAuth(){
       // Cross validation if the request method is POST else it will return "Not Acceptable" status
       if($this->get_request_method() != "POST"){
@@ -632,7 +821,7 @@ private function usuario(){
          //$r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
          //if($r->num_rows > 0) {
 
-                  $query = "SELECT ci_usuarios, nom_ape_usuarios, nick_usuario, id_nivel, id_dpto FROM usuarios WHERE nick_usuario = '$user' AND pass_usuario = '$pass' LIMIT 1";
+                  $query = "SELECT ci_usuario, nombre_usuario, apellido_usuario, nick_usuario, id_nivel, id_dpto FROM usuarios WHERE nick_usuario = '$user' AND pass_usuario = '$pass' LIMIT 1";
                   //$query = "SELECT ci_usuarios, nom_ape_usuarios, nick_usuario, id_nivel, id_dpto FROM usuarios";
                   $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
                   if($r->num_rows > 0){
@@ -643,7 +832,7 @@ private function usuario(){
                         $r2 = $this->mysqli->query($query2) or die($this->mysqli->error.__LINE__);
                         
                         //$query3 = "SELECT ci_usuarios, nom_ape_usuarios, nick_usuario, id_nivel, id_dpto, token FROM usuarios, usuario_log WHERE nick_usuario.usuarios = '$user' AND usuario.usuario_log = '$user' LIMIT 1";
-                        $query3 =" SELECT a.nom_ape_usuarios, a.nick_usuario, a.id_nivel, a.id_dpto, b.token FROM usuarios a , usuario_log  b WHERE a.nick_usuario = b.usuario AND a.nick_usuario = '$user' LIMIT 1";
+                        $query3 =" SELECT a.nombre_usuario, a.apellido_usuario, a.nick_usuario, a.id_nivel, a.id_dpto, b.token FROM usuarios a , usuario_log  b WHERE a.nick_usuario = b.usuario AND a.nick_usuario = '$user' LIMIT 1";
                         $r3 = $this->mysqli->query($query3) or die($this->mysqli->error.__LINE__);
                         if($r3->num_rows>0){
                               $result = $r3->fetch_assoc();   
@@ -663,6 +852,73 @@ private function usuario(){
       $error = array('status' => "Error", "msg" => "Invalid User or Password");
       $this->response($this->json($error), 400);
 }
+
+
+private function departamentos(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $query="SELECT idDep as codigo, Departamento as descripcion FROM departamentos  ORDER BY idDep";
+      $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+
+      if($r->num_rows > 0){
+         $result = array();
+         while($row = $r->fetch_assoc()){
+            $result[] = $row;
+         }
+         $this->response($this->json($result), 200); // send user details
+      }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
+//http://localhost/api/regart/provincias?dep=2
+private function provincias(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $id = (int)$this->_request['dep'];
+         if($id >0){
+            //$query="SELECT Prov as codigo, IdProv as id, Provincia as descripcion FROM provincias WHERE DepProv =$id";
+            $query="SELECT * FROM provincias WHERE DepProv =$id";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0){
+                  $result = array();
+                  while($row = $r->fetch_assoc()){
+                     $result[] = $row;
+                  }
+                  $this->response($this->json($result), 200); // send user details
+               }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                  $this->response($this->json($error), 202); // send user details
+               }
+         }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
+
+   //http://localhost/api/regart/localidades?pro=5
+private function localidades(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $id = (int)$this->_request['pro'];
+         $idDep = (int)$this->_request['dep'];
+         if($id >0){
+            $query="SELECT ProvLoc as id,IdLoc as codigo, Localidad as descripcion FROM localidades WHERE ProvLoc =$id AND DepLoc =$idDep";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0){
+                  $result = array();
+                  while($row = $r->fetch_assoc()){
+                     $result[] = $row;
+                  }
+                  $this->response($this->json($result), 200); // send user details
+               }else{
+                  $error = array('status' => "empty", "msg" => $idDep);
+                  $this->response($this->json($error), 202); // send user details
+               }
+         }
+      $this->response('',204);   // If no records "No Content" status
+   }
 
 
 

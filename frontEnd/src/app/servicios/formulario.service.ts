@@ -33,8 +33,8 @@ export class FormularioService {
       .catch(this.handleError);
   }
 
-  getMunicipios(cod:any): Observable<any[]> {
-    return this.http.get(environment.urlApi + 'localidades?pro='+cod).map(this.extractData)
+  getMunicipios(cod:any, dep:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'localidades?pro='+cod+'&dep='+dep).map(this.extractData)
       .catch(this.handleError);
   }
   
