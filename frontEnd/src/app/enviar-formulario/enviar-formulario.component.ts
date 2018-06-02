@@ -38,7 +38,7 @@ export class EnviarFormularioComponent implements OnInit {
             .subscribe(data => {
               this.artista = data;
               this.base64Foto = this.artista.d_foto;
-              if (this. artista.id_estado == "ENVIADO"){
+              if (this.artista.id_estado == "ENVIADO"){
                 this.showMsg = true;  
               }
               
@@ -49,15 +49,21 @@ export class EnviarFormularioComponent implements OnInit {
 
   public enviar(): void {
     let data = {
-      "id":this.id
+      id:this.id,
+      cod:this.artista.numero_registro
     }
+    console.log(data)
       this.formularioService.updateEstadoIndividual(data).subscribe(response => {
         console.log(response);
         if (response.status == "Success") {
-          alert("Se envio el Formulario:" + this.artista.numero_registro + " para su REVISION");
+          //alert("Se envio el Formulario:" + this.artista.numero_registro + " para su REVISION");
           //let link = ['home/listado-artistas/'];
           //this.router.navigate(link);
-          this.showMsg = true;
+          alert("Para Validar su registro tiene 10 días calendario para apersonarse por oficinas de la Unidad de Coordinación de Consejos Departamentales de Cultura – UCCDC, dependiente de la Dirección General de Planificación – DGP del Ministerio de Culturas y Turismo, para presentar su documentación en fotocopias y originales, para respaldo de la actualización de su registro. "+
+          "Dirección – UCCDC: Calle Potosí, casi Esq. Loayza, Edificio Aguirre 5to. Piso."+
+          "Teléfonos: 2200910-2200946 – Interno: 1502 (UCCDC");
+        
+          //this.showMsg = true;
         } else {
           alert("No se pudo realizar la actualizacion!")
         }

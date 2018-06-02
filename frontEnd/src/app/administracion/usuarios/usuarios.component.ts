@@ -47,7 +47,9 @@ export class UsuariosComponent implements OnInit {
     private router: Router) {
       this.userForm = this._fb.group({
         'ci_usuarios': [{ value: '' }, Validators.required],
-        'nom_ape_usuarios': [{ value: '' }, Validators.required],
+        'nombre_usuario': [{ value: '' }, Validators.required],
+        'apellido_usuario': [{ value: '' }, Validators.required],
+        'email_usuario': [{ value: '' }, Validators.required],
         'nick_usuario': [{ value: '' }, Validators.required],
         'pass_usuario': [{ value: '' }, Validators.required],
         'id_nivel': [{ value: '' }, Validators.required],
