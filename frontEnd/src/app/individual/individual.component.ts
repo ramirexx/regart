@@ -31,10 +31,8 @@ export class IndividualComponent implements OnInit {
   renovacion: boolean;
   private base64Foto: String = "";
   year: any;
-
-
-  provincia: any;
-
+  provincia = { DepProv: null, Prov: null, IdProv: null, Provincia: null}
+  //"DepProv": "2", "Prov": "03", "Provincia": "Pacajes", "IdProv": "203"
 
   imagePath: string = "/9j/4AAQSkZJRgABAQEAkACQAAD/4QBgRXhpZgAASUkqAAgAAAACADEBAgAHAAAAJgAAAGmHBAABAAAALgAAAAAAAABHb29nbGUAAAMAAJAHAAQAAAAwMjIwAqAEAAEAAACQAQAAA6AEAAEAAACQAQAAAAAAAP/bAEMAEA" +
     "sLDAwMEQ0NERgQDhAYHBURERUcIRkZGRkZISAZHBwcHBkgICUnKCclIDAwNDQwMEBAQEBAQEBAQEBAQEBAQP/bAEMBERAQEhMSFhISFhYSFRIWHBYXFxYcKBwcHRwcKDElICAgICUxLC8oKCgvLDY2MTE2NkBAP0BAQEBAQEBAQEBAQP/AABEIAZA" +
@@ -76,10 +74,10 @@ export class IndividualComponent implements OnInit {
 
   estadoCivil = ['Soltero', 'Casado', 'Divorciado', 'Viuda']
 
-  documentos = [{ codigo: 1, descripcion: 'Curriculum Vitae' },
-  { codigo: 2, descripcion: 'Certificado/Credencial de Institución' },
-  { codigo: 3, descripcion: 'Título/Certificado Académico' },
-  { codigo: 4, descripcion: 'Otros Documentos' }
+  documentos = ['Curriculum Vitae',
+   'Certificado/Credencial de Institución',
+   'Título/Certificado Académico',
+   'Otros Documentos'
   ]
 
   categorizacion = [{ codigo: 'Emergente', descripcion: '2 a 6 años' },
@@ -206,8 +204,32 @@ export class IndividualComponent implements OnInit {
             .subscribe(data => {
               this.artista = data;
               this.artista.numero_registro = this.artista.numero_registro+"-"+id 
-              this.base64Foto = this.artista.d_foto
-
+              this.base64Foto = this.artista.d_foto;
+              this.formularioService.getProvincias(this.artista.id_dpto)
+              .subscribe(data => {
+                let res: any = data
+                if (res.length > 0) {
+                  this.provincias = res
+                  for (let i = 0; i < this.provincias.length; i++) {
+                    let p = this.provincias[i];
+                    if(p.IdProv = this.artForm.id_prov)
+                    console.log("uuuuuu",p.Provincia)
+                  }
+                } else {
+                  this.provincias = [];
+                }
+              });
+              
+            
+              //this.provincia.Provincia = this.provincias[this.provincias.map(function (e) { return e.IdProv; }).indexOf(this.provincia.Provincia.IdProv)];
+              this.provincia = { DepProv: this.artista.dptoProv, 
+                                Prov: this.artista.prov,
+                                IdProv: this.artista.id_prov,
+                                Provincia: null}
+              console.log("00000",this.provincia)
+              this.onselectMunicipio(this.provincia);
+              
+              console.log("222222222222222",this.provincia.Provincia)
               if (this.artista.d_fecha_nacimiento != null) {
                 this.artista.d_fecha_nacimiento = new Date(this.artista.d_fecha_nacimiento);
                 console.log("---->" + this.artista.d_fecha_nacimiento);
@@ -251,16 +273,22 @@ export class IndividualComponent implements OnInit {
   }
 
   onselectMunicipio(objSelected) {
-    console.log(objSelected)
+    console.log("11111",objSelected)
     if (objSelected != undefined) {
-      this.formularioService.getMunicipios(objSelected, this.artista.id_dpto)
+      //this.artista.id_prov = objSelected.IdProv;
+      console.log(objSelected.IdProv, objSelected.Prov)
+      this.artista.id_prov = objSelected.IdProv;
+      this.artista.dptoProv = objSelected.DepProv;
+      this.artista.prov = objSelected.Prov;
+      //this.formularioService.getMunicipios(objSelected, this.artista.id_dpto)
+      this.formularioService.getMunicipios(objSelected.Prov , objSelected.DepProv)
         .subscribe(data => {
           let res: any = data
           if (res.length > 0) {
             this.municipios = res
           } else {
             this.municipios = [];
-            alert("MUNICIPIO CAMPO VACIO")
+            //alert("MUNICIPIO CAMPO VACIO")
             console.log("MUNICIPIO",data)
           }
         },

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Individual } from '../modelo/individual.model';
+import { FormIndividual } from '../modelo/individual.model';
 import { FormularioService } from '../servicios/formulario.service';
 import { Router, ActivatedRoute} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -11,10 +11,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class FormularioComponent implements OnInit {
 
-  artista: Individual = new Individual();
+  artista: FormIndividual = new FormIndividual();
   private base64Foto:String="";
   imagePath:string;
   depto: string;
+  pro: string;
+  mun: string;
+
 
   constructor(private formularioService: FormularioService,
     private route: ActivatedRoute,
@@ -30,13 +33,13 @@ export class FormularioComponent implements OnInit {
       let id = params['id'];
       if (id != undefined) {
         console.log(id);
-        this.formularioService.getIndividual(id)
+        this.formularioService.getFormIndividual(id)
           .subscribe(artista => {
             this.artista = artista;
-            
+            console.log(this.artista)
             this.imagePath = this.artista.d_foto;
-            this.base64Foto = this.artista.d_foto
-            this.depto = this.getDepto(this.artista.id_dpto);
+            this.base64Foto = this.artista.d_foto;
+            //this.depto = this.getDepto(this.artista.id_dpto);
             console.log(this.artista.id_dpto)
             console.log(this.depto)
           })

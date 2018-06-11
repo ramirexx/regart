@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <h3 style="text-align: center"> REGISTRO INDIVIDUAL </h3>
       <table class="table table-sm">
-
+ <!--{{artista | json}}-->
         <tbody>
           <tr>
             <td>
@@ -12,13 +12,13 @@
                   <span class="value">{{artista.d_fecha_registro}}</span>
                 </div>
                 <div class="info-name">Departamento:
-                  <span class="value">{{depto}}</span>
+                  <span class="value">{{artista.Departamento}}</span>
                 </div>
                 <div class="info-name">Provincia:
-                  <span class="value">{{artista.id_dpto}}</span>
+                  <span class="value">{{artista.Provincia}}</span>
                 </div>
                 <div class="info-name">Municipio:
-                  <span class="value">{{artista.d_municipio}}</span>
+                  <span class="value">{{artista.Localidad}}</span>
                 </div>
               </div>
             </td>
@@ -27,7 +27,7 @@
                 <span class="value"> {{artista.d_nombres}} {{artista.d_apellidos}} </span>
               </div>
               <div class="info-name">C.I.: <span class="value">{{artista.d_cedula}}</span></div>
-              <div class="info-name">Lugar de Nacimiento: <span class="value">{{depto}} {{artista.d_provincia}} {{artista.d_fecha_nacimiento}}</span></div>
+              <div class="info-name">Lugar de Nacimiento: <span class="value">{{Departamento}} {{Provincia}} {{artista.d_fecha_nacimiento}}</span></div>
               <div class="info-name">Domicilio: <span class="value">{{artista.d_domicilio}} {{artista.d_fecha_nacimiento}}</span></div>
               <div class="info-name">Teléfono/Celular: <span class="value">{{artista.d_telefono}} {{artista.d_celular}}</span></div>
               <div class="info-name">Correo Electrónico:  <span class="value">{{artista.d_email}}</span></div>
@@ -36,7 +36,6 @@
                 <div class="col-sm-6">
                     <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px" class="img-responsive img-thumbnail"/>
                     <div class="info-name">{{artista.numero_registro}}</div>
-                    <!--<img [src]="'data:image/jpg;base64,'+imagePath"/> -->
                 </div>
             </td>
           </tr>
@@ -50,8 +49,8 @@
           <tr>
             <td>
               <div class="col-md-12">
-                <div class="info-name">Sector: <span class="value">{{artista.id_sector}}</span> Sub Sector: <span class="value">{{artista.id_sub_sector}}</span></div>
-                <div class="info-name">Actividad: <span class="value">{{artista.id_actividad}}</span> Especialidad: <span class="value">{{artista.id_especialidad}}</span></div>
+                <div class="info-name">Sector: <span class="value">{{artista.d_desc_cat}}</span> Sub Sector: <span class="value">{{artista.d_desc_sub_cat}}</span></div>
+                <div class="info-name">Actividad: <span class="value">{{artista.d_desc_act}}</span> Especialidad: <span class="value">{{artista.d_desc_esp}}</span></div>
               </div>
             </td>
           </tr>

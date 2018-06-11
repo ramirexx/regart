@@ -95,6 +95,7 @@ import { EnviarFormularioComponent } from './enviar-formulario/enviar-formulario
   providers: [
     Auth,
     FormularioService,
+    {provide:LocationStrategy,  useClass: HashLocationStrategy },
     {provide: APP_BASE_HREF, useValue: '/'}
     //{ provide: HTTP_INTERCEPTORS, useClass: HttpLogInterceptor, multi: true }  
     

@@ -74,9 +74,13 @@
                     </div>
                     <div class="col-sm-3">
                         <label>Provincia </label>
-                        <select class="form-control" [formControl]="artForm.controls['d_provincia']" [(ngModel)]="artista.id_prov"
-                        (ngModelChange)="onselectMunicipio($event)">
+                        <!--<select class="form-control" [formControl]="artForm.controls['d_provincia']" [(ngModel)]="artista.id_prov"
+                        (ngModelChange)="onselectMunicipio($event, obj)">
                             <option *ngFor="let obj of provincias" [ngValue]="obj.DepProv">{{obj.Provincia}}</option>
+                        </select>-->
+                        <select class="form-control" [formControl]="artForm.controls['d_provincia']" [(ngModel)]="provincia"
+                        (ngModelChange)="onselectMunicipio($event)">
+                            <option *ngFor="let obj of provincias" [ngValue]="obj">{{obj.Provincia}}</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
@@ -334,15 +338,14 @@
                 <div class="row">
                         <div class="col-sm-3">
                                 <label>Tipo de respaldo </label>
-                                <select class="form-control" [formControl]="artForm.controls['id_doc_resp']">
-                                    <option *ngFor="let obj of documentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
+                                <select class="form-control" [formControl]="artForm.controls['id_doc_resp']" [(ngModel)]="artista.id_doc_resp">
+                                    <option *ngFor="let obj of documentos" [ngValue]="obj">{{obj}}</option>
                                 </select>
                             </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <label>Documento de respaldo </label>
-                        <label>Fotografia </label>
                         <!--<input type="file" id="filePicker" [formControl]="artForm.controls['d_doc_respaldo']">-->
 
                         <!--<select class="form-control" [formControl]="artForm.controls['d_doc_respaldo']">
@@ -362,7 +365,7 @@
     <p-toolbar>
         <div class="ui-toolbar-group-right">
             <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveDraft()"></button>
-            <button pButton type="button" label="Cancelar" icon="fa-times"(click)="cancel()"></button>
+            <button pButton type="button" label="Volver" icon="fa-times"(click)="cancel()"></button>
         </div>
     </p-toolbar>
 </div>

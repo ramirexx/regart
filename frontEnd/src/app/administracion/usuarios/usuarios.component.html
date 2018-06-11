@@ -20,13 +20,14 @@
           <span>{{index+1}}</span>
         </ng-template>
       </p-column>
-      <p-column field="ci_usuarios" header="Cedula de Identidad"></p-column>
-      <p-column field="nom_ape_usuarios" header="Nombres y Apellidos"></p-column>
+      <p-column field="ci_usuario" header="Cedula de Identidad"></p-column>
+      <p-column field="nombre_usuario" header="Nombres y Apellidos"></p-column>
+      <p-column field="apellido_usuario" header="Nombres y Apellidos"></p-column>
       <p-column field="nick_usuario" header="Nombre usuario"></p-column>
       <p-column field="id_nivel" header="Nivel"></p-column>
       <p-column [style]="{'width':'10%'}" header="Acciones">
         <ng-template let-doc="rowData" pTemplate type="body">
-          <button type="button" pButton (click)="ver(doc.ci_usuarios)" icon="fa-search"></button>
+          <button type="button" pButton (click)="ver(doc.ci_usuario)" icon="fa-search"></button>
 
           <!--<div class="btn-group" dropdown>
             <button dropdownToggle type="button" class="btn btn-primary btn-sm dropdown-toggle">
@@ -54,7 +55,7 @@
           <div class="col-sm-3">
             <div class="form-group">
               <label>Cedula de Identidad </label>
-              <input type="text" class="form-control" [formControl]="userForm.controls['ci_usuarios']" [(ngModel)]="usuario.ci_usuarios"
+              <input type="text" class="form-control" [formControl]="userForm.controls['ci_usuarios']" [(ngModel)]="usuario.ci_usuario"
                 maxlength="36" />
             </div>
           </div>

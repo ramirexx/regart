@@ -14,6 +14,7 @@ export class EnviarFormularioComponent implements OnInit {
   artista: Individual = new Individual();
   private base64Foto: String = "";
   id: any;
+  enviado:boolean;
 
   constructor(
     private formularioService: FormularioService,
@@ -62,10 +63,13 @@ export class EnviarFormularioComponent implements OnInit {
           alert("Para Validar su registro tiene 10 días calendario para apersonarse por oficinas de la Unidad de Coordinación de Consejos Departamentales de Cultura – UCCDC, dependiente de la Dirección General de Planificación – DGP del Ministerio de Culturas y Turismo, para presentar su documentación en fotocopias y originales, para respaldo de la actualización de su registro. "+
           "Dirección – UCCDC: Calle Potosí, casi Esq. Loayza, Edificio Aguirre 5to. Piso."+
           "Teléfonos: 2200910-2200946 – Interno: 1502 (UCCDC");
-        
+      console.log(response.data)
+      this.artista.numero_registro = response.data;
+      this.enviado = true;
           //this.showMsg = true;
         } else {
           alert("No se pudo realizar la actualizacion!")
+          this.enviado = false;
         }
       }, err => {
         alert("ERROR DE ACTUALIZACION " +err)

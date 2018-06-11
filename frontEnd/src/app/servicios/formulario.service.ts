@@ -135,7 +135,10 @@ export class FormularioService {
     return this.http.get(environment.urlApi + 'individual?id='+id).map(this.extractData)
       .catch(this.handleError);
   }
-
+  getFormIndividual(id: any): Observable<any> {
+    return this.http.get(environment.urlApi + 'formularioIndividual?id='+id).map(this.extractData)
+      .catch(this.handleError);
+  }
 
   getUsuarios(): Observable<any[]> {
     return this.http.get(environment.urlApi + 'listaUsuarios').map(this.extractData)

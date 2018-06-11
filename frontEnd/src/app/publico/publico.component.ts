@@ -57,7 +57,8 @@ export class PublicoComponent implements OnInit {
       if (response.status=="Success"){
         alert("Usuario Registrado");
         this.usuario = new Publico();
-
+        let link = ['/'];
+        this.router.navigate(link);
       }else{
         alert("No se pudo realizar el registro!")
       }
@@ -67,6 +68,11 @@ export class PublicoComponent implements OnInit {
       //let link = ['home/listado-artistas/'];
       //this.router.navigate(link);
     });
+  }
+
+  cancel(){
+    let link = ['/'];
+    this.router.navigate(link);
   }
 
 }

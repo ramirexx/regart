@@ -32,7 +32,7 @@ export class CredencialComponent implements OnInit {
       let id = params['id'];
       if (id != undefined) {
         console.log(id);
-        this.formularioService.getIndividual(id)
+        this.formularioService.getFormIndividual(id)
           .subscribe(artista => {
             this.artista = artista;
 
