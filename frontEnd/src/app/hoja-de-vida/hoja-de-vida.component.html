@@ -1,0 +1,88 @@
+<!--        <button pButton type="button" label="Adicionar" icon="fa-plus"(click)="cancel()"></button>-->
+    
+    <fieldset>
+        <!--<div class="col-md-12 div-footer">
+            <div class="pull-right"><span style="font-weight:normal">Adicionar Documento Anexo</span> <button type="button" class="btn btn-primary btn-sm"
+                    (click)="addAnexo()"><i class="fa fa-plus white"></i></button></div>
+        </div>-->
+
+        <p-tabView>
+                <p-tabPanel header="Trayectoria Artistica">
+                 <fieldset>
+                                <form [formGroup]="trayectoriaForm" novalidate>
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Gestión </label>
+                                                <input type="text" class="form-control" [formControl]="trayectoriaForm.controls['gestion']" [(ngModel)]="trayectoria.gestion"
+                                                    maxlength="36" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-3">
+                                            <label>Fecha</label>
+                                            <p-calendar [(ngModel)]="trayectoria.fecha" [formControl]="trayectoriaForm.controls['fecha']" dateFormat="dd/mm/yy"
+                                                inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
+                                       </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Lugar</label>
+                                                <input type="text" class="form-control" [formControl]="trayectoriaForm.controls['lugar']" [(ngModel)]="trayectoria.lugar" maxlength="36"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                                <label>Actividad </label>
+                                                <input type="text" class="form-control" [formControl]="trayectoriaForm.controls['actividad']" [(ngModel)]="trayectoria.actividad" maxlength="36">
+                                            </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-md-12">
+                                            <p-toolbar>
+                                                <div class="ui-toolbar-group-right">
+                                                    <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveDraft()"></button>
+                                                    <button pButton type="button" label="Limpiar" icon="fa-times"(click)="cancel()"></button>
+                                                </div>
+                                            </p-toolbar>
+                                        </div>
+                                    </div>
+                                        
+                                </fieldset>
+                                </form>
+                        <table class="table table-striped table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Gestion</th>
+                                        <th>Fecha</th>
+                                        <th>Lugar</th>
+                                        <th>Actividad</th>
+                                        <th>Opcion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let obj of listaTrayectoria;let i = index">
+                                        <td class="form-group">
+                                          
+                                        </td>
+                                        <td class="form-group">
+                                        </td>
+                                        <td class="form-group">
+                                        </td>
+                                        <td><button class="btn btn-white btn-danger btn-sm" (click)="deleteAnexos(i)"><i class="fa fa-minus"></i></button></td>
+                                    </tr>
+                                </tbody>
+                    
+                               
+                            </table>
+                 </fieldset>
+                </p-tabPanel>
+                <p-tabPanel header="Header 2">
+                    Content 2
+                </p-tabPanel>
+                <p-tabPanel header="Header 3">
+                    Content 3    
+                </p-tabPanel>
+            </p-tabView>
+
+    </fieldset>

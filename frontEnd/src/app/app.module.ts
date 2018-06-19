@@ -24,13 +24,15 @@ import { LocationStrategy, HashLocationStrategy,APP_BASE_HREF } from '@angular/c
 
 import { Auth } from './auth/index';
 
+import { ModalModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { SortableModule } from 'ngx-bootstrap/sortable';
 
 import {InputTextModule,DataTableModule,ButtonModule,DialogModule,MultiSelectModule,
   PanelModule, GrowlModule, CalendarModule, InputMaskModule, CheckboxModule, AutoCompleteModule,
-  ConfirmDialogModule, OverlayPanelModule, TooltipModule, MenuModule, MenuItemContent,ToolbarModule
+  ConfirmDialogModule, OverlayPanelModule, TooltipModule, MenuModule, MenuItemContent,ToolbarModule,
+  TabViewModule
 } from 'primeng/primeng';
 
 
@@ -56,6 +58,7 @@ import { CredencialComponent } from './credencial/credencial.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { PublicoComponent } from './publico/publico.component';
 import { EnviarFormularioComponent } from './enviar-formulario/enviar-formulario.component';
+import { HojaDeVidaComponent } from './hoja-de-vida/hoja-de-vida.component';
 
 
 @NgModule({
@@ -73,7 +76,8 @@ import { EnviarFormularioComponent } from './enviar-formulario/enviar-formulario
     CredencialComponent,
     FormularioComponent,
     PublicoComponent,
-    EnviarFormularioComponent
+    EnviarFormularioComponent,
+    HojaDeVidaComponent
   ],
   imports: [
     
@@ -86,9 +90,10 @@ import { EnviarFormularioComponent } from './enviar-formulario/enviar-formulario
     HttpClientModule,
     InputTextModule, DataTableModule, ButtonModule, DialogModule, PanelModule, 
     CalendarModule, InputMaskModule, ConfirmDialogModule, OverlayPanelModule,
-    MenuModule, ToolbarModule,
+    MenuModule, ToolbarModule, TabViewModule,
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
+    ModalModule.forRoot(),
     QRCodeModule
     
   ],

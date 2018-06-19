@@ -159,7 +159,11 @@ export class FormularioService {
     return this.http.post(environment.urlApi + 'accesAuth', data).map(this.extractData) 
       .catch(this.handleError);
   }
-
+  
+  ci: string
+  setCi(ci:any){
+    this.ci = ci
+  }
 
 
 

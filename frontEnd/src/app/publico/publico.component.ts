@@ -22,7 +22,7 @@ export class PublicoComponent implements OnInit {
   usuario: Publico = new Publico;
   userForm: any;
 
-  tipos=['Nuevo Registro','Renovacion']
+  tipos=['Nuevo Registro','Actualización']
 
   departamentos = [{ codigo: 1, descripcion: 'Chuquisaca' },
   { codigo: 2, descripcion: 'La Paz' },

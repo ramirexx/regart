@@ -38,7 +38,7 @@ export class CredencialComponent implements OnInit {
 
             this.imagePath = this.artista.d_foto;
             this.base64Foto = this.artista.d_foto
-            this.qr = this.artista.d_nombres + this.artista.d_apellidos 
+            this.qr = this.artista.d_pagina_web;//this.artista.d_nombres + this.artista.d_apellidos 
             this.depto = this.getDepto(this.artista.id_dpto);
 
             

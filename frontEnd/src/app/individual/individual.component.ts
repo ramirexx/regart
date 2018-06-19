@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,11 +8,13 @@ import {
 } from '@angular/forms';
 import { FormularioService } from '../servicios/formulario.service';
 import { Individual } from '../modelo/individual.model';
+//import { Individual } from '../modelo/individual.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HojaDeVidaComponent } from '../hoja-de-vida/hoja-de-vida.component';
 
 
 @Component({
@@ -24,7 +26,6 @@ export class IndividualComponent implements OnInit {
 
   artForm: any;
   artista: Individual = new Individual();
-  //calendario idioma;
   es: any;
 
   qr: string = "sdfsdfsd";
@@ -32,6 +33,7 @@ export class IndividualComponent implements OnInit {
   private base64Foto: String = "";
   year: any;
   provincia = { DepProv: null, Prov: null, IdProv: null, Provincia: null}
+  ci : string;
   //"DepProv": "2", "Prov": "03", "Provincia": "Pacajes", "IdProv": "203"
 
   imagePath: string = "/9j/4AAQSkZJRgABAQEAkACQAAD/4QBgRXhpZgAASUkqAAgAAAACADEBAgAHAAAAJgAAAGmHBAABAAAALgAAAAAAAABHb29nbGUAAAMAAJAHAAQAAAAwMjIwAqAEAAEAAACQAQAAA6AEAAEAAACQAQAAAAAAAP/bAEMAEA" +
@@ -95,10 +97,10 @@ export class IndividualComponent implements OnInit {
 
   estadosCredencial = [
     "NUEVO REGISTRO",
-    "RENOVACION",
-    "DUPLICADO POR EXTRAVIO",
-    "DUPLICADO POR ROBO"
+    "RENOVACION"
   ]
+
+  @ViewChild(HojaDeVidaComponent) domicilioComponent: HojaDeVidaComponent;
 
   constructor(private _fb: FormBuilder,
     private formularioService: FormularioService,
@@ -129,12 +131,12 @@ export class IndividualComponent implements OnInit {
       'd_profesion': [{ value: '' }, Validators.required],
 
       'd_domicilio': [{ value: '' }, Validators.required],
-      'd_telefono': [{ value: '' }, Validators.required],
+      'd_telefono': [{ value: '' }],
       'd_celular': [{ value: '' }, Validators.required],
       'd_email': [{ value: '' }, Validators.required],
-      'd_pagina_web': [{ value: '' }, Validators.required],
-      'd_youtube': [{ value: '' }, Validators.required],
-      'd_otros': [{ value: '' }, Validators.required],
+      'd_pagina_web': [{ value: '' }],
+      'd_youtube': [{ value: '' }],
+      'd_otros': [{ value: '' }],
 
       'd_institucion': [{ value: '' }, Validators.required],
       'd_agrupaciones': [{ value: '' }, Validators.required],
@@ -364,6 +366,8 @@ export class IndividualComponent implements OnInit {
         //this.artista.numero_registro = 
         if (response.status == "Success") {
           alert("Datos Registrados, Formulario:" + this.artista.numero_registro);
+          this.artista.id_individual = response.data;
+          console.log(this.artista.id_individual)
           //let link = ['home/listado-artistas/'];
           //this.router.navigate(link);
         } else {
@@ -422,6 +426,13 @@ export class IndividualComponent implements OnInit {
     console.log(btoa(binaryString));
   }
 
+
+  display: boolean = false;
+
+    showDialog() {
+        this.display = true;
+        this.formularioService.setCi(this.ci)
+    }
 
 
 

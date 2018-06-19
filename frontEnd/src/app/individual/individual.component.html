@@ -42,11 +42,11 @@
                         <p-calendar [(ngModel)]="artista.d_fecha_renovacion" [formControl]="artForm.controls['d_fecha_renovacion']" dateFormat="dd/mm/yy"
                             inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
                     </div>
-                    <div class="col-sm-3">
+                    <!--<div class="col-sm-3">
                         <label>Vigencia</label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['vigencia']" [(ngModel)]="artista.vigencia"
                                 maxlength="36" />
-                    </div>
+                    </div>-->
 
                 </div>
                 <div class="row">
@@ -300,18 +300,20 @@
 
 
                 <div class="row">
-                    
-                    <div class="col-sm-8">
-                        <label>Experiencia </label>
+                        <div class="col-md-4">
+                                <label>Categorizacion </label>
+                                <select class="form-control" [formControl]="artForm.controls['categorizacion']" [(ngModel)]="artista.categorizacion">
+                                    <option *ngFor="let obj of listaCategorizacion" [ngValue]="obj">{{obj}}</option>
+                                </select>
+                            </div>
+                    <div class="col-md-4">
+                        <br>
+                        <button pButton type="button" label="Registrar Experiencia" icon="fa-save" (click)="showDialog()"></button>
+                        <!--<label>Experiencia </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_experiencia']" [(ngModel)]="artista.d_experiencia"
-                            maxlength="36" />
+                            maxlength="36" />-->
                     </div>
-                    <div class="col-sm-4">
-                        <label>Categorizacion </label>
-                        <select class="form-control" [formControl]="artForm.controls['categorizacion']" [(ngModel)]="artista.categorizacion">
-                            <option *ngFor="let obj of listaCategorizacion" [ngValue]="obj">{{obj}}</option>
-                        </select>
-                    </div>
+                    
                 
                 </div>
             </fieldset>
@@ -335,7 +337,7 @@
                     
                     
                 </div>
-                <div class="row">
+                <!--<div class="row">
                         <div class="col-sm-3">
                                 <label>Tipo de respaldo </label>
                                 <select class="form-control" [formControl]="artForm.controls['id_doc_resp']" [(ngModel)]="artista.id_doc_resp">
@@ -346,13 +348,8 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <label>Documento de respaldo </label>
-                        <!--<input type="file" id="filePicker" [formControl]="artForm.controls['d_doc_respaldo']">-->
-
-                        <!--<select class="form-control" [formControl]="artForm.controls['d_doc_respaldo']">
-                            <option *ngFor="let obj of documentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
-                        </select>-->
                     </div>
-                </div>
+                </div>-->
                 <div class="row">
                     
                 </div>
@@ -369,5 +366,21 @@
         </div>
     </p-toolbar>
 </div>
+
+
+<p-dialog [(visible)]="display" [width]="740" [height]="600" modal="true" [closable]="false">
+        <p-header>
+                Registro de Hoja Artistica
+            </p-header>
+            <app-hoja-de-vida></app-hoja-de-vida>
+            <p-footer>
+                    <button pButton type="button" label="Aceptar" icon="fa-save" (click)="saveDraft()"></button>
+                    <button pButton type="button" label="Cerrar" icon="fa-times"(click)="cancel()"></button>
+            </p-footer>
+</p-dialog>
+
+
+
+
 
 <!--<pre>{{artista | json}}</pre>-->

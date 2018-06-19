@@ -17,6 +17,7 @@ export class FormularioComponent implements OnInit {
   depto: string;
   pro: string;
   mun: string;
+  qr: string = "";
 
 
   constructor(private formularioService: FormularioService,
@@ -39,6 +40,7 @@ export class FormularioComponent implements OnInit {
             console.log(this.artista)
             this.imagePath = this.artista.d_foto;
             this.base64Foto = this.artista.d_foto;
+            this.qr = this.artista.d_nombres + this.artista.d_apellidos 
             //this.depto = this.getDepto(this.artista.id_dpto);
             console.log(this.artista.id_dpto)
             console.log(this.depto)

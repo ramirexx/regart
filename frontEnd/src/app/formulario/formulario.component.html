@@ -59,6 +59,7 @@
               <div class="col-md-12">
               <div class="info-name">Agrupaciones/Instituciones: : <span class="value">{{artista.d_cedula}}</span></div>
               <div class="info-name">Biografía: : <span class="value">{{artista.d_experiencia}}</span></div>
+              <qr-code [value]="qr" [size]="100"></qr-code>
             </div>
             </td>
           </tr>
@@ -70,6 +71,7 @@
     <div class="row">
       <div class="col-md-6" style="padding-top:120px">
         <div style="text-align: center">
+            
           <span class="firma"> {{artista.d_nombres}} {{artista.d_apellidos}} </span>
           <p class="firma"> Artista </p>
         </div>

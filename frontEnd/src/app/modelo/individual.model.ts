@@ -1,7 +1,8 @@
+import { Calendar } from "primeng/primeng";
+
 export class Individual {
 
     id_individual: number;
-
     numero_registro: string;
     d_fecha_registro: Date;
     d_fecha_renovacion: Date;
@@ -23,7 +24,7 @@ export class Individual {
     d_estado_civil: string;
     d_nro_hijos: string;
     d_profesion: string;
-    
+
     d_domicilio: string;
     d_telefono: string;
     d_celular: string;
@@ -42,14 +43,14 @@ export class Individual {
     id_especialidad_sec: number;
     id_especialidad_ter: number;
     d_experiencia: string;
-    caegorizacion:string;
+    caegorizacion: string;
 
     d_foto: any;
     id_doc_resp: string;
     d_doc_respaldo: string;
-    
+
     id_estado: string;
-    
+
     id_log: number;
 
 }
@@ -72,7 +73,7 @@ export class FormIndividual {
     d_nacimiento: number;
     d_fecha_nacimiento: Date;
     d_estado_civil: string;
-    
+
     d_domicilio: string;
     d_telefono: string;
     d_celular: string;
@@ -91,7 +92,7 @@ export class FormIndividual {
     id_especialidad_sec: number;
     id_especialidad_ter: number;
     d_experiencia: string;
-    caegorizacion:string;
+    caegorizacion: string;
 
     d_foto: any;
     id_estado: string;
@@ -104,4 +105,39 @@ export class FormIndividual {
     d_desc_act: string;
     d_desc_esp: string;
 
+}
+
+export class Trayectoria {
+    gestion: string;
+    fecha: Date;
+    lugar: string;
+    actividad: string;
+}
+
+export class Curso {
+    institucion: string;
+    nombre_curso: string;
+    desde: Date;
+    hasta: Date;
+}
+
+export class Formacion {
+    universidad: string;
+    grado: string;
+    desde: Date;
+    fecha_emision: Date;
+}
+
+export class Premios {
+    institucion: string;
+    distincion: string;
+    lugar: string;
+    fecha: Date;
+}  
+
+export class Produccion {
+    gestion: string;
+    fecha: Date;
+    lugar: string;
+    actividad: string;
 }
