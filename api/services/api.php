@@ -272,10 +272,15 @@ private function insertIndividual(){
          $columns = $columns.$desired_key.',';
          $values = $values."'".$$desired_key."',";
       }
+      
       $query = "INSERT INTO tb_individual(".trim($columns,',').") VALUES(".trim($values,',').")";
+      
+      
       if(!empty($customer)){
+      
          $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
-         $success = array('status' => "Success", "msg" => "Artista Created Successfully.", "data" => $customer);
+         $z = $this->mysqli->insert_id;
+         $success = array('status' => "Success", "msg" => "Artista Created Successfully.", "data" => $z);
          $this->response($this->json($success),200);
       }else
          $this->response('error',204);   //"No Content" status
@@ -728,6 +733,34 @@ private function insertUsusario(){
          $this->response('',204);   //"No Content" status
 }
 
+private function updateUsuario(){
+      if($this->get_request_method() != "POST"){
+            $this->response('',406);
+      }
+         $obj = json_decode(file_get_contents("php://input"),true);
+         //$id = (int)$this->customer['id'];
+         $keys = array($obj);
+         foreach ($keys as $input)
+         {
+               $id     = $input['id'];
+         }
+         $correlativo = $cod."-".$id;
+         $correlativo2 = (string)$correlativo;
+
+         $query="UPDATE tb_individual SET id_estado='ENVIADO', numero_registro= '$correlativo2' WHERE id_individual=$id";
+
+         if(!empty($obj)){
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            $success = array('status' => "Success", "msg" => "Estado Actualizado Successfully.", "data" => $correlativo2);
+            $this->response($this->json($success),200);
+         }else
+            $this->response($this->json($obj), 400);
+            //$this->response('error',204);   //"No Content" status
+
+   }
+
+
+
 //servicio que recupera usuario por ci
 //http://localhost/api/regart/usuario?ci=3395116
 private function usuario(){
@@ -946,6 +979,144 @@ private function localidades(){
       $this->response('',204);   // If no records "No Content" status
    }
 
+//SERVICIOS PARA HOJA ARTISTICA
+
+//servicio para CURSOS
+private function insertCurso(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('id_artista','institucion','nombre_curso','desde','hasta');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO ha_cursos(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Curso Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
+
+private function insertFormacion(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('id_artista','universidad','grado','desde','fecha_emision');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO ha_formacion(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Formacion Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
+
+private function insertPremios(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('id_artista','institucion','distincion','lugar','fecha');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO ha_premios(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Premio Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
+
+private function insertProduccion(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('id_artista','gestion','fecha','lugar','actividad');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO ha_produccion(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Produccion Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
+
+private function insertTrayectoria(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('id_artista','gestion','fecha','lugar','actividad');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO ha_produccion(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Produccion Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
 
 
       /*
