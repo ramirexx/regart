@@ -7,6 +7,7 @@ import { RegistroComponent } from './registro/index';
 import { ColectivoComponent } from './colectivo/colectivo.component';
 import { IndividualComponent } from './individual/individual.component';
 import { ListadoArtistasComponent } from './listado-artistas/listado-artistas.component';
+import { ListadoColectivoComponent } from './listado-colectivo/listado-colectivo.component';
 import { VerIndividualComponent } from './ver-individual/ver-individual.component';
 import { EnviarFormularioComponent } from './enviar-formulario/enviar-formulario.component';
 import { CredencialComponent } from './credencial/credencial.component';
@@ -23,6 +24,7 @@ export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent,
     children:[
         { path: 'registro-colectivo', component: ColectivoComponent },
+        { path: 'registro-colectivo/:id', component: ColectivoComponent },
         { path: 'registro-individual', component: IndividualComponent },
         { path: 'registro-individual/:id', component: IndividualComponent },
         { path: 'enviar-formulario/:id', component: EnviarFormularioComponent },
@@ -30,6 +32,7 @@ export const appRoutes: Routes = [
         { path: 'ver-artista/:id', component: VerIndividualComponent },
         { path: 'usuarios', component: UsuariosComponent },
         { path: 'categorias', component: CategoriasComponent },
+        { path: 'listado-colectivos', component: ListadoColectivoComponent },
     ]},
     { path: 'crear-cuenta', component: PublicoComponent },
     { path: 'tipo-registro', component: RegistroComponent },

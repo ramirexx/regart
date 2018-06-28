@@ -11,12 +11,13 @@
                  <fieldset>
                                 <form [formGroup]="trayectoriaForm" novalidate>
                                 <fieldset>
+                                    <h5>1. TRAYECTORIA ARTÍSTICA (Documentado)</h5>
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Gestión </label>
                                                 <input type="text" class="form-control" [formControl]="trayectoriaForm.controls['gestion']" [(ngModel)]="trayectoria.gestion"
-                                                    maxlength="36" />
+                                                    maxlength="4" />
                                             </div>
                                         </div>
                                         
@@ -28,27 +29,28 @@
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Lugar</label>
-                                                <input type="text" class="form-control" [formControl]="trayectoriaForm.controls['lugar']" [(ngModel)]="trayectoria.lugar" maxlength="36"
+                                                <input type="text" class="form-control" [formControl]="trayectoriaForm.controls['lugar']" [(ngModel)]="trayectoria.lugar" maxlength="200"
                                                 />
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                                 <label>Actividad </label>
-                                                <input type="text" class="form-control" [formControl]="trayectoriaForm.controls['actividad']" [(ngModel)]="trayectoria.actividad" maxlength="36">
+                                                <input type="text" class="form-control" [formControl]="trayectoriaForm.controls['actividad']" [(ngModel)]="trayectoria.actividad" maxlength="200">
                                             </div>
                                     </div>
                                     <div class="row">
                                     <div class="col-md-12">
                                             <p-toolbar>
                                                 <div class="ui-toolbar-group-right">
-                                                    <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveDraft()"></button>
-                                                    <button pButton type="button" label="Limpiar" icon="fa-times"(click)="cancel()"></button>
+                                                    <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveTra()"></button>
+                                                    <button pButton type="button" label="Limpiar" icon="fa-times"(click)="cancelTra()"></button>
                                                 </div>
                                             </p-toolbar>
                                         </div>
                                     </div>
                                         
                                 </fieldset>
+                                <!--<pre>{{trayectoria| json}}</pre>-->
                                 </form>
                         <table class="table table-striped table-bordered table-sm">
                                 <thead>
@@ -63,13 +65,19 @@
                                 <tbody>
                                     <tr *ngFor="let obj of listaTrayectoria;let i = index">
                                         <td class="form-group">
-                                          
+                                            {{obj.gestion}}
                                         </td>
                                         <td class="form-group">
+                                            {{obj.fecha}}
                                         </td>
                                         <td class="form-group">
+                                            {{obj.lugar}}
                                         </td>
-                                        <td><button class="btn btn-white btn-danger btn-sm" (click)="deleteAnexos(i)"><i class="fa fa-minus"></i></button></td>
+                                        <td class="form-group">
+                                            {{obj.actividad}}
+                                        </td>
+                                        <td>
+                                                <button pButton type="button" label="Eliminar" icon="fa-trash" (click)="deleteTra(obj.id)"></button>
                                     </tr>
                                 </tbody>
                     
@@ -77,12 +85,317 @@
                             </table>
                  </fieldset>
                 </p-tabPanel>
-                <p-tabPanel header="Header 2">
-                    Content 2
+                <p-tabPanel header="Cursos" *ngIf="tipo == 'IND'">
+                        <fieldset>
+                                <form [formGroup]="cursoForm" novalidate>
+                                <fieldset>
+                                    <h5>2. CURSOS DE ESPECIALIZACIÓN/ACTUALIZACIÓN ARTÍSTICA (Documentado)</h5>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Institución </label>
+                                                <input type="text" class="form-control" [formControl]="cursoForm.controls['institucion']" [(ngModel)]="curso.institucion"
+                                                    maxlength="200" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Nombre Específico del Curso</label>
+                                                <input type="text" class="form-control" [formControl]="cursoForm.controls['nombre_curso']" [(ngModel)]="curso.nombre_curso" maxlength="200"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                                <label>Desde (mes/año)</label>
+                                                <p-calendar [(ngModel)]="curso.desde" [formControl]="cursoForm.controls['desde']" dateFormat="dd/mm/yy"
+                                                    inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
+                                           </div>
+                                           <div class="col-sm-3">
+                                                <label>Hasta (mes/año)</label>
+                                                <p-calendar [(ngModel)]="curso.hasta" [formControl]="cursoForm.controls['hasta']" dateFormat="dd/mm/yy"
+                                                    inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
+                                           </div>
+
+                                        
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-md-12">
+                                            <p-toolbar>
+                                                <div class="ui-toolbar-group-right">
+                                                    <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveCur()"></button>
+                                                    <button pButton type="button" label="Limpiar" icon="fa-times"(click)="cancel()"></button>
+                                                </div>
+                                            </p-toolbar>
+                                        </div>
+                                    </div>
+                                        
+                                </fieldset>
+                                <!--<pre>{{trayectoria| json}}</pre>-->
+                                </form>
+                        <table class="table table-striped table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Institución</th>
+                                        <th>Nombre Especifico del Curso</th>
+                                        <th>Desde</th>
+                                        <th>Hata</th>
+                                        <th>Opcion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let obj of listaCurso;let i = index">
+                                        <td class="form-group">
+                                            {{obj.institucion}}
+                                        </td>
+                                        <td class="form-group">
+                                            {{obj.nombre_curso}}
+                                        </td>
+                                        <td class="form-group">
+                                            {{obj.desde}}
+                                        </td>
+                                        <td class="form-group">
+                                            {{obj.hasta}}
+                                        </td>
+                                        <td>
+                                                <button pButton type="button" label="Eliminar" icon="fa-trash" (click)="deleteTra(obj.id)"></button>
+                                    </tr>
+                                </tbody>
+                    
+                               
+                            </table>
+                 </fieldset>
                 </p-tabPanel>
-                <p-tabPanel header="Header 3">
-                    Content 3    
+                <p-tabPanel header="Formación" *ngIf="tipo == 'IND'">
+                        <fieldset>
+                        <form [formGroup]="formacionForm" novalidate>
+                        <fieldset>
+                            <h5>3. FORMACIÓN ACADÉMICA (Documentado)</h5>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Universidad / Institución</label>
+                                        <input type="text" class="form-control" [formControl]="formacionForm.controls['universidad']" [(ngModel)]="formacion.universidad"
+                                            maxlength="200" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Grado Obtenido</label>
+                                            <input type="text" class="form-control" [formControl]="formacionForm.controls['grado']" [(ngModel)]="formacion.grado" maxlength="200"
+                                            />
+                                        </div>
+                                    </div>
+                                <div class="col-sm-3">
+                                    <label>Fecha de Emision de Titulo Académico</label>
+                                    <p-calendar [(ngModel)]="formacion.fecha_emision" [formControl]="formacionForm.controls['fecha_emision']" dateFormat="dd/mm/yy"
+                                        inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
+                               </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-md-12">
+                                    <p-toolbar>
+                                        <div class="ui-toolbar-group-right">
+                                            <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveFor()"></button>
+                                            <button pButton type="button" label="Limpiar" icon="fa-times"(click)="cancelFor()"></button>
+                                        </div>
+                                    </p-toolbar>
+                                </div>
+                            </div>
+                                
+                        </fieldset>
+                        <!--<pre>{{trayectoria| json}}</pre>-->
+                        </form>
+                <table class="table table-striped table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th>Universidad / Institución</th>
+                                <th>Grado Obtenido</th>
+                                <th>Fecha de Emision del Titulo Académico</th>
+                                <th>Opcion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let obj of listaFormacion;let i = index">
+                                <td class="form-group">
+                                    {{obj.universidad}}
+                                </td>
+                                <td class="form-group">
+                                    {{obj.grado}}
+                                </td>
+                                <td class="form-group">
+                                    {{obj.fecha_emision}}
+                                </td>
+                                <td>
+                                        <button pButton type="button" label="Eliminar" icon="fa-trash" (click)="deleteTra(obj.id)"></button>
+                            </tr>
+                        </tbody>
+            
+                       
+                    </table>
+         </fieldset>
                 </p-tabPanel>
+                <p-tabPanel header="Producción">
+                <fieldset>
+                <form [formGroup]="trayectoriaForm" novalidate>
+                <fieldset>
+                    <h5 *ngIf="tipo == 'IND'">4. PRODUCCIÓN INTELECTUAL (Obras – Libros – Investigación – Producción literaria - Producción audiovisual – Producción fonográfica, etc.)</h5>
+                    <h5 *ngIf="tipo == 'COL'">2. PRODUCCIÓN INTELECTUAL (Obras – Libros – Investigación – Producción literaria - Producción audiovisual – Producción fonográfica, etc.)</h5>
+                    
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Gestión </label>
+                                <input type="text" class="form-control" [formControl]="produccionForm.controls['gestion']" [(ngModel)]="produccion.gestion"
+                                    maxlength="4" />
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                            <label>Fecha</label>
+                            <p-calendar [(ngModel)]="produccion.fecha" [formControl]="produccionForm.controls['fecha']" dateFormat="dd/mm/yy"
+                                inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
+                       </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Lugar</label>
+                                <input type="text" class="form-control" [formControl]="produccionForm.controls['lugar']" [(ngModel)]="produccion.lugar" maxlength="100"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                                <label>Actividad Publicacion Exposición</label>
+                                <input type="text" class="form-control" [formControl]="produccionForm.controls['actividad']" [(ngModel)]="produccion.act_pub_exp" maxlength="200">
+                            </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12">
+                            <p-toolbar>
+                                <div class="ui-toolbar-group-right">
+                                    <button pButton type="button" label="Guardar" icon="fa-save" (click)="savePro()"></button>
+                                    <button pButton type="button" label="Limpiar" icon="fa-times"(click)="cancelPro()"></button>
+                                </div>
+                            </p-toolbar>
+                        </div>
+                    </div>
+                        
+                </fieldset>
+                <!--<pre>{{trayectoria| json}}</pre>-->
+                </form>
+        <table class="table table-striped table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th>Gestion</th>
+                        <th>Fecha</th>
+                        <th>Lugar</th>
+                        <th>Actividad</th>
+                        <th>Opcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let obj of listaProduccion;let i = index">
+                        <td class="form-group">
+                            {{obj.gestion}}
+                        </td>
+                        <td class="form-group">
+                            {{obj.fecha}}
+                        </td>
+                        <td class="form-group">
+                            {{obj.lugar}}
+                        </td>
+                        <td class="form-group">
+                            {{obj.act_pub_exp}}
+                        </td>
+                        <td>
+                                <button pButton type="button" label="Eliminar" icon="fa-trash" (click)="deleteTra(obj.id)"></button>
+                    </tr>
+                </tbody>
+    
+               
+            </table>
+ </fieldset>
+ </p-tabPanel>
+ <p-tabPanel header="Premios">
+        <fieldset>
+        <form [formGroup]="premioForm" novalidate>
+        <fieldset>
+            <h5 *ngIf ="tipo == 'IND'">5. PREMIOS Y DISTINCIONES</h5>
+            <h5 *ngIf ="tipo == 'COL'">3. PREMIOS Y DISTINCIONES</h5>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Institucion </label>
+                        <input type="text" class="form-control" [formControl]="premioForm.controls['institucion']" [(ngModel)]="premio.institucion"
+                            maxlength="200" />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Distincion</label>
+                        <input type="text" class="form-control" [formControl]="premioForm.controls['distincion']" [(ngModel)]="premio.distincion" maxlength="200"
+                        />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                        <label>Lugar</label>
+                        <input type="text" class="form-control" [formControl]="premioForm.controls['lugar']" [(ngModel)]="premio.lugar" maxlength="200">
+                    </div>
+                    <div class="col-sm-3">
+                            <label>Fecha</label>
+                            <p-calendar [(ngModel)]="premio.fecha" [formControl]="premioForm.controls['fecha']" dateFormat="dd/mm/yy"
+                                inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
+                       </div>
+            </div>
+            <div class="row">
+            <div class="col-md-12">
+                    <p-toolbar>
+                        <div class="ui-toolbar-group-right">
+                            <button pButton type="button" label="Guardar" icon="fa-save" (click)="savePre()"></button>
+                            <button pButton type="button" label="Limpiar" icon="fa-times"(click)="cancelPre()"></button>
+                        </div>
+                    </p-toolbar>
+                </div>
+            </div>
+                
+        </fieldset>
+        <!--<pre>{{trayectoria| json}}</pre>-->
+        </form>
+<table class="table table-striped table-bordered table-sm">
+        <thead>
+            <tr>
+                <th>Gestion</th>
+                <th>Fecha</th>
+                <th>Lugar</th>
+                <th>Actividad</th>
+                <th>Opcion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let obj of listaPremio;let i = index">
+                <td class="form-group">
+                    {{obj.institucion}}
+                </td>
+                <td class="form-group">
+                    {{obj.distincion}}
+                </td>
+                <td class="form-group">
+                    {{obj.lugar}}
+                </td>
+                <td class="form-group">
+                    {{obj.fecha}}
+                </td>
+                <td>
+                        <button pButton type="button" label="Eliminar" icon="fa-trash" (click)="deleteTra(obj.id)"></button>
+            </tr>
+        </tbody>
+
+       
+    </table>
+</fieldset>
+</p-tabPanel>
+
+
+
+
             </p-tabView>
 
     </fieldset>

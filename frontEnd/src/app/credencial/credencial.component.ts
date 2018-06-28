@@ -35,11 +35,10 @@ export class CredencialComponent implements OnInit {
         this.formularioService.getFormIndividual(id)
           .subscribe(artista => {
             this.artista = artista;
-
-            this.imagePath = this.artista.d_foto;
+            //this.imagePath = this.artista.d_foto;
             this.base64Foto = this.artista.d_foto
-            this.qr = this.artista.d_pagina_web;//this.artista.d_nombres + this.artista.d_apellidos 
-            this.depto = this.getDepto(this.artista.id_dpto);
+            this.qr = "Pagina Web "+this.artista.d_pagina_web ;//this.artista.d_nombres + this.artista.d_apellidos 
+            //this.depto = this.getDepto(this.artista.id_dpto);
 
             
           })
@@ -81,5 +80,6 @@ export class CredencialComponent implements OnInit {
     console.log(this.depto)
     return this.depto;
   }
+  
 
 }

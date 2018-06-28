@@ -11,7 +11,8 @@ export class HomeComponent implements OnInit {
   usuario: string;
   token: string;
   rol:string;
-  nombre:string
+  nombre:string;
+  apellido: string;
 
   constructor(public router: Router) { }
 
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
     this.token = localStorage.getItem('token');
     this.rol = localStorage.getItem('rol');
     this.nombre = localStorage.getItem('nombre');
+    this.apellido = localStorage.getItem('apellido');
 
   }
 

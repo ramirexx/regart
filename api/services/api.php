@@ -154,10 +154,10 @@ private function test2(){
       }
 
       $customer = json_decode(file_get_contents("php://input"),true);
-      $column_names = array('ci_usuarios', 'd_modificador', 'gestion', 'd_fecha', 'id_dpto', 'd_provincia', 'd_municipio', 'd_comunidad', 'd_denominacion',
-      'd_representantes','d_nom_rep_legal','d_ape_rep_legal','d_cedula_rep_legal','d_exp','d_lugar_nac_rep_legal','d_fecha_nac_rep_legal','d_dom_rep_legal',
-      'd_telefono_grupo','d_celular_grupo','d_email_grupo','d_antecedentes_grupo','id_cat','id_sub_cat','d_especialidad_grupo','d_biografia_grupo',' 	id_doc_resp',
-      'd_doc_respaldo','d_logo_grupo','id_estado');
+      $column_names = array('numero_registro','ci_usuarios', 'd_modificador', 'gestion', 'd_fecha_registro','d_fecha_renovacion', 'vigencia','id_dpto','dptoProv','id_prov','prov',
+      'id_mun','d_denominacion','integrantes','id_sector','id_sub_sector','id_actividad','trayectoria','institucion','eta','acreditacion',
+      'd_nom_rep_legal','d_ape_rep_legal','d_cedula_rep_legal','d_expedicion','d_lugar_nac_rep_legal','d_fecha_nac_rep_legal','d_dom_rep_legal',
+      'd_telefono_grupo','d_celular_grupo','d_email_grupo','d_logo_grupo','estado', 'estado_credencial');
       $keys = array_keys($customer);
       $columns = '';
       $values = '';
@@ -179,6 +179,37 @@ private function test2(){
          $this->response('error',204);   //"No Content" status
    }
 
+
+   private function updateColectivo(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $id = $customer['id'];
+      $column_names = array('numero_registro','ci_usuarios', 'd_modificador', 'gestion', 'd_fecha_registro','d_fecha_renovacion', 'vigencia','id_dpto','dptoProv','id_prov','prov',
+      'id_mun','d_denominacion','integrantes','id_sector','id_sub_sector','id_actividad','trayectoria','institucion','eta','acreditacion',
+      'd_nom_rep_legal','d_ape_rep_legal','d_cedula_rep_legal','d_expedicion','d_lugar_nac_rep_legal','d_fecha_nac_rep_legal','d_dom_rep_legal',
+      'd_telefono_grupo','d_celular_grupo','d_email_grupo','d_logo_grupo','estado', 'estado_credencial');
+      $keys = array_keys($customer['data']);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer['data'][$desired_key];
+         }
+         $columns = $columns.$desired_key."='".$$desired_key."',";
+      }
+      $query = "UPDATE tb_colectivo SET ".trim($columns,',')."WHERE id_colectivo=$id" ;
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Colectivo Actualizado Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('error',204);   //"No Content" status
+   }
 
    
 //Servicio para recuperar colectivos
@@ -1010,12 +1041,36 @@ private function insertCurso(){
          $this->response('',204);   //"No Content" status
 }
 
+private function curso(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $id = (int)$this->_request['id'];
+         if($id >0){
+            //$query="SELECT Prov as codigo, IdProv as id, Provincia as descripcion FROM provincias WHERE DepProv =$id";
+            $query="SELECT * FROM ha_cursos WHERE id_artista =$id";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0){
+                  $result = array();
+                  while($row = $r->fetch_assoc()){
+                     $result[] = $row;
+                  }
+                  $this->response($this->json($result), 200); // send user details
+               }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                  $this->response($this->json($error), 202); // send user details
+               }
+         }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
+
 private function insertFormacion(){
       if($this->get_request_method() != "POST"){
          $this->response('',406);
       }
       $customer = json_decode(file_get_contents("php://input"),true);
-      $column_names = array('id_artista','universidad','grado','desde','fecha_emision');
+      $column_names = array('id_artista','universidad','grado','fecha_emision');
       $keys = array_keys($customer);
       $columns = '';
       $values = '';
@@ -1037,7 +1092,30 @@ private function insertFormacion(){
          $this->response('',204);   //"No Content" status
 }
 
-private function insertPremios(){
+private function formacion(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $id = (int)$this->_request['id'];
+         if($id >0){
+            //$query="SELECT Prov as codigo, IdProv as id, Provincia as descripcion FROM provincias WHERE DepProv =$id";
+            $query="SELECT * FROM ha_formacion WHERE id_artista =$id";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0){
+                  $result = array();
+                  while($row = $r->fetch_assoc()){
+                     $result[] = $row;
+                  }
+                  $this->response($this->json($result), 200); // send user details
+               }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                  $this->response($this->json($error), 202); // send user details
+               }
+         }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
+private function insertPremio(){
       if($this->get_request_method() != "POST"){
          $this->response('',406);
       }
@@ -1064,12 +1142,35 @@ private function insertPremios(){
          $this->response('',204);   //"No Content" status
 }
 
+private function premio(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $id = (int)$this->_request['id'];
+         if($id >0){
+            //$query="SELECT Prov as codigo, IdProv as id, Provincia as descripcion FROM provincias WHERE DepProv =$id";
+            $query="SELECT * FROM ha_premios WHERE id_artista =$id";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0){
+                  $result = array();
+                  while($row = $r->fetch_assoc()){
+                     $result[] = $row;
+                  }
+                  $this->response($this->json($result), 200); // send user details
+               }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                  $this->response($this->json($error), 202); // send user details
+               }
+         }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
 private function insertProduccion(){
       if($this->get_request_method() != "POST"){
          $this->response('',406);
       }
       $customer = json_decode(file_get_contents("php://input"),true);
-      $column_names = array('id_artista','gestion','fecha','lugar','actividad');
+      $column_names = array('id_artista','gestion','fecha','lugar','act_pub_exp');
       $keys = array_keys($customer);
       $columns = '';
       $values = '';
@@ -1090,6 +1191,28 @@ private function insertProduccion(){
       }else
          $this->response('',204);   //"No Content" status
 }
+private function produccion(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $id = (int)$this->_request['id'];
+         if($id >0){
+            //$query="SELECT Prov as codigo, IdProv as id, Provincia as descripcion FROM provincias WHERE DepProv =$id";
+            $query="SELECT * FROM ha_produccion WHERE id_artista =$id";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0){
+                  $result = array();
+                  while($row = $r->fetch_assoc()){
+                     $result[] = $row;
+                  }
+                  $this->response($this->json($result), 200); // send user details
+               }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                  $this->response($this->json($error), 202); // send user details
+               }
+         }
+      $this->response('',204);   // If no records "No Content" status
+   }
 
 private function insertTrayectoria(){
       if($this->get_request_method() != "POST"){
@@ -1109,7 +1232,7 @@ private function insertTrayectoria(){
          $columns = $columns.$desired_key.',';
          $values = $values."'".$$desired_key."',";
       }
-      $query = "INSERT INTO ha_produccion(".trim($columns,',').") VALUES(".trim($values,',').")";
+      $query = "INSERT INTO ha_trayectoria(".trim($columns,',').") VALUES(".trim($values,',').")";
       if(!empty($customer)){
          $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
          $success = array('status' => "Success", "msg" => "Produccion Created Successfully.", "data" => $customer);
@@ -1117,6 +1240,30 @@ private function insertTrayectoria(){
       }else
          $this->response('',204);   //"No Content" status
 }
+
+private function trayectoria(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $id = (int)$this->_request['id'];
+         if($id >0){
+            //$query="SELECT Prov as codigo, IdProv as id, Provincia as descripcion FROM provincias WHERE DepProv =$id";
+            $query="SELECT * FROM ha_trayectoria WHERE id_artista =$id";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0){
+                  $result = array();
+                  while($row = $r->fetch_assoc()){
+                     $result[] = $row;
+                  }
+                  $this->response($this->json($result), 200); // send user details
+               }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                  $this->response($this->json($error), 202); // send user details
+               }
+         }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
 
 
       /*

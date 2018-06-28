@@ -24,11 +24,14 @@ import { HojaDeVidaComponent } from '../hoja-de-vida/hoja-de-vida.component';
 })
 export class IndividualComponent implements OnInit {
 
+ // master = null;
+ tipoForm: string = "IND";
+
   artForm: any;
   artista: Individual = new Individual();
   es: any;
 
-  qr: string = "sdfsdfsd";
+  qr: string = "Ministerio de culturas";
   renovacion: boolean;
   private base64Foto: String = "";
   year: any;
@@ -100,6 +103,8 @@ export class IndividualComponent implements OnInit {
     "RENOVACION"
   ]
 
+  rol:string;
+
   @ViewChild(HojaDeVidaComponent) domicilioComponent: HojaDeVidaComponent;
 
   constructor(private _fb: FormBuilder,
@@ -163,6 +168,8 @@ export class IndividualComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.artista.id_individual= 12244;
+    this.rol = localStorage.getItem('rol');
 
     this.es = {
       firstDayOfWeek: 1,
@@ -341,10 +348,15 @@ export class IndividualComponent implements OnInit {
     if (objSelected != undefined) {
       this.formularioService.getEspecialidad(objSelected)
         .subscribe(data => {
+          console.log("onselectActividad",objSelected)
           let res: any = data
-
+          
           if (res.length > 0) {
-            this.especialidad = res
+            this.especialidad = res;
+            console.log("this.especialidad",this.especialidad)
+            this.artista.id_especialidad = this.especialidad[0].id_especialidad;
+            this.artista.id_especialidad_sec = null;
+            this.artista.id_especialidad_ter = null;
           } else {
             this.especialidad = [];
             alert("ESPECIALIDAD CAMPO VACIO")
@@ -430,8 +442,17 @@ export class IndividualComponent implements OnInit {
   display: boolean = false;
 
     showDialog() {
+      if(this.artista.id_individual != null){
         this.display = true;
-        this.formularioService.setCi(this.ci)
+      }else{
+        alert("Por favor guarde primero el fomulario")
+      }
+        
+        //this.formularioService.setCi(this.ci)
+    }
+
+    closeDialog(){
+      this.display = false
     }
 
 

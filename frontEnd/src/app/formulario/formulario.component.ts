@@ -86,7 +86,7 @@ export class FormularioComponent implements OnInit {
   }
  
 
-_handleReaderLoaded(readerEvt) {
+handleReaderLoaded(readerEvt) {
   var binaryString = readerEvt.target.result;
          this.base64Foto= btoa(binaryString);
          

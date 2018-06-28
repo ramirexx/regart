@@ -104,6 +104,17 @@ export class FormularioService {
       .catch(this.handleError);
       
   }
+
+  updateColectivo (id: number, data:Artista): Observable<any> {
+    return this.http.post(environment.urlApi + 'updateColectivo', {id,data}).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+
+  updateEstadoColectivo (obj: any): Observable<any> {
+    return this.http.post(environment.urlApi + 'updateEstadoColectivo', obj).map(this.extractData) 
+      .catch(this.handleError);
+  }
   
   saveIndividual (data:Individual): Observable<any> {
     //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
@@ -112,6 +123,58 @@ export class FormularioService {
       .catch(this.handleError);
       
   }
+
+  saveTrayectoria (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertTrayectoria', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+  getTrayectoria(id:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'trayectoria?id='+id).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  saveCurso (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertCurso', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+  getCurso(id:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'curso?id='+id).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  saveFormacion (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertFormacion', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+  getFormacion(id:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'formacion?id='+id).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  savePremio (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertPremio', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+  getPremio(id:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'premio?id='+id).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  saveProduccion (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertProduccion', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+  getProduccion(id:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'produccion?id='+id).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+
 
 //  obj.updateAlumno = function (id,alumno) {
   //  return $http.post(serviceBase + 'updateAlumno', {id:id, alumno:alumno})
@@ -137,6 +200,16 @@ export class FormularioService {
   }
   getFormIndividual(id: any): Observable<any> {
     return this.http.get(environment.urlApi + 'formularioIndividual?id='+id).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getArtistasColectivo(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'listaColectivos').map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getFormColectivo(id: any): Observable<any> {
+    return this.http.get(environment.urlApi + 'colectivo?id='+id).map(this.extractData)
       .catch(this.handleError);
   }
 

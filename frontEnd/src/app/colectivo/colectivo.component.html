@@ -1,10 +1,9 @@
 <h4 class="page-title txt-color-blueDark">
-        <i class="fa-fw fa fa-group"></i> 
-            REGISTRO COLECTIVO 
-        <span>>  
-                  Ficha de Registro
-        </span>
-   </h4>
+    <i class="fa-fw fa fa-group"></i>
+    REGISTRO COLECTIVO
+    <span>> Ficha de Registro
+    </span>
+</h4>
 
 <div class="col-md-12">
     <!--<nav aria-label="breadcrumb">
@@ -13,237 +12,276 @@
           <li class="breadcrumb-item active" aria-current="page">REGISTRO COLECTIVO / Ficha de Registro</li>
         </ol>
       </nav>-->
-  <form [formGroup]="artForm" novalidate>
-      <p-panel header="Datos Geográficos">
-          <fieldset>
-              <div class="row">
-                  <div class="col-sm-3">
-                      <label>Fecha</label>
-                      <p-calendar [(ngModel)]="artista.d_fecha" [formControl]="artForm.controls['d_fecha']" dateFormat="dd/mm/yy" class="form-control"
-                          placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
-                  </div>
-                  <div class="col-sm-3">
-                      <div class="form-group">
-                          <label>Registrado en</label>
-                          <select class="form-control" [formControl]="artForm.controls['id_dpto']">
-                            <option *ngFor="let obj of departamentos" [ngValue]="obj">{{obj.descripcion}}</option>
-                          </select>
+    <form [formGroup]="artForm" novalidate>
+        <fieldset>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Número de Registro </label>
+                        <input type="text" class="form-control" [formControl]="artForm.controls['numero_registro']" [(ngModel)]="artista.numero_registro"
+                            maxlength="36" />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Estado del Registro</label>
+                        <input type="text" class="form-control" [formControl]="artForm.controls['estado']" [(ngModel)]="artista.estado" maxlength="36"
+                        />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label>Fecha de registro</label>
+                    <p-calendar [(ngModel)]="artista.d_fecha_registro" [formControl]="artForm.controls['d_fecha_registro']" dateFormat="dd/mm/yy"
+                        inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
+                </div>
+                <div class="col-sm-3" *ngIf="renovacion">
+                    <label>Fecha de renovacion</label>
+                    <p-calendar [(ngModel)]="artista.d_fecha_renovacion" [formControl]="artForm.controls['d_fecha_renovacion']" dateFormat="dd/mm/yy"
+                        inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
+                </div>
+                <div class="col-sm-3">
+                        <label>Vigencia</label>
+                        <input type="text" class="form-control" [formControl]="artForm.controls['zz']" [(ngModel)]="artista.zz"
+                                maxlength="36" />--{{artista.zz}}
+                    </div>
 
-                      </div>
-                  </div>
-              </div>
-          </fieldset>
-          <fieldset>
-              <div class="row">
-                  <div class="col-sm-3">
-                      <label>Provincia </label>
-                      <input type="text" class="form-control" [formControl]="artForm.controls['d_provincia']" [(ngModel)]="artista.d_provincia"
-                          maxlength="36" />
-                  </div>
-                  <div class="col-sm-3">
-                      <div class="form-group">
-                          <label>Municipio </label>
-                          <input type="text" class="form-control" [formControl]="artForm.controls['d_municipio']" [(ngModel)]="artista.d_municipio"
-                              maxlength="36" />
-                      </div>
-                  </div>
-                  <div class="col-sm-3">
-                      <div class="form-group">
-                          <label>Comunidad / Nación</label>
-                          <input type="text" class="form-control" [formControl]="artForm.controls['d_comunidad']" [(ngModel)]="artista.d_comunidad"
-                              maxlength="36" />
-                      </div>
-                  </div>
-              </div>
-          </fieldset>
-      </p-panel>
-      <p-panel header="Datos del Grupo">
-          <fieldset>
-              <div class="row">
-                  <div class="col-sm-12">
-                      <label>Nombre / Denominación </label>
-                      <input type="text" class="form-control" [formControl]="artForm.controls['d_denominacion']" [(ngModel)]="artista.d_denominacion"
-                          maxlength="36" />
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-sm-12">
-                      <div class="form-group">
-                          <label>Integrantes</label>
-                          <textarea rows="3" class="form-control" [formControl]="artForm.controls['d_representantes']" [(ngModel)]="artista.d_representantes"
-                              maxlength="36">
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label>Tipo de Registro </label>
+                    <select class="form-control" [formControl]="artForm.controls['estado_credencial']" [(ngModel)]="artista.estado_credencial">
+                        <option *ngFor="let obj of estadosCredencial" [ngValue]="obj">{{obj}}</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+        </fieldset>
+        <p-panel header="Lugar de Registro">
+            <fieldset>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Departamento</label>
+                            <select class="form-control" [formControl]="artForm.controls['id_dpto']" [(ngModel)]="artista.id_dpto" (ngModelChange)="onselectDepartamento($event)">
+                                <option *ngFor="let obj of departamentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Provincia </label>
+                        <select class="form-control" [formControl]="artForm.controls['d_provincia']" [(ngModel)]="provincia" (ngModelChange)="onselectMunicipio($event)">
+                            <option *ngFor="let obj of provincias" [ngValue]="obj">{{obj.Provincia}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Municipio </label>
+                            <select class="form-control" [formControl]="artForm.controls['d_municipio']" [(ngModel)]="artista.id_mun">
+                                <option *ngFor="let obj of municipios" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--<div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Comunidad / Nación</label>
+                                <input type="text" class="form-control" [formControl]="artForm.controls['d_comunidad']" [(ngModel)]="artista.d_comunidad"
+                                    maxlength="36" />
+                            </div>
+                        </div>-->
+                </div>
+            </fieldset>
+        </p-panel>
+        <p-panel header="Datos del Grupo">
+            <fieldset>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Nombre / Denominación </label>
+                        <input type="text" class="form-control" [formControl]="artForm.controls['d_denominacion']" [(ngModel)]="artista.denominacion"
+                            maxlength="200" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Integrantes</label>
+                            <textarea rows="3" class="form-control" [formControl]="artForm.controls['d_representantes']" [(ngModel)]="artista.integrantes"
+                                maxlength="200">
                           </textarea>
-                      </div>
-                  </div>
-              </div>
-          </fieldset>
-      </p-panel>
-      <p-panel header="Datos del Contacto">
-          <fieldset>
-              <div class="row">
-                  <div class="col-sm-3">
-                      <label>Teléfono </label>
-                      <input type="text" class="form-control" [formControl]="artForm.controls['d_telefono_grupo']" [(ngModel)]="artista.d_telefono_grupo"
-                          maxlength="36" />
-                  </div>
-                  <div class="col-sm-3">
-                      <label>Celular </label>
-                      <input type="text" class="form-control" [formControl]="artForm.controls['d_celular_grupo']" [(ngModel)]="artista.d_celular_grupo"
-                          maxlength="36" />
-                  </div>
-                  <div class="col-sm-3">
-                      <label>E-mail </label>
-                      <input type="text" class="form-control" [formControl]="artForm.controls['d_email_grupo']" [(ngModel)]="artista.d_email_grupo"
-                          maxlength="36" />
-                  </div>
-              </div>
-              
-          </fieldset>
-      </p-panel>
-      <p-panel header="Antecedentes Artisticos">
-          <fieldset>
-              <div class="row">
-                  <div class="col-sm-3">
-                      <label>Categoría </label>
-                      <select class="form-control" [formControl]="artForm.controls['id_cat']">
-                          <option *ngFor="let obj of categorias" [ngValue]="obj">{{obj.d_desc_cat}}</option>
-                      </select>
-                  </div>
-                  <div class="col-sm-3">
-                      <label>Subcategoría </label>
-                      <select class="form-control" [formControl]="artForm.controls['id_sub_cat']">
-                          <option *ngFor="let obj of departamentos" [ngValue]="obj">{{obj.descripcion}}</option>
-                      </select>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-sm-6">
-                      <label>Especialidad del grupo </label>
-                      <input type="text" class="form-control" [formControl]="artForm.controls['d_especialidad_grupo']" [(ngModel)]="artista.d_especialidad_grupo"
-                          maxlength="36" />
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-sm-12">
-                      <div class="form-group">
-                          <label>Antecedentes del Grupo</label>
-                          <textarea rows="3" class="form-control" [formControl]="artForm.controls['d_antecedentes_grupo']" [(ngModel)]="artista.d_antecedentes_grupo"
-                              maxlength="36">
-                          </textarea>
-                      </div>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-sm-12">
-                      <div class="form-group">
-                          <label>Trayectoria del Grupo</label>
-                          <textarea rows="3" class="form-control" [formControl]="artForm.controls['d_biografia_grupo']" [(ngModel)]="artista.d_biografia_grupo"
-                              maxlength="36">
-                          </textarea>
-                      </div>
-                  </div>
-              </div>
-              
-          </fieldset>
-      </p-panel>
-      <p-panel header="Datos  del Representante">
-          <fieldset>
-              <div class="row">
-                  <div class="col-sm-3">
-                      <label>Nombre </label>
-                      <input type="text" class="form-control" [formControl]="artForm.controls['d_nom_rep_legal']" [(ngModel)]="artista.d_nom_rep_legal"
-                          maxlength="36" />
-                  </div>
-                  <div class="col-sm-3">
-                      <label>Apellidos </label>
-                      <input type="text" class="form-control" [formControl]="artForm.controls['d_ape_rep_legal']" [(ngModel)]="artista.d_ape_rep_legal"
-                          maxlength="36" />
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-sm-6">
-                      <label>Cedula de Identidad </label>
-                      <input type="text" class="form-control" [formControl]="artForm.controls['d_cedula_rep_legal']" [(ngModel)]="artista.d_cedula_rep_legal"
-                          maxlength="36" />
-                  </div>
-                  <div class="col-sm-3">
-                      <label>Expedido </label>
-                      <select class="form-control" [formControl]="artForm.controls['d_exp']">
-                          <option *ngFor="let obj of departamentos" [ngValue]="obj">{{obj.descripcion}}</option>
-                      </select>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-sm-6">
-                      <div class="form-group">
-                          <label>Lugar de Nacimiento</label>
-                          <textarea rows="3" class="form-control" [formControl]="artForm.controls['d_lugar_nac_rep_legal']" [(ngModel)]="artista.d_lugar_nac_rep_legal"
-                              maxlength="36">
-                                  </textarea>
-                      </div>
-                  </div>
-                  <div class="col-sm-6">
-                      <div class="form-group">
-                          <label>Fecha de Nacimiento</label>
-                          <p-calendar [(ngModel)]="artista.d_fecha" [formControl]="artForm.controls['d_fecha']" dateFormat="dd/mm/yy" class="form-control"
-                              placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
-                      </div>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-sm-12">
-                      <div class="form-group">
-                          <label>Domicilio</label>
-                          <input type="text" class="form-control" [formControl]="artForm.controls['d_dom_rep_legal']" [(ngModel)]="artista.d_especialidad_grupo"
-                              maxlength="36" />
-                      </div>
-                  </div>
-              </div>
-          </fieldset>
-      </p-panel>
-      <p-panel header="Imágenes Digitales">
-          <fieldset>
-              <div class="row">
-                  <div class="col-sm-3">
-                      <label>Logo del Grupo </label>
-                      
-                  </div>
-                  <div class="col-sm-3">
-                      <label>Documento de respaldo </label>
-                      <select class="form-control" [formControl]="artForm.controls['id_sub_cat']">
-                          <option *ngFor="let obj of departamentos" [ngValue]="obj">{{obj.descripcion}}</option>
-                      </select>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-sm-6">
-                      <label>Tipo de respaldo </label>
-                      <select class="form-control" [formControl]="artForm.controls['id_doc_resp']">
-                          <option *ngFor="let obj of departamentos" [ngValue]="obj">{{obj.descripcion}}</option>
-                      </select>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-sm-12">
-                      <div class="form-group">
-                          <label>Estado del Registro</label>
-                          <select class="form-control" [formControl]="artForm.controls['id_estado']">
-                              <option *ngFor="let obj of departamentos" [ngValue]="obj">{{obj.descripcion}}</option>
-                          </select>
-                      </div>
-                  </div>
-              </div>
-          </fieldset>
-      </p-panel>
-  </form>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </p-panel>
+        <p-panel header="Datos Artisticos">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Sector </label>
+                            <select class="form-control" [formControl]="artForm.controls['id_sector']" [(ngModel)]="artista.id_sector" (ngModelChange)="onselectSector($event)">
+                                <option *ngFor="let obj of categorias" [ngValue]="obj.id_cat">{{obj.d_desc_cat}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Sub Sector </label>
+                            <select class="form-control" [formControl]="artForm.controls['id_sub_sector']" [(ngModel)]="artista.id_sub_sector" (ngModelChange)="onselectSubSector($event)">
+                                <option *ngFor="let obj of subSector" [ngValue]="obj.id_sub_cat">{{obj.d_desc_sub_cat}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Actividad Principal</label>
+                            <select class="form-control" [formControl]="artForm.controls['id_actividad']" [(ngModel)]="artista.id_actividad" (ngModelChange)="onselectActividad($event)">
+                                <option *ngFor="let obj of actividad" [ngValue]="obj.id_actividad">{{obj.d_desc_act}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                            <br>
+                            <button pButton type="button" label="Registrar Experiencia" icon="fa-save" (click)="showDialog()"></button>
+                            <!--<label>Experiencia </label>
+                            <input type="text" class="form-control" [formControl]="artForm.controls['d_experiencia']" [(ngModel)]="artista.d_experiencia"
+                                maxlength="36" />-->
+                        </div>
+                    
+                </fieldset>
+            </p-panel>
+            <p-panel header="Acreditante">
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label>Institución </label>
+                                <input type="text" class="form-control" [formControl]="artForm.controls['institucion']" [(ngModel)]="artista.institucion"
+                                    maxlength="36" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label>ETA (Entidades Territoriales Autónomas) </label>
+                                <input type="text" class="form-control" [formControl]="artForm.controls['eta']" [(ngModel)]="artista.eta"
+                                    maxlength="36" />
+                            </div>
+                        </div>
+        
+                    </fieldset>
+                </p-panel>
+                <p-panel header="Acreditación de nombre">
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Institución: </label>
+                                    <select class="form-control" [formControl]="artForm.controls['acreditacion']" [(ngModel)]="artista.acreditacion">
+                                            <option *ngFor="let obj of instituciones" [ngValue]="obj">{{obj}}</option>
+                                        </select>
+                                </div>
+                                
+                            </div>
+            
+                        </fieldset>
+                    </p-panel>
+        <p-panel header="Datos del Representante">
+            <fieldset>
+                    <div class="row">
+                            <div class="col-sm-3">
+                                    <label>Nombre </label>
+                                    <input type="text" class="form-control" [formControl]="artForm.controls['d_nom_rep_legal']" [(ngModel)]="artista.d_nom_rep_legal"
+                                        maxlength="36" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Apellidos </label>
+                                    <input type="text" class="form-control" [formControl]="artForm.controls['d_ape_rep_legal']" [(ngModel)]="artista.d_ape_rep_legal"
+                                        maxlength="36" />
+                                </div>
+                            <div class="col-sm-3">
+                                <label>Cedula de identidad </label>
+                                <input type="text" class="form-control" [formControl]="artForm.controls['d_cedula_rep_legal']" [(ngModel)]="artista.d_cedula_rep_legal"
+                                    maxlength="36" />
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-3">
+                                        <label>Lugar de expedicion</label>
+                                        <select class="form-control" [formControl]="artForm.controls['d_exp']" [(ngModel)]="artista.d_expedicion">
+                                            <option *ngFor="let obj of departamentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
+                                        </select>
+                                </div>
+                                <div class="col-sm-3">
+                                        <label>Lugar de Nacimiento</label>
+                                        <select class="form-control" [formControl]="artForm.controls['d_lugar_nac_rep_legal']" [(ngModel)]="artista.d_lugar_nac_rep_legal">
+                                            <option *ngFor="let obj of departamentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
+                                        </select>
+                                </div>
+                                <div class="col-sm-3">
+                                        <label>Fecha de nacimiento</label>
+                                        <p-calendar [(ngModel)]="artista.d_fecha_nac_rep_legal" [formControl]="artForm.controls['d_fecha_nac_rep_legal']" dateFormat="dd/mm/yy"
+                                            inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-sm-12">
+                                    <label>Domicilio</label>
+                                    <input type="text" class="form-control" [formControl]="artForm.controls['d_dom_rep_legal']" [(ngModel)]="artista.d_dom_rep_legal"
+                                    maxlength="36" />
+                                    </div>
+                            </div>
+            </fieldset>
+        </p-panel>
+        <p-panel header="Datos del Representante">
+            <fieldset>
+                <div class="row">
+                        <div class="col-sm-3">
+                            <label>Número de Teléfono Fijo </label>
+                            <input type="text" class="form-control" [formControl]="artForm.controls['d_telefono_grupo']" [(ngModel)]="artista.d_telefono_grupo"
+                                maxlength="36" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Número de Celular </label>
+                            <input type="text" class="form-control" [formControl]="artForm.controls['d_celular_grupo']" [(ngModel)]="artista.d_celular_grupo"
+                                maxlength="36" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Correo Electrónico </label>
+                            <input type="text" class="form-control" [formControl]="artForm.controls['d_email_grupo']" [(ngModel)]="artista.d_email_grupo"
+                                maxlength="36" />
+                        </div>
+                    </div>
+            </fieldset>
+        </p-panel>
+        <p-panel header="Archivos Digitales">
+            <fieldset>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Logo del Grupo </label>
+                        <input type="file" id="filePicker" (change)="handleFileSelect($event)" [formControl]="artForm.controls['d_logo_grupo']">
+                    </div>
+                    <div class="col-sm-6">
+                        <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px"/>
+                    </div>
+                </div>
+                <div class="row">
+                </div>
+            </fieldset>
+        </p-panel>
+    </form>
 </div>
 <br>
-  <div class="col-md-12">
-      <p-toolbar>
-          <div class="ui-toolbar-group-right">
-              <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveDraft()"></button>
-              <button pButton type="button" label="Cancelar" icon="fa-times"></button>
-          </div>
-      </p-toolbar>
-  </div>
+<div class="col-md-12">
+    <p-toolbar>
+        <div class="ui-toolbar-group-right">
+            <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveDraft()"></button>
+            <button pButton type="button" label="Cancelar" icon="fa-times" (click)="cancel()"></button>
+        </div>
+    </p-toolbar>
+</div>
+{{artista}}
+<p-dialog [(visible)]="display" [width]="740" [height]="600" modal="true" [closable]="false">
+        <p-header>
+                Registro de Hoja Artistica
+            </p-header>
+            <app-hoja-de-vida [master]="artista.id_colectivo"
+            [tipo]="tipoForm">
+            </app-hoja-de-vida>
+            <p-footer>
+                    <!--<button pButton type="button" label="Aceptar" icon="fa-save" (click)="saveDraft()"></button>-->
+                    <button pButton type="button" label="Cerrar" icon="fa-times"(click)="closeDialog()"></button>
+            </p-footer>
+</p-dialog>
+
 

@@ -1,0 +1,33 @@
+
+<h4 class="page-title txt-color-blueDark">
+    <i class="fa-fw fa fa-user"></i> 
+        LISTADO DE ARTISTAS
+        <span>>  
+            Colectivo
+  </span>
+</h4>
+<div class="row">
+  <div class="col-md-12">
+    <p-dataTable [value]="listaColectivo" [rows]="10" [paginator]="true" [globalFilter]="gb" emptyMessage="No se encontraron registros">
+      <p-column [style]="{'width':'5%'}" header="N°">
+        <ng-template let-index="rowIndex" pTemplate type="body">
+          <span>{{index+1}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="d_denominacion" header="Denominacion"></p-column>
+      <p-column field="d_dom_rep_legal" header="Nombres Rep. Legal"></p-column>
+      <p-column field="d_ape_rep_legal" header="Apelidos Rep. Legal"></p-column>
+      <p-column field="estado" header="Estado"></p-column>
+      <p-column [style]="{'width':'10%'}" header="Acciones">
+        <ng-template let-doc="rowData" pTemplate type="body">
+            <!--<button type="button" pButton (click)="ver(doc.id_individual)" icon="fa-search"></button>-->
+            <button type="button" pButton (click)="editarFormulario(doc.id_colectivo)" icon="fa-edit"></button>
+            <!--<button type="button" pButton (click)="enviarFormulario(doc.id_colectvo)" icon="fa-send"></button>
+            <button type="button" pButton (click)="verFormulario(doc.id_colectivo)" icon="fa-print"></button>
+            <button type="button" pButton (click)="verCredencial(doc.id_colectivo)" icon="fa fa-id-card"></button>-->
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+  </div>
+  </div>
+  <br>

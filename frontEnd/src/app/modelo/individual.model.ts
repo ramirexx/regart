@@ -108,6 +108,7 @@ export class FormIndividual {
 }
 
 export class Trayectoria {
+    id_artista: number;
     gestion: string;
     fecha: Date;
     lugar: string;
@@ -115,6 +116,7 @@ export class Trayectoria {
 }
 
 export class Curso {
+    id_artista: number;
     institucion: string;
     nombre_curso: string;
     desde: Date;
@@ -122,13 +124,14 @@ export class Curso {
 }
 
 export class Formacion {
+    id_artista: number;
     universidad: string;
     grado: string;
-    desde: Date;
     fecha_emision: Date;
 }
 
 export class Premios {
+    id_artista: number;
     institucion: string;
     distincion: string;
     lugar: string;
@@ -136,8 +139,9 @@ export class Premios {
 }  
 
 export class Produccion {
+    id_artista: number;
     gestion: string;
     fecha: Date;
     lugar: string;
-    actividad: string;
+    act_pub_exp: string;
 }
