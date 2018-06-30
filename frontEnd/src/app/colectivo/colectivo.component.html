@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Municipio </label>
+                            <label>Comunidad/Nación Localidad  </label>
                             <select class="form-control" [formControl]="artForm.controls['d_municipio']" [(ngModel)]="artista.id_mun">
                                 <option *ngFor="let obj of municipios" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
                             </select>

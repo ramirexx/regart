@@ -442,11 +442,11 @@ export class IndividualComponent implements OnInit {
   display: boolean = false;
 
     showDialog() {
-      if(this.artista.id_individual != null){
+      //if(this.artista.id_individual != null){
         this.display = true;
-      }else{
+      /*}else{
         alert("Por favor guarde primero el fomulario")
-      }
+      }*/
         
         //this.formularioService.setCi(this.ci)
     }

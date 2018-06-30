@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
 
-  //urlApi:"http://localhost/api/regart/"
-  urlApi:"https://regart.000webhostapp.com/api/"
+  urlApi:"http://localhost/api/regart/"
+  //urlApi:"https://regart.000webhostapp.com/api/"
 };

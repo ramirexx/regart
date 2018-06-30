@@ -81,7 +81,7 @@ export class ColectivoComponent implements OnInit {
   ) {
     this.artForm = this._fb.group({
 
-      'numero_registro': ['', Validators.required],
+      'numero_registro': [{ value: '', disabled: true }],
       'estado': [{ value: '', disabled: true }],
       'd_fecha_registro': ['', Validators.required],
       'd_fecha_renovacion': ['', Validators.required],
@@ -204,6 +204,10 @@ export class ColectivoComponent implements OnInit {
                 this.artista.d_fecha_renovacion = new Date(this.artista.d_fecha_renovacion);
                 console.log("---->" + this.artista.d_fecha_renovacion);
               }
+              if (this.artista.d_fecha_nac_rep_legal != null) {
+                this.artista.d_fecha_nac_rep_legal = new Date(this.artista.d_fecha_nac_rep_legal);
+                console.log("---->" + this.artista.d_fecha_renovacion);
+              }
             })
         });
       }
@@ -321,7 +325,7 @@ export class ColectivoComponent implements OnInit {
     }, err => {
       console.log("error", err);
     });*/
-    this.artista.numero_registro = "MDCyT" + this.year + "I";
+    this.artista.numero_registro = "MDCyT" + this.year + "C";
     this.artista.estado = "BORRADOR";
     if (this.artista.id_colectivo == null) {
       this.formularioService.saveColectivo(this.artista).subscribe(response => {

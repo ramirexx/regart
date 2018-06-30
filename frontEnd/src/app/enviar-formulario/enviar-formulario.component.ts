@@ -15,6 +15,8 @@ export class EnviarFormularioComponent implements OnInit {
   private base64Foto: String = "";
   id: any;
   enviado:boolean;
+  mensaje:string;
+  id_dpto:any;
 
   constructor(
     private formularioService: FormularioService,
@@ -39,6 +41,7 @@ export class EnviarFormularioComponent implements OnInit {
             .subscribe(data => {
               this.artista = data;
               this.base64Foto = this.artista.d_foto;
+              this.id_dpto =  this.artista.id_dpto;
               if (this.artista.id_estado == "ENVIADO"){
                 this.showMsg = true;  
               }
@@ -57,6 +60,7 @@ export class EnviarFormularioComponent implements OnInit {
       this.formularioService.updateEstadoIndividual(data).subscribe(response => {
         console.log(response);
         if (response.status == "Success") {
+          
           //alert("Se envio el Formulario:" + this.artista.numero_registro + " para su REVISION");
           //let link = ['home/listado-artistas/'];
           //this.router.navigate(link);
@@ -65,6 +69,36 @@ export class EnviarFormularioComponent implements OnInit {
           "Teléfonos: 2200910-2200946 – Interno: 1502 (UCCDC");
       console.log(response.data)
       this.artista.numero_registro = response.data;
+
+      switch (this.id_dpto) {
+        case 1:
+          this.mensaje = "Chuquisaca"
+          break;
+        case 2:
+          this.mensaje = "La Paz"
+          break;
+        case 3:
+          this.mensaje = "Cochabamaba"
+          break;
+        case 4:
+          this.mensaje = "Oruro"
+          break;
+        case 5:
+          this.mensaje = "Potosi"
+          break;
+        case 6:
+          this.mensaje = "Tarija"
+          break;
+        case 7:
+          this.mensaje = "Santa Cruz"
+          break;
+        case 8:
+          this.mensaje = "Beni"
+          break;
+        case 9:
+          this.mensaje = "Pando"
+          break;
+      }
       this.enviado = true;
           //this.showMsg = true;
         } else {
