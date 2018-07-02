@@ -154,7 +154,7 @@ private function test2(){
       }
 
       $customer = json_decode(file_get_contents("php://input"),true);
-      $column_names = array('numero_registro','ci_usuarios', 'd_modificador', 'gestion', 'd_fecha_registro','d_fecha_renovacion', 'vigencia','id_dpto','dptoProv','id_prov','prov',
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro','d_fecha_renovacion', 'vigencia','id_dpto','dptoProv','id_prov','prov',
       'id_mun','d_denominacion','integrantes','id_sector','id_sub_sector','id_actividad','trayectoria','institucion','eta','acreditacion',
       'd_nom_rep_legal','d_ape_rep_legal','d_cedula_rep_legal','d_expedicion','d_lugar_nac_rep_legal','d_fecha_nac_rep_legal','d_dom_rep_legal',
       'd_telefono_grupo','d_celular_grupo','d_email_grupo','d_logo_grupo','estado', 'estado_credencial');
@@ -173,7 +173,8 @@ private function test2(){
       $query = "INSERT INTO tb_colectivo(".trim($columns,',').") VALUES(".trim($values,',').")";
       if(!empty($customer)){
          $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
-         $success = array('status' => "Success", "msg" => "Colectivo Created Successfully.", "data" => $customer);
+         $z = $this->mysqli->insert_id;
+         $success = array('status' => "Success", "msg" => "Colectivo Created Successfully.", "data" => $z);
          $this->response($this->json($success),200);
       }else
          $this->response('error',204);   //"No Content" status
@@ -187,7 +188,7 @@ private function test2(){
 
       $customer = json_decode(file_get_contents("php://input"),true);
       $id = $customer['id'];
-      $column_names = array('numero_registro','ci_usuarios', 'd_modificador', 'gestion', 'd_fecha_registro','d_fecha_renovacion', 'vigencia','id_dpto','dptoProv','id_prov','prov',
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro','d_fecha_renovacion', 'vigencia','id_dpto','dptoProv','id_prov','prov',
       'id_mun','d_denominacion','integrantes','id_sector','id_sub_sector','id_actividad','trayectoria','institucion','eta','acreditacion',
       'd_nom_rep_legal','d_ape_rep_legal','d_cedula_rep_legal','d_expedicion','d_lugar_nac_rep_legal','d_fecha_nac_rep_legal','d_dom_rep_legal',
       'd_telefono_grupo','d_celular_grupo','d_email_grupo','d_logo_grupo','estado', 'estado_credencial');
@@ -231,6 +232,29 @@ private function test2(){
          $this->response('',204);   // If no records "No Content" status
       }
 
+      private function listaColectivoUsuario(){
+            if($this->get_request_method() != "GET"){
+               $this->response('',406);
+            }
+            $ci = (int)$this->_request['ci'];
+            if($ci > 0){   
+            $query="SELECT * FROM tb_colectivo where ci_usuario = $ci";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+      
+            if($r->num_rows > 0){
+               $result = array();
+               while($row = $r->fetch_assoc()){
+                  $result[] = $row;
+                  $this->response($this->json($result), 200); // send user details   
+               }
+            }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                              $this->response($this->json($error), 202); // send user details
+            }
+            }
+            $this->response('',204);   // If no records "No Content" status
+         }
+
 //Servicio para recuperar colectivo por id
 //http://localhost/api/regart/colectivo?id=1
       private function colectivo(){
@@ -245,6 +269,29 @@ private function test2(){
                   $result = $r->fetch_assoc();   
                   $this->response($this->json($result), 200); // send user details
                }
+            }
+            $this->response('',204);   // If no records "No Content" status
+         }
+
+         private function listaIndiUsuario(){
+            if($this->get_request_method() != "GET"){
+               $this->response('',406);
+            }
+            $ci = (int)$this->_request['ci'];
+            if($ci > 0){   
+            $query="SELECT * FROM tb_individual where ci_usuario = $ci";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+      
+            if($r->num_rows > 0){
+               $result = array();
+               while($row = $r->fetch_assoc()){
+                  $result[] = $row;
+                  $this->response($this->json($result), 200); // send user details   
+               }
+            }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                              $this->response($this->json($error), 202); // send user details
+            }
             }
             $this->response('',204);   // If no records "No Content" status
          }
@@ -434,6 +481,29 @@ private function listaIndividual(){
             $this->response($this->json($obj), 400);
             //$this->response('error',204);   //"No Content" status
 
+   }
+
+   private function listaIndividualUsuario(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+      }
+      $ci = (int)$this->_request['ci'];
+      if($ci > 0){   
+      $query="SELECT * FROM tb_individual where ci_usuario = $ci";
+      $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+
+      if($r->num_rows > 0){
+         $result = array();
+         while($row = $r->fetch_assoc()){
+            $result[] = $row;
+            $this->response($this->json($result), 200); // send user details   
+         }
+      }else{
+            $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                        $this->response($this->json($error), 202); // send user details
+      }
+      }
+      $this->response('',204);   // If no records "No Content" status
    }
       
 ##############CATEGORIAS##################
@@ -922,7 +992,7 @@ private function usuario(){
                         $r2 = $this->mysqli->query($query2) or die($this->mysqli->error.__LINE__);
                         
                         //$query3 = "SELECT ci_usuarios, nom_ape_usuarios, nick_usuario, id_nivel, id_dpto, token FROM usuarios, usuario_log WHERE nick_usuario.usuarios = '$user' AND usuario.usuario_log = '$user' LIMIT 1";
-                        $query3 =" SELECT a.nombre_usuario, a.apellido_usuario, a.nick_usuario, a.id_nivel, a.id_dpto, b.token FROM usuarios a , usuario_log  b WHERE a.nick_usuario = b.usuario AND a.nick_usuario = '$user' LIMIT 1";
+                        $query3 =" SELECT a.ci_usuario, a.nombre_usuario, a.apellido_usuario, a.nick_usuario, a.id_nivel, a.id_dpto, b.token FROM usuarios a , usuario_log  b WHERE a.nick_usuario = b.usuario AND a.nick_usuario = '$user' LIMIT 1";
                         $r3 = $this->mysqli->query($query3) or die($this->mysqli->error.__LINE__);
                         if($r3->num_rows>0){
                               $result = $r3->fetch_assoc();   
@@ -1011,6 +1081,7 @@ private function localidades(){
    }
 
 //SERVICIOS PARA HOJA ARTISTICA
+
 
 //servicio para CURSOS
 private function insertCurso(){
