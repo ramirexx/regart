@@ -198,6 +198,14 @@ export class FormularioService {
     return this.http.get(environment.urlApi + 'individual?id='+id).map(this.extractData)
       .catch(this.handleError);
   }
+
+  getIndividualbyCi(ci: any): Observable<Individual[]> {
+    return this.http.get(environment.urlApi + 'listaIndividualUsuario?ci='+ci).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+
+  
   getFormIndividual(id: any): Observable<any> {
     return this.http.get(environment.urlApi + 'formularioIndividual?id='+id).map(this.extractData)
       .catch(this.handleError);
@@ -205,6 +213,11 @@ export class FormularioService {
 
   getArtistasColectivo(): Observable<any[]> {
     return this.http.get(environment.urlApi + 'listaColectivos').map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getColectivobyCi(ci: any): Observable<Artista[]> {
+    return this.http.get(environment.urlApi + 'listaColectivoUsuario?ci='+ci).map(this.extractData)
       .catch(this.handleError);
   }
 

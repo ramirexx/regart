@@ -117,7 +117,6 @@ export class ColectivoComponent implements OnInit {
       
       'd_logo_grupo': [''],
 
-      'zz': [{ value: '', disabled: false }]
 
 
     });
@@ -170,6 +169,7 @@ export class ColectivoComponent implements OnInit {
               this.artista = data;
               this.artista.numero_registro = this.artista.numero_registro+"-"+id 
               this.base64Foto = this.artista.d_logo_grupo;
+              console.log(this.base64Foto)
               this.formularioService.getProvincias(this.artista.id_dpto)
               .subscribe(data => {
                 let res: any = data
@@ -206,7 +206,7 @@ export class ColectivoComponent implements OnInit {
               }
               if (this.artista.d_fecha_nac_rep_legal != null) {
                 this.artista.d_fecha_nac_rep_legal = new Date(this.artista.d_fecha_nac_rep_legal);
-                console.log("---->" + this.artista.d_fecha_renovacion);
+                console.log("d_fecha_renovacion---->" + this.artista.d_fecha_nac_rep_legal);
               }
             })
         });
@@ -327,6 +327,7 @@ export class ColectivoComponent implements OnInit {
     });*/
     this.artista.numero_registro = "MDCyT" + this.year + "C";
     this.artista.estado = "BORRADOR";
+    this.artista.ci_usuario = localStorage.getItem('ci');
     if (this.artista.id_colectivo == null) {
       this.formularioService.saveColectivo(this.artista).subscribe(response => {
         console.log(response);
@@ -335,6 +336,8 @@ export class ColectivoComponent implements OnInit {
           alert("Datos Registrados, Formulario:" + this.artista.numero_registro);
           this.artista.id_colectivo = response.data;
           console.log(this.artista.id_colectivo)
+          this.artista.numero_registro = this.artista.numero_registro + this.artista.id_colectivo
+          console.log("NUMERO REGISTRO"+this.artista.numero_registro)
           //let link = ['home/listado-artistas/'];
           //this.router.navigate(link);
         } else {
@@ -391,11 +394,11 @@ export class ColectivoComponent implements OnInit {
   display: boolean = false;
 
     showDialog() {
-      //if(this.artista.id_individual != null){
+      if(this.artista.id_colectivo != null){
         this.display = true;
-      /*}else{
+      }else{
         alert("Por favor guarde primero el fomulario")
-      }*/
+      }
         
         //this.formularioService.setCi(this.ci)
     }

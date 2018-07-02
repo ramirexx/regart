@@ -13,16 +13,32 @@ import {Column, LazyLoadEvent} from 'primeng/primeng';
 export class ListadoArtistasComponent implements OnInit {
 
   listaIndividual: Individual[];
+  listaIndividualbyCi: Individual[];
+  rol: any;
+  ci: any;
 
   constructor(private formularioService: FormularioService,
     private router: Router) { }
 
   ngOnInit() {
+    
+    this.rol = localStorage.getItem('rol');
+    this.ci = localStorage.getItem('ci');
+
+    if(this.rol == 4){
+      this.formularioService.getIndividualbyCi(this.ci)
+      .subscribe(artistas => {
+      this.listaIndividualbyCi = artistas
+        console.log(this.listaIndividualbyCi);
+      });
+    }else{
     this.formularioService.getArtistasIndividual()
       .subscribe(artistas => {
       this.listaIndividual = artistas
         console.log(this.listaIndividual);
       });
+    }
+
   }
 
   ver(id: string) {
@@ -37,8 +53,8 @@ export class ListadoArtistasComponent implements OnInit {
     this.router.navigate(link);
   }
 
-  enviarFormulario(id: string, estado:string="ENVIAR") {
-    let link = ['home/enviar-formulario/' + id];
+  enviarFormulario(id: string, estado:string="ENVIAR", tipo:string="ind") {
+    let link = ['home/enviar-formulario/' + id +'/'+ tipo];
     console.log(link)
     this.router.navigate(link);
   }
@@ -49,8 +65,8 @@ export class ListadoArtistasComponent implements OnInit {
     this.router.navigate(link);
   }
 
-  verCredencial(id: string) {
-    let link = ['/credencial/' + id];
+  verCredencial(id: string, tipo:string="ind") {
+    let link = ['/credencial/' + id +'/'+ tipo];
     console.log(link)
     this.router.navigate(link);
   }

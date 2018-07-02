@@ -4,6 +4,7 @@ export class Individual {
 
     id_individual: number;
     numero_registro: string;
+    ci_usuario: any;
     d_fecha_registro: Date;
     d_fecha_renovacion: Date;
     vigencia: string = "Vigencia de 2 años";

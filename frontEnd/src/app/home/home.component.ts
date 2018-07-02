@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   rol:string;
   nombre:string;
   apellido: string;
+  ci: string;
 
   constructor(public router: Router) { }
 
@@ -22,6 +23,9 @@ export class HomeComponent implements OnInit {
     this.rol = localStorage.getItem('rol');
     this.nombre = localStorage.getItem('nombre');
     this.apellido = localStorage.getItem('apellido');
+    this.ci = localStorage.getItem('ci');
+
+    console.log("Usuario"+this.rol)
 
   }
 

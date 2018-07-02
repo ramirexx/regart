@@ -87,7 +87,7 @@
 							<a href="index.html">
 								<i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 						</li>-->
-						<li>
+						<li >
 							<a routerLink="registro-individual" routerLinkActive="active">
 								<i class="fa fa-lg fa-fw fa-user"></i>
 								<span class="menu-item-parent">Registro Individual</span>
@@ -111,13 +111,13 @@
 								<span class="menu-item-parent">Listado Colectivo</span>
 							</a>
 						</li>
-						<li>
+						<li *ngIf="rol == 1 || rol == 2">
 							<a routerLink="usuarios" routerLinkActive="active">
 								<i class="fa fa-lg fa-fw fa-key"></i>
 								<span class="menu-item-parent">Usuarios de Sistema</span>
 							</a>
 						</li>
-						<li>
+						<li *ngIf="rol == 1">
 							<a routerLink="categorias" routerLinkActive="active">
 								<i class="fa fa-lg fa-fw fa-list"></i>
 								<span class="menu-item-parent">Categorias</span>

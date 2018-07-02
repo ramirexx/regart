@@ -1,3 +1,5 @@
+<div *ngIf="tipo == 'ind'">
+
 <h4 class="page-title txt-color-blueDark">
   <i class="fa-fw fa fa-user"></i>
   REGISTRO INDIVIDUAL
@@ -54,6 +56,69 @@
   </div>
   
 
+</div>
+</div>
+
+<div *ngIf="tipo == 'col'">
+<h4 class="page-title txt-color-blueDark">
+  <i class="fa-fw fa fa-user"></i>
+  REGISTRO COLECTIVO
+  <span>> Enviar Formulario para APROBACION
+  </span>
+</h4>
+<div class="col-md-12">
+  <table class="table table-sm">
+
+    <tbody>
+      <tr>
+        <td>
+          <div class="col-md-12">
+            <div class="info-name">Número de Registro
+              <span class="value">{{colectivo.numero_registro}}</span>
+            </div>
+            <div class="info-name">Estado del Registro
+              <span class="value">{{colectivo.estado}}</span>
+            </div>
+
+            <div class="info-name">Vigencia
+              <span class="value">{{colectivo.vigencia}}</span>
+            </div>
+
+          </div>
+        </td>
+        <td>
+          <div class="info-name">Artista:
+            <span class="value"> {{colectivo.denominacion}} </span>
+            <span class="value"> {{colectivo.d_nom_rep_legal}}  {{colectivo.d_ape_rep_legal}}</span>
+            
+          </div>
+          <div class="info-name">C.I.:
+            <span class="value">{{colectivo.d_cedula_rep_legal}}</span>
+          </div>
+        </td>
+        <td>
+          <div class="col-sm-6">
+            <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px" class="img-responsive img-thumbnail" />
+            <div class="info-name">{{colectivo.numero_registro}}</div>
+            <!--<img [src]="'data:image/jpg;base64,'+imagePath"/> -->
+          </div>
+        </td>
+      </tr>
+
+    </tbody>
+    
+  </table>
+  <div class="col-md-12">
+      <p-toolbar>
+          <div class="ui-toolbar-group-right">
+              <button pButton type="button" label="Enviar" icon="fa-save" *ngIf="artista.id_estado == 'BORRADOR'" (click)="enviar()" [disabled]="enviado"></button>
+              <button pButton type="button" label="Volver" icon="fa-times"(click)="cancel()"></button>
+          </div>
+      </p-toolbar>
+  </div>
+  
+
+</div>
 </div>
 
   <!--<div class="col-md-12" *ngIf="showMsg">

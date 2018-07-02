@@ -372,6 +372,7 @@ export class IndividualComponent implements OnInit {
   public saveDraft(): void {
     this.artista.numero_registro = "MDCyT" + this.year + "I";
     this.artista.id_estado = "BORRADOR";
+    this.artista.ci_usuario = localStorage.getItem('ci');
     if (this.artista.id_individual == null) {
       this.formularioService.saveIndividual(this.artista).subscribe(response => {
         console.log(response);
@@ -442,11 +443,11 @@ export class IndividualComponent implements OnInit {
   display: boolean = false;
 
     showDialog() {
-      //if(this.artista.id_individual != null){
+      if(this.artista.id_individual != null){
         this.display = true;
-      /*}else{
+      }else{
         alert("Por favor guarde primero el fomulario")
-      }*/
+      }
         
         //this.formularioService.setCi(this.ci)
     }

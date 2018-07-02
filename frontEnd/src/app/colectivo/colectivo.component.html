@@ -39,12 +39,6 @@
                     <p-calendar [(ngModel)]="artista.d_fecha_renovacion" [formControl]="artForm.controls['d_fecha_renovacion']" dateFormat="dd/mm/yy"
                         inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
                 </div>
-                <div class="col-sm-3">
-                        <label>Vigencia</label>
-                        <input type="text" class="form-control" [formControl]="artForm.controls['zz']" [(ngModel)]="artista.zz"
-                                maxlength="36" />--{{artista.zz}}
-                    </div>
-
             </div>
             <div class="row">
                 <div class="col-sm-3">
@@ -97,7 +91,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <label>Nombre / Denominación </label>
-                        <input type="text" class="form-control" [formControl]="artForm.controls['d_denominacion']" [(ngModel)]="artista.denominacion"
+                        <input type="text" class="form-control" [formControl]="artForm.controls['d_denominacion']" [(ngModel)]="artista.d_denominacion"
                             maxlength="200" />
                     </div>
                 </div>
@@ -270,7 +264,7 @@
         </div>
     </p-toolbar>
 </div>
-{{artista}}
+{{artista | json}}
 <p-dialog [(visible)]="display" [width]="740" [height]="600" modal="true" [closable]="false">
         <p-header>
                 Registro de Hoja Artistica

@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('rol', data.id_nivel);
           localStorage.setItem('nombre', data.nombre_usuario);
           localStorage.setItem('apellido', data.apellido_usuario);
+          localStorage.setItem('ci', data.ci_usuario);
           let link = ['/home'];
           this.router.navigate(link);
         }else{

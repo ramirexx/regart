@@ -2,6 +2,7 @@ export class Artista {
 
     id_colectivo: number;
     numero_registro: string;
+    ci_usuario: any;
     d_fecha_registro: Date;
     d_fecha_renovacion: Date;
     vigencia: string = "Vigencia de 2 años";
@@ -13,7 +14,7 @@ export class Artista {
     prov: any;
     id_mun: number;
 
-    denominacion: string;
+    d_denominacion: string;
     integrantes: string;
 
     id_sector: number;
@@ -44,7 +45,5 @@ export class Artista {
     estado: string;
 
     id_log: number;
-
-    zzz: string;
 
 }

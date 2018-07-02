@@ -17,6 +17,7 @@ export class CredencialComponent implements OnInit {
   imagePath:string;
   qr: string = "";
   depto: string;
+  tipo:any;
 
   constructor(private formularioService: FormularioService,
     private route: ActivatedRoute,
@@ -30,19 +31,27 @@ export class CredencialComponent implements OnInit {
     this.route.params.subscribe(params => {
       console.log("REVISION :", params);
       let id = params['id'];
-      if (id != undefined) {
-        console.log(id);
-        this.formularioService.getFormIndividual(id)
-          .subscribe(artista => {
-            this.artista = artista;
-            //this.imagePath = this.artista.d_foto;
-            this.base64Foto = this.artista.d_foto
-            this.qr = "Pagina Web "+this.artista.d_pagina_web ;//this.artista.d_nombres + this.artista.d_apellidos 
-            //this.depto = this.getDepto(this.artista.id_dpto);
+      this.tipo = params['tipo'];
 
-            
-          })
+      if(this.tipo == "col"){
+        alert(this.tipo);
+      }else{
+        if (id != undefined) {
+          console.log(id);
+          this.formularioService.getFormIndividual(id)
+            .subscribe(artista => {
+              this.artista = artista;
+              //this.imagePath = this.artista.d_foto;
+              this.base64Foto = this.artista.d_foto;
+              
+              this.qr = "Pagina Web: www.minculturas.gob.bo/ver-artista/"+id;//this.artista.d_nombres + this.artista.d_apellidos 
+              //this.depto = this.getDepto(this.artista.id_dpto);
+  
+              
+            })
+        }
       }
+      
     })
   }
 
