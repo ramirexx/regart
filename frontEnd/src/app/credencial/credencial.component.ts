@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Individual } from '../modelo/individual.model';
 import { FormularioService } from '../servicios/formulario.service';
 import { Router, ActivatedRoute} from '@angular/router';
+import { Artista } from '../modelo/artista.model';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
@@ -13,11 +14,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class CredencialComponent implements OnInit {
 
   artista: Individual = new Individual();
+  colectivo: Artista = new Artista();
   private base64Foto:String="";
   imagePath:string;
   qr: string = "";
   depto: string;
   tipo:any;
+  id_dpto:any;
 
   constructor(private formularioService: FormularioService,
     private route: ActivatedRoute,
@@ -32,10 +35,7 @@ export class CredencialComponent implements OnInit {
       console.log("REVISION :", params);
       let id = params['id'];
       this.tipo = params['tipo'];
-
-      if(this.tipo == "col"){
-        alert(this.tipo);
-      }else{
+      if(this.tipo == "ind"){
         if (id != undefined) {
           console.log(id);
           this.formularioService.getFormIndividual(id)
@@ -46,6 +46,20 @@ export class CredencialComponent implements OnInit {
               
               this.qr = "Pagina Web: www.minculturas.gob.bo/ver-artista/"+id;//this.artista.d_nombres + this.artista.d_apellidos 
               //this.depto = this.getDepto(this.artista.id_dpto);
+  
+              
+            })
+        }
+      }else{
+        if (id != undefined) {
+          console.log(id);
+          this.formularioService.getFormColectivo(id)
+            .subscribe(artista => {
+              this.colectivo = artista;
+              this.base64Foto = this.colectivo.d_logo_grupo;
+              //this.id_dpto =  this.colectivo.id_dpto;
+              this.qr = "Pagina Web: www.minculturas.gob.bo/ver-artista/"+id;//this.artista.d_nombres + this.artista.d_apellidos 
+              this.depto = this.getDepto(this.colectivo.id_dpto);
   
               
             })

@@ -1,4 +1,5 @@
-<div class="bgimg">
+<div *ngIf="tipo == 'ind'">
+<div class="bgimgind">
   <table style="WIDTH: 312px; HEIGHT: 195px" border="0" cellspacing="0" cellpadding="0" align="center">
     <tbody>
       <tr>
@@ -36,7 +37,7 @@
                     <br>
                     <font color="#ffffff" size="1">{{artista.numero_registro}}</font>
                     <br>
-                    <font size="1" style="line-height: 1"><strong>{{artista.estado_credencial}} </strong></font>
+                    <font size="1" style="line-height: 1" color="ffffff"><strong>{{artista.estado_credencial}} </strong></font>
                   </p>
                 </td>
                 <td style="WIDTH: 4px; HEIGHT: 90px; FONT-SIZE: 2px" valign="top" align="left">&nbsp;</td>
@@ -69,6 +70,83 @@
     </tbody>
   </table>
 </div>
+</div>
+
+<div *ngIf="tipo == 'col'">
+  <div class="bgimgcol">
+    <table style="WIDTH: 312px; HEIGHT: 195px" border="0" cellspacing="0" cellpadding="0" align="center">
+      <tbody>
+        <tr>
+          <td style="HEIGHT: 52px; FONT-SIZE: 10px" valign="bottom" align="center">
+            <!--<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; ESTADO PLURINACIONAL DE BOLIVIA
+              <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; MINISTERIO DE CULTURAS Y TURISMO
+              <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;REGISTRO PLURINACIONAL DE ARTISTAS</strong>-->
+          </td>
+        </tr>
+  
+        <tr>
+          <td style="HEIGHT: 90px; FONT-SIZE: 2px" valign="top" align="left">
+            <table style="WIDTH: 296px; HEIGHT: 100px" border="0" cellspacing="0" cellpadding="0" width="296" align="center">
+              <tbody>
+                <tr>
+                  <td valign="top" colspan="4" align="left"></td>
+                </tr>
+  
+                <tr>
+                  <td style="WIDTH: 4px; FONT-SIZE: 2px" align="center">&nbsp;</td>
+                  <td style="WIDTH: 80px" align="center">&nbsp;</td>
+                  <td style="WIDTH: 4px; FONT-SIZE: 2px" valign="top" align="left">&nbsp;</td>
+                  <td valign="top" align="left">&nbsp;</td>
+                </tr>
+  
+                <tr>
+                  <td style="WIDTH: 4px; FONT-SIZE: 2px" align="center" >&nbsp;</td>
+                  <td style="WIDTH: 80px" align="center" v="">
+                    <p align="center">
+                      <font color="#ffffff" size="1">
+                          <img [src]="'data:image/jpg;base64,'+base64Foto" width="80px" class="img-responsive img-thumbnail" alt="Fotografia"/>
+                        <!--<img style="WIDTH: 80px; HEIGHT: 80px" id="datos1Image1" border="1" align="middle" src="fotos_individual/201805141933590.Daniela cordero.jpg"
+                          height="80">-->
+                      </font>
+                      <br>
+                      <font color="#ffffff" size="1">{{colectivo.numero_registro}}</font>
+                      <br>
+                      <font size="1" style="line-height: 1" color="ffffff"><strong>{{colectivo.estado_credencial}} </strong></font>
+                    </p>
+                  </td>
+                  <td style="WIDTH: 4px; HEIGHT: 90px; FONT-SIZE: 2px" valign="top" align="left">&nbsp;</td>
+                  <td valign="top" align="center" v="">
+                    <font size="1">
+                      <p align="left" style="margin-bottom:0px">
+                        <font size="2" color="#ffffff">
+                          <strong>Nombre: </strong>{{colectivo.d_denominacion}} 
+                          <br>
+                          <strong>Rep: </strong>{{colectivo.d_nom_rep_legal}} {{colectivo.d_ape_rep_legal}}&nbsp;
+                          <br>
+                          <strong>C.I.: </strong>{{colectivo.d_cedula_rep_legal}}
+                          <br>
+                          <strong>Departamento: </strong>{{depto}}
+                          <br>
+                          <!--<strong>Sector: </strong>{{colectivo.d_desc_cat}}-->
+                          
+                          <!--<strong>Expedido: </strong>{{artista.d_fecha_registro}} -->
+                          <br><strong>Vigencia: </strong>{{colectivo.vigencia}}</font>
+                    </font>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <!--<tr>
+          <td style="FONT-SIZE: 8px" align="center" v="">
+              <font size="2">www.minculturas.gob.bo</font>
+          </td>
+        </tr>-->
+      </tbody>
+    </table>
+  </div>
+  </div>
 
 <table style="WIDTH: 312px; HEIGHT: 195px;" border="0" cellspacing="0" cellpadding="0" align="center">
   <tbody><tr>

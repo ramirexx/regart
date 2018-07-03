@@ -40,7 +40,6 @@ export class EnviarFormularioComponent implements OnInit {
       //console.log("REVISION :",params);
       this.id = params['id'];
       this.tipo = params['tipo'];
-      alert(this.tipo);
     if(this.tipo == "ind"){
       this.formularioService.getIndividual(this.id)
       .subscribe(data => {
