@@ -4,6 +4,7 @@ import { FormularioService } from '../servicios/formulario.service';
 import { Router, ActivatedRoute} from '@angular/router';
 import { Artista } from '../modelo/artista.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment }     from '../../environments/environment';
 
 
 @Component({
@@ -44,7 +45,7 @@ export class CredencialComponent implements OnInit {
               //this.imagePath = this.artista.d_foto;
               this.base64Foto = this.artista.d_foto;
               
-              this.qr = "Pagina Web: www.minculturas.gob.bo/ver-artista/"+id;//this.artista.d_nombres + this.artista.d_apellidos 
+              this.qr = "Pagina Web: "+ environment.urlApp+"regart/#/ver-artista/"+id;//this.artista.d_nombres + this.artista.d_apellidos 
               //this.depto = this.getDepto(this.artista.id_dpto);
   
               
@@ -58,7 +59,7 @@ export class CredencialComponent implements OnInit {
               this.colectivo = artista;
               this.base64Foto = this.colectivo.d_logo_grupo;
               //this.id_dpto =  this.colectivo.id_dpto;
-              this.qr = "Pagina Web: www.minculturas.gob.bo/ver-artista/"+id;//this.artista.d_nombres + this.artista.d_apellidos 
+              this.qr = "Pagina Web:"+ environment.urlApp+"regart/#/ver-artista/"+id;//this.artista.d_nombres + this.artista.d_apellidos 
               this.depto = this.getDepto(this.colectivo.id_dpto);
   
               
