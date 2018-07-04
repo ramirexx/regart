@@ -54,6 +54,13 @@
           </div>
       </p-toolbar>
   </div>
+  <div class="row" *ngIf="showMsg">
+    <div class="col-md-12">
+        <div class="alert alert-success" role="alert">
+            {{mensaje}}
+          </div>
+    </div>
+  </div>
   
 
 </div>

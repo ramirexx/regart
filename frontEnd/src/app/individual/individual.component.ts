@@ -393,7 +393,7 @@ export class IndividualComponent implements OnInit {
         //this.router.navigate(link);
       });
     } else {
-      this.artista.numero_registro = this.artista.numero_registro+"-"+this.artista.id_individual;
+      //this.artista.numero_registro = this.artista.numero_registro+"-"+this.artista.id_individual;
       this.formularioService.updateIndividual(this.artista.id_individual, this.artista).subscribe(response => {
         console.log(response);
         if (response.status == "Success") {

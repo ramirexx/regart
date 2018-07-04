@@ -29,7 +29,6 @@ export const appRoutes: Routes = [
         { path: 'registro-individual/:id', component: IndividualComponent },
         { path: 'enviar-formulario/:id/:tipo', component: EnviarFormularioComponent },
         { path: 'listado-artistas', component: ListadoArtistasComponent },
-        { path: 'ver-artista/:id', component: VerIndividualComponent },
         { path: 'usuarios', component: UsuariosComponent },
         { path: 'categorias', component: CategoriasComponent },
         { path: 'listado-colectivos', component: ListadoColectivoComponent },
@@ -40,6 +39,7 @@ export const appRoutes: Routes = [
     { path: 'registro-colectivo', component: ColectivoComponent },
     { path: 'credencial/:id/:tipo', component: CredencialComponent },
     { path: 'formulario/:id', component: FormularioComponent },
+    { path: 'ver-artista/:id', component: VerIndividualComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

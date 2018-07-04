@@ -11,9 +11,15 @@ import { Router, ActivatedRoute} from '@angular/router';
 export class VerIndividualComponent implements OnInit {
 
   artista: Individual = new Individual();
-
+  private base64Foto:String="";
+  imagePath:string;
   qr: string = "";
   depto: string;
+  listaTrayectoria: any[];
+  listaCurso: any[];
+  listaFormacion: any[];
+  listaPremio: any[];
+  listaProduccion: any[];
   
   constructor(private formularioService: FormularioService,
     private route: ActivatedRoute,
@@ -30,11 +36,22 @@ export class VerIndividualComponent implements OnInit {
       let id = params['id'];
       if (id != undefined) {
         console.log(id);
-        this.formularioService.getIndividual(id)
+        this.formularioService.getFormIndividual(id)
           .subscribe(artista => {
             this.artista = artista;
-            this.qr = this.artista.numero_registro + this.artista.d_nombres + this.artista.d_apellidos 
-            switch (this.artista.id_dpto) {
+            console.log(this.artista)
+            this.imagePath = this.artista.d_foto;
+            this.base64Foto = this.artista.d_foto;
+            this.qr = this.artista.d_nombres + this.artista.d_apellidos 
+            this.getTra(id);
+            this.getCur(id);
+            this.getFor(id);
+            this.getPro(id);
+            this.getPre(id);
+            
+
+            //this.qr = this.artista.numero_registro + this.artista.d_nombres + this.artista.d_apellidos 
+            /*switch (this.artista.id_dpto) {
               case 1:
                 this.depto = "Chuquisaca"
                 break;
@@ -62,10 +79,56 @@ export class VerIndividualComponent implements OnInit {
               case 9:
                 this.depto = "Pando"
                 break;
-            }
+            }*/
           })
       }
     })
+  }
+
+
+  getTra(id) {
+    console.log(id)
+    this.formularioService.getTrayectoria(id)
+      .subscribe(lista => {
+        this.listaTrayectoria = lista
+        console.log(this.listaTrayectoria);
+      });
+  }
+
+  getCur(id) {
+    console.log(id)
+    this.formularioService.getCurso(id)
+      .subscribe(lista => {
+        this.listaCurso = lista
+        console.log(this.listaCurso);
+      });
+  }
+
+  getFor(id) {
+    console.log(id)
+    this.formularioService.getFormacion(id)
+      .subscribe(lista => {
+        this.listaFormacion = lista
+        console.log(this.listaFormacion);
+      });
+  }
+
+  getPro(id) {
+    console.log(id)
+    this.formularioService.getProduccion(id)
+      .subscribe(lista => {
+        this.listaProduccion = lista
+        console.log(this.listaProduccion);
+      });
+  }
+
+  getPre(id) {
+    console.log(id)
+    this.formularioService.getPremio(id)
+      .subscribe(lista => {
+        this.listaPremio = lista
+        console.log(this.listaPremio);
+      });
   }
 
   volver(){

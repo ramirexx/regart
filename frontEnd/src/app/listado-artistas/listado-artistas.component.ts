@@ -42,7 +42,7 @@ export class ListadoArtistasComponent implements OnInit {
   }
 
   ver(id: string) {
-    let link = ['home/ver-artista/' + id];
+    let link = ['ver-artista/' + id];
     console.log(link)
     this.router.navigate(link);
   }
