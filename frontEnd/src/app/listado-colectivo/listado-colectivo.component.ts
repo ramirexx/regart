@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormularioService } from '../servicios/formulario.service';
-import { Artista } from '../modelo/artista.model';
+import { Colectivo } from '../modelo/colectivo.model';
 import { Router} from '@angular/router';
 import {DataTable, MenuItem} from 'primeng/primeng';
 import {Column, LazyLoadEvent} from 'primeng/primeng';
@@ -13,8 +13,8 @@ import {Column, LazyLoadEvent} from 'primeng/primeng';
 })
 export class ListadoColectivoComponent implements OnInit {
 
-  listaColectivo: Artista[];
-  listaColectivobyCi: Artista[];
+  listaColectivo: Colectivo[];
+  listaColectivobyCi: Colectivo[];
   rol: any;
   ci: any;
   constructor(private formularioService: FormularioService,

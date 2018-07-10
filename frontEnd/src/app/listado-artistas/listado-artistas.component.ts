@@ -34,7 +34,12 @@ export class ListadoArtistasComponent implements OnInit {
     }else{
     this.formularioService.getArtistasIndividual()
       .subscribe(artistas => {
-      this.listaIndividual = artistas
+      let res: any = artistas;
+      if(res.length>0){
+        this.listaIndividual = artistas;
+      }else{
+        this.listaIndividual = [];
+      }
         console.log(this.listaIndividual);
       });
     }

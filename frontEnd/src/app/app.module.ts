@@ -92,7 +92,7 @@ import { ListadoColectivoComponent } from './listado-colectivo/listado-colectivo
     HttpClientModule,
     InputTextModule, DataTableModule, ButtonModule, DialogModule, PanelModule, 
     CalendarModule, InputMaskModule, ConfirmDialogModule, OverlayPanelModule,
-    MenuModule, ToolbarModule, TabViewModule,
+    MenuModule, ToolbarModule, TabViewModule, GrowlModule,
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),

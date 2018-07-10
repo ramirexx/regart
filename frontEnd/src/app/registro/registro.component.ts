@@ -7,7 +7,7 @@ import {
   FormArray,
   FormControl
 } from '@angular/forms';
-import { Artista } from '../modelo/artista.model';
+import { Colectivo } from '../modelo/colectivo.model';
 import {MenuModule} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
 
@@ -24,7 +24,7 @@ export class RegistroComponent implements OnInit {
 
 
   artForm: any;
-  artista: Artista= new Artista();
+  artista: Colectivo= new Colectivo();
 
   //calendrio;
   es: any;

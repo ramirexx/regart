@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Individual } from '../modelo/individual.model';
 import { FormularioService } from '../servicios/formulario.service';
 import { Router, ActivatedRoute} from '@angular/router';
-import { Artista } from '../modelo/artista.model';
+import { Colectivo } from '../modelo/colectivo.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { environment }     from '../../environments/environment';
 
@@ -15,7 +15,7 @@ import { environment }     from '../../environments/environment';
 export class CredencialComponent implements OnInit {
 
   artista: Individual = new Individual();
-  colectivo: Artista = new Artista();
+  colectivo: Colectivo = new Colectivo();
   private base64Foto:String="";
   imagePath:string;
   qr: string = "";

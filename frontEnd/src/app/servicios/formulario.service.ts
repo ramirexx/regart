@@ -9,7 +9,7 @@ import { environment }     from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 //import { HttpClient,HttpHandler, HttpHeaders, HttpResponse } from '@angular/common/http';
 
-import { Artista} from '../modelo';
+import { Colectivo} from '../modelo';
 import { Individual } from '../modelo/individual.model';
 import { Usuario} from '../modelo/usuarios.model';
 import { Publico} from '../modelo/usuarios.model';
@@ -22,6 +22,16 @@ import { Publico} from '../modelo/usuarios.model';
 export class FormularioService {
 
   constructor(private http: HttpClient) { }
+
+  getProfesiones(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'profesiones').map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getComunidades(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'comunidades').map(this.extractData)
+      .catch(this.handleError);
+  }
 
   getDepartamentos(): Observable<any[]> {
     return this.http.get(environment.urlApi + 'departamentos').map(this.extractData)
@@ -52,6 +62,11 @@ export class FormularioService {
   //http://localhost/api/regart/actividades?id=1
   getActividad(cod:any): Observable<any[]> {
     return this.http.get(environment.urlApi + 'actividades?sub='+cod).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getActividadSec(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'listaActividadesSecundarias').map(this.extractData)
       .catch(this.handleError);
   }
 
@@ -97,7 +112,7 @@ export class FormularioService {
   }
 
 
-  saveColectivo (data:Artista): Observable<any> {
+  saveColectivo (data:Colectivo): Observable<any> {
     //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
     //let options = new RequestOptions( {method: RequestMethod.Post, headers: headers });
     return this.http.post(environment.urlApi + 'insertColectivo', data).map(this.extractData) 
@@ -105,7 +120,7 @@ export class FormularioService {
       
   }
 
-  updateColectivo (id: number, data:Artista): Observable<any> {
+  updateColectivo (id: number, data:Colectivo): Observable<any> {
     return this.http.post(environment.urlApi + 'updateColectivo', {id,data}).map(this.extractData) 
       .catch(this.handleError);
   }
@@ -174,6 +189,16 @@ export class FormularioService {
       .catch(this.handleError);
   }
 
+  saveRep (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertRep', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+  getRep(id:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'representacion?id='+id).map(this.extractData)
+      .catch(this.handleError);
+  }
+
 
 
 //  obj.updateAlumno = function (id,alumno) {
@@ -216,7 +241,7 @@ export class FormularioService {
       .catch(this.handleError);
   }
 
-  getColectivobyCi(ci: any): Observable<Artista[]> {
+  getColectivobyCi(ci: any): Observable<Colectivo[]> {
     return this.http.get(environment.urlApi + 'listaColectivoUsuario?ci='+ci).map(this.extractData)
       .catch(this.handleError);
   }

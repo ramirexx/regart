@@ -50,11 +50,20 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-sm-3">
+                    <!--<div class="col-sm-3">
                         <label>Tipo de Registro </label>
                         <select class="form-control" [formControl]="artForm.controls['estado_credencial']" [(ngModel)]="artista.estado_credencial">
                             <option *ngFor="let obj of estadosCredencial" [ngValue]="obj">{{obj}}</option>
                         </select>
+                    </div>-->
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Identidad</label>
+                            <select class="form-control" [formControl]="artForm.controls['comunidad']" [(ngModel)]="artista.comunidad">
+                                <option *ngFor="let obj of comunidades" [ngValue]="obj.comunidad">{{obj.comunidad}}</option>
+                            </select>
+
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -104,6 +113,11 @@
         <p-panel header="Datos Personales">
             <fieldset>
                 <div class="row">
+                        <div class="col-sm-3">
+                                <label>Nombre Artistico</label>
+                                <input type="text" class="form-control" [formControl]="artForm.controls['nombre_artistico']" [(ngModel)]="artista.d_nombre_artistico"
+                                    maxlength="36" />
+                            </div>
                     <div class="col-sm-3">
                         <label>Cedula de identidad</label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_cedula']" [(ngModel)]="artista.d_cedula"
@@ -163,22 +177,31 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Estado civil</label>
-                            <input type="text" class="form-control" [formControl]="artForm.controls['d_estado_civil']" [(ngModel)]="artista.d_estado_civil"
-                                maxlength="36" />
+                            <select class="form-control" [formControl]="artForm.controls['d_estado_civil']" [(ngModel)]="artista.d_estado_civil">
+                                <option *ngFor="let obj of estadoCivil" [ngValue]="obj">{{obj}}</option>
+                            </select>
+                            <!--<input type="text" class="form-control" [formControl]="artForm.controls['d_estado_civil']" [(ngModel)]="artista.d_estado_civil"
+                                maxlength="36" />-->
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Nº Hijos</label>
-                            <input type="text" class="form-control" [formControl]="artForm.controls['d_nro_hijos']" [(ngModel)]="artista.d_nro_hijos"
-                                maxlength="36" />
+                            <select class="form-control" [formControl]="artForm.controls['d_nro_hijos']" [(ngModel)]="artista.d_nro_hijos">
+                                <option *ngFor="let obj of hijos" [ngValue]="obj">{{obj}}</option>
+                            </select>
+                            <!--<input type="text" class="form-control" [formControl]="artForm.controls['d_nro_hijos']" [(ngModel)]="artista.d_nro_hijos"
+                                maxlength="36" />-->
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Profesión </label>
-                            <input type="text" class="form-control" [formControl]="artForm.controls['d_profesion']" [(ngModel)]="artista.d_profesion"
-                                maxlength="36" />
+                            <label>Otra Profesión </label>
+                            <select class="form-control" [formControl]="artForm.controls['d_profesion']" [(ngModel)]="artista.d_profesion">
+                                <option *ngFor="let obj of profesiones" [ngValue]="obj">{{obj.profesion}}</option>
+                            </select>
+                            <!--<input type="text" class="form-control" [formControl]="artForm.controls['d_profesion']" [(ngModel)]="artista.d_profesion"
+                                maxlength="36" />-->
                         </div>
                     </div>
                 </div>
@@ -221,8 +244,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <label>Otros </label>
+                    <div class="col-sm-4">
+                        <label>Facebook </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_otros']" [(ngModel)]="artista.d_otros" maxlength="36"
                         />
                     </div>
@@ -234,15 +257,15 @@
             <fieldset>
                 <div class="row">
                     <div class="col-sm-4">
-                        <label>Institución/Sindicato/Asociación </label>
+                        <label>Sindicato / Asociación </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_institucion']" [(ngModel)]="artista.d_institucion"
                             maxlength="36" />
                     </div>
-                    <div class="col-sm-4">
+                    <!--<div class="col-sm-4">
                         <label>Agrupación </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_agrupaciones']" [(ngModel)]="artista.d_agrupaciones"
                             maxlength="36" />
-                    </div>
+                    </div>-->
                     <div class="col-sm-4">
                         <label>Sector </label>
                         <select class="form-control" [formControl]="artForm.controls['id_sector']" [(ngModel)]="artista.id_sector"
@@ -272,10 +295,10 @@
                     </div>
                     <div class="col-sm-4">
                             <label>Actividad Secundaria</label>
-                            <select class="form-control" [formControl]="artForm.controls['id_actividad_sec']" [(ngModel)]="artista.id_actividad_sec"
-                            (ngModelChange)="onselectActividad($event)">
+                            <select class="form-control" [formControl]="artForm.controls['id_actividad_sec']" [(ngModel)]="artista.actividad_sec"
+                            >
                             <option value="">--Seleccione un valor--</option>      
-                                <option *ngFor="let obj of actividad" [ngValue]="obj.id_actividad">{{obj.d_desc_act}}</option>
+                                <option *ngFor="let obj of actividadSec" [ngValue]="obj.d_desc_act">{{obj.d_desc_act}}</option>
                             </select>
                         </div>
                     
@@ -330,36 +353,22 @@
             <fieldset>
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>Fotografia </label>
+                        <label>Fotografia para Credencial </label>
                         <input type="file" id="filePicker" (change)="handleFileSelect($event)" [formControl]="artForm.controls['d_foto_individual']">
                     </div>
                     <div class="col-sm-6">
                         <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px"/>
-                        <!--<img *ngIf="base64Image" [src]="domSanitizer.bypassSecurityTrustUrl(base64Image)" />-->
                     </div>
-                    
-
-                    <!--<img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
-                    AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
-                        9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />-->
-                    
-                    
                 </div>
-                <!--<div class="row">
-                        <div class="col-sm-3">
-                                <label>Tipo de respaldo </label>
-                                <select class="form-control" [formControl]="artForm.controls['id_doc_resp']" [(ngModel)]="artista.id_doc_resp">
-                                    <option *ngFor="let obj of documentos" [ngValue]="obj">{{obj}}</option>
-                                </select>
-                            </div>
-                </div>
+                <hr>
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>Documento de respaldo </label>
+                        <label>Fotografia de Perfil  </label>
+                        <input type="file" id="filePicker" (change)="handleFileSelect2($event)" [formControl]="artForm.controls['d_foto_artista']">
                     </div>
-                </div>-->
-                <div class="row">
-                    
+                    <div class="col-sm-6">
+                        <img *ngIf="base64FotoPerfil" [src]="'data:image/jpg;base64,'+base64FotoPerfil" width="200px"/>
+                    </div>
                 </div>
             </fieldset>
         </p-panel>
@@ -372,6 +381,9 @@
             <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveDraft()"></button>
             <button pButton type="button" label="Volver" icon="fa-times"(click)="cancel()"></button>
         </div>
+
+        <!--<button type="button" pButton (click)="showSuccess()" label="Success" class="ui-button-success"></button>
+        <button type="button" pButton (click)="showError()" label="Error" class="ui-button-danger"></button>-->
     </p-toolbar>
 </div>
 
@@ -389,8 +401,10 @@
             </p-footer>
 </p-dialog>
 
+<p-growl [(value)]="msgs"></p-growl>
 
-{{artista.ci_usuario}}
+
+<!--{{artista.ci_usuario}}-->
 
 
 <!--<pre>{{artista | json}}</pre>-->

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormularioService } from '../servicios/formulario.service';
 import { Individual } from '../modelo/individual.model';
-import { Artista } from '../modelo/artista.model';
+import { Colectivo } from '../modelo/colectivo.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -13,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class EnviarFormularioComponent implements OnInit {
 
   artista: Individual = new Individual();
-  colectivo: Artista = new Artista();
+  colectivo: Colectivo = new Colectivo();
   private base64Foto: String = "";
   id: any;
   enviado:boolean;

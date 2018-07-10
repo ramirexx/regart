@@ -249,7 +249,15 @@
                         <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px"/>
                     </div>
                 </div>
+                <hr>
                 <div class="row">
+                    <div class="col-sm-6">
+                        <label>Fotografia de Perfil  </label>
+                        <input type="file" id="filePicker" (change)="handleFileSelect2($event)" [formControl]="artForm.controls['d_foto_grupo']">
+                    </div>
+                    <div class="col-sm-6">
+                        <img *ngIf="base64FotoPerfil" [src]="'data:image/jpg;base64,'+base64FotoPerfil" width="200px"/>
+                    </div>
                 </div>
             </fieldset>
         </p-panel>
@@ -264,7 +272,7 @@
         </div>
     </p-toolbar>
 </div>
-{{artista | json}}
+<!--{{artista | json}}-->
 <p-dialog [(visible)]="display" [width]="740" [height]="600" modal="true" [closable]="false">
         <p-header>
                 Registro de Hoja Artistica

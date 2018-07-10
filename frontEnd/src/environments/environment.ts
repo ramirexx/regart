@@ -8,6 +8,6 @@ export const environment = {
 
   urlApi:"http://localhost/api/regart/",
   urlApp:"http://localhost/",
-  //urlApi:"https://regart.000webhostapp.com/api/"
+  //urlApi:"https://regart.000webhostapp.com/api/",
   //urlApp:"https://regart.000webhostapp.com/"
 };

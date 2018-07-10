@@ -29,11 +29,11 @@
       <p-column field="id_estado" header="Estado"></p-column>
       <p-column [style]="{'width':'10%'}" header="Acciones">
         <ng-template let-doc="rowData" pTemplate type="body">
-            <!--<button type="button" pButton (click)="ver(doc.id_individual)" icon="fa-search"></button>-->
-            <button type="button" pButton (click)="editarFormulario(doc.id_individual)" icon="fa-edit"></button>
-            <button type="button" pButton (click)="enviarFormulario(doc.id_individual)" icon="fa-send"></button>
-            <button type="button" pButton (click)="verFormulario(doc.id_individual)" icon="fa-print"></button>
-            <button type="button" pButton (click)="verCredencial(doc.id_individual)" icon="fa fa-id-card"></button>
+            <button type="button" pButton (click)="ver(doc.id_individual)" title="Ver Hoja Artistica" icon="fa-address-card-o"></button>
+            <button type="button" pButton (click)="editarFormulario(doc.id_individual)" title="Editar Formulario" icon="fa-edit"></button>
+            <button type="button" pButton (click)="enviarFormulario(doc.id_individual)" title="Enviar Formulario" icon="fa-send"></button>
+            <button type="button" pButton (click)="verFormulario(doc.id_individual)" title="Imprimir Formulario" icon="fa-print"></button>
+            <button type="button" pButton (click)="verCredencial(doc.id_individual)" title="Ver Credencial" icon="fa fa-id-card"></button>
 
           <!--<div class="btn-group" dropdown>
             <button dropdownToggle type="button" class="btn btn-primary btn-sm dropdown-toggle">
@@ -75,7 +75,7 @@
       <p-column field="id_estado" header="Estado"></p-column>
       <p-column [style]="{'width':'10%'}" header="Acciones">
         <ng-template let-doc="rowData" pTemplate type="body">
-            <button type="button" pButton (click)="ver(doc.id_individual)" icon="fa-search"></button>
+            <button type="button" pButton (click)="ver(doc.id_individual)" icon="fa-profile icon"></button>
             <button type="button" pButton (click)="editarFormulario(doc.id_individual)" icon="fa-edit"></button>
             <button type="button" pButton (click)="enviarFormulario(doc.id_individual)" icon="fa-send"></button>
             <button type="button" pButton (click)="verFormulario(doc.id_individual)" icon="fa-print"></button>

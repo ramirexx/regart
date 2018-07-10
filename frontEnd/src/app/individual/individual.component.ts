@@ -15,12 +15,15 @@ import { MenuItem } from 'primeng/api';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HojaDeVidaComponent } from '../hoja-de-vida/hoja-de-vida.component';
+import {Message} from 'primeng/components/common/api';
+import { MessageService} from 'primeng/components/common/messageservice';
 
 
 @Component({
   selector: 'app-individual',
   templateUrl: './individual.component.html',
-  styleUrls: ['./individual.component.css']
+  styleUrls: ['./individual.component.css'],
+  providers: [MessageService]
 })
 export class IndividualComponent implements OnInit {
 
@@ -34,9 +37,11 @@ export class IndividualComponent implements OnInit {
   qr: string = "Ministerio de culturas";
   renovacion: boolean;
   private base64Foto: String = "";
+  private base64FotoPerfil: String = "";
   year: any;
   provincia = { DepProv: null, Prov: null, IdProv: null, Provincia: null}
   ci : string;
+  msgs: Message[] = [];
   //"DepProv": "2", "Prov": "03", "Provincia": "Pacajes", "IdProv": "203"
 
   imagePath: string = "/9j/4AAQSkZJRgABAQEAkACQAAD/4QBgRXhpZgAASUkqAAgAAAACADEBAgAHAAAAJgAAAGmHBAABAAAALgAAAAAAAABHb29nbGUAAAMAAJAHAAQAAAAwMjIwAqAEAAEAAACQAQAAA6AEAAEAAACQAQAAAAAAAP/bAEMAEA" +
@@ -67,17 +72,22 @@ export class IndividualComponent implements OnInit {
   { codigo: 8, descripcion: 'Beni' },
   { codigo: 9, descripcion: 'Pando' }]*/
 
+  profesiones: any[];
+  comunidades: any[];
   departamentos: any[];
   provincias: any[];
   municipios: any[];
   categorias: any[];
   subSector: any[];
   actividad: any[];
+  actividadSec: any[];
   especialidad: any[];
+
+  hijos = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 
   generos = ['Femenino', 'Masculino']
 
-  estadoCivil = ['Soltero', 'Casado', 'Divorciado', 'Viuda']
+  estadoCivil = ['Soltera(o)', 'Casada(o)', 'Divorciada(o)', 'Viuda(o)']
 
   documentos = ['Curriculum Vitae',
    'Certificado/Credencial de Institución',
@@ -103,6 +113,8 @@ export class IndividualComponent implements OnInit {
     "RENOVACION"
   ]
 
+  
+
   rol:string;
 
   @ViewChild(HojaDeVidaComponent) domicilioComponent: HojaDeVidaComponent;
@@ -111,19 +123,23 @@ export class IndividualComponent implements OnInit {
     private formularioService: FormularioService,
     private router: Router,
     private route: ActivatedRoute,
-    private _sanitizer: DomSanitizer) {
+    private _sanitizer: DomSanitizer,
+    private messageService: MessageService) {
 
     this.artForm = this._fb.group({
+      
       'numero_registro': [{ value: '', disabled: true }],
       'd_fecha_registro': ['', Validators.required],
       'd_fecha_renovacion': [''],
       'vigencia': [{ value: '', disabled: true }, Validators.required],
       'estado_credencial': [{ value: '', disabled: false }, Validators.required],
 
+      'comunidad': [ Validators.required],
       'id_dpto': [ Validators.required],
       'd_provincia': [ Validators.required],
       'd_municipio': [ Validators.required],
 
+      'nombre_artistico':[''],
       'd_cedula': [{ value: '' }, Validators.required],
       'd_exp': [{ value: '' }, Validators.required],
       'd_sexo': [{ value: '' }, Validators.required],
@@ -157,6 +173,7 @@ export class IndividualComponent implements OnInit {
       'categorizacion': [{ value: '' }, Validators.required],
 
       'd_foto_individual': [''],
+      'd_foto_artista': [''],
       'id_doc_resp': [{ value: '' }, Validators.required],
       'd_doc_respaldo': [{ value: '' }, Validators.required],
       'id_estado': [{ value: '', disabled: true }]
@@ -182,10 +199,25 @@ export class IndividualComponent implements OnInit {
       clear: 'Borrar'
     }
 
+    this.formularioService.getProfesiones()
+      .subscribe(data => { this.profesiones = data },
+        err => console.log(err),
+        () => console.log("done loanding", this.profesiones));
+
+    this.formularioService.getComunidades()
+      .subscribe(data => { this.comunidades = data },
+        err => console.log(err),
+        () => console.log("done loanding", this.comunidades));
+
     this.formularioService.getCategorias()
       .subscribe(data => { this.categorias = data },
         err => console.log(err),
         () => console.log("done loanding", this.categorias));
+
+    this.formularioService.getActividadSec()
+      .subscribe(data => { this.actividadSec = data },
+        err => console.log(err),
+        () => console.log("done loanding", this.actividadSec));
 
     this.formularioService.getDepartamentos()
       .subscribe(data => { this.departamentos = data },
@@ -368,6 +400,16 @@ export class IndividualComponent implements OnInit {
     }
   }
 
+showSuccess() {
+    this.msgs = [];
+    this.msgs.push({severity:'success', summary:'Mensaje de Exito', detail:'Datos Registrados'});
+}
+
+showError() {
+  this.msgs = [];
+  this.msgs.push({severity:'error', summary:'Mensaje de Error ', detail:'Error'});
+}
+
 
   public saveDraft(): void {
     this.artista.numero_registro = "MDCyT" + this.year + "I";
@@ -378,6 +420,7 @@ export class IndividualComponent implements OnInit {
         console.log(response);
         //this.artista.numero_registro = 
         if (response.status == "Success") {
+          this.showSuccess();
           alert("Datos Registrados, Formulario:" + this.artista.numero_registro);
           this.artista.id_individual = response.data;
           console.log(this.artista.id_individual)
@@ -387,7 +430,8 @@ export class IndividualComponent implements OnInit {
           alert("No se pudo realizar el registro!")
         }
       }, err => {
-        alert("ERROR NO SE PUDO GUARDAR LOS DATOS "+err)
+        this.showError();
+        alert("ERROR NO SE PUDO GUARDAR LOS DATOS------------------ "+err)
         console.log("error", err);
         //let link = ['home/listado-artistas/'];
         //this.router.navigate(link);
@@ -404,6 +448,7 @@ export class IndividualComponent implements OnInit {
           alert("No se pudo realizar el registro!")
         }
       }, err => {
+        this.showError();
         alert("ERROR DE ACTUALIZACION " +err)
         console.log("error", err);
         //let link = ['home/listado-artistas/'];
@@ -436,6 +481,26 @@ export class IndividualComponent implements OnInit {
     this.base64Foto = btoa(binaryString);
 
     this.artista.d_foto = this.base64Foto
+    console.log(btoa(binaryString));
+  }
+
+  handleFileSelect2(evt) {
+    var files = evt.target.files;
+    var file = files[0];
+
+    if (files && file) {
+      var reader = new FileReader();
+
+      reader.onload = this._handleReaderLoaded2.bind(this);
+
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded2(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.base64FotoPerfil = btoa(binaryString);
+    this.artista.d_foto_artista = this.base64FotoPerfil
     console.log(btoa(binaryString));
   }
 

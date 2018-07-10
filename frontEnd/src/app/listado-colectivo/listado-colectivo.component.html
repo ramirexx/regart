@@ -21,11 +21,11 @@
       <p-column field="estado" header="Estado"></p-column>
       <p-column [style]="{'width':'10%'}" header="Acciones">
         <ng-template let-doc="rowData" pTemplate type="body">
-            <!--<button type="button" pButton (click)="ver(doc.id_individual)" icon="fa-search"></button>-->
-            <button type="button" pButton (click)="editarFormulario(doc.id_colectivo)" icon="fa-edit"></button>
-            <button type="button" pButton (click)="enviarFormulario(doc.id_colectivo)" icon="fa-send"></button>
-            <button type="button" pButton (click)="verFormulario(doc.id_colectivo)" icon="fa-print"></button>
-            <button type="button" pButton (click)="verCredencial(doc.id_colectivo)" icon="fa fa-id-card"></button>
+            <button type="button" pButton (click)="ver(doc.id_individual)" title="Ver Hoja Artistica" icon="fa-address-card-o"></button>
+            <button type="button" pButton (click)="editarFormulario(doc.id_colectivo)" title="Editar Formulario" icon="fa-edit"></button>
+            <button type="button" pButton (click)="enviarFormulario(doc.id_colectivo)" title="Enviar Formulario" icon="fa-send"></button>
+            <button type="button" pButton (click)="verFormulario(doc.id_colectivo)" title="Imprimir Formulario" icon="fa-print"></button>
+            <button type="button" pButton (click)="verCredencial(doc.id_colectivo)" title="Ver Credencial" icon="fa fa-id-card"></button>
         </ng-template>
       </p-column>
     </p-dataTable>
@@ -56,10 +56,10 @@
       <p-column field="estado" header="Estado"></p-column>
       <p-column [style]="{'width':'10%'}" header="Acciones">
         <ng-template let-doc="rowData" pTemplate type="body">
-            <button type="button" pButton (click)="ver(doc.id_individual)" icon="fa-search"></button>
-            <button type="button" pButton (click)="editarFormulario(doc.id_colectivo)" icon="fa-edit"></button>
-            <button type="button" pButton (click)="enviarFormulario(doc.id_colectvo)" icon="fa-send"></button>
-            <button type="button" pButton (click)="verFormulario(doc.id_colectivo)" icon="fa-print"></button>
+            <button type="button" pButton (click)="ver(doc.id_individual)" title="Ver Hoja Artistica" icon="fa-address-card"></button>
+            <button type="button" pButton (click)="editarFormulario(doc.id_colectivo)" title="Editar Formulario" icon="fa-edit"></button>
+            <button type="button" pButton (click)="enviarFormulario(doc.id_colectvo)" title="Enviar Formulario" icon="fa-send"></button>
+            <button type="button" pButton (click)="verFormulario(doc.id_colectivo)" title="Ver Credencial" icon="fa-print"></button>
         </ng-template>
       </p-column>
     </p-dataTable>

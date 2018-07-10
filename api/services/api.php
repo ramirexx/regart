@@ -157,7 +157,7 @@ private function test2(){
       $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro','d_fecha_renovacion', 'vigencia','id_dpto','dptoProv','id_prov','prov',
       'id_mun','d_denominacion','integrantes','id_sector','id_sub_sector','id_actividad','trayectoria','institucion','eta','acreditacion',
       'd_nom_rep_legal','d_ape_rep_legal','d_cedula_rep_legal','d_expedicion','d_lugar_nac_rep_legal','d_fecha_nac_rep_legal','d_dom_rep_legal',
-      'd_telefono_grupo','d_celular_grupo','d_email_grupo','d_logo_grupo','estado', 'estado_credencial');
+      'd_telefono_grupo','d_celular_grupo','d_email_grupo','d_logo_grupo','d_foto_grupo','estado', 'estado_credencial');
       $keys = array_keys($customer);
       $columns = '';
       $values = '';
@@ -191,7 +191,7 @@ private function test2(){
       $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro','d_fecha_renovacion', 'vigencia','id_dpto','dptoProv','id_prov','prov',
       'id_mun','d_denominacion','integrantes','id_sector','id_sub_sector','id_actividad','trayectoria','institucion','eta','acreditacion',
       'd_nom_rep_legal','d_ape_rep_legal','d_cedula_rep_legal','d_expedicion','d_lugar_nac_rep_legal','d_fecha_nac_rep_legal','d_dom_rep_legal',
-      'd_telefono_grupo','d_celular_grupo','d_email_grupo','d_logo_grupo','estado', 'estado_credencial');
+      'd_telefono_grupo','d_celular_grupo','d_email_grupo','d_logo_grupo','d_foto_grupo','estado', 'estado_credencial');
       $keys = array_keys($customer['data']);
       $columns = '';
       $values = '';
@@ -334,10 +334,10 @@ private function insertIndividual(){
       }
 
       $customer = json_decode(file_get_contents("php://input"),true);
-      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto', 'id_prov', 'dptoProv','id_mun',
-      'd_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
-      'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','id_actividad_sec', 'id_especialidad',
-      'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','id_estado','estado_credencial');
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','comunidad','id_dpto', 'id_prov', 'dptoProv','id_mun',
+      'd_nombre_artistico','d_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
+      'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','actividad_sec', 'id_especialidad',
+      'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','d_foto_artista','id_estado','estado_credencial');
       $keys = array_keys($customer);
       $columns = '';
       $values = '';
@@ -373,9 +373,9 @@ private function insertIndividual(){
       $customer = json_decode(file_get_contents("php://input"),true);
       //$id = (int)$this->customer['id'];
       $id = $customer['id'];
-      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto', 'id_prov',	'dptoProv', 'id_mun',
-      'd_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
-      'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','id_actividad_sec', 'id_especialidad',
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto','comunidad','id_prov',	'dptoProv', 'id_mun',
+      'd_nombre_artistico','d_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
+      'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','actividad_sec', 'id_especialidad',
       'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','id_estado');
       $keys = array_keys($customer['data']);
       $columns = '';
@@ -452,6 +452,10 @@ private function listaIndividual(){
          }
          $this->response($this->json($result), 200); // send user details
       }
+      else{
+            $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+            $this->response($this->json($error), 202); // send user details  
+      }
       $this->response('',204);   // If no records "No Content" status
    }
 
@@ -496,8 +500,8 @@ private function listaIndividual(){
          $result = array();
          while($row = $r->fetch_assoc()){
             $result[] = $row;
-            $this->response($this->json($result), 200); // send user details   
          }
+         $this->response($this->json($result), 200); // send user details   
       }else{
             $error = array('status' => "empty", "msg" => "NO se encontraron datos");
                         $this->response($this->json($error), 202); // send user details
@@ -700,6 +704,23 @@ private function insertActividad(){
                $this->response('',406);
                }
                $query="SELECT a.id_actividad, a.id_sub_cat, a.d_desc_act,  b.d_desc_sub_cat FROM tb_actividad a, tb_sub_cat  b WHERE a.id_sub_cat = b.id_sub_cat ORDER BY id_cat";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+   
+            if($r->num_rows > 0){
+               $result = array();
+               while($row = $r->fetch_assoc()){
+                  $result[] = $row;
+               }
+               $this->response($this->json($result), 200); // send user details
+            }
+            $this->response('',204);   // If no records "No Content" status
+         }   
+
+         private function listaActividadesSecundarias(){
+            if($this->get_request_method() != "GET"){
+               $this->response('',406);
+               }
+               $query="SELECT * FROM tb_actividad ORDER BY d_desc_act ASC";
             $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
    
             if($r->num_rows > 0){
@@ -1013,6 +1034,40 @@ private function usuario(){
       $this->response($this->json($error), 400);
 }
 
+private function profesiones(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $query="SELECT * FROM profesiones ORDER BY profesion";
+      $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+
+      if($r->num_rows > 0){
+         $result = array();
+         while($row = $r->fetch_assoc()){
+            $result[] = $row;
+         }
+         $this->response($this->json($result), 200); // send user details
+      }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
+
+private function comunidades(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $query="SELECT * FROM comunidades  ORDER BY id_comunidad";
+      $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+
+      if($r->num_rows > 0){
+         $result = array();
+         while($row = $r->fetch_assoc()){
+            $result[] = $row;
+         }
+         $this->response($this->json($result), 200); // send user details
+      }
+      $this->response('',204);   // If no records "No Content" status
+   }
 
 private function departamentos(){
       if($this->get_request_method() != "GET"){
@@ -1334,6 +1389,58 @@ private function trayectoria(){
          }
       $this->response('',204);   // If no records "No Content" status
    }
+
+
+   private function insertRep(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('id_artista','fecha','lugar','actividad','recursos');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO ha_representacion(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Representacion Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
+
+private function representacion(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $id = (int)$this->_request['id'];
+         if($id >0){
+            //$query="SELECT Prov as codigo, IdProv as id, Provincia as descripcion FROM provincias WHERE DepProv =$id";
+            $query="SELECT * FROM ha_representacion WHERE id_artista =$id";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0){
+                  $result = array();
+                  while($row = $r->fetch_assoc()){
+                     $result[] = $row;
+                  }
+                  $this->response($this->json($result), 200); // send user details
+               }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                  $this->response($this->json($error), 202); // send user details
+               }
+         }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
 
 
 

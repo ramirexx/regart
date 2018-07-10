@@ -9,6 +9,7 @@ export class Individual {
     d_fecha_renovacion: Date;
     vigencia: string = "Vigencia de 2 años";
     estado_credencial: string;
+    comunidad: string;
     id_dpto: number;
     dptoProv: number;
     id_prov: number;
@@ -18,6 +19,7 @@ export class Individual {
     d_cedula: string;
     d_exp: string;
     d_sexo: string;
+    d_nombre_artistico: string;
     d_nombres: string;
     d_apellidos: string;
     d_nacimiento: number;
@@ -39,7 +41,7 @@ export class Individual {
     id_sector: number;
     id_sub_sector: number;
     id_actividad: number;
-    id_actividad_sec: number;
+    actividad_sec: string;
     id_especialidad: number;
     id_especialidad_sec: number;
     id_especialidad_ter: number;
@@ -47,6 +49,7 @@ export class Individual {
     caegorizacion: string;
 
     d_foto: any;
+    d_foto_artista: any;
     id_doc_resp: string;
     d_doc_respaldo: string;
 
@@ -88,7 +91,7 @@ export class FormIndividual {
     id_sector: number;
     id_sub_sector: number;
     id_actividad: number;
-    id_actividad_sec: number;
+    actividad_sec: string;
     id_especialidad: number;
     id_especialidad_sec: number;
     id_especialidad_ter: number;
@@ -96,6 +99,7 @@ export class FormIndividual {
     caegorizacion: string;
 
     d_foto: any;
+    d_foto_artista: any;
     id_estado: string;
 
     Departamento: string;
@@ -145,4 +149,12 @@ export class Produccion {
     fecha: Date;
     lugar: string;
     act_pub_exp: string;
+}
+
+export class Representacion {
+    id_artista: number;
+    fecha: Date;
+    lugar: string;
+    actividad: string;
+    recursos: string;
 }

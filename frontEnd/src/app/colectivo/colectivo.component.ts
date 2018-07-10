@@ -8,7 +8,7 @@ import {
   FormControl
 } from '@angular/forms';
 import { FormularioService } from '../servicios/formulario.service';
-import { Artista } from '../modelo/artista.model';
+import { Colectivo } from '../modelo/colectivo.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
@@ -26,13 +26,14 @@ export class ColectivoComponent implements OnInit {
   tipoForm: string = "COL";
 
   artForm: any;
-  artista: Artista = new Artista();
+  artista: Colectivo = new Colectivo();
 
   //calendario idioma;
   es: any;
   qr: string = "Ministerio de culturas";
   renovacion: boolean;
   private base64Foto: String = "";
+  private base64FotoPerfil: String = "";
   year: any;
   provincia = { DepProv: null, Prov: null, IdProv: null, Provincia: null}
   ci : string;
@@ -116,6 +117,7 @@ export class ColectivoComponent implements OnInit {
       'd_email_grupo': [{ value: '' }, Validators.required],
       
       'd_logo_grupo': [''],
+      'd_foto_grupo': [''],
 
 
 
@@ -169,6 +171,7 @@ export class ColectivoComponent implements OnInit {
               this.artista = data;
               this.artista.numero_registro = this.artista.numero_registro+"-"+id 
               this.base64Foto = this.artista.d_logo_grupo;
+              this.base64FotoPerfil = this.artista.d_foto_grupo;
               console.log(this.base64Foto)
               this.formularioService.getProvincias(this.artista.id_dpto)
               .subscribe(data => {
@@ -388,6 +391,26 @@ export class ColectivoComponent implements OnInit {
     this.base64Foto = btoa(binaryString);
 
     this.artista.d_logo_grupo = this.base64Foto
+    console.log(btoa(binaryString));
+  }
+
+
+  handleFileSelect2(evt) {
+    var files = evt.target.files;
+    var file = files[0];
+
+    if (files && file) {
+      var reader = new FileReader();
+      reader.onload = this._handleReaderLoaded2.bind(this);
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded2(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.base64FotoPerfil = btoa(binaryString);
+
+    this.artista.d_foto_grupo = this.base64FotoPerfil
     console.log(btoa(binaryString));
   }
 

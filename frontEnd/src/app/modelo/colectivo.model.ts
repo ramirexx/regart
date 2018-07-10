@@ -1,4 +1,4 @@
-export class Artista {
+export class Colectivo {
 
     id_colectivo: number;
     numero_registro: string;
@@ -40,6 +40,8 @@ export class Artista {
     
     
     d_logo_grupo: any;
+    d_foto_grupo: any;
+
     //d_logo: any;
 
     estado: string;

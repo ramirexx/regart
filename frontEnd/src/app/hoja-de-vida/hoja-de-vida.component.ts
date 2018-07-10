@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Trayectoria, Curso, Formacion, Premios, Produccion } from '../modelo/individual.model';
+import { Trayectoria, Curso, Formacion, Premios, Produccion, Representacion } from '../modelo/individual.model';
 import {
   FormBuilder,
   FormGroup,
@@ -24,18 +24,23 @@ export class HojaDeVidaComponent implements OnInit {
   listaFormacion: any[];
   listaPremio: any[];
   listaProduccion: any[];
+  listaRepresentacion: any[];
 
   trayectoria: Trayectoria = new Trayectoria();
   curso: Curso = new Curso();
   formacion: Formacion = new Formacion();
   premio: Premios = new Premios();
   produccion: Produccion = new Produccion();
+  rep: Representacion = new Representacion();
 
   trayectoriaForm: any;
   cursoForm: any;
   formacionForm: any;
   premioForm: any;
   produccionForm: any;
+  repForm: any;
+
+  recursos=["PROPIO", "ESTATAL", "APOYO INTERNACIONAL"]
 
   es: any;
 
@@ -76,6 +81,15 @@ export class HojaDeVidaComponent implements OnInit {
       'lugar': [''],
       'actividad': []
     })
+
+    this.repForm = this._fb.group({
+      'fecha': [''],
+      'lugar': [''],
+      'actividad': [],
+      'recursos': [''],
+    })
+
+
   }
 
   ngOnInit() {
@@ -266,6 +280,40 @@ export class HojaDeVidaComponent implements OnInit {
   public cancelPre() {
     this.premio = new Premios()
   }
+
+  public saveRep(): void {
+    console.log("*----->" + this.masterName);
+    this.premio.id_artista = this.masterName;
+    this.formularioService.saveRep(this.rep).subscribe(response => {
+      console.log(response);
+      //this.artista.numero_registro = 
+      if (response.status == "Success") {
+        alert("Datos Registrados");
+        console.log(response.data.id_artista);
+        this.rep = new Representacion();
+        this.repForm.markAsUntouched();
+        this.getPre(response.data.id_artista);
+      } else {
+        alert("No se pudo realizar el registro!")
+      }
+    }, err => {
+      alert("ERROR NO SE PUDO GUARDAR LOS DATOS " + err)
+      console.log("error", err);
+    });
+  }
+
+  getRep(id) {
+    console.log(id)
+    this.formularioService.getRep(id)
+      .subscribe(lista => {
+        this.listaRepresentacion = lista
+        console.log(this.listaRepresentacion);
+      });
+  }
+  public cancelRep() {
+    this.rep = new Representacion()
+  }
+  
 
 
 }

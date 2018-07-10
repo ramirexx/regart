@@ -389,6 +389,28 @@ background: #7DB4D8;
 color: #f3f3f3
 }
 
+.bgimgind {
+    background-image: url('assets/img/individual.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 220px;
+    margin-top: 10px;
+}
 
+.bgimg2 {
+    background-image: url('assets/img/firma.png');
+    background-repeat: no-repeat;
+    background-position: center left ;
+    width: 312px;
+    height: 95px;
+}
+
+.bgimgcol {
+    background-image: url('assets/img/colectivo.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 220px;
+    margin-top: 10px;
+}
 
 
