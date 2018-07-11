@@ -15,6 +15,7 @@ import { FormularioComponent } from './formulario/formulario.component';
 import { UsuariosComponent } from './administracion/usuarios/usuarios.component';
 import { CategoriasComponent } from './administracion/categorias/categorias.component';
 import { PublicoComponent } from './publico/publico.component';
+import { PerfilArtistaComponent } from './perfil-artista/perfil-artista.component';
 import { Auth } from './auth/index';
 
 export const appRoutes: Routes = [
@@ -40,6 +41,7 @@ export const appRoutes: Routes = [
     { path: 'credencial/:id/:tipo', component: CredencialComponent },
     { path: 'formulario/:id', component: FormularioComponent },
     { path: 'ver-artista/:id', component: VerIndividualComponent },
+    { path: 'perfil-artista/:id', component: PerfilArtistaComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

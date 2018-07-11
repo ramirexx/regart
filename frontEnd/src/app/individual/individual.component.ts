@@ -117,7 +117,7 @@ export class IndividualComponent implements OnInit {
 
   rol:string;
 
-  @ViewChild(HojaDeVidaComponent) domicilioComponent: HojaDeVidaComponent;
+  @ViewChild(HojaDeVidaComponent) hdvComponent: HojaDeVidaComponent;
 
   constructor(private _fb: FormBuilder,
     private formularioService: FormularioService,
@@ -246,6 +246,13 @@ export class IndividualComponent implements OnInit {
               this.artista = data;
               this.artista.numero_registro = this.artista.numero_registro+"-"+id 
               this.base64Foto = this.artista.d_foto;
+              this.base64FotoPerfil = this.artista.d_foto_artista;
+              this.hdvComponent.getTra(id);
+              this.hdvComponent.getCur(id);
+              this.hdvComponent.getFor(id);
+              this.hdvComponent.getPro(id);
+              this.hdvComponent.getPre(id);
+              this.hdvComponent.getRep(id);
               this.formularioService.getProvincias(this.artista.id_dpto)
               .subscribe(data => {
                 let res: any = data

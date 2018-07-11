@@ -76,6 +76,12 @@ export class ListadoArtistasComponent implements OnInit {
     this.router.navigate(link);
   }
 
+  verPerfil(id: string) {
+    let link = ['/perfil-artista/' + id];
+    console.log(link)
+    this.router.navigate(link);
+  }
+
   
 
 }

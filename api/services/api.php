@@ -376,7 +376,7 @@ private function insertIndividual(){
       $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto','comunidad','id_prov',	'dptoProv', 'id_mun',
       'd_nombre_artistico','d_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
       'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','actividad_sec', 'id_especialidad',
-      'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','id_estado');
+      'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','d_foto_artista','id_estado');
       $keys = array_keys($customer['data']);
       $columns = '';
       $values = '';
@@ -423,7 +423,7 @@ private function formularioIndividual(){
       }
       $id = (int)$this->_request['id'];
       if($id > 0){  
-            $query="SELECT a.numero_registro,a.d_fecha_registro, a.id_dpto, a.id_prov, a.id_mun, a.d_nombres, d_apellidos, a.d_cedula, a.d_fecha_nacimiento, a.d_domicilio, a.d_telefono, a.d_celular, a.d_email,  a.id_sector, a.id_actividad, a.d_agrupaciones,  a.d_experiencia, a.d_foto, a.id_sector, a.id_sub_sector, a.id_actividad, a.id_especialidad, a.d_agrupaciones,  a.d_experiencia, a.vigencia, b.Departamento, c.Provincia, d.Localidad, e.d_desc_cat, f.d_desc_sub_cat, g.d_desc_act, h.d_desc_esp
+            $query="SELECT a.numero_registro,a.d_fecha_registro, a.id_dpto, a.id_prov, a.id_mun, a.d_nombres, d_apellidos, a.d_cedula, a.d_fecha_nacimiento, a.d_domicilio, a.d_telefono, a.d_celular, a.d_email,  a.id_sector, a.id_actividad, a.d_agrupaciones,  a.d_experiencia, a.d_foto, a.d_foto_artista, a.id_sector, a.id_sub_sector, a.id_actividad, a.id_especialidad, a.d_agrupaciones,  a.d_experiencia, a.vigencia, b.Departamento, c.Provincia, d.Localidad, e.d_desc_cat, f.d_desc_sub_cat, g.d_desc_act, h.d_desc_esp
  FROM tb_individual a , departamentos b , provincias c, localidades d, tb_categoria e, tb_sub_cat f, tb_actividad g, tb_especialidad h  WHERE a.id_dpto = b.idDep AND a.id_prov = c.idProv AND a.id_mun = d.idLoc  AND a.id_sector = e.id_cat AND a.id_sub_sector = f.id_sub_cat AND a.id_actividad = g.id_actividad AND a.id_especialidad = h.id_especialidad AND a.id_individual =$id LIMIT 1";
  //        $query="SELECT d_fecharegistro as fechaReg,  FROM tb_individual c where c.id_individual=$id";
          $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);

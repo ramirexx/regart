@@ -60,6 +60,7 @@ import { PublicoComponent } from './publico/publico.component';
 import { EnviarFormularioComponent } from './enviar-formulario/enviar-formulario.component';
 import { HojaDeVidaComponent } from './hoja-de-vida/hoja-de-vida.component';
 import { ListadoColectivoComponent } from './listado-colectivo/listado-colectivo.component';
+import { PerfilArtistaComponent } from './perfil-artista/perfil-artista.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { ListadoColectivoComponent } from './listado-colectivo/listado-colectivo
     PublicoComponent,
     EnviarFormularioComponent,
     HojaDeVidaComponent,
-    ListadoColectivoComponent
+    ListadoColectivoComponent,
+    PerfilArtistaComponent
   ],
   imports: [
     
