@@ -9,7 +9,8 @@ export class Individual {
     d_fecha_renovacion: Date;
     vigencia: string = "Vigencia de 2 años";
     estado_credencial: string;
-    comunidad: string;
+    residencia:string;
+    //comunidad: string;
     id_dpto: number;
     dptoProv: number;
     id_prov: number;

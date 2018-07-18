@@ -27,7 +27,12 @@ export class FormularioService {
     return this.http.get(environment.urlApi + 'profesiones').map(this.extractData)
       .catch(this.handleError);
   }
-
+  getResidencia(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'Departamentos').map(this.extractData)
+      .catch(this.handleError);
+  }
+  
+  
   getComunidades(): Observable<any[]> {
     return this.http.get(environment.urlApi + 'comunidades').map(this.extractData)
       .catch(this.handleError);

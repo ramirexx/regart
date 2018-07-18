@@ -4,7 +4,7 @@
    class API extends REST {
    
       public $data = "";
-      
+      //const DB_SERVER = "192.168.113.161";
       const DB_SERVER = "localhost";
       //const DB_USER = "id5857866_root";
       const DB_USER = "root";
@@ -334,7 +334,7 @@ private function insertIndividual(){
       }
 
       $customer = json_decode(file_get_contents("php://input"),true);
-      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','comunidad','id_dpto', 'id_prov', 'dptoProv','id_mun',
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','comunidad','residencia','id_dpto', 'id_prov', 'dptoProv','id_mun',
       'd_nombre_artistico','d_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
       'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','actividad_sec', 'id_especialidad',
       'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','d_foto_artista','id_estado','estado_credencial');
@@ -373,7 +373,7 @@ private function insertIndividual(){
       $customer = json_decode(file_get_contents("php://input"),true);
       //$id = (int)$this->customer['id'];
       $id = $customer['id'];
-      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto','comunidad','id_prov',	'dptoProv', 'id_mun',
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto','comunidad','residencia','id_prov',	'dptoProv', 'id_mun',
       'd_nombre_artistico','d_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
       'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','actividad_sec', 'id_especialidad',
       'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','d_foto_artista','id_estado');
@@ -1069,7 +1069,24 @@ private function comunidades(){
       $this->response('',204);   // If no records "No Content" status
    }
 
-private function departamentos(){
+   private function Residencia(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $query="SELECT * FROM departamentos  ORDER BY Departamento";
+      $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+
+      if($r->num_rows > 0){
+         $result = array();
+         while($row = $r->fetch_assoc()){
+            $result[] = $row;
+         }
+         $this->response($this->json($result), 200); // send user details
+      }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
+      private function departamentos(){
       if($this->get_request_method() != "GET"){
          $this->response('',406);
          }

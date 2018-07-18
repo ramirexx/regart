@@ -58,13 +58,22 @@
                     </div>-->
                     <div class="col-sm-3">
                         <div class="form-group">
+                            <label>Residencia</label>
+                            <select class="form-control" [formControl]="artForm.controls['residencia']" [(ngModel)]="artista.residencia">
+                                <option *ngFor="let obj of departamentos" [ngValue]="obj.descripcion">{{obj.descripcion}}</option>
+                            </select>
+                            
+                        </div>
+                    </div>
+                    <!--<div class="col-sm-3">
+                        <div class="form-group">
                             <label>Identidad</label>
                             <select class="form-control" [formControl]="artForm.controls['comunidad']" [(ngModel)]="artista.comunidad">
                                 <option *ngFor="let obj of comunidades" [ngValue]="obj.comunidad">{{obj.comunidad}}</option>
                             </select>
 
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <br>
             </fieldset>

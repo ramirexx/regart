@@ -40,7 +40,7 @@ export class HojaDeVidaComponent implements OnInit {
   produccionForm: any;
   repForm: any;
 
-  recursos=["PROPIO", "ESTATAL", "APOYO INTERNACIONAL"]
+  recursos=["Propio", "Estatal", "Apoyo Internacional, Mixta"]
 
   es: any;
 

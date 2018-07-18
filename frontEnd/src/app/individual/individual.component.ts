@@ -83,7 +83,7 @@ export class IndividualComponent implements OnInit {
   actividadSec: any[];
   especialidad: any[];
 
-  hijos = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+  hijos = ['0','1','2','3','4','5','6','7','8','9','10','11','12'];
 
   generos = ['Femenino', 'Masculino']
 
@@ -134,7 +134,8 @@ export class IndividualComponent implements OnInit {
       'vigencia': [{ value: '', disabled: true }, Validators.required],
       'estado_credencial': [{ value: '', disabled: false }, Validators.required],
 
-      'comunidad': [ Validators.required],
+     'residencia': [''],
+      //'comunidad': [''],
       'id_dpto': [ Validators.required],
       'd_provincia': [ Validators.required],
       'd_municipio': [ Validators.required],
@@ -204,10 +205,15 @@ export class IndividualComponent implements OnInit {
         err => console.log(err),
         () => console.log("done loanding", this.profesiones));
 
-    this.formularioService.getComunidades()
+    this.formularioService.getDepartamentos()
+    .subscribe(data=>{this.departamentos=data},
+    err=>console.log(err),
+    ()=>console.log("done loanding", this.departamentos));
+    
+        /*this.formularioService.getComunidades()
       .subscribe(data => { this.comunidades = data },
         err => console.log(err),
-        () => console.log("done loanding", this.comunidades));
+        () => console.log("done loanding", this.comunidades));*/
 
     this.formularioService.getCategorias()
       .subscribe(data => { this.categorias = data },
