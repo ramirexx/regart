@@ -1,13 +1,113 @@
-<div style="background: rgba(76, 160, 97, 0.562); padding: 100px;">
-  <div style="background: white; padding: 100px; border-radius: 1em">
+<!--<<div style="background: rgba(76, 160, 97, 0.562); padding: 100px;">-->
+  <div style="background:#474544; padding: 100px;">
+  <div style="background: #f3f3f3; padding: 30px; border-radius: 1em">
   <div class="row">
-    <div class="col-md-12">
+      <div class="col-sm-12 col-md-12">
+          <div class="well well-light well-sm no-margin no-padding">
+
+            <div class="row">
+
+              <div class="col-sm-12">
+                  <div class="padding-10">
+                  <h3>Perfil de Artista     </h3>
+                </div>
+                <!--<div id="myCarousel" class="carousel fade profile-carousel">
+                  <div class="air air-bottom-right">
+                    <a href="javascript:void(0);" class="btn txt-color-white bg-color-teal btn-sm"><i class="fa fa-check"></i> Follow</a>&nbsp; <a href="javascript:void(0);" class="btn txt-color-white bg-color-pinkDark btn-sm"><i class="fa fa-link"></i> Connect</a>
+                  </div>
+                  <div class="air air-top-left padding-10">
+                    <h4 class="txt-color-white font-md">Jan 1, 2014</h4>
+                  </div>
+                  <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+                    <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+                  </ol>
+                </div>-->
+              </div>
+
+              <div class="col-sm-12">
+                
+                <div class="row">
+
+                  <div class="col-sm-3">
+                    
+                    <!--<img src="img/avatars/sunny-big.png" alt="demo user">-->
+                    <div class="padding-10">
+                        <img *ngIf="base64FotoPerfil" [src]="'data:image/jpg;base64,'+base64FotoPerfil" width="500px" class="img-responsive img-thumbnail" />                      
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <h1>{{artista.d_nombres}} <span class="semi-bold">{{artista.d_apellidos}}</span>
+                    <br>
+                    <small> {{artista.d_desc_cat}} - {{artista.d_desc_sub_cat}} <br> {{artista.d_desc_act}} - {{artista.d_desc_esp}}</small></h1>
+                    <br>
+                    <ul class="list-unstyled">
+                      <li>
+                        <p class="text-muted">
+                          <i class="fa fa-phone"></i>&nbsp;&nbsp;(<span class="txt-color-darken">{{artista.d_telefono}}</span>) <span class="txt-color-darken"></span> - <span class="txt-color-darken">{{artista.d_celular}}</span>
+                        </p>
+                      </li>
+                      <li>
+                        <p class="text-muted">
+                          <i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">ceo@smartadmin.com</a>
+                        </p>
+                      </li>
+                      <li>
+                        <p class="text-muted">
+                          <i class="fa fa-facebook"></i>&nbsp;&nbsp;<span class="txt-color-darken">{{artista.d_otros}}</span>
+                        </p>
+                      </li>
+                      <li>
+                        <p class="text-muted">
+                          <i class="fa fa-youtube"></i>&nbsp;&nbsp;<span class="txt-color-darken"> <a href="javascript:void(0);" rel="tooltip" title="" data-placement="top" >{{artista.d_youtube}}</a></span>
+                        </p>
+                      </li>
+                    </ul>
+                    <br>
+                    <p class="font-md">
+                      <i>Resumen Artistico</i>
+                    </p>
+                    <p *ngFor="let obj of listaTrayectoria">
+
+                        {{obj.actividad}}
+
+                    </p>
+                    <br>
+                    <!--<a href="javascript:void(0);" class="btn btn-default btn-xs"><i class="fa fa-envelope-o"></i> Send Message</a>-->
+                    <br>
+                    <br>
+
+                  </div>
+                  
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-12">
+
+              
+              
+
+              </div>
+
+            </div>
+            <!-- end row -->
+
+          </div>
+
+        </div>
+    <!--<div class="col-md-12">
       <h3 style="text-align: center"> PERFIL DE ARTISTA</h3>
       <div class="col-sm-6">
         
       </div>
       <table class="table table-sm">
-        <!--<pre>{{artista | json}}</pre>-->
         <tbody>
           <tr>
            <td><img *ngIf="base64FotoPerfil" [src]="'data:image/jpg;base64,'+base64FotoPerfil" width="300px" class="img-responsive img-thumbnail" /></td>
@@ -60,312 +160,17 @@
 
     <div class="col-md-12">
       <h5>TRAYECTORIA ARTÍSTICA</h5>
-      <table class="table table-striped table-bordered table-sm">
-        <thead>
-          <tr>
-            <th>Gestion</th>
-            <th>Fecha</th>
-            <th>Lugar</th>
-            <th>Actividad</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let obj of listaTrayectoria;let i = index">
-            <td class="form-group">
-              {{obj.gestion}}
-            </td>
-            <td class="form-group">
-              {{obj.fecha}}
-            </td>
-            <td class="form-group">
-              {{obj.lugar}}
-            </td>
-            <td class="form-group">
-              {{obj.actividad}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-        <fieldset>
-            <h5>PREMIOS Y DISTINCIONES</h5>
-            <table class="table table-striped table-bordered table-sm">
-                <thead>
-                    <tr>
-                        <th>Gestion</th>
-                        <th>Fecha</th>
-                        <th>Lugar</th>
-                        <th>Actividad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let obj of listaPremio;let i = index">
-                        <td class="form-group">
-                            {{obj.institucion}}
-                        </td>
-                        <td class="form-group">
-                            {{obj.distincion}}
-                        </td>
-                        <td class="form-group">
-                            {{obj.lugar}}
-                        </td>
-                        <td class="form-group">
-                            {{obj.fecha}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </fieldset>
+      <div *ngFor="let obj of listaTrayectoria">
+        <div class="info-value"> {{obj.actividad}}</div>
+      </div>
+    
 
 
     </div>
+  -->
+
   </div>
   </div>
 </div>
 
 
-<!--<div class="col-md-12">
-  <fieldset>
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="info-name">Número de Registro</div>
-        <div class="info-value">{{artista.numero_registro}}</div>
-      </div>
-
-      <div class="col-sm-3">
-
-        <div class="info-name">Fecha de registro</div>
-        <div class="info-value">{{artista.d_fecha_registro}}</div>
-      </div>
-
-      <div class="col-sm-3" *ngIf="renovacion">
-        <div class="info-name">Fecha de renovacion</div>
-        <div class="info-value">{{d_fecha_renovacion}}</div>
-      </div>
-      <div class="col-sm-3">
-        <div class="info-name">Estado del Registro</div>
-          <div class="info-value">{{artista.id_estado}}</div>
-        </div>
-
-      <div class="col-sm-3">
-          <qr-code [value]="qr" [size]="100"></qr-code>
-        </div>
-    </div>
-  </fieldset>
-  <p-panel header="Lugar de Registro">
-    <fieldset>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="info-name">Departamento</div>
-            <div class="info-value">{{artista.id_dpto}}</div>
-          </div>
-          <div class="col-sm-3">
-            <div class="info-name">Provincia </div>
-              <div class="info-value">{{artista.d_provincia}}</div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <div class="info-name">Municipio </div>
-                  <div class="info-value">{{artista.d_municipio}}</div>
-                </div>
-              </div>
-            </div>
-    </fieldset>
-  </p-panel>
-  <p-panel header="Datos Personales">
-    <fieldset>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="info-name">Cedula de identidad</div>
-            <div class="info-value">{{artista.d_cedula}}</div>
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <div class="info-name">Lugar de expedicion</div>
-                <div class="info-value">{{artista.d_exp}}</div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <div class="info-name">Sexo</div>
-                  <div class="info-value">{{artista.d_sexo}}</div>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="info-name">Fecha de nacimiento</div>
-                  <div class="info-value">{{artista.d_fecha_nacimiento}}</div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="form-group">
-                    <div class="info-name">Nombres</div>
-                      <div class="info-value">{{artista.d_nombres}}</div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="form-group">
-                      <div class="info-name">Apellidos</div>
-                        <div class="info-value">{{artista.d_apellidos}}</div>
-                      </div>
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="form-group">
-                        <div class="info-name">Lugar de Nacimiento</div>
-                          <div class="info-value">{{artista.d_nacimiento}}</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <div class="form-group">
-                          <div class="info-name">Estado civil</div>
-                            <div class="info-value">{{artista.d_estado_civil}}</div>
-                          </div>
-                        </div>
-                        <div class="col-sm-3">
-                          <div class="form-group">
-                            <div class="info-name">Nº Hijos</div>
-                              <div class="info-value">{{artista.d_nro_hijos}}</div>
-                            </div>
-                          </div>
-                          <div class="col-sm-3">
-                            <div class="form-group">
-                              <div class="info-name">Profesión </div>
-                                <div class="info-value">{{artista.d_profesion}}</div>
-                              </div>
-                            </div>
-                          </div>
-    </fieldset>
-  </p-panel>
-  <p-panel header="Datos del Contacto">
-    <fieldset>
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="info-name">Domicilio actual </div>
-            <div class="info-value">{{artista.d_domicilio}}</div>
-          </div>
-          <div class="col-sm-4">
-            <div class="info-name">Número de telefono fijo </div>
-              <div class="info-value">{{artista.d_telefono}}</div>
-            </div>
-            <div class="col-sm-4">
-              <div class="info-name">Número de celular </div>
-                <div class="info-value">{{artista.d_celular}}</div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-4">
-                <div class="info-name">Correo electrónico </div>
-                  <div class="info-value">{{artista.d_email}}</div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="info-name">Página Web </div>
-                    <div class="info-value">{{artista.d_pagina_web}}</div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="info-name">Yotube Blog </div>
-                      <div class="info-value">{{artista.d_youtube}}</div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="info-name">Otros </div>
-                        <div class="info-value">{{artista.d_otros}}</div>
-                      </div>
-                    </div>
-
-    </fieldset>
-  </p-panel>
-  <p-panel header="Datos Artisticos">
-    <fieldset>
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="info-name">Institución/Sindicato </div>
-            <div class="info-value">{{artista.d_institucion}}</div>
-          </div>
-          <div class="col-sm-4">
-            <div class="info-name">Agrupación </div>
-              <div class="info-value">{{artista.id_cat}}</div>
-            </div>
-            <div class="col-sm-4">
-              <div class="info-name">Sector cultural </div>
-                <div class="info-value">{{artista.id_sub_cat}}</div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-4">
-                <div class="info-name">Sub sector cultural </div>
-                  <div class="info-value">{{artista.id_sub_sector}}</div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="info-name">Actividad </div>
-                    <div class="info-value">{{artista.d_actividad}}</div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="info-name">Producto </div>
-                      <div class="info-value">{{artista.d_producto}}</div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="info-name">Experiencia </div>
-                        <div class="info-value">{{artista.d_experiencia}}</div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="info-name">Ingresos </div>
-                          <div class="info-value">{{artista.d_ingresos}}</div>
-                        </div>
-                        <div class="col-sm-4">
-                          <div class="info-name">Gastos </div>
-                            <div class="info-value">{{artista.d_gastos}}</div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-4">
-                            <div class="info-name">Empleos directos </div>
-                              <div class="info-value">{{artista.d_empleos_directos}}</div>
-                            </div>
-                            <div class="col-sm-4">
-                              <div class="info-name">Empleos indirectos </div>
-                                <div class="info-value">{{artista.d_empleos_indirectos}}</div>
-                              </div>
-                              <div class="col-sm-4">
-                                <div class="info-name">Fuentes de financiamiento </div>
-                                  <div class="info-value">{{artista.d_fuente_financiamiento}}</div>
-                                </div>
-                              </div>
-    </fieldset>
-  </p-panel>
-  <p-panel header="Archivos Digitales">
-    <fieldset>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="info-name">Fotografia </div>
-            <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="info-name">Tipo de respaldo </div>
-              <div class="info-value">{{artista.id_doc_resp}}</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="info-name">Documento de respaldo </div>
-                <div class="info-name">Fotografia </div>
-                </div>
-              </div>
-    </fieldset>
-  </p-panel>
-  </div>
-  <br>
-  <div class="col-md-12">
-    <p-toolbar>
-      <div class="ui-toolbar-group-right">
-        <button pButton type="button" label="Volver" icon="fa fa-arrow-circle-left" (click)="volver()"></button>
-      </div>
-    </p-toolbar>
-  </div>-->
-
-<!--<pre>{{artista | json}}</pre>-->

@@ -116,7 +116,7 @@ export class HojaDeVidaComponent implements OnInit {
       if (response.status == "Success") {
         alert("Datos Registrados");
         console.log(response.data.id_artista);
-        this.trayectoria = new Trayectoria();
+        //this.trayectoria = new Trayectoria();
         this.trayectoriaForm.markAsUntouched();
         this.getTra(response.data.id_artista);
       } else {
