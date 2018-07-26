@@ -20,8 +20,10 @@ export class CredencialComponent implements OnInit {
   imagePath:string;
   qr: string = "";
   depto: string;
-  tipo:any;
+  tipo:string = "ind";
   id_dpto:any;
+  exp:string;
+  showInd: boolean = true;
 
   constructor(private formularioService: FormularioService,
     private route: ActivatedRoute,
@@ -36,7 +38,10 @@ export class CredencialComponent implements OnInit {
       console.log("REVISION :", params);
       let id = params['id'];
       this.tipo = params['tipo'];
+      console.log("*****************"+params['tipo']+this.tipo)
       if(this.tipo == "ind"){
+        this.showInd = true;
+        console.log("INDIVIDUAL")
         if (id != undefined) {
           console.log(id);
           this.formularioService.getFormIndividual(id)
@@ -46,12 +51,13 @@ export class CredencialComponent implements OnInit {
               this.base64Foto = this.artista.d_foto;
               
               this.qr = "Pagina Web: "+ environment.urlApp+"regart/#/ver-artista/"+id;//this.artista.d_nombres + this.artista.d_apellidos 
-              //this.depto = this.getDepto(this.artista.id_dpto);
+              this.exp = this.getExp(this.artista.d_exp);
   
               
             })
         }
       }else{
+        this.showInd = false ;
         if (id != undefined) {
           console.log(id);
           this.formularioService.getFormColectivo(id)
@@ -103,7 +109,42 @@ export class CredencialComponent implements OnInit {
     }
     console.log(this.depto)
     return this.depto;
+  } getExp(x){
+    switch (x) {
+      case "1":
+        this.depto = "CH"
+        break;
+      case "2":
+        this.depto = "LP"
+        break;
+      case "3":
+        this.depto = "CBBA"
+        break;
+      case "4":
+        this.depto = "OR"
+        break;
+      case "5":
+        this.depto = "PT"
+        break;
+      case "6":
+        this.depto = "TJA"
+        break;
+      case "7":
+        this.depto = "SCZ"
+        break;
+      case "8":
+        this.depto = "BN"
+        break;
+      case "9":
+        this.depto = "PD"
+        break;
+        
+    }
+    console.log(this.depto)
+    return this.depto;
   }
+
+
   
 
 }

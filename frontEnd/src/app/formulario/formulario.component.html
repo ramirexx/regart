@@ -20,6 +20,9 @@
                 <div class="info-name">Municipio:
                   <span class="value">{{artista.Localidad}}</span>
                 </div>
+                <div class="info-name">Residencia:
+                  <span class="value">{{artista.Residencia}}</span>
+                </div>
               </div>
             </td>
             <td>
@@ -58,7 +61,7 @@
             <td>
               <div class="col-md-12">
               <div class="info-name">Agrupaciones/Instituciones: : <span class="value">{{artista.d_cedula}}</span></div>
-              <div class="info-name">Biografía: : <span class="value">{{artista.d_experiencia}}</span></div>
+              <!--<div class="info-name">Biografía: : <span class="value">{{artista.d_experiencia}}</span></div>-->
               <qr-code [value]="qr" [size]="100"></qr-code>
             </div>
             </td>

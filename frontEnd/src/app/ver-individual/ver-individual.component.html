@@ -36,7 +36,7 @@
                 <span class="value">{{artista.d_domicilio}} {{artista.d_fecha_nacimiento}}</span>
               </div>
               <div class="info-name">Teléfono/Celular:
-                <span class="value">{{artista.d_telefono}} {{artista.d_celular}}</span>
+                <span class="value">{{artista.d_telefono}}-{{artista.d_celular}}</span>
               </div>
               <div class="info-name">Correo Electrónico:
                 <span class="value">{{artista.d_email}}</span>
@@ -60,11 +60,11 @@
             <td>
               <div class="col-md-12">
                 <div class="info-name">Sector:
-                  <span class="value">{{artista.d_desc_cat}}</span> Sub Sector:
+                  <span class="value">{{artista.d_desc_cat}}</span> / Sub Sector:
                   <span class="value">{{artista.d_desc_sub_cat}}</span>
                 </div>
                 <div class="info-name">Actividad:
-                  <span class="value">{{artista.d_desc_act}}</span> Especialidad:
+                  <span class="value">{{artista.d_desc_act}}</span> / Especialidad:
                   <span class="value">{{artista.d_desc_esp}}</span>
                 </div>
               </div>
@@ -76,9 +76,9 @@
                 <div class="info-name">Agrupaciones/Instituciones: :
                   <span class="value">{{artista.d_cedula}}</span>
                 </div>
-                <div class="info-name">Biografía: :
+                <!--<div class="info-name">Biografía: :
                   <span class="value">{{artista.d_experiencia}}</span>
-                </div>
+                </div>-->
                 <!--<qr-code [value]="qr" [size]="100"></qr-code>-->
               </div>
             </td>
@@ -93,15 +93,15 @@
       <table class="table table-striped table-bordered table-sm">
         <thead>
           <tr>
-            <th>Gestion</th>
+            <!--<th>Gestion</th>
             <th>Fecha</th>
             <th>Lugar</th>
-            <th>Actividad</th>
+            <th>Actividad</th>-->
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let obj of listaTrayectoria;let i = index">
-            <td class="form-group">
+            <!--<td class="form-group">
               {{obj.gestion}}
             </td>
             <td class="form-group">
@@ -109,7 +109,7 @@
             </td>
             <td class="form-group">
               {{obj.lugar}}
-            </td>
+            </td>-->
             <td class="form-group">
               {{obj.actividad}}
             </td>
@@ -123,7 +123,7 @@
         <thead>
           <tr>
             <th>Institución</th>
-            <th>Nombre Especifico del Curso</th>
+            <th>Nombre Específico del Curso</th>
             <th>Desde</th>
             <th>Hasta</th>
           </tr>
@@ -152,7 +152,7 @@
                   <tr>
                       <th>Universidad / Institución</th>
                       <th>Grado Obtenido</th>
-                      <th>Fecha de Emision del Titulo Académico</th>
+                      <th>Fecha de Emisión del Título Académico</th>
                   </tr>
               </thead>
               <tbody>
@@ -171,7 +171,7 @@
           </table>
         </fieldset>
         <fieldset>
-            <h5>4. PRODUCCIÓN INTELECTUAL (Obras – Libros – Investigación – Producción literaria - Producción audiovisual – Producción fonográfica, etc.)</h5>
+            <h5>4. PRODUCCIÓN INTELECTUAL (Obras – Libros – Investigación – Producción Literaria - Producción Audiovisual – Producción Fonográfica, etc.)</h5>
             <table class="table table-striped table-bordered table-sm">
                 <thead>
                     <tr>
@@ -204,7 +204,7 @@
             <table class="table table-striped table-bordered table-sm">
                 <thead>
                     <tr>
-                        <th>Gestion</th>
+                        <th>Gestión</th>
                         <th>Fecha</th>
                         <th>Lugar</th>
                         <th>Actividad</th>

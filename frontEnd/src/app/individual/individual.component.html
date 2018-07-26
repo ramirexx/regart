@@ -1,6 +1,6 @@
 <h4 class="page-title txt-color-blueDark">
         <i class="fa-fw fa fa-user"></i> 
-            REGISTRO INDIVIDUAL 
+            REGISTRO INDIVIDUAL  111111111111111111 
         <span>>  
                   Ficha de Registro
         </span>
@@ -25,17 +25,19 @@
                                 maxlength="36" />
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
+                    
+                        <!--<div class="form-group">
                             <label>Estado del Registro</label>
                             <input type="text" class="form-control" [formControl]="artForm.controls['id_estado']" [(ngModel)]="artista.id_estado" maxlength="36"
                             />
-                        </div>
-                    </div>
+                        </div>-->
+                    
                     <div class="col-sm-3">
                         <label>Fecha de registro</label>
-                        <p-calendar [(ngModel)]="artista.d_fecha_registro" [formControl]="artForm.controls['d_fecha_registro']" dateFormat="dd/mm/yy"
-                            inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
+                        <!--<p-calendar [(ngModel)]="artista.d_fecha_registro" [formControl]="artForm.controls['d_fecha_registro']" dateFormat="dd/mm/yy"
+                            inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>-->
+                            <span class="value">{{artista.d_fecha_registro}}</span>
+                        
                     </div>
                     <div class="col-sm-3" *ngIf="renovacion">
                         <label>Fecha de renovacion</label>
@@ -56,7 +58,7 @@
                             <option *ngFor="let obj of estadosCredencial" [ngValue]="obj">{{obj}}</option>
                         </select>
                     </div>-->
-                    <div class="col-sm-3">
+                    <!--<div class="col-sm-3">
                         <div class="form-group">
                             <label>Residencia</label>
                             <select class="form-control" [formControl]="artForm.controls['residencia']" [(ngModel)]="artista.residencia">
@@ -64,17 +66,8 @@
                             </select>
                             
                         </div>
-                    </div>
-                    <!--<div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Identidad</label>
-                            <select class="form-control" [formControl]="artForm.controls['comunidad']" [(ngModel)]="artista.comunidad">
-                                <option *ngFor="let obj of comunidades" [ngValue]="obj.comunidad">{{obj.comunidad}}</option>
-                            </select>
-
-                        </div>
                     </div>-->
-                </div>
+                                    </div>
                 <br>
             </fieldset>
             <p-panel header="Lugar de Registro">
@@ -109,6 +102,16 @@
                         </select>
                         </div>
                     </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Nación</label>
+                            <select class="form-control" [formControl]="artForm.controls['comunidad']" [(ngModel)]="artista.comunidad">
+                                <option *ngFor="let obj of comunidades" [ngValue]="obj.comunidad">{{obj.comunidad}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+
                     <!--<div class="col-sm-3">
                     <div class="form-group">
                         <label>Comunidad / Nación</label>
@@ -123,18 +126,18 @@
             <fieldset>
                 <div class="row">
                         <div class="col-sm-3">
-                                <label>Nombre Artistico</label>
+                                <label>Nombre Artístico</label>
                                 <input type="text" class="form-control" [formControl]="artForm.controls['nombre_artistico']" [(ngModel)]="artista.d_nombre_artistico"
                                     maxlength="36" />
                             </div>
                     <div class="col-sm-3">
-                        <label>Cedula de identidad</label>
+                        <label>Cédula de Identidad</label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_cedula']" [(ngModel)]="artista.d_cedula"
                             maxlength="36" />
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Lugar de expedicion</label>
+                            <label>Lugar de Expedición</label>
                             <select class="form-control" [formControl]="artForm.controls['d_exp']" [(ngModel)]="artista.d_exp">
                                 <option *ngFor="let obj of departamentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
                             </select>
@@ -176,21 +179,20 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <label>Fecha de nacimiento</label>
+                        <label>Fecha de Nacimiento</label>
                         <p-calendar [(ngModel)]="artista.d_fecha_nacimiento" [formControl]="artForm.controls['d_fecha_nacimiento']" dateFormat="dd/mm/yy"
                             inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
                             
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3">
+                    <!--<div class="col-sm-3">
                         <div class="form-group">
-                            <label>Estado civil</label>
+                            <label>Estado Civil</label>
                             <select class="form-control" [formControl]="artForm.controls['d_estado_civil']" [(ngModel)]="artista.d_estado_civil">
                                 <option *ngFor="let obj of estadoCivil" [ngValue]="obj">{{obj}}</option>
                             </select>
-                            <!--<input type="text" class="form-control" [formControl]="artForm.controls['d_estado_civil']" [(ngModel)]="artista.d_estado_civil"
-                                maxlength="36" />-->
+                          
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -201,7 +203,7 @@
                             </select>
                             <!--<input type="text" class="form-control" [formControl]="artForm.controls['d_nro_hijos']" [(ngModel)]="artista.d_nro_hijos"
                                 maxlength="36" />-->
-                        </div>
+                       <!-- </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
@@ -211,8 +213,8 @@
                             </select>
                             <!--<input type="text" class="form-control" [formControl]="artForm.controls['d_profesion']" [(ngModel)]="artista.d_profesion"
                                 maxlength="36" />-->
-                        </div>
-                    </div>
+                       <!-- </div>
+                    </div>-->
                 </div>
             </fieldset>
         </p-panel>
@@ -220,24 +222,24 @@
             <fieldset>
                 <div class="row">
                     <div class="col-sm-4">
-                        <label>Domicilio actual </label>
+                        <label>Domicilio Actual </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_domicilio']" [(ngModel)]="artista.d_domicilio"
                             maxlength="250" />
                     </div>
                     <div class="col-sm-4">
-                        <label>Número de telefono fijo </label>
+                        <label>Número de Teléfono Fijo </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_telefono']" [(ngModel)]="artista.d_telefono" maxlength="36"
                         />
                     </div>
                     <div class="col-sm-4">
-                        <label>Número de celular </label>
+                        <label>Número de Celular </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_celular']" [(ngModel)]="artista.d_celular" maxlength="36"
                         />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <label>Correo electrónico </label>
+                        <label>Correo Electrónico </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_email']" [(ngModel)]="artista.d_email" maxlength="36"
                         />
                     </div>
@@ -247,7 +249,7 @@
                             maxlength="36" />
                     </div>
                     <div class="col-sm-4">
-                        <label>Yotube Blog </label>
+                        <label>Youtube Blog </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_youtube']" [(ngModel)]="artista.d_youtube" maxlength="36"
                         />
                     </div>
@@ -262,7 +264,7 @@
 
             </fieldset>
         </p-panel>
-        <p-panel header="Datos Artisticos">
+        <p-panel header="Datos Artísticos">
             <fieldset>
                 <div class="row">
                     <div class="col-sm-4">
@@ -340,12 +342,12 @@
 
 
                 <div class="row">
-                        <div class="col-md-4" *ngIf="rol !='4'">
-                                <label>Categorizacion </label>
+                        <!--<div class="col-md-4" *ngIf="rol !='4'">
+                                <label>Categorización </label>
                                 <select class="form-control" [formControl]="artForm.controls['categorizacion']" [(ngModel)]="artista.categorizacion">
                                     <option *ngFor="let obj of listaCategorizacion" [ngValue]="obj">{{obj}}</option>
                                 </select>
-                            </div>
+                            </div>-->
                     <div class="col-md-4">
                         <br>
                         <button pButton type="button" label="Registrar Experiencia" icon="fa-save" (click)="showDialog()"></button>
@@ -362,7 +364,7 @@
             <fieldset>
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>Fotografia para Credencial </label>
+                        <label>Fotografía para Credencial </label>
                         <input type="file" id="filePicker" (change)="handleFileSelect($event)" [formControl]="artForm.controls['d_foto_individual']">
                     </div>
                     <div class="col-sm-6">
@@ -372,7 +374,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>Fotografia de Perfil  </label>
+                        <label>Fotografía de Perfil  </label>
                         <input type="file" id="filePicker" (change)="handleFileSelect2($event)" [formControl]="artForm.controls['d_foto_artista']">
                     </div>
                     <div class="col-sm-6">

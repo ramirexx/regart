@@ -129,13 +129,13 @@ export class IndividualComponent implements OnInit {
     this.artForm = this._fb.group({
       
       'numero_registro': [{ value: '', disabled: true }],
-      'd_fecha_registro': ['', Validators.required],
+      //'d_fecha_registro': [{disabled: true }, Validators.required],
       'd_fecha_renovacion': [''],
       'vigencia': [{ value: '', disabled: true }, Validators.required],
       'estado_credencial': [{ value: '', disabled: false }, Validators.required],
 
-     'residencia': [''],
-      //'comunidad': [''],
+     //'residencia': [''],
+      'comunidad': [''],
       'id_dpto': [ Validators.required],
       'd_provincia': [ Validators.required],
       'd_municipio': [ Validators.required],
@@ -171,7 +171,7 @@ export class IndividualComponent implements OnInit {
       'id_especialidad_ter': [{ value: '' }],
 
       'd_experiencia': [{ value: '' }, Validators.required],
-      'categorizacion': [{ value: '' }, Validators.required],
+      //'categorizacion': [{ value: '' }, Validators.required],
 
       'd_foto_individual': [''],
       'd_foto_artista': [''],
@@ -427,6 +427,7 @@ showError() {
   public saveDraft(): void {
     this.artista.numero_registro = "MDCyT" + this.year + "I";
     this.artista.id_estado = "BORRADOR";
+    this.artista.d_fecha_registro = new(Date);
     this.artista.ci_usuario = localStorage.getItem('ci');
     if (this.artista.id_individual == null) {
       this.formularioService.saveIndividual(this.artista).subscribe(response => {

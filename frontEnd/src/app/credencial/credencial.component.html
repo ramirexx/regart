@@ -1,4 +1,5 @@
-<div *ngIf="tipo == 'ind'">
+
+<div *ngIf="showInd">
 <div class="bgimgind">
   <table style="WIDTH: 312px; HEIGHT: 195px" border="0" cellspacing="0" cellpadding="0" align="center">
     <tbody>
@@ -35,7 +36,7 @@
                         height="80">-->
                     </font>
                     <br>
-                    <font color="#ffffff" size="1">{{artista.numero_registro}}</font>
+                    <font color="#ffffff" size="1"> <strong>C.I.: </strong> {{artista.d_cedula}} {{exp}}</font>
                     <br>
                     <font size="1" style="line-height: 1" color="ffffff"><strong>{{artista.estado_credencial}} </strong></font>
                   </p>
@@ -47,11 +48,13 @@
                       <font size="2" color="#ffffff">
                         <strong>Nombre: </strong>{{artista.d_nombres}} {{artista.d_apellidos}}
                         <br>
-                        <strong>C.I.: </strong>{{artista.d_cedula}}&nbsp;
-                        <br>
+                        <!--<strong>C.I.: </strong>{{artista.d_cedula}}&nbsp;
+                        <br>-->
                         <strong>Departamento: </strong>{{artista.Departamento}}
                         <br>
                         <strong>Sector: </strong>{{artista.d_desc_cat}}
+                        <br>
+                        <strong>Sub Sector:</strong>{{artista.d_desc_sub_cat}}
                         
                         <!--<strong>Expedido: </strong>{{artista.d_fecha_registro}} -->
                         <br><strong>Valida hasta: </strong>{{artista.d_fecha_validez}}
@@ -73,7 +76,7 @@
 </div>
 </div>
 
-<div *ngIf="tipo == 'col'">
+<div *ngIf="!showInd">
   <div class="bgimgcol">
     <table style="WIDTH: 312px; HEIGHT: 195px" border="0" cellspacing="0" cellpadding="0" align="center">
       <tbody>
@@ -124,7 +127,7 @@
                           <br>
                           <strong>Rep: </strong>{{colectivo.d_nom_rep_legal}} {{colectivo.d_ape_rep_legal}}&nbsp;
                           <br>
-                          <strong>C.I.: </strong>{{colectivo.d_cedula_rep_legal}}
+                          <strong>C.I.: </strong>{{colectivo.d_cedula_rep_legal}} 
                           <br>
                           <strong>Departamento: </strong>{{depto}}
                           <br>
@@ -156,13 +159,12 @@
  
   <tr>
     <td style="FONT-SIZE: 10px" valign="top" align="center">
-
-      <p align="center" style="margin-bottom: 0px"><span class="Estilo1">La Presente credencial personal e itransferible, acredita</span><br>
-        La Presente credencial personal e intransferible, acredita al portador como artista inscrito en el Sistema de Registro<br>
-        Plurinacional de Artistas Bolivianos.<br>
+      <p align="center" style="margin-bottom: 0px"><span class="Estilo1">El presente documento es personal e intransferible, acredita <br> al portador como artista inscrito en el Sistema de Registro <br> Plurinacional de Artistas Bolivianos. Se solicita a las <br>autoridades y ciudadanía en general brindar la <br>colaboración para el ejercicio de sus funciones.</span>
+        <!--La presente credencial es personal e intransferible, acredita al portador como artista inscrito en el Sistema de Registro  Plurinacional de Artistas Bolivianos. Se solicita a las autoridades y ciudadanía en general brindar la colaboración para el ejercicio de sus funciones.<br>
+        portador como artista inscrito en el Sistema de Registro  Plurinacional.<br>
         Se solicita a las autoridades y ciudadanía en general brindar<br>
-      la colaboración para el ejercicio de sus funciones. </p>
-      <div class="bgimg2"> <div style="float:right;"><qr-code [value]="qr" [size]="100"></qr-code></div></div>
+      la colaboración para el ejercicio de sus funciones.--> </p><br>
+      <div class="bgimg2"> <div style="float:right;"><qr-code [value]="qr" [size]="100"></qr-code></div></div> <br>
       
     </td>
   </tr>
