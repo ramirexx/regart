@@ -335,7 +335,8 @@ private function insertIndividual(){
       }
 
       $customer = json_decode(file_get_contents("php://input"),true);
-      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','comunidad','residencia','id_dpto', 'id_prov', 'dptoProv','id_mun',
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','comunidad',
+      'tipo_artista', 'e_id_pais', 'e_pais_localidad', 'e_cod_localidad','id_dpto', 'id_prov', 'dptoProv','id_mun',
       'd_nombre_artistico','d_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
       'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','actividad_sec', 'id_especialidad',
       'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','d_foto_artista','id_estado','estado_credencial');
@@ -374,7 +375,8 @@ private function insertIndividual(){
       $customer = json_decode(file_get_contents("php://input"),true);
       //$id = (int)$this->customer['id'];
       $id = $customer['id'];
-      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto','comunidad','residencia','id_prov',	'dptoProv', 'id_mun',
+      $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto','comunidad',
+      'tipo_artista', 'e_id_pais', 'e_pais_localidad', 'e_cod_localidad','id_prov','dptoProv', 'id_mun',
       'd_nombre_artistico','d_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
       'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','actividad_sec', 'id_especialidad',
       'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','d_foto_artista','id_estado');
@@ -424,7 +426,7 @@ private function formularioIndividual(){
       }
       $id = (int)$this->_request['id'];
       if($id > 0){  
-            $query="SELECT a.numero_registro,a.d_fecha_registro, a.d_fecha_validez, a.id_dpto, a.id_prov, a.id_mun, a.d_nombres, d_apellidos, a.d_cedula, a.d_fecha_nacimiento, a.d_domicilio, a.d_telefono, a.d_celular, a.d_email,  a.id_sector, a.id_actividad, a.d_agrupaciones,  a.d_experiencia, a.d_foto, a.d_foto_artista, a.id_sector, a.id_sub_sector, a.id_actividad, a.id_especialidad, a.d_agrupaciones,  a.d_experiencia, a.vigencia, b.Departamento, c.Provincia, d.Localidad, e.d_desc_cat, f.d_desc_sub_cat, g.d_desc_act, h.d_desc_esp
+            $query="SELECT a.numero_registro,a.d_fecha_registro, a.d_fecha_validez, a.id_dpto, a.id_prov, a.id_mun, a.d_nombres, d_apellidos, a.d_cedula, a.d_exp,a.d_fecha_nacimiento, a.d_domicilio, a.d_telefono, a.d_celular, a.d_email,  a.id_sector, a.id_actividad, a.d_agrupaciones,  a.d_experiencia, a.d_foto, a.d_foto_artista, a.id_sector, a.id_sub_sector, a.id_actividad, a.id_especialidad, a.d_agrupaciones,  a.d_experiencia, a.vigencia, b.Departamento, c.Provincia, d.Localidad, e.d_desc_cat, f.d_desc_sub_cat, g.d_desc_act, h.d_desc_esp
  FROM tb_individual a , departamentos b , provincias c, localidades d, tb_categoria e, tb_sub_cat f, tb_actividad g, tb_especialidad h  WHERE a.id_dpto = b.idDep AND a.id_prov = c.idProv AND a.id_mun = d.idLoc  AND a.id_sector = e.id_cat AND a.id_sub_sector = f.id_sub_cat AND a.id_actividad = g.id_actividad AND a.id_especialidad = h.id_especialidad AND a.id_individual =$id LIMIT 1";
  //        $query="SELECT d_fecharegistro as fechaReg,  FROM tb_individual c where c.id_individual=$id";
          $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
@@ -1073,22 +1075,6 @@ private function comunidades(){
       $this->response('',204);   // If no records "No Content" status
    }
 
-   private function Residencia(){
-      if($this->get_request_method() != "GET"){
-         $this->response('',406);
-         }
-         $query="SELECT * FROM departamentos  ORDER BY Departamento";
-      $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
-
-      if($r->num_rows > 0){
-         $result = array();
-         while($row = $r->fetch_assoc()){
-            $result[] = $row;
-         }
-         $this->response($this->json($result), 200); // send user details
-      }
-}
-
 private function departamentos(){
       if($this->get_request_method() != "GET"){
          $this->response('',406);
@@ -1154,6 +1140,47 @@ private function localidades(){
          }
       $this->response('',204);   // If no records "No Content" status
    }
+
+   private function paises(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $query="SELECT id as id, pais_nombre as pais FROM tb_pais  ORDER BY id";
+      $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+
+      if($r->num_rows > 0){
+         $result = array();
+         while($row = $r->fetch_assoc()){
+            $result[] = $row;
+         }
+         $this->response($this->json($result), 200); // send user details
+      }
+      $this->response('',204);   // If no records "No Content" status
+   }
+   //http://localhost/api/regart/paisLocalidad?loc=2
+   private function paisLocalidad(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $id = (int)$this->_request['loc'];
+         if($id >0){
+            //$query="SELECT Prov as codigo, IdProv as id, Provincia as descripcion FROM provincias WHERE DepProv =$id";
+            $query="SELECT * FROM tb_localidad WHERE pais_id =$id";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0){
+                  $result = array();
+                  while($row = $r->fetch_assoc()){
+                     $result[] = $row;
+                  }
+                  $this->response($this->json($result), 200); // send user details
+               }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                  $this->response($this->json($error), 202); // send user details
+               }
+         }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
 
 //SERVICIOS PARA HOJA ARTISTICA
 
@@ -1460,9 +1487,6 @@ private function representacion(){
          }
       $this->response('',204);   // If no records "No Content" status
    }
-
-   
-      
 
 
 

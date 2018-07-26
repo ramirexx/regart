@@ -414,3 +414,8 @@ color: #f3f3f3
 }
 
 
+.ui-chkbox-box.ui-state-active, .ui-radiobutton-box.ui-state-active {
+    
+    
+    color:#156090 !important;
+}

@@ -40,6 +40,7 @@ export class IndividualComponent implements OnInit {
   private base64FotoPerfil: String = "";
   year: any;
   provincia = { DepProv: null, Prov: null, IdProv: null, Provincia: null}
+  paisloc = { loc_codigo: null, loc_nombre: null, pais_id: null}
   ci : string;
   msgs: Message[] = [];
   //"DepProv": "2", "Prov": "03", "Provincia": "Pacajes", "IdProv": "203"
@@ -82,6 +83,8 @@ export class IndividualComponent implements OnInit {
   actividad: any[];
   actividadSec: any[];
   especialidad: any[];
+  paises:any[];
+  paisLocalidad: any[];
 
   hijos = ['0','1','2','3','4','5','6','7','8','9','10','11','12'];
 
@@ -133,8 +136,9 @@ export class IndividualComponent implements OnInit {
       'd_fecha_renovacion': [''],
       'vigencia': [{ value: '', disabled: true }, Validators.required],
       'estado_credencial': [{ value: '', disabled: false }, Validators.required],
-
-     //'residencia': [''],
+      'tipo_artista': [{ value: '', disabled: false }, Validators.required],
+      'e_id_pais':[''],
+      'e_pais_localidad': [''],
       'comunidad': [''],
       'id_dpto': [ Validators.required],
       'd_provincia': [ Validators.required],
@@ -148,9 +152,9 @@ export class IndividualComponent implements OnInit {
       'd_apellidos': [{ value: '' }, Validators.required],
       'd_nacimiento': [{ value: '' }, Validators.required],
       'd_fecha_nacimiento': ['', Validators.required],
-      'd_estado_civil': [{ value: '' }, Validators.required],
-      'd_nro_hijos': [{ value: '' }, Validators.required],
-      'd_profesion': [{ value: '' }, Validators.required],
+      //'d_estado_civil': [{ value: '' }, Validators.required],
+      //'d_nro_hijos': [{ value: '' }, Validators.required],
+      //'d_profesion': [{ value: '' }, Validators.required],
 
       'd_domicilio': [{ value: '' }, Validators.required],
       'd_telefono': [{ value: '' }],
@@ -199,6 +203,11 @@ export class IndividualComponent implements OnInit {
       today: 'Hoy',
       clear: 'Borrar'
     }
+
+    this.formularioService.getPaises()
+    .subscribe(data=>{this.paises=data},
+    err=>console.log(err),
+    ()=>console.log("done loanding", this.paises));
 
     this.formularioService.getProfesiones()
       .subscribe(data => { this.profesiones = data },
@@ -266,13 +275,30 @@ export class IndividualComponent implements OnInit {
                   this.provincias = res
                   for (let i = 0; i < this.provincias.length; i++) {
                     let p = this.provincias[i];
-                    if(p.IdProv = this.artForm.id_prov)
+                    if(p.IdProv = this.artista.id_prov)
                     console.log("uuuuuu",p.Provincia)
                   }
                 } else {
                   this.provincias = [];
                 }
               });
+
+
+              this.formularioService.getPaisLocalidad(this.artista.e_id_pais)
+              .subscribe(data => {
+                let res: any = data
+                if (res.length > 0) {
+                  this.paisLocalidad = res
+                  for (let i = 0; i < this.paisLocalidad.length; i++) {
+                    let p = this.paisLocalidad[i];
+                    if(p.e_id_pais = this.artista.e_id_pais)
+                    console.log("LOCALIDAD",p.e_cod_localidad)
+                  }
+                } else {
+                  this.paisLocalidad = [];
+                }
+              });
+              
               
             
               //this.provincia.Provincia = this.provincias[this.provincias.map(function (e) { return e.IdProv; }).indexOf(this.provincia.Provincia.IdProv)];
@@ -280,6 +306,11 @@ export class IndividualComponent implements OnInit {
                                 Prov: this.artista.prov,
                                 IdProv: this.artista.id_prov,
                                 Provincia: null}
+
+              this.paisloc = {loc_nombre:this.artista.e_cod_localidad,
+                              loc_codigo:this.artista.e_pais_localidad,
+                              pais_id:this.artista.e_id_pais
+              }
               console.log("00000",this.provincia)
               this.onselectMunicipio(this.provincia);
               
@@ -300,6 +331,25 @@ export class IndividualComponent implements OnInit {
         });
       }
     })
+  }
+
+  onselectPais(objSelected){
+    console.log(objSelected)
+    if (objSelected != undefined) {
+      this.formularioService.getPaisLocalidad(objSelected)
+        .subscribe(data => {
+          let res: any = data
+          if (res.length > 0) {
+            this.paisLocalidad = res
+          } else {
+            this.paisLocalidad = [];
+            alert("LOCALIDAD:"+res.msg)
+            console.log("pais localidad",data)
+          }
+        },
+          err => console.log(err)
+        );
+    }
   }
 
 
@@ -429,6 +479,8 @@ showError() {
     this.artista.id_estado = "BORRADOR";
     this.artista.d_fecha_registro = new(Date);
     this.artista.ci_usuario = localStorage.getItem('ci');
+    this.artista.e_cod_localidad = this.paisloc.loc_codigo;
+    this.artista.e_pais_localidad = this.paisloc.loc_nombre;
     if (this.artista.id_individual == null) {
       this.formularioService.saveIndividual(this.artista).subscribe(response => {
         console.log(response);

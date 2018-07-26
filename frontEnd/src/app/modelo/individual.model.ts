@@ -9,8 +9,13 @@ export class Individual {
     d_fecha_renovacion: Date;
     vigencia: string = "Vigencia de 2 años";
     estado_credencial: string;
-    residencia:string;
-    //comunidad: string;
+    //residencia:string;
+    comunidad: string;
+    tipo_artista: string;
+    e_id_pais: number;
+    e_pais_localidad:string;
+    e_cod_localidad:string;
+
     id_dpto: number;
     dptoProv: number;
     id_prov: number;
@@ -25,9 +30,9 @@ export class Individual {
     d_apellidos: string;
     d_nacimiento: number;
     d_fecha_nacimiento: Date;
-    d_estado_civil: string;
-    d_nro_hijos: string;
-    d_profesion: string;
+    //d_estado_civil: string;
+    //d_nro_hijos: string;
+    //d_profesion: string;
 
     d_domicilio: string;
     d_telefono: string;

@@ -1,6 +1,6 @@
 <h4 class="page-title txt-color-blueDark">
         <i class="fa-fw fa fa-user"></i> 
-            REGISTRO INDIVIDUAL  111111111111111111 
+            REGISTRO INDIVIDUAL 
         <span>>  
                   Ficha de Registro
         </span>
@@ -49,9 +49,6 @@
                         <input type="text" class="form-control" [formControl]="artForm.controls['vigencia']" [(ngModel)]="artista.vigencia"
                                 maxlength="36" />
                     </div>-->
-
-                </div>
-                <div class="row">
                     <!--<div class="col-sm-3">
                         <label>Tipo de Registro </label>
                         <select class="form-control" [formControl]="artForm.controls['estado_credencial']" [(ngModel)]="artista.estado_credencial">
@@ -67,11 +64,28 @@
                             
                         </div>
                     </div>-->
-                                    </div>
+
+                </div>
+                
                 <br>
             </fieldset>
-            <p-panel header="Lugar de Registro">
+            <p-panel header="Nacionalidad Artistica">
+            <div class="row">
+                    <div class="col-md-12">
+                            <!--NACIONAL<input name="options" [formControl]="artForm.controls['tipo_artista']" type="radio" [value]="nacional"  [(ngModel)]="artista.tipo_artista" ><br/>{{artista.tipo_artista}}
+
+                            EXTRANJERO<input name="options" [formControl]="artForm.controls['tipo_artista']" type="radio" [value]="extranjero" [(ngModel)]="artista.tipo_artista" ><br/>{{artista.tipo_artista}}-->
+                            NACIONAL<p-radioButton name="groupname" value="nacional" [(ngModel)]="artista.tipo_artista" formControlName="tipo_artista"></p-radioButton>{{artista.tipo_artista}}
+                            EXTRANJERO<p-radioButton name="groupname" value="extranjero" [(ngModel)]="artista.tipo_artista" formControlName="tipo_artista"></p-radioButton>
+                    </div>
+                    
+                </div>
+            </p-panel>
             <fieldset>
+            <br>
+            </fieldset>
+            <p-panel header="Lugar de Registro">
+            <fieldset *ngIf="artista.tipo_artista == 'nacional'">
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
@@ -121,7 +135,40 @@
                 </div>-->
                 </div>
             </fieldset>
+
+            <fieldset *ngIf="artista.tipo_artista == 'extranjero'">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label>Pais </label>
+                            <!--<select class="form-control" [formControl]="artForm.controls['d_provincia']" [(ngModel)]="artista.id_prov"
+                            (ngModelChange)="onselectMunicipio($event, obj)">
+                                <option *ngFor="let obj of provincias" [ngValue]="obj.DepProv">{{obj.Provincia}}</option>
+                            </select>-->
+                            <select class="form-control" [formControl]="artForm.controls['e_id_pais']" [(ngModel)]="artista.e_id_pais"
+                            (ngModelChange)="onselectPais($event)">
+                                <option *ngFor="let obj of paises" [ngValue]="obj.id">{{obj.pais}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Localidad </label>
+                                <select class="form-control" [formControl]="artForm.controls['e_pais_localidad']" [(ngModel)]="paisloc">
+                                <option *ngFor="let obj of paisLocalidad" [ngValue]="obj">{{obj.loc_nombre}}</option>
+                            </select>
+                            </div>
+                        </div>
+    
+                        <!--<div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Comunidad / Nación</label>
+                            <input type="text" class="form-control" [formControl]="artForm.controls['d_comunidad']" [(ngModel)]="artista.d_comunidad"
+                                maxlength="36" />
+                        </div>
+                    </div>-->
+                    </div>
+                </fieldset>
         </p-panel>
+        <br>
         <p-panel header="Datos Personales">
             <fieldset>
                 <div class="row">

@@ -32,10 +32,10 @@ import { SortableModule } from 'ngx-bootstrap/sortable';
 import {InputTextModule,DataTableModule,ButtonModule,DialogModule,MultiSelectModule,
   PanelModule, GrowlModule, CalendarModule, InputMaskModule, CheckboxModule, AutoCompleteModule,
   ConfirmDialogModule, OverlayPanelModule, TooltipModule, MenuModule, MenuItemContent,ToolbarModule,
-  TabViewModule
+  TabViewModule, ChartModule, RadioButtonModule
 } from 'primeng/primeng';
 
-
+//import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {MenuItem} from 'primeng/api';
 
 //import { QRCodeModule } from 'angular2-qrcode';
@@ -61,6 +61,7 @@ import { EnviarFormularioComponent } from './enviar-formulario/enviar-formulario
 import { HojaDeVidaComponent } from './hoja-de-vida/hoja-de-vida.component';
 import { ListadoColectivoComponent } from './listado-colectivo/listado-colectivo.component';
 import { PerfilArtistaComponent } from './perfil-artista/perfil-artista.component';
+import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 
 
 @NgModule({
@@ -81,7 +82,9 @@ import { PerfilArtistaComponent } from './perfil-artista/perfil-artista.componen
     EnviarFormularioComponent,
     HojaDeVidaComponent,
     ListadoColectivoComponent,
-    PerfilArtistaComponent
+    PerfilArtistaComponent,
+    EstadisticasComponent,
+    
   ],
   imports: [
     
@@ -94,7 +97,7 @@ import { PerfilArtistaComponent } from './perfil-artista/perfil-artista.componen
     HttpClientModule,
     InputTextModule, DataTableModule, ButtonModule, DialogModule, PanelModule, 
     CalendarModule, InputMaskModule, ConfirmDialogModule, OverlayPanelModule,
-    MenuModule, ToolbarModule, TabViewModule, GrowlModule,
+    MenuModule, ToolbarModule, TabViewModule, GrowlModule, ChartModule, RadioButtonModule,
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
@@ -111,5 +114,6 @@ import { PerfilArtistaComponent } from './perfil-artista/perfil-artista.componen
     
   ],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }

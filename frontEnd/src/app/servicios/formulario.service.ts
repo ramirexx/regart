@@ -52,6 +52,16 @@ export class FormularioService {
     return this.http.get(environment.urlApi + 'localidades?pro='+cod+'&dep='+dep).map(this.extractData)
       .catch(this.handleError);
   }
+
+  getPaises(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'paises').map(this.extractData)
+      .catch(this.handleError);
+  }
+  //localhost/api/regart/paisLocalidad?loc=2
+  getPaisLocalidad(cod:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'paisLocalidad?loc='+cod).map(this.extractData)
+      .catch(this.handleError);
+  }
   
 
   getCategorias(): Observable<any[]> {

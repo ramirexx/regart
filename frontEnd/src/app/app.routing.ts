@@ -16,6 +16,7 @@ import { UsuariosComponent } from './administracion/usuarios/usuarios.component'
 import { CategoriasComponent } from './administracion/categorias/categorias.component';
 import { PublicoComponent } from './publico/publico.component';
 import { PerfilArtistaComponent } from './perfil-artista/perfil-artista.component';
+import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 import { Auth } from './auth/index';
 
 export const appRoutes: Routes = [
@@ -33,6 +34,7 @@ export const appRoutes: Routes = [
         { path: 'usuarios', component: UsuariosComponent },
         { path: 'categorias', component: CategoriasComponent },
         { path: 'listado-colectivos', component: ListadoColectivoComponent },
+        { path: 'estadisticas', component: EstadisticasComponent },
     ]},
     { path: 'crear-cuenta', component: PublicoComponent },
     { path: 'tipo-registro', component: RegistroComponent },
