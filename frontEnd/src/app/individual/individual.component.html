@@ -172,37 +172,6 @@
         <p-panel header="Datos Personales">
             <fieldset>
                 <div class="row">
-                        <div class="col-sm-3">
-                                <label>Nombre Artístico</label>
-                                <input type="text" class="form-control" [formControl]="artForm.controls['nombre_artistico']" [(ngModel)]="artista.d_nombre_artistico"
-                                    maxlength="36" />
-                            </div>
-                    <div class="col-sm-3">
-                        <label>Cédula de Identidad</label>
-                        <input type="text" class="form-control" [formControl]="artForm.controls['d_cedula']" [(ngModel)]="artista.d_cedula"
-                            maxlength="36" />
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Lugar de Expedición</label>
-                            <select class="form-control" [formControl]="artForm.controls['d_exp']" [(ngModel)]="artista.d_exp">
-                                <option *ngFor="let obj of departamentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
-                            </select>
-
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Sexo</label>
-                            <select class="form-control" [formControl]="artForm.controls['d_sexo']" [(ngModel)]="artista.d_sexo">
-                                <option *ngFor="let obj of generos" [ngValue]="obj">{{obj}}</option>
-                            </select>
-
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Nombres</label>
@@ -232,6 +201,40 @@
                             
                     </div>
                 </div>
+                
+                
+                <div class="row">
+                        
+                        <div class="col-sm-3">
+                                <label>Cédula de Identidad</label>
+                                <input type="text" class="form-control" [formControl]="artForm.controls['d_cedula']" [(ngModel)]="artista.d_cedula"
+                            maxlength="36" />
+                        </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Lugar de Expedición</label>
+                            <select class="form-control" [formControl]="artForm.controls['d_exp']" [(ngModel)]="artista.d_exp">
+                                <option *ngFor="let obj of departamentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Sexo</label>
+                            <select class="form-control" [formControl]="artForm.controls['d_sexo']" [(ngModel)]="artista.d_sexo">
+                                <option *ngFor="let obj of generos" [ngValue]="obj">{{obj}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Nombre Artístico</label>
+                        <input type="text" class="form-control" [formControl]="artForm.controls['nombre_artistico']" [(ngModel)]="artista.d_nombre_artistico"
+                            maxlength="36" />
+                </div>
+                </div>
+                
                 <div class="row">
                     <!--<div class="col-sm-3">
                         <div class="form-group">
@@ -314,11 +317,7 @@
         <p-panel header="Datos Artísticos">
             <fieldset>
                 <div class="row">
-                    <div class="col-sm-4">
-                        <label>Sindicato / Asociación </label>
-                        <input type="text" class="form-control" [formControl]="artForm.controls['d_institucion']" [(ngModel)]="artista.d_institucion"
-                            maxlength="36" />
-                    </div>
+                    
                     <!--<div class="col-sm-4">
                         <label>Agrupación </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_agrupaciones']" [(ngModel)]="artista.d_agrupaciones"
@@ -332,8 +331,8 @@
                         </select>
                     </div>
                     
-                </div>
-                <div class="row">
+                <!--</div>
+                <div class="row">-->
                     <div class="col-sm-4">
                         <label>Sub Sector </label>
                         <select class="form-control" [formControl]="artForm.controls['id_sub_sector']" [(ngModel)]="artista.id_sub_sector"
@@ -343,6 +342,12 @@
                         </select>
                     </div>
                     <div class="col-sm-4">
+                        <label>Sindicato / Asociación </label>
+                        <input type="text" class="form-control" [formControl]="artForm.controls['d_institucion']" [(ngModel)]="artista.d_institucion"
+                            maxlength="200" />
+                    </div>
+                    
+                    <div class="col-sm-4">
                         <label>Actividad Principal</label>
                      
                         <select class="form-control" [formControl]="artForm.controls['id_actividad']" [(ngModel)]="artista.id_actividad"
@@ -351,6 +356,8 @@
                             <option *ngFor="let obj of actividad" [ngValue]="obj.id_actividad">{{obj.d_desc_act}}</option>
                         </select>
                     </div>
+                    
+                    
                     <div class="col-sm-4">
                             <label>Actividad Secundaria</label>
                             <select class="form-control" [formControl]="artForm.controls['id_actividad_sec']" [(ngModel)]="artista.actividad_sec"
@@ -360,8 +367,8 @@
                             </select>
                         </div>
                     
-                </div>
-                <div class="row">
+                <!--</div>
+                <div class="row">-->
                         <div class="col-sm-4">
                                 <label>Especialidad Principal</label>
                                 <select class="form-control" [formControl]="artForm.controls['id_especialidad']" [(ngModel)]="artista.id_especialidad">
@@ -384,6 +391,7 @@
                                             <option *ngFor="let obj of especialidad" [ngValue]="obj.id_especialidad">{{obj.d_desc_esp}}</option>
                                             </select>
                                     </div>
+                                    
                 </div>
                 
 

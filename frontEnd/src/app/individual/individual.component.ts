@@ -219,10 +219,10 @@ export class IndividualComponent implements OnInit {
     err=>console.log(err),
     ()=>console.log("done loanding", this.departamentos));
     
-        /*this.formularioService.getComunidades()
+    this.formularioService.getComunidades()
       .subscribe(data => { this.comunidades = data },
         err => console.log(err),
-        () => console.log("done loanding", this.comunidades));*/
+        () => console.log("done loanding", this.comunidades));
 
     this.formularioService.getCategorias()
       .subscribe(data => { this.categorias = data },
