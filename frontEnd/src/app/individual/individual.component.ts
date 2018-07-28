@@ -41,6 +41,7 @@ export class IndividualComponent implements OnInit {
   year: any;
   provincia = { DepProv: null, Prov: null, IdProv: null, Provincia: null}
   paisloc = { loc_codigo: null, loc_nombre: null, pais_id: null}
+  actividad2 = {id_actividad: null, id_sub_cat: null,d_desc_act:null }
   ci : string;
   msgs: Message[] = [];
   //"DepProv": "2", "Prov": "03", "Provincia": "Pacajes", "IdProv": "203"
@@ -82,9 +83,15 @@ export class IndividualComponent implements OnInit {
   subSector: any[];
   actividad: any[];
   actividadSec: any[];
+  actividad3: any[];
+  actividad4: any[];
   especialidad: any[];
+  especialidad3: any[];
   paises:any[];
   paisLocalidad: any[];
+
+  actividad3des:any
+  actividad4des:any
 
   hijos = ['0','1','2','3','4','5','6','7','8','9','10','11','12'];
 
@@ -115,6 +122,8 @@ export class IndividualComponent implements OnInit {
     "NUEVO REGISTRO",
     "RENOVACION"
   ]
+
+  
 
   
 
@@ -463,6 +472,31 @@ export class IndividualComponent implements OnInit {
     }
   }
 
+  onselectActividad2(objSelected) {
+    console.log(objSelected)
+    if (objSelected != undefined) {
+      this.formularioService.getEspecialidad(objSelected.id_actividad)
+        .subscribe(data => {
+          console.log("onselectActividad",objSelected)
+          let res: any = data
+          
+          if (res.length > 0) {
+            this.especialidad3 = res;
+            console.log("this.especialidad2",this.especialidad3)
+            //this.artista.id_especialidad = this.especialidad[0].id_especialidad;
+            this.artista.id_especialidad_sec = this.especialidad3[0].id_especialidad
+            //this.artista.id_especialidad_ter = null;
+          } else {
+            this.especialidad3 = [];
+            alert("ESPECIALIDAD 3 CAMPO VACIO")
+            console.log("ESPECIALIDAD3",data)
+          }
+        },
+          err => console.log(err)
+        );
+    }
+  }
+
 showSuccess() {
     this.msgs = [];
     this.msgs.push({severity:'success', summary:'Mensaje de Exito', detail:'Datos Registrados'});
@@ -574,11 +608,11 @@ showError() {
   display: boolean = false;
 
     showDialog() {
-      if(this.artista.id_individual != null){
+      //if(this.artista.id_individual != null){
         this.display = true;
-      }else{
+      /*}else{
         alert("Por favor guarde primero el fomulario")
-      }
+      }*/
         
         //this.formularioService.setCi(this.ci)
     }

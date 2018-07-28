@@ -40,7 +40,11 @@ export class HojaDeVidaComponent implements OnInit {
   produccionForm: any;
   repForm: any;
 
-  recursos=["Propio", "Estatal", "Apoyo Internacional, Mixta"]
+  tipo_artista: string;
+  tipo_formacion: string;
+
+  recursos=["Propio", "Estatal", "Apoyo Internacional","Mixta"]
+  bienes=["1","2"];
 
   es: any;
 
@@ -79,7 +83,8 @@ export class HojaDeVidaComponent implements OnInit {
       'gestion': [''],
       'fecha': [''],
       'lugar': [''],
-      'actividad': []
+      'actividad': [],
+      'bien':[]
     })
 
     this.repForm = this._fb.group({

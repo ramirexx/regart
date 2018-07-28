@@ -135,6 +135,7 @@ export class Curso {
 }
 
 export class Formacion {
+    resumen: string;
     id_artista: number;
     universidad: string;
     grado: string;
@@ -155,6 +156,7 @@ export class Produccion {
     fecha: Date;
     lugar: string;
     act_pub_exp: string;
+    bien: string;
 }
 
 export class Representacion {
