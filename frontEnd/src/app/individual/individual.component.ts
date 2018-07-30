@@ -28,8 +28,8 @@ import { MessageService} from 'primeng/components/common/messageservice';
 export class IndividualComponent implements OnInit {
 
  // master = null;
- tipoForm: string = "IND";
-
+  tipoForm: string = "IND";
+  id: any;
   artForm: any;
   artista: Individual = new Individual();
   es: any;
@@ -123,11 +123,8 @@ export class IndividualComponent implements OnInit {
     "RENOVACION"
   ]
 
-  
-
-  
-
   rol:string;
+  showBtnAprobar: any;
 
   @ViewChild(HojaDeVidaComponent) hdvComponent: HojaDeVidaComponent;
 
@@ -259,6 +256,10 @@ export class IndividualComponent implements OnInit {
     this.route.params.subscribe(params => {
       //console.log("REVISION :",params);
       let id = params['id'];
+      this.id = params['id'];
+      this.showBtnAprobar = params['estado'];
+      console.log("**************************"+typeof(this.showBtnAprobar))
+      
       if (id == undefined) {
         console.log("NEW FORM");
       }
@@ -559,8 +560,15 @@ showError() {
   }
 
   cancel() {
-    let link = ['home/listado-artistas/'];
-    this.router.navigate(link);
+    console.log("showBtnAprobar"+typeof(this.showBtnAprobar));
+    if(this.showBtnAprobar == 'true'){
+      let link = ['home/listado-solicitudes/'];
+      this.router.navigate(link);
+    }else{
+      let link = ['home/listado-artistas/'];
+      this.router.navigate(link);
+    }
+    
   }
 
   handleFileSelect(evt) {
@@ -619,6 +627,33 @@ showError() {
 
     closeDialog(){
       this.display = false
+    }
+
+    aprobar(){
+      let data = {
+        id:this.id,
+      }
+      this.formularioService.aprobarIndividual(data).subscribe(response => {
+        console.log(response);
+        if (response.status == "Success") {
+          //alert("Se envio el Formulario:" + this.artista.numero_registro + " para su REVISION");
+          let link = ['home/listado-solicitudes'];
+          this.router.navigate(link);
+          /*alert("Para Validar su registro tiene 10 días calendario para apersonarse por oficinas de la Unidad de Coordinación de Consejos Departamentales de Cultura – UCCDC, dependiente de la Dirección General de Planificación – DGP del Ministerio de Culturas y Turismo, para presentar su documentación en fotocopias y originales, para respaldo de la actualización de su registro. "+
+          "Dirección – UCCDC: Calle Potosí, casi Esq. Loayza, Edificio Aguirre 5to. Piso."+
+          "Teléfonos: 2200910-2200946 – Interno: 1502 (UCCDC");*/
+      console.log(response.data)
+      alert("SE APROBÓ EL FORMULARIO")
+          //this.showMsg = true;
+        } else {
+          alert("No se pudo realizar la acción!")
+        }
+      }, err => {
+        alert("ERROR DE APROBACION " +err)
+        console.log("error", err);
+        //let link = ['home/listado-artistas/'];
+        //this.router.navigate(link);
+      });
     }
 
 

@@ -7,6 +7,7 @@ import { RegistroComponent } from './registro/index';
 import { ColectivoComponent } from './colectivo/colectivo.component';
 import { IndividualComponent } from './individual/individual.component';
 import { ListadoArtistasComponent } from './listado-artistas/listado-artistas.component';
+import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
 import { ListadoColectivoComponent } from './listado-colectivo/listado-colectivo.component';
 import { VerIndividualComponent } from './ver-individual/ver-individual.component';
 import { EnviarFormularioComponent } from './enviar-formulario/enviar-formulario.component';
@@ -31,6 +32,8 @@ export const appRoutes: Routes = [
         { path: 'registro-individual/:id', component: IndividualComponent },
         { path: 'enviar-formulario/:id/:tipo', component: EnviarFormularioComponent },
         { path: 'listado-artistas', component: ListadoArtistasComponent },
+        { path: 'registro-individual/:id/aprobar/:estado', component: IndividualComponent },
+        { path: 'listado-solicitudes', component: ListadoSolicitudesComponent },
         { path: 'usuarios', component: UsuariosComponent },
         { path: 'categorias', component: CategoriasComponent },
         { path: 'listado-colectivos', component: ListadoColectivoComponent },

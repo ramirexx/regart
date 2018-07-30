@@ -111,6 +111,12 @@
 								<span class="menu-item-parent">Listado Colectivo</span>
 							</a>
 						</li>
+						<li>
+							<a routerLink="listado-solicitudes" routerLinkActive="active">
+								<i class="fa fa-lg fa-fw fa-check"></i>
+								<span class="menu-item-parent">Listado solicitudes</span>
+							</a>
+						</li>
 						<li *ngIf="rol == 1 || rol == 2">
 							<a routerLink="usuarios" routerLinkActive="active">
 								<i class="fa fa-lg fa-fw fa-key"></i>
@@ -125,7 +131,7 @@
 						</li>
 						<li>
 							<a routerLink="estadisticas" routerLinkActive="active">
-								<i class="fa fa-lg fa-fw fa-pie"></i>
+								<i class="fa fa-lg fa-fw fa-pie-chart"></i>
 								<span class="menu-item-parent">Estadisticas</span>
 							</a>
 						</li>

@@ -444,7 +444,29 @@ private function listaIndividual(){
       if($this->get_request_method() != "GET"){
          $this->response('',406);
       }
-      $query="SELECT * FROM tb_individual order by id_individual";
+      $query="SELECT * FROM tb_individual WHERE id_estado IN ('ENVIADO','BORRADOR') order by id_individual";
+      $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+      
+
+      if($r->num_rows > 0){
+         $result = array();
+         while($row = $r->fetch_assoc()){
+            $result[] = $row;
+         }
+         $this->response($this->json($result), 200); // send user details
+      }
+      else{
+            $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+            $this->response($this->json($error), 202); // send user details  
+      }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
+   private function listaIndividualEnviado(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+      }
+      $query="SELECT * FROM tb_individual WHERE id_estado IN ('ENVIADO','APROBADO') order by id_individual";
       $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
       
 
@@ -479,13 +501,43 @@ private function listaIndividual(){
          $correlativo2 = (string)$correlativo;
 
          //fecha de caducidad 2 años en adelante
-         $date=date("Y-m-d H:i:s", strtotime ("5years"));
+         //$date=date("Y-m-d H:i:s", strtotime ("5years"));
 
-         $query="UPDATE tb_individual SET id_estado='ENVIADO', numero_registro= '$correlativo2', d_fecha_validez = '$date' WHERE id_individual=$id";
+         //$query="UPDATE tb_individual SET id_estado='ENVIADO', numero_registro= '$correlativo2', d_fecha_validez = '$date' WHERE id_individual=$id";
+         $query="UPDATE tb_individual SET id_estado='ENVIADO', numero_registro= '$correlativo2' WHERE id_individual=$id";
 
          if(!empty($obj)){
             $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
             $success = array('status' => "Success", "msg" => "Estado Actualizado Successfully.", "data" => $correlativo2);
+            $this->response($this->json($success),200);
+         }else
+            $this->response($this->json($obj), 400);
+            //$this->response('error',204);   //"No Content" status
+
+   }
+
+   private function aprobarFormIndividual(){
+      if($this->get_request_method() != "POST"){
+            $this->response('',406);
+      }
+         $obj = json_decode(file_get_contents("php://input"),true);
+         //$id = (int)$this->customer['id'];
+         $keys = array($obj);
+         foreach ($keys as $input)
+         {
+               $id     = $input['id'];
+         }
+         $correlativo = $cod."-".$id;
+         $correlativo2 = (string)$correlativo;
+
+         //fecha de caducidad 2 años en adelante
+         $date=date("Y-m-d H:i:s", strtotime ("5years"));
+
+         $query="UPDATE tb_individual SET id_estado='APROBADO', d_fecha_validez = '$date' WHERE id_individual=$id";
+
+         if(!empty($obj)){
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            $success = array('status' => "Success", "msg" => "Aprobado Successfully.", "data" => $correlativo2);
             $this->response($this->json($success),200);
          }else
             $this->response($this->json($obj), 400);

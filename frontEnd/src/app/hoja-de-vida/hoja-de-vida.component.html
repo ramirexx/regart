@@ -502,7 +502,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <label>Bien / Obra artistica</label>
-                                <select class="form-control" [formControl]="repForm.controls['bien']" [(ngModel)]="rep.bien">
+                                <select class="form-control" [formControl]="produccionForm.controls['bien']" [(ngModel)]="produccion.bien">
                                     <option value="">--Seleccione un valor--</option>
                                     <option *ngFor="let obj of bienes" [ngValue]="obj">{{obj}}</option>
                                 </select>

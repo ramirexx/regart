@@ -479,8 +479,9 @@
 <div class="col-md-12">
     <p-toolbar>
         <div class="ui-toolbar-group-right">
-            <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveDraft()"></button>
+            <button *ngIf="!showBtnAprobar" pButton type="button" label="Guardar" icon="fa-save" (click)="saveDraft()"></button>
             <button pButton type="button" label="Volver" icon="fa-times" (click)="cancel()"></button>
+            <button *ngIf="showBtnAprobar" pButton type="button" label="Aprobar solicitud" icon="fa-check" (click)="aprobar()" class="ui-button-warning"></button>
         </div>
 
         <!--<button type="button" pButton (click)="showSuccess()" label="Success" class="ui-button-success"></button>

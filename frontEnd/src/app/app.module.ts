@@ -62,6 +62,7 @@ import { HojaDeVidaComponent } from './hoja-de-vida/hoja-de-vida.component';
 import { ListadoColectivoComponent } from './listado-colectivo/listado-colectivo.component';
 import { PerfilArtistaComponent } from './perfil-artista/perfil-artista.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
+import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import { EstadisticasComponent } from './estadisticas/estadisticas.component';
     ListadoColectivoComponent,
     PerfilArtistaComponent,
     EstadisticasComponent,
+    ListadoSolicitudesComponent,
     
   ],
   imports: [

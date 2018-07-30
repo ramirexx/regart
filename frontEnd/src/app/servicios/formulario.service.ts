@@ -229,10 +229,22 @@ export class FormularioService {
       .catch(this.handleError);
   }
 
+  aprobarIndividual (obj: any): Observable<any> {
+    return this.http.post(environment.urlApi + 'aprobarFormIndividual', obj).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
   getArtistasIndividual(): Observable<any[]> {
     return this.http.get(environment.urlApi + 'listaIndividual').map(this.extractData)
       .catch(this.handleError);
   }
+
+  getArtistasIndividualEnviado(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'listaIndividualEnviado').map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  
 
   getIndividual(id: any): Observable<Individual> {
     return this.http.get(environment.urlApi + 'individual?id='+id).map(this.extractData)
