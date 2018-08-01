@@ -68,14 +68,14 @@
 
             <br>
         </fieldset>
-        <p-panel header="Nacionalidad Artistica">
+        <p-panel header="Nacionalidad Artística">
             <div class="row">
                 <div class="col-md-12">
                     <!--NACIONAL<input name="options" [formControl]="artForm.controls['tipo_artista']" type="radio" [value]="nacional"  [(ngModel)]="artista.tipo_artista" ><br/>{{artista.tipo_artista}}
 
                             EXTRANJERO<input name="options" [formControl]="artForm.controls['tipo_artista']" type="radio" [value]="extranjero" [(ngModel)]="artista.tipo_artista" ><br/>{{artista.tipo_artista}}-->
                     NACIONAL
-                    <p-radioButton name="groupname" value="nacional" [(ngModel)]="artista.tipo_artista" formControlName="tipo_artista"></p-radioButton>{{artista.tipo_artista}} EXTRANJERO
+                    <p-radioButton name="groupname" value="nacional" [(ngModel)]="artista.tipo_artista" formControlName="tipo_artista"></p-radioButton>EXTRANJERO
                     <p-radioButton name="groupname" value="extranjero" [(ngModel)]="artista.tipo_artista" formControlName="tipo_artista"></p-radioButton>
                 </div>
 
@@ -137,7 +137,7 @@
             <fieldset *ngIf="artista.tipo_artista == 'extranjero'">
                 <div class="row">
                     <div class="col-sm-3">
-                        <label>Pais </label>
+                        <label>País </label>
                         <!--<select class="form-control" [formControl]="artForm.controls['d_provincia']" [(ngModel)]="artista.id_prov"
                             (ngModelChange)="onselectMunicipio($event, obj)">
                                 <option *ngFor="let obj of provincias" [ngValue]="obj.DepProv">{{obj.Provincia}}</option>

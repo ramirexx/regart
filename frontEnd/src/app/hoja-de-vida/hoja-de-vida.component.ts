@@ -44,7 +44,7 @@ export class HojaDeVidaComponent implements OnInit {
   tipo_formacion: string;
 
   recursos=["Propio", "Estatal", "Apoyo Internacional","Mixta"]
-  bienes=["1","2"];
+  bienes=["Dramático Musicales","Descripción Escrita de Coreografía","Descripción Escrita de Pantomímicas","Composiciones Musicales con Letra","Composiciones Musicales Instrumentales"];
 
   es: any;
 

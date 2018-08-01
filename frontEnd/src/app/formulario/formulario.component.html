@@ -20,25 +20,36 @@
                 <div class="info-name">Municipio:
                   <span class="value">{{artista.Localidad}}</span>
                 </div>
-                <div class="info-name">Residencia:
-                  <span class="value">{{artista.Residencia}}</span>
+                <div class="info-name">Auto Identificación Cultural:
+                  <span class="value">{{artista.comunidad}}</span>
                 </div>
+                <!--<div class="info-name">Residencia:
+                  <span class="value">{{artista.Residencia}}</span>
+                </div>-->
               </div>
             </td>
             <td>
               <div class="info-name">Artista: 
                 <span class="value"> {{artista.d_nombres}} {{artista.d_apellidos}} </span>
               </div>
-              <div class="info-name">C.I.: <span class="value">{{artista.d_cedula}}</span></div>
-              <div class="info-name">Lugar de Nacimiento: <span class="value">{{Departamento}} {{Provincia}} {{artista.d_fecha_nacimiento}}</span></div>
-              <div class="info-name">Domicilio: <span class="value">{{artista.d_domicilio}} {{artista.d_fecha_nacimiento}}</span></div>
-              <div class="info-name">Teléfono/Celular: <span class="value">{{artista.d_telefono}} {{artista.d_celular}}</span></div>
+              <!--<div class="info-name">C.I.: <span class="value">{{artista.d_cedula}}</span></div>-->
+              <div class="info-name">Lugar de Nacimiento: <span class="value">{{artista.d_nacimiento}}</span></div>
+              <div class="info-name">Fecha de Nacimiento: <span class="value">{{artista.d_fecha_nacimiento}}</span></div>
+              <div class="info-name">Sexo: <span class="value">{{d_sexo}}</span></div>
+              <div class="info-name">Nombre Artístico: <span class="value">{{d_nombre_artistico}}</span></div>
+
+              <div class="info-name">Domicilio Actual: <span class="value">{{artista.d_domicilio}}</span></div>
+              <div class="info-name">Número Teléfono/Celular: <span class="value">{{artista.d_telefono}}/{{artista.d_celular}}</span></div>
               <div class="info-name">Correo Electrónico:  <span class="value">{{artista.d_email}}</span></div>
+              <div class="info-name">Página Web:  <span class="value">{{artista.d_pagina_web}}</span></div>
+              <div class="info-name">YouTube Blog:  <span class="value">{{artista.d_youtube}}</span></div>
+              <div class="info-name">Facebook:  <span class="value">{{artista.d_otros}}</span></div>
             </td>
             <td>
                 <div class="col-sm-6">
                     <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px" class="img-responsive img-thumbnail"/>
-                    <div class="info-name">{{artista.numero_registro}}</div>
+                    <!--<div class="info-name">{{artista.numero_registro}}</div>-->
+                    <div class="info-name">C.I.: <span class="value>">{{artista.d_cedula}} {{exp}} </span></div>                  
                 </div>
             </td>
           </tr>
@@ -87,7 +98,7 @@
 </div>
 <br>
 <div class="col-md-12">
-  El presente documento constituye una declaración jurada, por tanto yo {{artista.d_nombres}} {{artista.d_apellidos}} juro que todos los datos declarados en el presente documento, corresponden a la verdad. De comprobarse la falsedad de alguno de ellos, seré sujeto(a) a las sanciones que establece la ley. 
+  El presente documento constituye una declaración jurada, por tanto yo {{artista.d_nombres}} {{artista.d_apellidos}} doy fe que todos los datos declarados en el presente documento, corresponden a la verdad. De comprobarse la falsedad de alguno de ellos, seré sujeto(a) a las sanciones que establece la ley. 
 </div>
 
     </div>

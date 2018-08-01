@@ -18,6 +18,7 @@ export class FormularioComponent implements OnInit {
   pro: string;
   mun: string;
   qr: string = "";
+  exp:string;
 
 
   constructor(private formularioService: FormularioService,
@@ -42,6 +43,7 @@ export class FormularioComponent implements OnInit {
             this.base64Foto = this.artista.d_foto;
             this.qr = this.artista.d_nombres + this.artista.d_apellidos 
             //this.depto = this.getDepto(this.artista.id_dpto);
+            this.exp = this.getExp(this.artista.d_exp);
             console.log(this.artista.id_dpto)
             console.log(this.depto)
           })
@@ -85,6 +87,41 @@ export class FormularioComponent implements OnInit {
     return this.depto;
   }
  
+
+  getExp(x){
+    switch (x) {
+      case "1":
+        this.depto = "CH"
+        break;
+      case "2":
+        this.depto = "LP"
+        break;
+      case "3":
+        this.depto = "CBBA"
+        break;
+      case "4":
+        this.depto = "OR"
+        break;
+      case "5":
+        this.depto = "PT"
+        break;
+      case "6":
+        this.depto = "TJA"
+        break;
+      case "7":
+        this.depto = "SCZ"
+        break;
+      case "8":
+        this.depto = "BN"
+        break;
+      case "9":
+        this.depto = "PD"
+        break;
+        
+    }
+    console.log(this.depto)
+    return this.depto;
+  }
 
 handleReaderLoaded(readerEvt) {
   var binaryString = readerEvt.target.result;
