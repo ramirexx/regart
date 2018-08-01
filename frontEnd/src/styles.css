@@ -419,3 +419,27 @@ color: #f3f3f3
     
     color:#156090 !important;
 }
+
+/*#header{
+    background-image: url('assets/img/encabezado.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+}*/
+
+#img{
+    background-image: url('assets/img/background_xl.png');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 900px;
+    
+}
+
+#content{
+    background-image: url('assets/img/background_m.png');
+    background-repeat: no-repeat;
+    background-position: left bottom;
+}
+
+#logo-group{
+    color: #f9dbdb;
+}

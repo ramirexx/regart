@@ -57,5 +57,10 @@ export class ListadoSolicitudesComponent implements OnInit {
     this.router.navigate(link);
   }
   
+  editarFormulario(id: string) {
+    let link = ['home/registro-individual/' + id];
+    console.log(link)
+    this.router.navigate(link);
+  }
 
 }

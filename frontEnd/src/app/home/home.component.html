@@ -1,5 +1,6 @@
-		<header id="header">
-			<div id="logo-group"><strong>SISTEMA DE REGISTRO DE ARTISTAS</strong>
+		<header id="header" style="height: 70px; background-image: url('assets/img/encabezado_m.jpg');
+    background-repeat: repeat; background-position: top left;">
+			<div id="logo-group" style="padding-top:20px"><h3>SISTEMA DE REGISTRO DE ARTISTAS</h3>
 			
 
 				<!-- PLACE YOUR LOGO HERE -->
@@ -42,7 +43,7 @@
 
 			
 			
-				
+				<div style="padding: 10px;">
 				<div id="logout" class="btn-header transparent pull-right">
 					<span> 
 						<a routerLink="/" routerLinkActive="active" title="Sign Out" data-action="userLogout">Salir <i class="fa fa-sign-out"></i></a> </span>
@@ -50,9 +51,10 @@
 				<div class="btn-header transparent pull-right">
 						<span> <a href="login.html" title="Sign Out">Perfil <i class="fa fa-gear fa-fw"></i></a> </span>
 				</div>
-				<div class="btn-header transparent pull-right" style="margin-top:15px;">
-						Usuario: <strong> {{nombre}} {{apellido}}</strong>
+				<div class="btn-header transparent pull-right" style="padding-top: 15px;">
+						<span style="color: white;"> Usuario: <strong> {{nombre}} {{apellido}}</strong></span>
 				</div>
+			</div>
 				<!-- end logout button -->
 
 				<!-- search mobile button (this is hidden till mobile view port) -->
