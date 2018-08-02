@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Trayectoria, Curso, Formacion, Premios, Produccion, Representacion } from '../modelo/individual.model';
+import { Resumen, Trayectoria, Curso, Formacion, Premios, Produccion, Representacion } from '../modelo/individual.model';
 import {
   FormBuilder,
   FormGroup,
@@ -19,6 +19,7 @@ export class HojaDeVidaComponent implements OnInit {
   @Input('master') masterName: number;
   @Input('tipo')tipo: String;
 
+  listaResumen: any[];
   listaTrayectoria: any[];
   listaCurso: any[];
   listaFormacion: any[];
@@ -26,6 +27,7 @@ export class HojaDeVidaComponent implements OnInit {
   listaProduccion: any[];
   listaRepresentacion: any[];
 
+  resumen: Resumen = new Resumen();
   trayectoria: Trayectoria = new Trayectoria();
   curso: Curso = new Curso();
   formacion: Formacion = new Formacion();
@@ -33,6 +35,7 @@ export class HojaDeVidaComponent implements OnInit {
   produccion: Produccion = new Produccion();
   rep: Representacion = new Representacion();
 
+  resumenForm:any;
   trayectoriaForm: any;
   cursoForm: any;
   formacionForm: any;
@@ -44,7 +47,7 @@ export class HojaDeVidaComponent implements OnInit {
   tipo_formacion: string;
 
   recursos=["Propio", "Estatal", "Apoyo Internacional","Mixta"]
-  bienes=["Dramático Musicales","Descripción Escrita de Coreografía","Descripción Escrita de Pantomímicas","Composiciones Musicales con Letra","Composiciones Musicales Instrumentales"];
+  bienes=["Dramático Musicales","Descripción Escrita de Coreografía","Descripción Escrita de Pantomímicas","Composiciones Musicales con Letra","Composiciones Musicales Instrumentales","Cinematográfica","Videograma","Dibujo","Pintura","Escultura","Grabado","Litografía","Fotografía","Artes Aplicadas","Artesanía","Ilustraciones","Bocetos Escenográficos","Escenografías","Adaptaciones","Arreglos Musicales"];
 
   es: any;
 
@@ -52,9 +55,13 @@ export class HojaDeVidaComponent implements OnInit {
   constructor(private _fb: FormBuilder,
     private formularioService: FormularioService) {
 
-    this.trayectoriaForm = this._fb.group({
+      this.resumenForm = this._fb.group({
+        'resumen': ['', Validators.required]
+      })
+
+      this.trayectoriaForm = this._fb.group({
       'gestion': ['', Validators.required],
-      'fecha': ['', Validators.required],
+      //'fecha': ['', Validators.required],
       'lugar': ['', Validators.required],
       'actividad': ['', Validators.required]
     })
@@ -112,6 +119,40 @@ export class HojaDeVidaComponent implements OnInit {
   }
 
 
+  public saveRes(): void {
+    console.log("*----->" + this.masterName);
+    this.resumen.id_artista = this.masterName;
+    this.formularioService.saveResumen(this.resumen).subscribe(response => {
+      console.log(response);
+      //this.artista.numero_registro = 
+      if (response.status == "Success") {
+        alert("Datos Registrados");
+        console.log(response.data.id_artista);
+        this.resumen = new Resumen();
+        this.resumenForm.markAsUntouched();
+        this.getRes(response.data.id_artista);
+      } else {
+        alert("No se pudo realizar el registro!")
+      }
+    }, err => {
+      alert("ERROR NO SE PUDO GUARDAR LOS DATOS " + err)
+      console.log("error", err);
+    });
+  }
+
+  getRes(id) {
+    console.log(id)
+    this.formularioService.getResumen(id)
+      .subscribe(lista => {
+        this.listaResumen = lista
+        console.log(this.listaResumen);
+      });
+  }
+
+  public cancelRes() {
+    this.resumen = new Resumen()
+  }
+
   public saveTra(): void {
     console.log("*----->" + this.masterName);
     this.trayectoria.id_artista = this.masterName;
@@ -121,7 +162,7 @@ export class HojaDeVidaComponent implements OnInit {
       if (response.status == "Success") {
         alert("Datos Registrados");
         console.log(response.data.id_artista);
-        //this.trayectoria = new Trayectoria();
+        this.trayectoria = new Trayectoria();
         this.trayectoriaForm.markAsUntouched();
         this.getTra(response.data.id_artista);
       } else {

@@ -31,9 +31,10 @@
           <ng-template let-doc="rowData" pTemplate type="body">
               <button *ngIf="doc.id_estado =='ENVIADO'" type="button" pButton (click)="aprobarFormulario(doc.id_individual)" title="Aprobar Formulario" icon="fa-check"></button>
               <button *ngIf="doc.id_estado =='APROBADO'" type="button" pButton (click)="verCredencial(doc.id_individual)" title="Ver Credencial" icon="fa fa-id-card"></button>
-            <button *ngIf="doc.id_estado =='APROBADO'" type="button" pButton (click)="verPerfil(doc.id_individual)" title="Ver Credencial" icon="fa fa-user"></button>
-            <button *ngIf="doc.id_estado =='APROBADO'" type="button" pButton (click)="ver(doc.id_individual)" title="Ver Hoja Artistica" icon="fa-address-card-o"></button>
+            <!--<button *ngIf="doc.id_estado =='APROBADO'" type="button" pButton (click)="verPerfil(doc.id_individual)" title="Ver Perfil" icon="fa fa-user"></button>-->
+            <!--<button *ngIf="doc.id_estado =='APROBADO'" type="button" pButton (click)="ver(doc.id_individual)" title="Ver Hoja Artistica" icon="fa-address-card-o"></button>-->
             <button *ngIf="doc.id_estado =='APROBADO'" type="button" pButton (click)="editarFormulario(doc.id_individual)" title="Editar Formulario" icon="fa-edit"></button>
+            <button *ngIf="doc.id_estado =='APROBADO'" type="button" pButton (click)="verFormulario(doc.id_individual)" title="Imprimir Formulario" icon="fa-print"></button>
           </ng-template>
         </p-column>
       </p-dataTable>

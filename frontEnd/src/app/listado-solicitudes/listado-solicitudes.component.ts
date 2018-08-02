@@ -63,4 +63,9 @@ export class ListadoSolicitudesComponent implements OnInit {
     this.router.navigate(link);
   }
 
+  verFormulario(id: string) {
+    let link = ['/formulario/' + id];
+    console.log(link)
+    this.router.navigate(link);
+  }
 }

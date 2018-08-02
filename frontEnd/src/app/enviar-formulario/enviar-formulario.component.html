@@ -20,10 +20,9 @@
               <span class="value">{{artista.id_estado}}</span>
             </div>
 
-            <div class="info-name">Vigencia
+            <!--<div class="info-name">Vigencia
               <span class="value">{{artista.vigencia}}</span>
-            </div>
-
+            </div>-->
           </div>
         </td>
         <td>
@@ -31,13 +30,13 @@
             <span class="value"> {{artista.d_nombres}} {{artista.d_apellidos}} </span>
           </div>
           <div class="info-name">C.I.:
-            <span class="value">{{artista.d_cedula}}</span>
+            <span class="value">{{artista.d_cedula}}{{exp}}</span>
           </div>
         </td>
         <td>
           <div class="col-sm-6">
             <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px" class="img-responsive img-thumbnail" />
-            <div class="info-name">{{artista.numero_registro}}</div>
+            <!--<div class="info-name">{{artista.numero_registro}}</div>-->
             <!--<img [src]="'data:image/jpg;base64,'+imagePath"/> -->
           </div>
         </td>

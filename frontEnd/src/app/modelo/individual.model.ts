@@ -80,7 +80,7 @@ export class FormIndividual {
     d_exp: string;
     d_nombres: string;
     d_apellidos: string;
-    d_nacimiento: number;
+    d_nacimiento: string;
     d_fecha_nacimiento: Date;
     d_estado_civil: string;
 
@@ -92,7 +92,7 @@ export class FormIndividual {
     d_youtube: string;
     d_otros: string;
 
-    d_institutucion: string;
+    d_institucion: string;
     d_agrupaciones: string;
     id_sector: number;
     id_sub_sector: number;
@@ -118,6 +118,10 @@ export class FormIndividual {
 
 }
 
+export class Resumen {
+    id_artista: number;
+    resumen: string;
+}
 export class Trayectoria {
     id_artista: number;
     gestion: string;

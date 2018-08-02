@@ -19,6 +19,7 @@ export class FormularioComponent implements OnInit {
   mun: string;
   qr: string = "";
   exp:string;
+  nac:string;
 
 
   constructor(private formularioService: FormularioService,
@@ -42,7 +43,8 @@ export class FormularioComponent implements OnInit {
             this.imagePath = this.artista.d_foto;
             this.base64Foto = this.artista.d_foto;
             this.qr = this.artista.d_nombres + this.artista.d_apellidos 
-            //this.depto = this.getDepto(this.artista.id_dpto);
+            //this.depto = this.getDepto(this.artista.d_nacimiento);
+            this.nac = this.getNac(this.artista.d_nacimiento);
             this.exp = this.getExp(this.artista.d_exp);
             console.log(this.artista.id_dpto)
             console.log(this.depto)
@@ -52,7 +54,7 @@ export class FormularioComponent implements OnInit {
   }
 
 
-  getDepto(x){
+  getNac(x){
     switch (x) {
       case "1":
         this.depto = "Chuquisaca"

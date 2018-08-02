@@ -153,6 +153,15 @@ export class FormularioService {
       .catch(this.handleError);
       
   }
+  saveResumen (data:any): Observable<any> {
+    return this.http.post(environment.urlApi + 'insertResumen', data).map(this.extractData) 
+      .catch(this.handleError);
+  }
+
+  getResumen(id:any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'resumen?id='+id).map(this.extractData)
+      .catch(this.handleError);
+  }
 
   saveTrayectoria (data:any): Observable<any> {
     return this.http.post(environment.urlApi + 'insertTrayectoria', data).map(this.extractData) 
