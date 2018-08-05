@@ -23,7 +23,7 @@ import "rxjs/add/observable/empty";
 import { LocationStrategy, HashLocationStrategy,APP_BASE_HREF } from '@angular/common';
 
 import { Auth } from './auth/index';
-
+import { ControlMessagesComponent } from './components/control-messages';
 import { ModalModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -51,6 +51,7 @@ import { IndividualComponent } from './individual/individual.component';
 import { ListadoArtistasComponent } from './listado-artistas/listado-artistas.component';
 
 import { FormularioService } from './servicios/formulario.service';
+import { ValidationService } from './servicios/validation.service';
 import { VerIndividualComponent } from './ver-individual/ver-individual.component';
 import { UsuariosComponent } from './administracion/usuarios/usuarios.component';
 import { CategoriasComponent } from './administracion/categorias/categorias.component';
@@ -68,6 +69,7 @@ import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solic
 @NgModule({
   declarations: [
     AppComponent,
+    ControlMessagesComponent,
     LoginComponent,
     HomeComponent,
     RegistroComponent,
@@ -109,6 +111,7 @@ import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solic
   providers: [
     Auth,
     FormularioService,
+    ValidationService,
     {provide:LocationStrategy,  useClass: HashLocationStrategy },
     {provide: APP_BASE_HREF, useValue: '/'}
     //{ provide: HTTP_INTERCEPTORS, useClass: HttpLogInterceptor, multi: true }  

@@ -91,6 +91,7 @@
                         <div class="form-group">
                             <label>Departamento</label>
                             <select class="form-control" [formControl]="artForm.controls['id_dpto']" [(ngModel)]="artista.id_dpto" (ngModelChange)="onselectDepartamento($event)">
+                                <option value="">--Seleccione un valor--</option>
                                 <option *ngFor="let obj of departamentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
                             </select>
 
@@ -103,12 +104,14 @@
                             <option *ngFor="let obj of provincias" [ngValue]="obj.DepProv">{{obj.Provincia}}</option>
                         </select>-->
                         <select class="form-control" [formControl]="artForm.controls['d_provincia']" [(ngModel)]="provincia" (ngModelChange)="onselectMunicipio($event)">
+                            <option value="">--Seleccione un valor--</option>
                             <option *ngFor="let obj of provincias" [ngValue]="obj">{{obj.Provincia}}</option>
                         </select>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Municipio </label>
+                            <option value="">--Seleccione un valor--</option>
                             <select class="form-control" [formControl]="artForm.controls['d_municipio']" [(ngModel)]="artista.id_mun">
                                 <option *ngFor="let obj of municipios" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
                             </select>
@@ -117,6 +120,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Nación</label>
+                            <option value="">--Seleccione un valor--</option>
                             <select class="form-control" [formControl]="artForm.controls['comunidad']" [(ngModel)]="artista.comunidad">
                                 <option *ngFor="let obj of comunidades" [ngValue]="obj.comunidad">{{obj.comunidad}}</option>
                             </select>
@@ -143,6 +147,7 @@
                                 <option *ngFor="let obj of provincias" [ngValue]="obj.DepProv">{{obj.Provincia}}</option>
                             </select>-->
                         <select class="form-control" [formControl]="artForm.controls['e_id_pais']" [(ngModel)]="artista.e_id_pais" (ngModelChange)="onselectPais($event)">
+                            <option value="">--Seleccione un valor--</option>
                             <option *ngFor="let obj of paises" [ngValue]="obj.id">{{obj.pais}}</option>
                         </select>
                     </div>
@@ -150,6 +155,7 @@
                         <div class="form-group">
                             <label>Localidad </label>
                             <select class="form-control" [formControl]="artForm.controls['e_pais_localidad']" [(ngModel)]="paisloc">
+                                    <option value="">--Seleccione un valor--</option>
                                 <option *ngFor="let obj of paisLocalidad" [ngValue]="obj">{{obj.loc_nombre}}</option>
                             </select>
                         </div>
@@ -187,6 +193,7 @@
                         <div class="form-group">
                             <label>Lugar de Nacimiento</label>
                             <select class="form-control" [formControl]="artForm.controls['d_nacimiento']" [(ngModel)]="artista.d_nacimiento">
+                                <option value="">--Seleccione un valor--</option>
                                 <option *ngFor="let obj of departamentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
                             </select>
                         </div>
@@ -204,13 +211,14 @@
 
                     <div class="col-sm-3">
                         <label>Cédula de Identidad</label>
-                        <input type="text" class="form-control" [formControl]="artForm.controls['d_cedula']" [(ngModel)]="artista.d_cedula" maxlength="36"
+                        <input type="number" class="form-control" [formControl]="artForm.controls['d_cedula']" [(ngModel)]="artista.d_cedula" maxlength="36"
                         />
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Lugar de Expedición</label>
                             <select class="form-control" [formControl]="artForm.controls['d_exp']" [(ngModel)]="artista.d_exp">
+                                <option value="">--Seleccione un valor--</option>
                                 <option *ngFor="let obj of departamentos" [ngValue]="obj.codigo">{{obj.descripcion}}</option>
                             </select>
 
@@ -275,12 +283,12 @@
                     </div>
                     <div class="col-sm-4">
                         <label>Número de Teléfono Fijo </label>
-                        <input type="text" class="form-control" [formControl]="artForm.controls['d_telefono']" [(ngModel)]="artista.d_telefono" maxlength="36"
+                        <input type="number" class="form-control" [formControl]="artForm.controls['d_telefono']" [(ngModel)]="artista.d_telefono" maxlength="36"
                         />
                     </div>
                     <div class="col-sm-4">
                         <label>Número de Celular </label>
-                        <input type="text" class="form-control" [formControl]="artForm.controls['d_celular']" [(ngModel)]="artista.d_celular" maxlength="36"
+                        <input type="numer" class="form-control" [formControl]="artForm.controls['d_celular']" [(ngModel)]="artista.d_celular" maxlength="36"
                         />
                     </div>
                 </div>
@@ -375,7 +383,7 @@
                         <select class="form-control" [formControl]="artForm.controls['id_actividad_sec']" [(ngModel)]="actividad2" (ngModelChange)="onselectActividad2($event)">
                             <option value="">--Seleccione un valor--</option>
                             <option *ngFor="let obj of actividadSec" [ngValue]="obj">{{obj.id_actividad}} - {{obj.d_desc_act}}</option>
-                        </select>
+                        </select>-->
                     </div>
                     <div class="col-sm-4">
                         <label>Especialidad 3 </label>
@@ -488,6 +496,7 @@
         <button type="button" pButton (click)="showError()" label="Error" class="ui-button-danger"></button>-->
     </p-toolbar>
 </div>
+<pre>{{getAllErrors(orderForm) | json }}</pre>
 
 
 <p-dialog [(visible)]="display" [width]="840" [height]="600" modal="true" [closable]="false">

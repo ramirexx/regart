@@ -7,6 +7,8 @@ import {
   FormControl
 } from '@angular/forms';
 import { FormularioService } from '../servicios/formulario.service';
+import { ValidationService } from '../servicios/validation.service';
+
 import { Individual } from '../modelo/individual.model';
 //import { Individual } from '../modelo/individual.model';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -126,6 +128,8 @@ export class IndividualComponent implements OnInit {
   rol:string;
   showBtnAprobar: any;
 
+  submitted = false;
+
   @ViewChild(HojaDeVidaComponent) hdvComponent: HojaDeVidaComponent;
 
   constructor(private _fb: FormBuilder,
@@ -141,7 +145,7 @@ export class IndividualComponent implements OnInit {
       //'d_fecha_registro': [{disabled: true }, Validators.required],
       'd_fecha_renovacion': [''],
       'vigencia': [{ value: '', disabled: true }, Validators.required],
-      'estado_credencial': [{ value: '', disabled: false }, Validators.required],
+      //'estado_credencial': [{ value: '', disabled: false }],
       'tipo_artista': [{ value: '', disabled: false }, Validators.required],
       'e_id_pais':[''],
       'e_pais_localidad': [''],
@@ -164,8 +168,8 @@ export class IndividualComponent implements OnInit {
 
       'd_domicilio': [{ value: '' }, Validators.required],
       'd_telefono': [{ value: '' }],
-      'd_celular': [{ value: '' }, Validators.required],
-      'd_email': [{ value: '' }, Validators.required],
+      'd_celular': [{ value: '' }, [Validators.required]],
+      'd_email': [{ value: '' }, [Validators.required, Validators.email]],
       'd_pagina_web': [{ value: '' }],
       'd_youtube': [{ value: '' }],
       'd_otros': [{ value: '' }],
@@ -238,7 +242,7 @@ export class IndividualComponent implements OnInit {
     this.formularioService.getActividadSec()
       .subscribe(data => { this.actividadSec = data },
         err => console.log(err),
-        () => console.log("done loanding", this.actividadSec));
+        () => console.log("getActividadSec done loanding", this.actividadSec));
 
     this.formularioService.getDepartamentos()
       .subscribe(data => { this.departamentos = data },
@@ -503,13 +507,28 @@ showSuccess() {
     this.msgs.push({severity:'success', summary:'Mensaje de Exito', detail:'Datos Registrados'});
 }
 
-showError() {
+showError(ms: any) {
   this.msgs = [];
-  this.msgs.push({severity:'error', summary:'Mensaje de Error ', detail:'Error'});
+  this.msgs.push({severity:'error', summary:"Advertencia", detail:ms});
+}
+
+validacion():boolean{
+  this.submitted = true;
+  if (!this.artForm.valid){
+       //let ms ='Campo: ${this.artForm.value.name}'
+    //this.artForm.controls.setErrors({'invalidYear': true});
+    this.showError('Por favor complete los campos requeridos');
+    console.log(this.artForm)
+    return false;
+  }
+  console.log("Formulario valido")
+    return true
 }
 
 
+
   public saveDraft(): void {
+    if (this.validacion()){
     this.artista.numero_registro = "MDCyT" + this.year + "I";
     this.artista.id_estado = "BORRADOR";
     this.artista.d_fecha_registro = new(Date);
@@ -531,9 +550,11 @@ showError() {
           alert("No se pudo realizar el registro!")
         }
       }, err => {
-        this.showError();
-        alert("ERROR NO SE PUDO GUARDAR LOS DATOS------------------ "+err)
+        
+        //alert("ERROR NO SE PUDO GUARDAR LOS DATOS------------------ "+err)
+        let ms = "ERROR NO SE PUDO GUARDAR LOS DATOS------------------ "+err
         console.log("error", err);
+        this.showError(ms);
         //let link = ['home/listado-artistas/'];
         //this.router.navigate(link);
       });
@@ -549,14 +570,17 @@ showError() {
           alert("No se pudo realizar el registro!")
         }
       }, err => {
-        this.showError();
-        alert("ERROR DE ACTUALIZACION " +err)
+        
+        //alert("ERROR DE ACTUALIZACION " +err)
+        let ms = "ERROR DE ACTUALIZACION " +err;
         console.log("error", err);
+        this.showError(ms);
         //let link = ['home/listado-artistas/'];
         //this.router.navigate(link);
       });
 
     }
+  }
   }
 
   cancel() {
@@ -656,6 +680,22 @@ showError() {
       });
     }
 
+
+    getAllErrors(form: FormGroup | FormArray): { [key: string]: any; } | null {
+      let hasError = false;
+      const result = Object.keys(this.artForm.controls).reduce((acc, key) => {
+          const control = this.artForm.get(key);
+          const errors = (control instanceof FormGroup || control instanceof FormArray)
+              ? this.getAllErrors(control)
+              : control.errors;
+          if (errors) {
+              acc[key] = errors;
+              hasError = true;
+          }
+          return acc;
+      }, {} as { [key: string]: any; });
+      return hasError ? result : null;
+  }
 
 
 }
