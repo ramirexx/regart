@@ -64,7 +64,7 @@ getRandomColor() {
         let totalNumber = parseInt(this.lista1[i].total);
         this.deptoTotal.push(totalNumber);
         this.coloBack.push(this.getRandomColor());
-        this.hoverBack.push(this.getRandomColor());
+        this.hoverBack.push("#36A2EB");
         console.log(this.deptoNombre);
         console.log(this.deptoTotal);
         console.log(this.coloBack);
