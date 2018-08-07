@@ -306,6 +306,11 @@ export class FormularioService {
     return this.http.post(environment.urlApi + 'accesAuth', data).map(this.extractData) 
       .catch(this.handleError);
   }
+
+  getDeptoIndividual(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'deptoindividual').map(this.extractData)
+      .catch(this.handleError);
+  }
   
   ci: string
   setCi(ci:any){
