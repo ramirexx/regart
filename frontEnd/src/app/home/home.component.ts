@@ -27,6 +27,12 @@ export class HomeComponent implements OnInit {
 
     console.log("Usuario"+this.rol)
 
+    if(this.token == null){
+      let link = [''];
+      this.router.navigate(link);
+      //alert("Por favor inicie sesión")
+    }
+
   }
 
 }

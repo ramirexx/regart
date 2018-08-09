@@ -383,7 +383,7 @@
                         <select class="form-control" [formControl]="artForm.controls['id_actividad_sec']" [(ngModel)]="actividad2" (ngModelChange)="onselectActividad2($event)">
                             <option value="">--Seleccione un valor--</option>
                             <option *ngFor="let obj of actividadSec" [ngValue]="obj">{{obj.id_actividad}} - {{obj.d_desc_act}}</option>
-                        </select>-->
+                        </select>
                     </div>
                     <div class="col-sm-4">
                         <label>Especialidad 3 </label>
@@ -496,7 +496,7 @@
         <button type="button" pButton (click)="showError()" label="Error" class="ui-button-danger"></button>-->
     </p-toolbar>
 </div>
-<pre>{{getAllErrors(orderForm) | json }}</pre>
+<!--<pre>{{getAllErrors(orderForm) | json }}</pre>-->
 
 
 <p-dialog [(visible)]="display" [width]="840" [height]="600" modal="true" [closable]="false">

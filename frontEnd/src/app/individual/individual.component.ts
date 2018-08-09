@@ -43,7 +43,7 @@ export class IndividualComponent implements OnInit {
   year: any;
   provincia = { DepProv: null, Prov: null, IdProv: null, Provincia: null}
   paisloc = { loc_codigo: null, loc_nombre: null, pais_id: null}
-  actividad2 = {id_actividad: null, id_sub_cat: null,d_desc_act:null }
+  actividad2= {id_actividad: null, id_sub_cat: null,d_desc_act:null }
   ci : string;
   msgs: Message[] = [];
   //"DepProv": "2", "Prov": "03", "Provincia": "Pacajes", "IdProv": "203"
@@ -200,6 +200,7 @@ export class IndividualComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.actividad2 = null;
     //this.artista.id_individual= 12244;
     this.rol = localStorage.getItem('rol');
 
@@ -252,6 +253,7 @@ export class IndividualComponent implements OnInit {
     let date = new Date();
     this.year = date.getFullYear();
 
+    //this.actividad2= {id_actividad: null, id_sub_cat: null,d_desc_act:null }
   }
 
   ngAfterContentInit() {
@@ -455,6 +457,9 @@ export class IndividualComponent implements OnInit {
   onselectActividad(objSelected) {
     console.log(objSelected)
     if (objSelected != undefined) {
+      
+      //this.artista.id_sub_cat=objSelected.id_sub_cat
+      //this.artista.d_desc_act=objSelected.d_desc_act
       this.formularioService.getEspecialidad(objSelected)
         .subscribe(data => {
           console.log("onselectActividad",objSelected)
@@ -476,11 +481,15 @@ export class IndividualComponent implements OnInit {
         );
     }
   }
-
+ 
   onselectActividad2(objSelected) {
-    console.log(objSelected)
+    console.log("onselectActividad2",objSelected)
     if (objSelected != undefined) {
+      this.artista.actividad_sec =objSelected.id_actividad;
       this.formularioService.getEspecialidad(objSelected.id_actividad)
+      
+
+      
         .subscribe(data => {
           console.log("onselectActividad",objSelected)
           let res: any = data
@@ -493,7 +502,7 @@ export class IndividualComponent implements OnInit {
             //this.artista.id_especialidad_ter = null;
           } else {
             this.especialidad3 = [];
-            alert("ESPECIALIDAD 3 CAMPO VACIO")
+            //alert("ESPECIALIDAD 3 CAMPO VACIO")
             console.log("ESPECIALIDAD3",data)
           }
         },
