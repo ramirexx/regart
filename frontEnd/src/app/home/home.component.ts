@@ -19,7 +19,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = localStorage.getItem('usuario');
-    this.token = localStorage.getItem('token');
+    this.token = sessionStorage.getItem('token');
+    console.log("token"+this.token)
+    //this.token = localStorage.getItem('token');
     this.rol = localStorage.getItem('rol');
     this.nombre = localStorage.getItem('nombre');
     this.apellido = localStorage.getItem('apellido');
