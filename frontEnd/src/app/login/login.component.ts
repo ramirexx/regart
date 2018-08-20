@@ -17,8 +17,12 @@ import { FormularioService } from '../servicios/formulario.service';
 export class LoginComponent implements OnInit {
 
   logForm: any;
+  resetForm: any;
   usuario: string;
   password: string;
+  email: string;
+
+  recovery: boolean = false;
   constructor(private router: Router,
     private _fb: FormBuilder,
     private formularioService: FormularioService,) {
@@ -26,6 +30,10 @@ export class LoginComponent implements OnInit {
   this.logForm = this._fb.group({
     'usuario': ['', Validators.required],
     'password': ['', Validators.required]
+  })
+
+  this.resetForm = this._fb.group({
+    'email': ['', Validators.required],
   })
 
 
@@ -40,7 +48,7 @@ export class LoginComponent implements OnInit {
       usuario: this.usuario,
       password: this.password
     }
-    if (this.validForm()) {
+    if (this.email != null) {
       this.formularioService.loginUsuario(data).subscribe(response => {
         console.log(response)
         if (response.status == "ok"){
@@ -69,6 +77,40 @@ export class LoginComponent implements OnInit {
 
     
 
+  }
+
+  passRecovery(){
+    console.log("Recupera contraseña");
+    this.recovery = true;
+  }
+
+  sendEmail(){
+    let data = {
+      email: this.email,
+    }
+    console.log(this.resetForm)
+    if (this.resetForm.valid) {
+      this.formularioService.resetPassword(data).subscribe(response => {
+        console.log(response)
+        if (response.status == "ok"){
+          
+          console.log(response.data);
+          let data = response.data 
+          alert("Por favor revise su correo electrónico")     
+        }else{
+          alert(response.msg);
+        }
+      },(error: any) => {
+        alert(error)
+      }
+      )
+    }else{
+      alert("Complete los datos")
+    }
+  }
+
+  cancel(){
+    this.recovery = false;
   }
 
   validForm(): boolean {

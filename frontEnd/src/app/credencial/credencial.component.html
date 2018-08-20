@@ -39,7 +39,7 @@
                     <font color="#ffffff" size="1"> <strong>C.I.: </strong> {{artista.d_cedula}} {{exp}}</font>
                     <br>
                     <!--<font size="1" style="line-height: 1" color="ffffff"><strong>{{artista.estado_credencial}} </strong></font>-->
-                    <br><font size="1" style="line-height: 1" color="ffffff"><strong>Válida Hasta: {{artista.d_fecha_validez}} </strong></font>
+                    <br><font size="1" style="line-height: 1" color="ffffff"><strong>Válida Hasta: {{artista.d_fecha_validez | date:'dd-MM-yyyy'}} </strong></font>
                   </p>
                 </td>
                 <td style="WIDTH: 4px; HEIGHT: 90px; FONT-SIZE: 2px" valign="top" align="left">&nbsp;</td>

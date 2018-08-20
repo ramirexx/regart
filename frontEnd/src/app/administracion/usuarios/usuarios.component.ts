@@ -91,6 +91,54 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
+  public show(doc: Usuario){
+    console.log(doc)
+    this.panelForm = true;
+    this.usuario = doc;
+    for(let i= 0; i< this.niveles.length; i++){
+      if (this.usuario.id_nivel == this.niveles[i].id_nivel){
+        console.log(this.usuario.id_nivel)
+        console.log(this.niveles[i].nivel_desc)
+        return this.niveles[i].nivel_desc
+      }
+    }
+  if(this.usuario.id_dpto != null){
+    for(let i= 0; i< this.departamentos.length; i++){
+      if (this.usuario.id_dpto == this.departamentos[i].codigo){
+        console.log(this.departamentos[i].codigo)
+        return this.departamentos[i].descripcion
+      }
+    }
+  }
+  
+    
+  }
+
+
+
+  public delete(ci): void {
+    this.formularioService.deleteUsuario(ci).subscribe(response => {
+      console.log(response);
+      //this.artista.numero_registro = 
+      if (response.status=="Success"){
+        alert("Usuario Eliminado");
+        this.getUsuario();
+
+      }else{
+        alert("No se pudo eliminar el registro!")
+      }
+    }, err => {
+      alert(err)
+      console.log("error", err);
+      //let link = ['home/listado-artistas/'];
+      //this.router.navigate(link);
+    });
+  }
+
+
+
+
+
   showForm(){
     this.panelForm = true;
   }

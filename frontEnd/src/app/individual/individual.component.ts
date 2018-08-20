@@ -19,6 +19,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { HojaDeVidaComponent } from '../hoja-de-vida/hoja-de-vida.component';
 import {Message} from 'primeng/components/common/api';
 import { MessageService} from 'primeng/components/common/messageservice';
+import { ControlMessagesComponent } from '../components/control-messages/control-messages.component';
 
 
 @Component({
@@ -245,11 +246,11 @@ export class IndividualComponent implements OnInit {
         err => console.log(err),
         () => console.log("getActividadSec done loanding", this.actividadSec));
 
-    this.formularioService.getDepartamentos()
+    /*this.formularioService.getDepartamentos()
       .subscribe(data => { this.departamentos = data },
         err => console.log(err),
         () => console.log("done loanding", this.departamentos));
-
+*/
     let date = new Date();
     this.year = date.getFullYear();
 
@@ -284,21 +285,35 @@ export class IndividualComponent implements OnInit {
               this.hdvComponent.getPro(id);
               this.hdvComponent.getPre(id);
               this.hdvComponent.getRep(id);
-              this.formularioService.getProvincias(this.artista.id_dpto)
+
+              
+              this.provincia = { DepProv: this.artista.dptoProv, 
+                Prov: this.artista.prov,
+                IdProv: this.artista.id_prov,
+               Provincia: null}
+               
+                this.onselectDepartamento(this.artista.id_dpto)
+                //this.onselectDepartamento(this.provincia);
+
+              /*this.formularioService.getProvincias(this.artista.id_dpto)
               .subscribe(data => {
+                alert(this.artista.id_dpto)
                 let res: any = data
                 if (res.length > 0) {
                   this.provincias = res
                   for (let i = 0; i < this.provincias.length; i++) {
                     let p = this.provincias[i];
                     if(p.IdProv = this.artista.id_prov)
-                    console.log("uuuuuu",p.Provincia)
+                    this.provincias[i].Provincia;
+                    console.log("111111111111111111111111PROVINCIA",p.Provincia, this.provincias[i].Provincia)
+
+                    
                   }
                 } else {
                   this.provincias = [];
                 }
-              });
-
+              });*/
+              
 
               this.formularioService.getPaisLocalidad(this.artista.e_id_pais)
               .subscribe(data => {
@@ -318,19 +333,21 @@ export class IndividualComponent implements OnInit {
               
             
               //this.provincia.Provincia = this.provincias[this.provincias.map(function (e) { return e.IdProv; }).indexOf(this.provincia.Provincia.IdProv)];
-              this.provincia = { DepProv: this.artista.dptoProv, 
+              /*this.provincia = { DepProv: this.artista.dptoProv, 
                                 Prov: this.artista.prov,
                                 IdProv: this.artista.id_prov,
-                                Provincia: null}
+                                Provincia: null}*/
 
               this.paisloc = {loc_nombre:this.artista.e_cod_localidad,
                               loc_codigo:this.artista.e_pais_localidad,
                               pais_id:this.artista.e_id_pais
               }
               console.log("00000",this.provincia)
-              this.onselectMunicipio(this.provincia);
+
               
-              console.log("222222222222222",this.provincia.Provincia)
+              this.onselectProvincia(this.provincia);
+              console.log("222222222222222",this.provincia)
+
               if (this.artista.d_fecha_nacimiento != null) {
                 this.artista.d_fecha_nacimiento = new Date(this.artista.d_fecha_nacimiento);
                 console.log("---->" + this.artista.d_fecha_nacimiento);
@@ -344,7 +361,7 @@ export class IndividualComponent implements OnInit {
                 console.log("---->" + this.artista.d_fecha_renovacion);
               }
             })
-        });
+        }, 3000);
       }
     })
   }
@@ -381,6 +398,9 @@ export class IndividualComponent implements OnInit {
           let res: any = data
           if (res.length > 0) {
             this.provincias = res
+            this.artista.id_prov = objSelected.IdProv;
+            this.artista.dptoProv = objSelected.DepProv;
+            this.artista.prov = objSelected.Prov;
           } else {
             this.provincias = [];
             alert("DEPARTAMENTO:"+res.msg)
@@ -392,7 +412,7 @@ export class IndividualComponent implements OnInit {
     }
   }
 
-  onselectMunicipio(objSelected) {
+  onselectProvincia(objSelected) {
     console.log("11111",objSelected)
     if (objSelected != undefined) {
       //this.artista.id_prov = objSelected.IdProv;
@@ -528,7 +548,7 @@ validacion():boolean{
     //this.artForm.controls.setErrors({'invalidYear': true});
     this.showError('Por favor complete los campos requeridos');
     console.log(this.artForm)
-    return false;
+    return true;
   }
   console.log("Formulario valido")
     return true

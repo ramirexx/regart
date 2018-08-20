@@ -283,8 +283,14 @@ export class HojaDeVidaComponent implements OnInit {
     console.log(id)
     this.formularioService.getProduccion(id)
       .subscribe(lista => {
-        this.listaProduccion = lista
-        console.log(this.listaProduccion);
+        let res: any = lista;
+        if(res.length>0){
+          this.listaProduccion = lista
+          console.log(this.listaProduccion);
+        }else{
+          this.listaProduccion = [];
+        }
+        
       });
   }
 
@@ -318,8 +324,13 @@ export class HojaDeVidaComponent implements OnInit {
     console.log(id)
     this.formularioService.getPremio(id)
       .subscribe(lista => {
-        this.listaPremio = lista
-        console.log(this.listaPremio);
+        let res: any = lista
+        if (res.length>0){
+          this.listaPremio = lista
+          console.log(this.listaPremio);
+        }else{
+          this.listaPremio = [];
+        }
       });
   }
 

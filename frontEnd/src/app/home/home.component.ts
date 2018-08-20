@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
 
     if(this.token == null){
       let link = [''];
-      this.router.navigate(link);
+      //this.router.navigate(link);
       //alert("Por favor inicie sesión")
     }
 

@@ -297,6 +297,10 @@ export class FormularioService {
       .catch(this.handleError);
   }
 
+  deleteUsuario = function (ci) {
+    return this.http.delete(environment.urlApi + 'deleteUsuario?ci=' + ci)
+};
+
   saveUsuarioPublico (data:Publico): Observable<any> {
     return this.http.post(environment.urlApi + 'insertUsuarioPublico', data).map(this.extractData) 
       .catch(this.handleError);
@@ -305,6 +309,11 @@ export class FormularioService {
   loginUsuario (data:any): Observable<any> {
     return this.http.post(environment.urlApi + 'accesAuth', data).map(this.extractData) 
       .catch(this.handleError);
+  }
+
+  resetPassword(data:any): Observable<any>{
+    return this.http.post(environment.urlApi + 'resetPassword', data).map(this.extractData) 
+    .catch(this.handleError);
   }
 
   getDeptoIndividual(): Observable<any[]> {

@@ -14,7 +14,7 @@
 </header>
 <div id="main" role="main" class="animated fadeInDown" style="margin-left: 0px">
     
-  <div id="content" class="container" style="width: 1024px;">
+  <div id="content" class="container" style="max-width: 1024px;">
     <div class="row">
         
       <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
@@ -31,7 +31,7 @@
           
         </div>
       </div>
-      <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+      <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4" *ngIf="!recovery">
         <div class="well no-padding">
           <form class="smart-form client-form" [formGroup]="logForm" novalidate>
             <header>
@@ -53,7 +53,10 @@
                     </b> </label>
 
                 <div class="note">
-                  <a routerLink="/auth/forgot-password">Olvidó contraseña?</a>
+                  <!--<a routerLink="/auth/forgot-password">¿Olvidó contraseña?</a>-->
+                  <button (click)="passRecovery()" class="btn btn-link">
+                    ¿Olvidé mi contraseña?
+                  </button>
                 </div>
               </section>
               <!--<section>
@@ -73,7 +76,52 @@
         <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Necesita una cuenta?</span> 
         <a routerLink="/crear-cuenta" routerLinkActive="active" class="btn btn-danger">Crear Cuenta</a> </span>
       </div>
-      
+
+      <!--Recupera tu cuenta
+Podemos ayudarte a restablecer tu contraseña y la información de seguridad. Primero escribe tu cuenta Microsoft y sigue las instrucciones siguientes.-->
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4" *ngIf="recovery">
+        <div class="well no-padding">
+          <form class="smart-form client-form" [formGroup]="resetForm" novalidate>
+            <header>
+              Recuperación de la Cuenta
+            </header>
+            <fieldset>
+              <!--<section>
+                <label class="label">Nombre Usuario</label>
+                <label class="input"> <i class="icon-append fa fa-user"></i>
+                  <input type="text" name="email" [formControl]="logForm.controls['usuario']" [(ngModel)]="usuario">
+                  <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>
+                    Por favor ingrese el nombre de usuario</b></label>
+              </section>-->
+              <section>
+                  <label class="label">Ingrese la dirección de su correo electrónico registrado en el sistema REGART, para reestablecer sus contraseña</label>
+                <!--<label class="label">Email</label>-->
+                <label class="input"> <i class="icon-append fa fa-at"></i>
+                  <input type="email" [formControl]="resetForm.controls['email']" [(ngModel)]="email">
+                  <b class="tooltip tooltip-top-right"><i class="fa fa-mail"></i>Por favor ingrese su email
+                    </b> </label>
+
+                <div class="note">
+                </div>
+              </section>
+              <!--<section>
+                <label class="checkbox">
+                  <input type="checkbox" name="remember" checked>
+                  <i></i>Stay signed in</label>
+              </section>-->
+            </fieldset>
+            <footer>
+                <button (click)="cancel()" class="btn btn-secondary">
+                    Cancelar
+                  </button>  
+              <button (click)="sendEmail()" class="btn btn-primary">
+                Enviar
+              </button>
+            </footer>
+          </form>
+        </div>
+      </div>      
+
     </div>
   </div>
 </div>

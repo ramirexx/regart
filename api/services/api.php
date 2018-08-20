@@ -336,7 +336,7 @@ private function insertIndividual(){
 
       $customer = json_decode(file_get_contents("php://input"),true);
       $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','comunidad',
-      'tipo_artista', 'e_id_pais', 'e_pais_localidad', 'e_cod_localidad','id_dpto', 'id_prov', 'dptoProv','id_mun',
+      'tipo_artista', 'e_id_pais', 'e_pais_localidad', 'e_cod_localidad','id_dpto', 'id_prov','prov','dptoProv','id_mun',
       'd_nombre_artistico','d_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
       'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','actividad_sec', 'id_especialidad',
       'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','d_foto_artista','id_estado','estado_credencial');
@@ -376,7 +376,7 @@ private function insertIndividual(){
       //$id = (int)$this->customer['id'];
       $id = $customer['id'];
       $column_names = array('numero_registro','ci_usuario', 'd_modificador', 'gestion', 'd_fecha_registro', 'd_fecha_renovacion','vigencia','id_dpto','comunidad',
-      'tipo_artista', 'e_id_pais', 'e_pais_localidad', 'e_cod_localidad','id_prov','dptoProv', 'id_mun',
+      'tipo_artista', 'e_id_pais', 'e_pais_localidad', 'e_cod_localidad','id_prov','prov','dptoProv', 'id_mun',
       'd_nombre_artistico','d_nombres','d_apellidos','d_cedula','d_exp','d_sexo','d_nacimiento','d_fecha_nacimiento','d_estado_civil','d_nro_hijos','d_profesion','d_domicilio',
       'd_telefono','d_celular','d_email','d_pagina_web','d_youtube','d_otros','d_institucion','d_agrupaciones','id_sector','id_sub_sector','id_actividad','actividad_sec', 'id_especialidad',
       'id_especialidad_sec','id_especialidad_ter','d_experiencia','categorizacion','id_doc_resp','d_doc_respaldo','d_foto','d_foto_artista','id_estado');
@@ -871,7 +871,7 @@ private function listaEspecialidades(){
             if($this->get_request_method() != "GET"){
                $this->response('',406);
                }
-               $query="SELECT * FROM usuarios  ORDER BY ci_usuario";
+               $query="SELECT * FROM usuarios, niveles WHERE usuarios.id_nivel = niveles.id_nivel  ORDER BY ci_usuario";
             $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
    
             if($r->num_rows > 0){
@@ -960,6 +960,21 @@ private function usuario(){
    }
 
 
+private function deleteUsuario(){
+      if($this->get_request_method() != "DELETE"){
+            $this->response('',406);
+      }
+      $ci = (int)$this->_request['ci'];
+      if($ci > 0){
+            $query="DELETE FROM usuarios WHERE ci_usuario = $ci";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            $success = array('status' => "Success", "msg" => "Successfully deleted one record.");
+            $this->response($this->json($success),200);
+      }else
+            $this->response('',204);	// If no records "No Content" status
+}
+
+
    private function insertUsuarioPublico(){
 
       function randomPassword() {
@@ -1035,6 +1050,76 @@ private function usuario(){
                   $this->response($this->json($arr_res), 400);
                   
       
+}   
+
+private function resetPassword(){
+
+      function randomPassword() {
+            $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+            $pass = array(); //remember to declare $pass as an array
+            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+            for ($i = 0; $i < 8; $i++) {
+                $n = rand(0, $alphaLength);
+                $pass[] = $alphabet[$n];
+            }
+            return implode($pass); //turn the array into a string
+        }
+
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+      $obj = json_decode(file_get_contents("php://input"),true);
+      $keys = array($obj);
+      foreach ($keys as $input)
+      {
+            //$usuario    = $input['usuario'];
+            $email = $input['email'];
+      }
+            $query="SELECT nombre_usuario FROM usuarios where email_usuario = '$email' LIMIT 1";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0) {
+               $result = $r->fetch_assoc();
+               //obtenemos el nombre de usuario
+               $keys = array($result);
+               foreach ($keys as $row)
+               {
+               $name= $row["nombre_usuario"];
+               }	   
+               //$response = array('status' => "ok", "data" => $result);
+               //genera password
+               $passUsuario = randomPassword();
+               $query2="UPDATE usuarios SET pass_usuario='$passUsuario' WHERE email_usuario='$email'";
+               //$query = "INSERT INTO usuarios (ci_usuario,nombre_usuario, apellido_usuario, email_usuario, nick_usuario, pass_usuario, id_nivel, id_dpto, tipo_registro) VALUES ('$ci','$nombres','$apellidos','$email','$nickUsuario','$passUsuario',4,'$id_dpto','$tipo')";
+               $r2 = $this->mysqli->query($query2) or die($this->mysqli->error.__LINE__);
+                  
+               $response = array('status' => "ok", "msg" => "reset Password to ".$passUsuario, "data" => $name);
+
+               /*$to = "ramirolozacmj@gmail.com"; // this is your Email address
+               $from = "Ministerio de Culturas y Turismo"; // this is the sender's Email address
+               $first_name = $nombres;
+               $last_name = $apellidos;
+               $subject = "Reestablecimiento de contraseña Sistema REGART";
+               $message = "Estimado(a) ".$nombres . " " . $apellidos . "\n\n".
+               "La creación de su cuenta fue realizada con exito"."\n\n". 
+               "Estas son sus credenciales para acceder al sistema:" . "\n\n" ."Usuario:".$nickUsuario. "\n\n". "Contraseña:".$passUsuario."\n\n". 
+               "https://regart.000webhostapp.com"."\n\n". 
+               "Ministerio de Culturas y Turismo";
+               $headers = "De:" . $from;
+               mail($to,$subject,$message,$headers);
+               }
+               $this->response($this->json($result), 200); // send user details*-/*/
+               $this->response($this->json($response), 200);
+            }
+            else{
+                  $error = array('status' => "Error", "msg" => "Datos invalidos");
+                  $this->response($this->json($error), 202);	// If no records
+                  
+/*                  $arr_res['error']  = $error;
+			$arr_res['result'] = array('status' => "Failed");
+                  $this->response('',204);*/
+            }
+            
+            
 }   
 
    private function accesAuth(){
@@ -1384,7 +1469,7 @@ private function premio(){
                   $this->response($this->json($result), 200); // send user details
                }else{
                   $error = array('status' => "empty", "msg" => "NO se encontraron datos");
-                  $this->response($this->json($error), 202); // send user details
+                  $this->response($this->json($result), 202); // send user details
                }
          }
       $this->response('',204);   // If no records "No Content" status
@@ -1433,7 +1518,7 @@ private function produccion(){
                   $this->response($this->json($result), 200); // send user details
                }else{
                   $error = array('status' => "empty", "msg" => "NO se encontraron datos");
-                  $this->response($this->json($error), 202); // send user details
+                  $this->response($this->json($result), 202); // send user details
                }
          }
       $this->response('',204);   // If no records "No Content" status
@@ -1483,7 +1568,7 @@ private function trayectoria(){
                   $this->response($this->json($result), 200); // send user details
                }else{
                   $error = array('status' => "empty", "msg" => "NO se encontraron datos");
-                  $this->response($this->json($error), 202); // send user details
+                  $this->response($this->json($result), 202); // send user details
                }
          }
       $this->response('',204);   // If no records "No Content" status
