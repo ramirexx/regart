@@ -360,7 +360,21 @@ private function insertIndividual(){
       
          $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
          $z = $this->mysqli->insert_id;
-         $success = array('status' => "Success", "msg" => "Artista Created Successfully.", "data" => $z);
+
+      /**
+       * REGISTRA LOG
+       */
+      $keys = array($customer);
+      foreach ($keys as $row){
+      $usuario= $row["d_modificador"];
+      $registro= $row["numero_registro"];
+      $estado=$row["id_estado"];
+      }	
+      $query2 ="INSERT INTO registro_log (usuario, numero_registro, estado_registro) VALUES('$usuario','$registro','$estado')";
+      $r2 = $this->mysqli->query($query2) or die($this->mysqli->error.__LINE__);
+
+         $success = array('status' => "Success", "msg" => $r2, "data" => $z);
+         //"Artista Created Successfully."
          $this->response($this->json($success),200);
       }else
          $this->response('error',204);   //"No Content" status
@@ -394,7 +408,21 @@ private function insertIndividual(){
       $query = "UPDATE tb_individual SET ".trim($columns,',')." WHERE id_individual=$id";
       if(!empty($customer)){
          $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
-         $success = array('status' => "Success", "msg" => "Artista Actualizado Successfully.", "data" => $customer);
+
+         /**
+          * registra log
+          */
+      $keys = array($customer);
+      foreach ($keys as $input){
+      $usuario= "TEST";//$input['d_modificador'];
+      $registro= $input['numero_registro'];
+      $estado=$input['id_estado'];
+      }	
+      $query2 ="INSERT INTO registro_log (usuario, numero_registro, estado_registro) VALUES('$usuario','$registro','$estado')";
+      $r2 = $this->mysqli->query($query2) or die($this->mysqli->error.__LINE__);
+
+
+         $success = array('status' => "Success", "msg" => "Artista Actualizado Successfully" , "data" => $customer);//"Artista Actualizado Successfully."
          $this->response($this->json($success),200);
       }else
          $this->response('error',204);   //"No Content" status

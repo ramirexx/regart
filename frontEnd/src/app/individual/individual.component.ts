@@ -548,7 +548,7 @@ validacion():boolean{
     //this.artForm.controls.setErrors({'invalidYear': true});
     this.showError('Por favor complete los campos requeridos');
     console.log(this.artForm)
-    return true;
+    return false;
   }
   console.log("Formulario valido")
     return true

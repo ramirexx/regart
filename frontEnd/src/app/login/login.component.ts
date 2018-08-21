@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       usuario: this.usuario,
       password: this.password
     }
-    if (this.email != null) {
+    if (this.validForm()) {
       this.formularioService.loginUsuario(data).subscribe(response => {
         console.log(response)
         if (response.status == "ok"){
