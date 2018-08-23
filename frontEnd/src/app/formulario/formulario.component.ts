@@ -21,6 +21,8 @@ export class FormularioComponent implements OnInit {
   exp:string;
   nac:string;
 
+  imgFirma: any;
+
 
   constructor(private formularioService: FormularioService,
     private route: ActivatedRoute,
@@ -48,6 +50,17 @@ export class FormularioComponent implements OnInit {
             this.exp = this.getExp(this.artista.d_exp);
             console.log(this.artista.id_dpto)
             console.log(this.depto)
+
+            if(this.artista.gestion == "2018" || this.artista.gestion == "2017"){
+              console.log("this.artista.gestion: WILMA ALANOCA");
+              this.imgFirma = "assets/img/firma.png"
+            }else if(this.artista.gestion == "2015" || this.artista.gestion == "2016"){
+              console.log("this.artista.gestion: MARCO MACHICAO")
+              this.imgFirma = "assets/img/firma2.png"
+            }else if(this.artista.gestion == "2013" || this.artista.gestion == "2014"){
+            console.log("this.artista.gestion: PABLO GROUX")
+            this.imgFirma = "assets/img/firma3.png"
+            }
           })
       }
     })

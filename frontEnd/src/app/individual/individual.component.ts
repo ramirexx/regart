@@ -560,6 +560,7 @@ validacion():boolean{
     if (this.validacion()){
     this.artista.numero_registro = "MDCyT" + this.year + "I";
     this.artista.id_estado = "BORRADOR";
+    this.artista.gestion = this.year;
     this.artista.d_fecha_registro = new(Date);
     this.artista.ci_usuario = localStorage.getItem('ci');
     this.artista.e_cod_localidad = this.paisloc.loc_codigo;

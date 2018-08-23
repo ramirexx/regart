@@ -5,6 +5,7 @@ export class Individual {
     id_individual: number;
     numero_registro: string;
     ci_usuario: any;
+    gestion: string;
     d_fecha_registro: Date;
     d_fecha_renovacion: Date;
     vigencia: string = "Vigencia de 2 años";
@@ -69,6 +70,7 @@ export class FormIndividual {
 
     numero_registro: string;
     d_fecha_registro: Date;
+    gestion: string;
     vigencia: string = "Vigencia de 2 años";
     estado_credencial: string;
     id_dpto: number;
