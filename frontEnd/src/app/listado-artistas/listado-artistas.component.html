@@ -23,9 +23,10 @@
           <span>{{index+1}}</span>
         </ng-template>
       </p-column>
-      <p-column field="d_cedula" header="Cedula de Identidad"></p-column>
-      <p-column field="d_nombres" header="Nombres"></p-column>
-      <p-column field="d_apellidos" header="Apelidos"></p-column>
+      <p-column field="d_cedula" header="Cedula de Identidad" [filter]="true" filterPlaceholder="Buscar"></p-column>
+      <p-column field="d_nombres" header="Nombres" [filter]="true" filterPlaceholder="Buscar"></p-column>
+      <p-column field="d_apellidos" header="Apelidos" [filter]="true" filterPlaceholder="Buscar"></p-column>
+      
       <p-column field="id_estado" header="Estado"></p-column>
       <p-column [style]="{'width':'10%'}" header="Acciones">
         <ng-template let-doc="rowData" pTemplate type="body">

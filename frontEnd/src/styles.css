@@ -99,10 +99,10 @@ margin-bottom: 3px;
         background-color: #7db4d8;
     }
     
-    .pager {
+    /*.pager {
         background: #eeeeee;
         padding: 10px
-    }
+    }*/
     
   
     .center {
@@ -464,3 +464,24 @@ color: #f3f3f3
         background-color: #f9dbdb;
     }
   
+
+    /*menu*/
+    #left-panel {
+        padding-top: 69px;
+    }
+
+
+    @media (max-width: 979px) and (min-width: 768px){
+    #left-menu {
+    /*left: -220px;*/
+    display: none
+    
+    }
+
+    #logo-group{
+    display:none
+
+    }
+
+
+}
