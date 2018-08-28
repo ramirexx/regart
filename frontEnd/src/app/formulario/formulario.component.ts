@@ -56,10 +56,10 @@ export class FormularioComponent implements OnInit {
               this.imgFirma = "assets/img/firma.png"
             }else if(this.artista.gestion == "2015" || this.artista.gestion == "2016"){
               console.log("this.artista.gestion: MARCO MACHICAO")
-              this.imgFirma = "assets/img/firma2.png"
-            }else if(this.artista.gestion == "2013" || this.artista.gestion == "2014"){
+              this.imgFirma = "assets/img/machicao.png"
+            }else if(this.artista.gestion == "2012" || this.artista.gestion == "2013" || this.artista.gestion == "2014"){
             console.log("this.artista.gestion: PABLO GROUX")
-            this.imgFirma = "assets/img/firma3.png"
+            this.imgFirma = "assets/img/groux.png"
             }
           })
       }

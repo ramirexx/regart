@@ -52,12 +52,7 @@
                   <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingrese su password
                     </b> </label>
 
-                <div class="note">
-                  <!--<a routerLink="/auth/forgot-password">¿Olvidó contraseña?</a>-->
-                  <button (click)="passRecovery()" class="btn btn-link">
-                    ¿Olvidé mi contraseña?
-                  </button>
-                </div>
+                
               </section>
               <!--<section>
                 <label class="checkbox">
@@ -70,8 +65,16 @@
               <button (click)="login()" class="btn btn-primary">
                 Acceder
               </button>
+
+              
             </footer>
           </form>
+        </div>
+        <div class="note">
+          <!--<a routerLink="/auth/forgot-password">¿Olvidó contraseña?</a>-->
+          <button (click)="passRecovery()" class="btn btn-link">
+            ¿Olvidé mi contraseña?
+          </button>
         </div>
         <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Necesita una cuenta?</span> 
         <a routerLink="/crear-cuenta" routerLinkActive="active" class="btn btn-danger">Crear Cuenta</a> </span>

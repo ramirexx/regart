@@ -25,6 +25,8 @@ export class CredencialComponent implements OnInit {
   exp:string;
   showInd: boolean = true;
 
+  imgFirma: any;
+
   constructor(private formularioService: FormularioService,
     private route: ActivatedRoute,
     private router: Router,
@@ -52,6 +54,17 @@ export class CredencialComponent implements OnInit {
               
               this.qr = "Pagina Web: "+ environment.urlApp+"regart/#/ver-artista/"+id;//this.artista.d_nombres + this.artista.d_apellidos 
               this.exp = this.getExp(this.artista.d_exp);
+
+              if(this.artista.gestion == "2018" || this.artista.gestion == "2017"){
+                console.log("this.artista.gestion: WILMA ALANOCA");
+                this.imgFirma = "assets/img/firma.png"
+              }else if(this.artista.gestion == "2015" || this.artista.gestion == "2016"){
+                console.log("this.artista.gestion: MARCO MACHICAO")
+                this.imgFirma = "assets/img/machicao.png"
+              }else if(this.artista.gestion == "2012" || this.artista.gestion == "2013" || this.artista.gestion == "2014"){
+              console.log("this.artista.gestion: PABLO GROUX")
+              this.imgFirma = "assets/img/groux.png"
+              }
   
               
             })

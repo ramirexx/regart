@@ -292,10 +292,10 @@ background: linear-gradient(to bottom, #f6f7f9 0%, #ebedf0 100%);
    /*font-size: 1rem*/
 }
 
-.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-caption {
+/*.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-caption {
 /*text-align: left;
-height: 40px;*/
-}
+height: 40px;
+}*/
 
 .ui-datatable .ui-datatable-thead > tr > th, body .ui-datatable .ui-datatable-tfoot > tr > td {
 /*background: linear-gradient(to bottom, #f6f7f9 0%, #ebedf0 100%) !important;*/
@@ -482,6 +482,16 @@ color: #f3f3f3
     display:none
 
     }
+
+
+    .subtitulo{
+        font-weight: bolder !important
+    }
+
+    .ui-widget-header{
+        font-weight: bolder !important
+    }
+    
 
 
 }

@@ -39,7 +39,7 @@
                     <font color="#ffffff" size="1"> <strong>C.I.: </strong> {{artista.d_cedula}} {{exp}}</font>
                     <br>
                     <!--<font size="1" style="line-height: 1" color="ffffff"><strong>{{artista.estado_credencial}} </strong></font>-->
-                    <br><font size="1" style="line-height: 1" color="ffffff"><strong>Válida Hasta: {{artista.d_fecha_validez | date:'dd-MM-yyyy'}} </strong></font>
+                    <br><font size="1" style="line-height: 1" color="ffffff"><strong><span *ngIf="artista.id_estado =='APROBADO'">Válida Hasta: {{artista.d_fecha_validez | date:'dd-MM-yyyy'}}</span> </strong></font>
                   </p>
                 </td>
                 <td style="WIDTH: 4px; HEIGHT: 90px; FONT-SIZE: 2px" valign="top" align="left">&nbsp;</td>
@@ -165,7 +165,9 @@
         portador como artista inscrito en el Sistema de Registro  Plurinacional.<br>
         Se solicita a las autoridades y ciudadanía en general brindar<br>
       la colaboración para el ejercicio de sus funciones.--> </p><br>
-      <div class="bgimg2"> <div style="float:right;"><qr-code [value]="qr" [size]="100"></qr-code></div></div> <br>
+      <div><!--</div> class="bgimg2">-->
+          <img [src]="imgFirma" width="110px" alt="" style="float: left; margin-left:60px;">
+        <div style="float:right;"><qr-code [value]="qr" [size]="90"></qr-code></div></div> <br>
       
     </td>
   </tr>
