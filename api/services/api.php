@@ -1027,7 +1027,7 @@ private function deleteUsuario(){
             $nombres    = $input['nombre'];
             $apellidos  = $input['apellido'];
             $email      = $input['email'];
-            $tipo       = $input['tipo'];
+            //$tipo       = $input['tipo'];
             $id_dpto    = $input['id_dpto'];
       }
                   // $array sólo estará compuesto de 2 elementos:
@@ -1040,7 +1040,7 @@ private function deleteUsuario(){
                   $nickUsuario = $sub1 . $sub2 . $sub3 . $ci;
                   $passUsuario = randomPassword();
             
-			$query = "INSERT INTO usuarios (ci_usuario,nombre_usuario, apellido_usuario, email_usuario, nick_usuario, pass_usuario, id_nivel, id_dpto, tipo_registro) VALUES ('$ci','$nombres','$apellidos','$email','$nickUsuario','$passUsuario',4,'$id_dpto','$tipo')";
+			$query = "INSERT INTO usuarios (ci_usuario,nombre_usuario, apellido_usuario, email_usuario, nick_usuario, pass_usuario, id_nivel, id_dpto, tipo_registro) VALUES ('$ci','$nombres','$apellidos','$email','$nickUsuario','$passUsuario',4,'$id_dpto','Nuevo Registro')";
                   if(!empty($obj)){
 
                                          

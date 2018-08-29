@@ -42,7 +42,7 @@ export class PublicoComponent implements OnInit {
         'apellidos': [{ value: '' }, Validators.required],
         'cedula': [{ value: '' }, Validators.required],
         'email': [{ value: '' }, [Validators.required, Validators.email]],
-        'tipo': [{ value: '' }, Validators.required],
+        //'tipo': [{ value: '' }, Validators.required],
         'dpto': [{ value: '' }, Validators.required],
       });
      }
