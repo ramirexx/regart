@@ -352,7 +352,7 @@
                     <!--</div>
                 <div class="row">-->
                     <div class="col-sm-4">
-                        <label>Sub Sector </label>
+                        <label>Actividad </label>
                         <select class="form-control" [formControl]="artForm.controls['id_sub_sector']" [(ngModel)]="artista.id_sub_sector" (ngModelChange)="onselectSubSector($event)">
                             <option value="">--Seleccione un valor--</option>
                             <option *ngFor="let obj of subSector" [ngValue]="obj.id_sub_cat">{{obj.d_desc_sub_cat}}</option>
@@ -368,7 +368,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <label>Actividad 1</label>
+                        <label>Especialidad 1</label>
 
                         <select class="form-control" [formControl]="artForm.controls['id_actividad']" [(ngModel)]="artista.id_actividad" (ngModelChange)="onselectActividad($event)">
                             <option value="">--Seleccione un valor--</option>
@@ -376,19 +376,19 @@
                         </select>
                         <control-messages [submitted]="submitted" [control]="artForm.controls.id_actividad"></control-messages>
                     </div>
-                    <div class="col-sm-4">
+                    <!--<div class="col-sm-4">
                         <label>Especialidad 1</label>
                         <select class="form-control" [formControl]="artForm.controls['id_especialidad']" [(ngModel)]="artista.id_especialidad">
                             <option value="">--Seleccione un valor--</option>
                             <option *ngFor="let obj of especialidad" [ngValue]="obj.id_especialidad">{{obj.d_desc_esp}}</option>
                         </select>
                         <control-messages [submitted]="submitted" [control]="artForm.controls.id_especialidad"></control-messages>
-                    </div>
+                    </di-->
                     <div class="col-sm-4">
                         <label>Especialidad 2 </label>
                         <select class="form-control" [formControl]="artForm.controls['id_especialidad_sec']" [(ngModel)]="artista.id_especialidad_sec">
                             <option value="">--Seleccione un valor--</option>
-                            <option *ngFor="let obj of especialidad" [ngValue]="obj.id_especialidad">{{obj.d_desc_esp}}</option>
+                            <option *ngFor="let obj of especialidad2" [ngValue]="obj.id_especialidad">{{obj.d_desc_act}}</option>
                         </select>
                     </div>
 

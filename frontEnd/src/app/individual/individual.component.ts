@@ -90,6 +90,8 @@ export class IndividualComponent implements OnInit {
   actividad4: any[];
   especialidad: any[];
   especialidad3: any[];
+
+  especialidad2: any[];
   paises:any[];
   paisLocalidad: any[];
 
@@ -181,7 +183,7 @@ export class IndividualComponent implements OnInit {
       'id_sub_sector': [{ value: '' }, Validators.required],
       'id_actividad': [{ value: '' }, Validators.required],
       'id_actividad_sec': [{ value: '' }],
-      'id_especialidad': [{ value: '' }, Validators.required],
+      //'id_especialidad': [{ value: '' }, Validators.required],
       'id_especialidad_sec': [{ value: '' }],
       'id_especialidad_ter': [{ value: '' }],
 
@@ -245,6 +247,12 @@ export class IndividualComponent implements OnInit {
       .subscribe(data => { this.actividadSec = data },
         err => console.log(err),
         () => console.log("getActividadSec done loanding", this.actividadSec));
+
+        this.formularioService.getEspecialidad2()
+      .subscribe(data => { this.especialidad2 = data },
+        err => console.log(err),
+        () => console.log("getActividadSec done loanding", this.especialidad2));
+
 
     /*this.formularioService.getDepartamentos()
       .subscribe(data => { this.departamentos = data },
@@ -480,7 +488,7 @@ export class IndividualComponent implements OnInit {
       
       //this.artista.id_sub_cat=objSelected.id_sub_cat
       //this.artista.d_desc_act=objSelected.d_desc_act
-      this.formularioService.getEspecialidad(objSelected)
+     /* this.formularioService.getEspecialidad(objSelected)
         .subscribe(data => {
           console.log("onselectActividad",objSelected)
           let res: any = data
@@ -498,7 +506,7 @@ export class IndividualComponent implements OnInit {
           }
         },
           err => console.log(err)
-        );
+        );*/
     }
   }
  

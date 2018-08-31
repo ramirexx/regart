@@ -68,6 +68,11 @@ export class FormularioService {
     return this.http.get(environment.urlApi + 'listaCategorias').map(this.extractData)
       .catch(this.handleError);
   }
+
+  getSectores(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'listaSectores').map(this.extractData)
+      .catch(this.handleError);
+  }
   //http://localhost/api/regart/subCategorias?cat=1
   getSubSector(cod:any): Observable<any[]> {
     return this.http.get(environment.urlApi + 'subCategorias?sec='+cod).map(this.extractData)
@@ -81,6 +86,11 @@ export class FormularioService {
   }
 
   getActividadSec(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'listaActividadesSecundarias').map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getEspecialidad2(): Observable<any[]> {
     return this.http.get(environment.urlApi + 'listaActividadesSecundarias').map(this.extractData)
       .catch(this.handleError);
   }
