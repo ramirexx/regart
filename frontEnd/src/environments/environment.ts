@@ -5,9 +5,12 @@
 
 export const environment = {
   production: false,
-
+  //urlApi:"http://192.168.113.161/api/regart/",
+ // urlApp:"http://192.168.113.161/sirpa",
   urlApi:"http://localhost/api/regart/",
   urlApp:"http://localhost/",
   //urlApi:"https://regart.000webhostapp.com/api/",
   //urlApp:"https://regart.000webhostapp.com/"
+  //urlApi:"https://sirpa.minculturas.gob.bo/api/",
+  //urlApp:"https://sirpa.minculturas.gob.bo/"
 };

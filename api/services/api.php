@@ -454,8 +454,8 @@ private function formularioIndividual(){
       }
       $id = (int)$this->_request['id'];
       if($id > 0){  
-            $query="SELECT a.id_estado, a.numero_registro,a.d_fecha_registro, a.gestion, a.d_fecha_validez, a.id_dpto, a.id_prov, a.id_mun, a.d_nombres, d_apellidos, a.d_cedula, a.d_exp,a.d_fecha_nacimiento, a.d_domicilio, a.d_telefono, a.d_celular, a.d_email,  a.id_sector, a.id_actividad, a.d_agrupaciones,  a.d_experiencia, a.d_foto, a.d_foto_artista, a.id_sector, a.id_sub_sector, a.id_actividad, a.id_especialidad, a.d_agrupaciones,  a.d_experiencia, a.vigencia, b.Departamento, c.Provincia, d.Localidad, e.d_desc_cat, f.d_desc_sub_cat, g.d_desc_act, h.d_desc_esp
- FROM tb_individual a , departamentos b , provincias c, localidades d, tb_categoria e, tb_sub_cat f, tb_actividad g, tb_especialidad h  WHERE a.id_dpto = b.idDep AND a.id_prov = c.idProv AND a.id_mun = d.idLoc  AND a.id_sector = e.id_cat AND a.id_sub_sector = f.id_sub_cat AND a.id_actividad = g.id_actividad AND a.id_especialidad = h.id_especialidad AND a.id_individual =$id LIMIT 1";
+            $query="SELECT a.id_estado, a.numero_registro,a.d_fecha_registro, a.gestion, a.d_fecha_validez, a.comunidad, a.id_dpto, a.id_prov, a.id_mun, a.d_nombre_artistico, a.d_nombres, d_apellidos, a.d_cedula, a.d_exp,a.d_sexo,a.d_nacimiento,a.d_fecha_nacimiento, a.d_domicilio, a.d_telefono, a.d_celular, a.d_email, a.d_pagina_web, a.d_youtube, a.d_otros, a.d_institucion, a.id_sector, a.id_actividad, a.d_agrupaciones,  a.d_experiencia, a.d_foto, a.d_foto_artista, a.id_sector, a.id_sub_sector, a.id_actividad, a.id_especialidad, a.d_agrupaciones,  a.d_experiencia, a.vigencia, b.Departamento, c.Provincia, d.Localidad, e.d_desc_cat, f.d_desc_sub_cat, g.d_desc_act, h.d_desc_esp
+ FROM tb_individual a , departamentos b , provincias c, localidades d, tb_categoria e, tb_sub_cat f, tb_actividad g, tb_especialidad h  WHERE a.id_dpto = b.idDep AND a.id_prov = c.idProv AND a.id_mun = d.idLoc  AND a.id_sector = e.id_cat AND a.id_sub_sector = f.id_sub_cat AND a.id_actividad = g.id_actividad AND a.id_individual =$id LIMIT 1";
  //        $query="SELECT d_fecharegistro as fechaReg,  FROM tb_individual c where c.id_individual=$id";
          $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
          if($r->num_rows > 0) {
@@ -1048,11 +1048,11 @@ private function deleteUsuario(){
                   
                   $response = array('status' => "Success", "msg" => "Usuario Creado", "data" => $obj);
 
-                  $to = "ramirolozacmj@gmail.com"; // this is your Email address
+                  $to = "marco.silove@gmail.com"; // this is your Email address
                   $from = "Ministerio de Culturas y Turismo"; // this is the sender's Email address
                   $first_name = $nombres;
                   $last_name = $apellidos;
-                  $subject = "Creación de Cuenta Sistema REGART";
+                  $subject = "Creación de Cuenta del Sistema Plurinacional de Artistas";
                   //$subject2 = "Copy of your form submission";
                   $message = "Estimado(a) ".$nombres . " " . $apellidos . "\n\n".
                   "La creación de su cuenta fue realizada con exito"."\n\n". 
@@ -1349,6 +1349,57 @@ private function localidades(){
 
 //SERVICIOS PARA HOJA ARTISTICA
 
+private function insertResumen(){
+      if($this->get_request_method() != "POST"){
+         $this->response('',406);
+      }
+      $customer = json_decode(file_get_contents("php://input"),true);
+      $column_names = array('id_artista','resumen');
+      $keys = array_keys($customer);
+      $columns = '';
+      $values = '';
+      foreach($column_names as $desired_key){ // Check the customer received. If blank insert blank into the array.
+         if(!in_array($desired_key, $keys)) {
+                $$desired_key = '';
+         }else{
+            $$desired_key = $customer[$desired_key];
+         }
+         $columns = $columns.$desired_key.',';
+         $values = $values."'".$$desired_key."',";
+      }
+      $query = "INSERT INTO ha_resumen_art(".trim($columns,',').") VALUES(".trim($values,',').")";
+      if(!empty($customer)){
+         $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+         $success = array('status' => "Success", "msg" => "Resumen Created Successfully.", "data" => $customer);
+         $this->response($this->json($success),200);
+      }else
+         $this->response('',204);   //"No Content" status
+}
+
+private function resumen(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+         }
+         $id = (int)$this->_request['id'];
+         if($id >0){
+            //$query="SELECT Prov as codigo, IdProv as id, Provincia as descripcion FROM provincias WHERE DepProv =$id";
+            $query="SELECT * FROM ha_resumen_art WHERE id_artista =$id";
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            if($r->num_rows > 0){
+                  $result = array();
+                  while($row = $r->fetch_assoc()){
+                     $result[] = $row;
+                  }
+                  $this->response($this->json($result), 200); // send user details
+               }else{
+                  $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                  $this->response($this->json($error), 202); // send user details
+               }
+         }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
+
 
 //servicio para CURSOS
 private function insertCurso(){
@@ -1508,7 +1559,7 @@ private function insertProduccion(){
          $this->response('',406);
       }
       $customer = json_decode(file_get_contents("php://input"),true);
-      $column_names = array('id_artista','gestion','fecha','lugar','act_pub_exp');
+      $column_names = array('id_artista','gestion','fecha','lugar','act_pub_exp','bien');
       $keys = array_keys($customer);
       $columns = '';
       $values = '';

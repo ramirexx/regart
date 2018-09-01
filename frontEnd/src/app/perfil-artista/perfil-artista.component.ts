@@ -45,6 +45,7 @@ export class PerfilArtistaComponent implements OnInit {
             this.getTra(id);
             this.getPre(id);
             
+            
 
             //this.qr = this.artista.numero_registro + this.artista.d_nombres + this.artista.d_apellidos 
             /*switch (this.artista.id_dpto) {
