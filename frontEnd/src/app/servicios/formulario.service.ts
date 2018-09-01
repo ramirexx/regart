@@ -90,6 +90,11 @@ export class FormularioService {
       .catch(this.handleError);
   }
 
+  getActividad2(): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'subCategoriasActividad2').map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getEspecialidad2(): Observable<any[]> {
     return this.http.get(environment.urlApi + 'listaActividadesSecundarias').map(this.extractData)
       .catch(this.handleError);

@@ -85,11 +85,16 @@ export class IndividualComponent implements OnInit {
   categorias: any[];
   subSector: any[];
   actividad: any[];
+
+  actividadSubCat2: any[];
+
   actividadSec: any[];
   actividad3: any[];
   actividad4: any[];
   especialidad: any[];
   especialidad3: any[];
+  especialidad4: any[];
+  especialidad5: any[];
 
   especialidad2: any[];
   paises:any[];
@@ -248,6 +253,14 @@ export class IndividualComponent implements OnInit {
       .subscribe(data => { this.actividadSec = data },
         err => console.log(err),
         () => console.log("getActividadSec done loanding", this.actividadSec));
+
+    this.formularioService.getActividad2()
+      .subscribe(data => { this.actividadSubCat2 = data },
+        err => console.log(err),
+        () => console.log("getActividadSec done loanding", this.actividadSubCat2));
+
+
+        
 
         this.formularioService.getEspecialidad2()
       .subscribe(data => { this.especialidad2 = data },
@@ -465,7 +478,7 @@ export class IndividualComponent implements OnInit {
     }
   }
   onselectSubSector(objSelected) {
-    console.log(objSelected)
+    console.log("onselectSubSector",objSelected)
     if (objSelected != undefined) {
       this.formularioService.getActividad(objSelected)
         .subscribe(data => {
@@ -511,14 +524,11 @@ export class IndividualComponent implements OnInit {
     }
   }
  
-  onselectActividad2(objSelected) {
+  /*onselectActividad2(objSelected) {
     console.log("onselectActividad2",objSelected)
     if (objSelected != undefined) {
       this.artista.actividad_sec =objSelected.id_actividad;
       this.formularioService.getEspecialidad(objSelected.id_actividad)
-      
-
-      
         .subscribe(data => {
           console.log("onselectActividad",objSelected)
           let res: any = data
@@ -533,6 +543,67 @@ export class IndividualComponent implements OnInit {
             this.especialidad3 = [];
             //alert("ESPECIALIDAD 3 CAMPO VACIO")
             console.log("ESPECIALIDAD3",data)
+          }
+        },
+          err => console.log(err)
+        );
+    }
+  }*/
+
+  onselectActividad2(objSelected) {
+    console.log("onselectActividad2",objSelected.id_sub_cat)
+    if (objSelected != undefined) {
+      this.artista.actividad_sec =objSelected.id_actividad;
+      this.formularioService.getActividad(objSelected.id_sub_cat)
+        .subscribe(data => {
+          let res: any = data
+          if (res.length > 0) {
+            this.especialidad3 = res
+          } else {
+            this.especialidad3 = [];
+            alert("ACTIVIDAD CAMPO VACIO")
+            console.log("ACTIVIDAD",data)
+          }
+        },
+          err => console.log(err)
+        );
+    }
+  }
+
+  onselectActividad3(objSelected) {
+    console.log("onselectActividad3",objSelected.id_sub_cat)
+    if (objSelected != undefined) {
+      this.artista.actividad_sec =objSelected.id_actividad;
+      this.formularioService.getActividad(objSelected.id_sub_cat)
+        .subscribe(data => {
+          let res: any = data
+          if (res.length > 0) {
+            this.especialidad4 = res
+          } else {
+            this.especialidad4 = [];
+            alert("ACTIVIDAD CAMPO VACIO")
+            console.log("ACTIVIDAD",data)
+          }
+        },
+          err => console.log(err)
+        );
+    }
+  }
+
+
+  onselectActividad4(objSelected) {
+    console.log("onselectActividad3",objSelected.id_sub_cat)
+    if (objSelected != undefined) {
+      this.artista.actividad_sec =objSelected.id_actividad;
+      this.formularioService.getActividad(objSelected.id_sub_cat)
+        .subscribe(data => {
+          let res: any = data
+          if (res.length > 0) {
+            this.especialidad5 = res
+          } else {
+            this.especialidad5 = [];
+            alert("ACTIVIDAD CAMPO VACIO")
+            console.log("ACTIVIDAD",data)
           }
         },
           err => console.log(err)

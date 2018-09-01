@@ -49,9 +49,13 @@ export class Individual {
     id_sub_sector: number;
     id_actividad: number;
     actividad_sec: string;
+    actividad_ter: string;
+    actividad_cua: string;
     id_especialidad: number;
     id_especialidad_sec: number;
     id_especialidad_ter: number;
+    id_especialidad_cua: number;
+    id_especialidad_qui: number;
     d_experiencia: string;
     caegorizacion: string;
 

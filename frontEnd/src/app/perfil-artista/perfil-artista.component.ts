@@ -21,6 +21,7 @@ export class PerfilArtistaComponent implements OnInit {
   listaFormacion: any[];
   listaPremio: any[];
   listaProduccion: any[];
+  resumen: any[];
 
   constructor(private formularioService: FormularioService,
     private route: ActivatedRoute,
@@ -42,8 +43,9 @@ export class PerfilArtistaComponent implements OnInit {
             this.imagePath = this.artista.d_foto;
             this.base64FotoPerfil = this.artista.d_foto_artista;
             this.qr = this.artista.d_nombres + this.artista.d_apellidos 
-            this.getTra(id);
-            this.getPre(id);
+            //this.getTra(id);
+            //this.getPre(id);
+            this.getRes(id);
             
             
 
@@ -80,6 +82,15 @@ export class PerfilArtistaComponent implements OnInit {
           })
       }
     })
+  }
+
+  getRes(id) {
+    console.log(id)
+    this.formularioService.getResumen(id)
+      .subscribe(lista => {
+        this.resumen = lista
+        console.log(this.resumen);
+      });
   }
 
   getTra(id) {

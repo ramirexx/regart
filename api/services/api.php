@@ -709,6 +709,26 @@ private function insertCategorias(){
             $this->response('',204);   // If no records "No Content" status
          }
 
+            //renombrado 4 cambio
+         private function subCategoriasActividad2(){
+            if($this->get_request_method() != "GET"){
+               $this->response('',406);
+               }
+                  $query="SELECT * FROM tb_sub_cat ORDER BY d_desc_sub_cat";
+                  $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+                  if($r->num_rows > 0){
+                        $result = array();
+                        while($row = $r->fetch_assoc()){
+                           $result[] = $row;
+                        }
+                        $this->response($this->json($result), 200); // send user details
+                     }else{
+                        $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+                        $this->response($this->json($error), 202); // send user details
+                     }
+            $this->response('',204);   // If no records "No Content" status
+         }
+
       private function listaSubCategorias(){
          if($this->get_request_method() != "GET"){
             $this->response('',406);
