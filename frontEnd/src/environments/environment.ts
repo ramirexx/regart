@@ -5,12 +5,16 @@
 
 export const environment = {
   production: false,
+  
+  //urlApi:"http://186.121.206.75/api/regart/",
+  //urlApp:"http://186.121.206.75/sirpa",
   //urlApi:"http://192.168.113.161/api/regart/",
- // urlApp:"http://192.168.113.161/sirpa",
+  //urlApp:"http://190.129.73.203/sirpa",
+  
   urlApi:"http://localhost/api/regart/",
   urlApp:"http://localhost/",
   //urlApi:"https://regart.000webhostapp.com/api/",
   //urlApp:"https://regart.000webhostapp.com/"
-  //urlApi:"https://sirpa.minculturas.gob.bo/api/",
+  //:"https://sirpa.minculturas.gob.bo/api/",
   //urlApp:"https://sirpa.minculturas.gob.bo/"
 };

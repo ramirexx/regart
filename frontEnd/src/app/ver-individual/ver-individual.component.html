@@ -26,9 +26,9 @@
               <div class="info-name">Artista:
                 <span class="value"> {{artista.d_nombres}} {{artista.d_apellidos}} </span>
               </div>
-              <div class="info-name">C.I.:
+              <!--<div class="info-name">C.I.:
                 <span class="value">{{artista.d_cedula}}</span>
-              </div>
+              </div>-->
               <div class="info-name">Lugar de Nacimiento:
                 <span class="value">{{Departamento}} {{Provincia}} {{artista.d_fecha_nacimiento}}</span>
               </div>
@@ -45,7 +45,7 @@
             <td>
               <div class="col-sm-6">
                 <img *ngIf="base64Foto" [src]="'data:image/jpg;base64,'+base64Foto" width="200px" class="img-responsive img-thumbnail" />
-                <div class="info-name">{{artista.numero_registro}}</div>
+                <div class="info-name">C.I.:{{artista.d_cedula}} {{exp}}</div>
               </div>
             </td>
           </tr>
@@ -60,12 +60,12 @@
             <td>
               <div class="col-md-12">
                 <div class="info-name">Sector:
-                  <span class="value">{{artista.d_desc_cat}}</span> / Sub Sector:
+                  <span class="value">{{artista.d_desc_cat}}</span> / Actividad:
                   <span class="value">{{artista.d_desc_sub_cat}}</span>
                 </div>
-                <div class="info-name">Actividad:
-                  <span class="value">{{artista.d_desc_act}}</span> / Especialidad:
-                  <span class="value">{{artista.d_desc_esp}}</span>
+                <div class="info-name">Especialidad:
+                  <span class="value">{{artista.d_desc_act}}</span> <!--/ Especialidad:
+                  <span class="value">{{artista.d_desc_esp}}</span>-->
                 </div>
               </div>
             </td>
@@ -73,7 +73,7 @@
           <tr>
             <td>
               <div class="col-md-12">
-                <div class="info-name">Agrupaciones/Instituciones: :
+                <div class="info-name">Sindicato/Asociación: :
                   <span class="value">{{artista.d_cedula}}</span>
                 </div>
                 <!--<div class="info-name">Biografía: :

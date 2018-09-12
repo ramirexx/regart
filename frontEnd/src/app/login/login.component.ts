@@ -14,6 +14,9 @@ import { FormularioService } from '../servicios/formulario.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+
+
 export class LoginComponent implements OnInit {
 
   logForm: any;
@@ -42,6 +45,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     
   }
+
+  onNavigate(){
+    //window.open("http://localhost/runa_publicar1/para_correo/publico.component", "_blank");
+   // window.open("http://192.168.113.161/para_correo/publico.component", "_blank");
+   window.open("http://186.121.206.75/para_correo/publico.component.php");
+  }
+
 
   public login() {
     let data = {

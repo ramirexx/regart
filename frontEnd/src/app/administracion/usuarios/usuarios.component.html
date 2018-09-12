@@ -20,11 +20,12 @@
           <span>{{index+1}}</span>
         </ng-template>
       </p-column>
-      <p-column field="ci_usuario" header="Cedula de Identidad"></p-column>
-      <p-column field="nombre_usuario" header="Nombres y Apellidos"></p-column>
-      <p-column field="apellido_usuario" header="Nombres y Apellidos"></p-column>
-      <p-column field="nick_usuario" header="Nombre usuario"></p-column>
-      <p-column field="nivel_desc" header="Nivel"></p-column>
+      <p-column field="ci_usuario" header="Cédula de Identidad" [filter]="true" filterPlaceholder="Buscar"></p-column>
+      <p-column field="nombre_usuario" header="Nombres" [filter]="true" filterPlaceholder="Buscar"></p-column>
+      <p-column field="apellido_usuario" header="Apellidos" [filter]="true" filterPlaceholder="Buscar"></p-column>
+      <p-column field="nick_usuario" header="Usuario" [filter]="true" filterPlaceholder="Buscar"></p-column>
+      
+      <p-column field="nivel_desc" header="Nivel" [filter]="true" filterPlaceholder="Buscar"></p-column>
       <p-column [style]="{'width':'10%'}" header="Acciones">
         <ng-template let-doc="rowData" pTemplate type="body">
           <button type="button" pButton (click)="show(doc)" icon="fa-search"></button>

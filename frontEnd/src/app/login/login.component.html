@@ -73,11 +73,14 @@
         <div class="note">
           <!--<a routerLink="/auth/forgot-password">¿Olvidó contraseña?</a>-->
           <button (click)="passRecovery()" class="btn btn-link">
-            ¿Olvidé mi contraseña?
+            <!--¿Olvidé mi contraseña?-->
           </button>
         </div>
         <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Necesita una cuenta?</span> 
-        <a routerLink="/crear-cuenta" routerLinkActive="active" class="btn btn-danger">Crear Cuenta</a> </span>
+        <!--<a routerLink="/crear-cuenta" routerLinkActive="active" class="btn btn-danger">Crear Cuenta</a> </span>-->
+        <!--<a href="http//www.regart.com/runa_publicar1/paracorreo/publico.component.php" target="_blank" class="btn btn-danger">Crear Cuenta</a>-->
+        <button class="btn btn-danger" (click)="onNavigate()">Crear Cuenta</button></span>
+
       </div>
 
       <!--Recupera tu cuenta

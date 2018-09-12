@@ -454,8 +454,81 @@ private function formularioIndividual(){
       }
       $id = (int)$this->_request['id'];
       if($id > 0){  
-            $query="SELECT a.id_estado, a.numero_registro,a.d_fecha_registro, a.gestion, a.d_fecha_validez, a.comunidad, a.id_dpto, a.id_prov, a.id_mun, a.d_nombre_artistico, a.d_nombres, d_apellidos, a.d_cedula, a.d_exp,a.d_sexo,a.d_nacimiento,a.d_fecha_nacimiento, a.d_domicilio, a.d_telefono, a.d_celular, a.d_email, a.d_pagina_web, a.d_youtube, a.d_otros, a.d_institucion, a.id_sector, a.id_actividad, a.d_agrupaciones,  a.d_experiencia, a.d_foto, a.d_foto_artista, a.id_sector, a.id_sub_sector, a.id_actividad, a.id_especialidad, a.d_agrupaciones,  a.d_experiencia, a.vigencia, b.Departamento, c.Provincia, d.Localidad, e.d_desc_cat, f.d_desc_sub_cat, g.d_desc_act, h.d_desc_esp
- FROM tb_individual a , departamentos b , provincias c, localidades d, tb_categoria e, tb_sub_cat f, tb_actividad g, tb_especialidad h  WHERE a.id_dpto = b.idDep AND a.id_prov = c.idProv AND a.id_mun = d.idLoc  AND a.id_sector = e.id_cat AND a.id_sub_sector = f.id_sub_cat AND a.id_actividad = g.id_actividad AND a.id_individual =$id LIMIT 1";
+            $query="SELECT 
+            tb_individual.id_individual,
+            tb_individual.numero_registro,
+            tb_individual.ci_usuario,
+            tb_individual.d_modificador,
+            tb_individual.gestion,
+            tb_individual.d_fecha_registro,
+            tb_individual.d_fecha_validez,
+            tb_individual.d_fecha_renovacion,
+            tb_individual.vigencia,
+            tb_individual.comunidad,
+            tb_individual.tipo_artista,
+            tb_individual.e_id_pais,
+            tb_individual.e_pais_localidad,
+            tb_individual.e_cod_localidad,
+            tb_individual.id_dpto,
+            tb_individual.id_prov,
+            tb_individual.dptoProv,
+            tb_individual.prov,
+            tb_individual.id_mun,
+            tb_individual.d_nombre_artistico,
+            tb_individual.d_nombres,
+            tb_individual.d_apellidos,
+            tb_individual.d_cedula,
+            tb_individual.d_exp,
+            tb_individual.d_sexo,
+            tb_individual.d_nacimiento,
+            tb_individual.d_fecha_nacimiento,
+            tb_individual.d_estado_civil,
+            tb_individual.d_nro_hijos,
+            tb_individual.d_profesion,
+            tb_individual.d_domicilio,
+            tb_individual.d_telefono,
+            tb_individual.d_celular,
+            tb_individual.d_email,
+            tb_individual.d_pagina_web,
+            tb_individual.d_youtube,
+            tb_individual.d_otros,
+            tb_individual.d_institucion,
+            tb_individual.d_agrupaciones,
+            tb_individual.id_sector,
+            tb_individual.id_sub_sector,
+            tb_individual.id_actividad,
+            tb_individual.actividad_sec,
+            tb_individual.id_especialidad,
+            tb_individual.id_especialidad_sec,
+            tb_individual.id_especialidad_ter,
+            tb_individual.d_experiencia,
+            tb_individual.categorizacion,
+            tb_individual.id_doc_resp,
+            tb_individual.d_doc_respaldo,
+            tb_individual.d_foto,
+            tb_individual.d_foto_artista,
+            tb_individual.id_estado,
+            tb_individual.estado_credencial,
+            departamentos.Departamento,
+            provincias.Provincia,
+            provincias.Prov,
+            provincias.DepProv,
+            tb_sub_cat.d_desc_sub_cat,
+            tb_actividad.d_desc_act,
+            tb_categoria.d_desc_cat,
+  localidades.Localidad
+          FROM
+            departamentos
+            RIGHT OUTER JOIN tb_individual ON (departamentos.idDep = tb_individual.id_dpto)
+            LEFT OUTER JOIN provincias ON (tb_individual.id_prov = provincias.IdProv)
+            LEFT OUTER JOIN localidades ON (tb_individual.id_mun = localidades.IdLoc)
+            INNER JOIN tb_categoria ON (tb_individual.id_sector = tb_categoria.id_cat)
+            INNER JOIN tb_sub_cat ON (tb_individual.id_sub_sector = tb_sub_cat.id_sub_cat)
+            INNER JOIN tb_actividad ON (tb_individual.id_actividad = tb_actividad.id_actividad)
+          WHERE
+            tb_individual.id_individual = $id LIMIT 1";
+ //$query="SELECT a.id_estado, a.numero_registro,a.d_fecha_registro, a.gestion, a.d_fecha_validez, a.comunidad, a.id_dpto, a.id_prov, a.id_mun, a.d_nombre_artistico, a.d_nombres, d_apellidos, a.d_cedula, a.d_exp,a.d_sexo,a.d_nacimiento,a.d_fecha_nacimiento, a.d_domicilio, a.d_telefono, a.d_celular, a.d_email, a.d_pagina_web, a.d_youtube, a.d_otros, a.d_institucion, a.id_sector, a.id_actividad, a.d_agrupaciones,  a.d_experiencia, a.d_foto, a.d_foto_artista, a.id_sector, a.id_sub_sector, a.id_actividad, a.id_especialidad, a.d_agrupaciones,  a.d_experiencia, a.vigencia, b.Departamento, c.Provincia, d.Localidad, e.d_desc_cat, f.d_desc_sub_cat, g.d_desc_act, h.d_desc_esp
+ //FROM tb_individual a , departamentos b , provincias c, localidades d, tb_categoria e, tb_sub_cat f, tb_actividad g, tb_especialidad h  WHERE a.id_dpto = b.idDep AND a.id_prov = c.idProv AND a.id_mun = d.idLoc  AND a.id_sector = e.id_cat AND a.id_sub_sector = f.id_sub_cat AND a.id_actividad = g.id_actividad AND a.id_individual =$id LIMIT 1";
  //        $query="SELECT d_fecharegistro as fechaReg,  FROM tb_individual c where c.id_individual=$id";
          $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
          if($r->num_rows > 0) {
@@ -1067,7 +1140,6 @@ private function deleteUsuario(){
                   $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
                   
                   $response = array('status' => "Success", "msg" => "Usuario Creado", "data" => $obj);
-
                   $to = "marco.silove@gmail.com"; // this is your Email address
                   $from = "Ministerio de Culturas y Turismo"; // this is the sender's Email address
                   $first_name = $nombres;
@@ -1075,7 +1147,7 @@ private function deleteUsuario(){
                   $subject = "Creación de Cuenta del Sistema Plurinacional de Artistas";
                   //$subject2 = "Copy of your form submission";
                   $message = "Estimado(a) ".$nombres . " " . $apellidos . "\n\n".
-                  "La creación de su cuenta fue realizada con exito"."\n\n". 
+                  "La creación de su cuenta fue realizada con éxito"."\n\n". 
                   "Estas son sus credenciales para acceder al sistema:" . "\n\n" ."Usuario:".$nickUsuario. "\n\n". "Contraseña:".$passUsuario."\n\n". 
                   "https://regart.000webhostapp.com"."\n\n". 
                   "Ministerio de Culturas y Turismo";

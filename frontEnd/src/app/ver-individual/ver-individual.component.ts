@@ -20,6 +20,7 @@ export class VerIndividualComponent implements OnInit {
   listaFormacion: any[];
   listaPremio: any[];
   listaProduccion: any[];
+  exp:string;
   
   constructor(private formularioService: FormularioService,
     private route: ActivatedRoute,
@@ -43,6 +44,7 @@ export class VerIndividualComponent implements OnInit {
             this.imagePath = this.artista.d_foto;
             this.base64Foto = this.artista.d_foto;
             this.qr = this.artista.d_nombres + this.artista.d_apellidos 
+            this.exp = this.getExp(this.artista.d_exp);
             this.getTra(id);
             this.getCur(id);
             this.getFor(id);
@@ -85,6 +87,41 @@ export class VerIndividualComponent implements OnInit {
     })
   }
 
+
+  getExp(x){
+    switch (x) {
+      case "1":
+        this.depto = "CH"
+        break;
+      case "2":
+        this.depto = "LP"
+        break;
+      case "3":
+        this.depto = "CBBA"
+        break;
+      case "4":
+        this.depto = "OR"
+        break;
+      case "5":
+        this.depto = "PT"
+        break;
+      case "6":
+        this.depto = "TJA"
+        break;
+      case "7":
+        this.depto = "SCZ"
+        break;
+      case "8":
+        this.depto = "BN"
+        break;
+      case "9":
+        this.depto = "PD"
+        break;
+        
+    }
+    console.log(this.depto)
+    return this.depto;
+  }
 
   getTra(id) {
     console.log(id)
