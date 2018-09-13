@@ -38,6 +38,7 @@ export const appRoutes: Routes = [
         { path: 'categorias', component: CategoriasComponent },
         { path: 'listado-colectivos', component: ListadoColectivoComponent },
         { path: 'estadisticas', component: EstadisticasComponent },
+        { path: 'ver-perfil', component: PublicoComponent },
     ]},
     { path: 'crear-cuenta', component: PublicoComponent },
     { path: 'tipo-registro', component: RegistroComponent },

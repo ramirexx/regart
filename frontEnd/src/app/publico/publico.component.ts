@@ -22,6 +22,13 @@ export class PublicoComponent implements OnInit {
   usuario: Publico = new Publico;
   userForm: any;
 
+
+  token: string;
+  rol:string;
+  nombre:string;
+  apellido: string;
+  ci: string;
+
   tipos=['Nuevo Registro','Actualización']
 
   departamentos = [{ codigo: 1, descripcion: 'Chuquisaca' },
@@ -38,16 +45,25 @@ export class PublicoComponent implements OnInit {
     private formularioService: FormularioService,
     private router: Router) {
       this.userForm = this._fb.group({
-        'nombres': [{ value: '' }, Validators.required],
-        'apellidos': [{ value: '' }, Validators.required],
-        'cedula': [{ value: '' }, Validators.required],
-        'email': [{ value: '' }, [Validators.required, Validators.email]],
+        'nombres': [{ value: '',disabled: true }, Validators.required],
+        'apellidos': [{ value: '', disabled: true }, Validators.required],
+        'cedula': [{ value: '', disabled: true}, Validators.required],
+        'email': [{ value: '', disabled: true }, [Validators.required, Validators.email]],
         //'tipo': [{ value: '' }, Validators.required],
-        'dpto': [{ value: '' }, Validators.required],
+        'pass1': [{ value: '' }, Validators.required],
+        'pass2': [{ value: '' }, Validators.required],
       });
      }
 
   ngOnInit() {
+
+    this.token = sessionStorage.getItem('token');
+    console.log("token"+this.token)
+    //this.token = localStorage.getItem('token');
+    this.rol = localStorage.getItem('rol');
+    this.nombre = localStorage.getItem('nombre');
+    this.apellido = localStorage.getItem('apellido');
+    this.ci = localStorage.getItem('ci');
   }
 
   public save(): void {
@@ -73,6 +89,10 @@ export class PublicoComponent implements OnInit {
   cancel(){
     let link = ['/'];
     this.router.navigate(link);
+  }
+
+  actualizar(){
+    alert("Aumentar codigo")
   }
 
 }
