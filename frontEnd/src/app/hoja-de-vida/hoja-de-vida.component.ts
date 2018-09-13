@@ -349,7 +349,7 @@ export class HojaDeVidaComponent implements OnInit {
         console.log(response.data.id_artista);
         this.rep = new Representacion();
         this.repForm.markAsUntouched();
-        this.getPre(response.data.id_artista);
+        this.getRep(response.data.id_artista);
       } else {
         alert("No se pudo realizar el registro!")
       }
