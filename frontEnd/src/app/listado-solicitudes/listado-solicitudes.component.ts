@@ -16,21 +16,40 @@ export class ListadoSolicitudesComponent implements OnInit {
   listaIndividual: Individual[];
   rol: any;
   ci: any;
+  dpto: any
 
   constructor(private formularioService: FormularioService,
     private router: Router) { }
 
   ngOnInit() {
-    this.formularioService.getArtistasIndividualEnviado()
-    .subscribe(artistas => {
-    let res: any = artistas;
-    if(res.length>0){
-      this.listaIndividual = artistas;
-    }else{
-      this.listaIndividual = [];
+
+    this.dpto = localStorage.getItem('dpto');
+    this.rol = localStorage.getItem('rol');
+    if(this.rol == 1 || this.rol == 2){
+      this.formularioService.getArtistasIndividualEnviado()
+      .subscribe(artistas => {
+      let res: any = artistas;
+      if(res.length>0){
+        this.listaIndividual = artistas;
+      }else{
+        this.listaIndividual = [];
+      }
+        console.log(this.listaIndividual);
+      });
+    }else if(this.rol == 3){
+      this.formularioService.getArtistasIndividualBydpto(this.dpto)
+      .subscribe(artistas => {
+      let res: any = artistas;
+      if(res.length>0){
+        this.listaIndividual = artistas;
+      }else{
+        this.listaIndividual = [];
+      }
+        console.log(this.listaIndividual);
+      });
     }
-      console.log(this.listaIndividual);
-    });
+
+    
   }
 
   aprobarFormulario(id: string) {

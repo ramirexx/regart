@@ -263,12 +263,16 @@ export class FormularioService {
       .catch(this.handleError);
   }
 
+  getArtistasIndividualBydpto(dpto: any): Observable<any[]> {
+    return this.http.get(environment.urlApi + 'listaIndividualByDpto?cod='+dpto).map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getArtistasIndividualEnviado(): Observable<any[]> {
     return this.http.get(environment.urlApi + 'listaIndividualEnviado').map(this.extractData)
       .catch(this.handleError);
   }
 
-  
 
   getIndividual(id: any): Observable<Individual> {
     return this.http.get(environment.urlApi + 'individual?id='+id).map(this.extractData)

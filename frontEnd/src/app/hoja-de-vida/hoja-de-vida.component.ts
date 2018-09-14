@@ -340,7 +340,7 @@ export class HojaDeVidaComponent implements OnInit {
 
   public saveRep(): void {
     console.log("*----->" + this.masterName);
-    this.premio.id_artista = this.masterName;
+    this.rep.id_artista = this.masterName;
     this.formularioService.saveRep(this.rep).subscribe(response => {
       console.log(response);
       //this.artista.numero_registro = 
