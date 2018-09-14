@@ -323,9 +323,30 @@
                     </div>
 
                 </div>
-                <div *ngIf="tipo_formacion =='autodidacta' || tipo_formacion =='tradicional'">
+                <div *ngIf="tipo_formacion =='autodidacta'">
                     <fieldset>
-                        <h5>RESUMEN </h5>
+                        <h5>RESUMEN AUTODIDACTA</h5>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <textarea rows="5" class="form-control" [(ngModel)]="formacion.resumen" maxlength="5000">
+                                 </textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p-toolbar>
+                                    <div class="ui-toolbar-group-right">
+                                        <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveTra()"></button>
+                                        <button pButton type="button" label="Limpiar" icon="fa-times" (click)="cancelTra()"></button>
+                                    </div>
+                                </p-toolbar>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div *ngIf="tipo_formacion =='tradicional'">
+                    <fieldset>
+                        <h5>RESUMEN TRADICIONAL</h5>
                         <div class="row">
                             <div class="col-sm-12">
                                 <textarea rows="5" class="form-control" [(ngModel)]="formacion.resumen" maxlength="5000">
