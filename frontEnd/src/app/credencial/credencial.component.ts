@@ -52,7 +52,7 @@ export class CredencialComponent implements OnInit {
               //this.imagePath = this.artista.d_foto;
               this.base64Foto = this.artista.d_foto;
               
-              this.qr = "Pagina Web: "+ environment.urlApp+"regart/#/ver-artista/"+id;//this.artista.d_nombres + this.artista.d_apellidos 
+              this.qr = "Pagina Web: "+ environment.urlApp+"/#/ver-artista/"+id;//this.artista.d_nombres + this.artista.d_apellidos 
               this.exp = this.getExp(this.artista.d_exp);
 
               if(this.artista.gestion == "2018" || this.artista.gestion == "2017"){

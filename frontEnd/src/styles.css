@@ -383,7 +383,8 @@ color: #f3f3f3
 .bgimgind {
     background-image: url('assets/img/individual.jpg');
     background-repeat: no-repeat;
-    background-position: center top;
+    /*background-position: center top;*/
+    background-position: left top;
     height: 220px;
     margin-top: 10px;
 }

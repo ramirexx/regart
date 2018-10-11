@@ -1,7 +1,7 @@
 
 <div *ngIf="showInd">
 <div class="bgimgind">
-  <table style="WIDTH: 312px; HEIGHT: 195px" border="0" cellspacing="0" cellpadding="0" align="center">
+  <table style="WIDTH: 312px; HEIGHT: 195px" border="0" cellspacing="0" cellpadding="0">
     <tbody>
       <tr>
         <td style="HEIGHT: 52px; FONT-SIZE: 10px" valign="bottom" align="center">
@@ -13,7 +13,7 @@
 
       <tr>
         <td style="HEIGHT: 90px; FONT-SIZE: 2px" valign="top" align="left">
-          <table style="WIDTH: 296px; HEIGHT: 100px" border="0" cellspacing="0" cellpadding="0" width="296" align="center">
+          <table style="WIDTH: 296px; HEIGHT: 100px" border="0" cellspacing="0" cellpadding="0" width="296">
             <tbody>
               <tr>
                 <td valign="top" colspan="4" align="left"></td>
@@ -51,8 +51,12 @@
                         <br>
                         <!--<strong>C.I.: </strong>{{artista.d_cedula}}&nbsp;
                         <br>-->
+                        <fieldset *ngIf="artista.tipo_artista == 'nacional'">
                         <strong>Departamento: </strong>{{artista.Departamento}}
-                        <br>
+                        </fieldset>
+                        <fieldset *ngIf="artista.tipo_artista == 'extranjero'">
+                          <strong>Pais: </strong>{{artista.pais_nombre}}
+                        </fieldset>
                         <strong>Sector: </strong>{{artista.d_desc_cat}}
                         <br>
                         <strong>Sub Sector:</strong>{{artista.d_desc_sub_cat}}
@@ -153,7 +157,7 @@
   </div>
   </div>
 
-<table style="WIDTH: 312px; HEIGHT: 195px;" border="0" cellspacing="0" cellpadding="0" align="center">
+<table style="WIDTH: 312px; HEIGHT: 195px;" border="0" cellspacing="0" cellpadding="0">
   <tbody><tr>
     <td style="FONT-SIZE: 4px" valign="top" align="center"></td>
   </tr>

@@ -16,6 +16,7 @@ export class VerIndividualComponent implements OnInit {
   qr: string = "";
   depto: string;
   listaTrayectoria: any[];
+  listaRep: any[];
   listaCurso: any[];
   listaFormacion: any[];
   listaPremio: any[];
@@ -46,6 +47,7 @@ export class VerIndividualComponent implements OnInit {
             this.qr = this.artista.d_nombres + this.artista.d_apellidos 
             this.exp = this.getExp(this.artista.d_exp);
             this.getTra(id);
+            this.getRep(id);
             this.getCur(id);
             this.getFor(id);
             this.getPro(id);
@@ -131,6 +133,16 @@ export class VerIndividualComponent implements OnInit {
         console.log(this.listaTrayectoria);
       });
   }
+
+  getRep(id) {
+    console.log(id)
+    this.formularioService.getRep(id)
+      .subscribe(lista => {
+        this.listaRep = lista
+        console.log(this.listaRep);
+      });
+  }
+
 
   getCur(id) {
     console.log(id)

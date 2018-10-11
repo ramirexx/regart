@@ -72,7 +72,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label>Nombres</label>
-                                <input type="text" class="form-control" [formControl]="artForm.controls['d_nombres']" [(ngModel)]="artista.d_nombres" maxlength="36"
+                                <input type="text" class="form-control" [formControl]="artForm.controls['d_nombres']" [(ngModel)]="artista.d_nombres" maxlength="100"
                                 />
                                 <control-messages [submitted]="submitted" [control]="artForm.controls.d_nombres"></control-messages>
                             </div>
@@ -81,7 +81,7 @@
                             <div class="form-group">
                                 <label>Apellidos</label>
                                 <input type="text" class="form-control" [formControl]="artForm.controls['d_apellidos']" [(ngModel)]="artista.d_apellidos"
-                                    maxlength="36" />
+                                    maxlength="100" />
                                     <control-messages [submitted]="submitted" [control]="artForm.controls.d_apellidos"></control-messages>
                             </div>
                             
@@ -137,7 +137,7 @@
                         <div class="col-sm-3">
                             <label>Nombre Artístico</label>
                             <input type="text" class="form-control" [formControl]="artForm.controls['nombre_artistico']" [(ngModel)]="artista.d_nombre_artistico"
-                                maxlength="36" />
+                                maxlength="100" />
                         </div>
                     </div>
     
@@ -299,7 +299,7 @@
             </div>
             <div class="col-sm-3">
                 <label>Correo Electrónico </label>
-                <input type="text" class="form-control" [formControl]="artForm.controls['d_email']" [(ngModel)]="artista.d_email" maxlength="36"
+                <input type="text" class="form-control" [formControl]="artForm.controls['d_email']" [(ngModel)]="artista.d_email" maxlength="50"
                 />
                 <!--<control-messages [submitted]="submitted" [control]="artForm.controls.d_email"></control-messages>-->
             </div>
@@ -319,16 +319,16 @@
                     <div class="col-sm-3">
                         <label>Página Web </label>
                         <input type="text" class="form-control" [formControl]="artForm.controls['d_pagina_web']" [(ngModel)]="artista.d_pagina_web"
-                            maxlength="36" />
+                            maxlength="150" />
                     </div>
                     <div class="col-sm-3">
                         <label>Youtube Blog </label>
-                        <input type="text" class="form-control" [formControl]="artForm.controls['d_youtube']" [(ngModel)]="artista.d_youtube" maxlength="36"
+                        <input type="text" class="form-control" [formControl]="artForm.controls['d_youtube']" [(ngModel)]="artista.d_youtube" maxlength="150"
                         />
                     </div>
                     <div class="col-sm-3">
                         <label>Facebook </label>
-                        <input type="text" class="form-control" [formControl]="artForm.controls['d_otros']" [(ngModel)]="artista.d_otros" maxlength="36"/>
+                        <input type="text" class="form-control" [formControl]="artForm.controls['d_otros']" [(ngModel)]="artista.d_otros" maxlength="150"/>
                     </div>
                 </div>
 
@@ -508,12 +508,13 @@
 <p-dialog [(visible)]="display" [width]="840" [height]="600" modal="true" [closable]="false">
     <p-header>
         Registro de Hoja Artistica
+    <button pButton type="button" label="Cerrar" icon="fa-times" align="ui-toolbar-group-right" (click)="closeDialog()"></button>
     </p-header>
     <app-hoja-de-vida [master]="artista.id_individual" [tipo]="tipoForm">
     </app-hoja-de-vida>
     <p-footer>
         <!--<button pButton type="button" label="Aceptar" icon="fa-save" (click)="saveDraft()"></button>-->
-        <button pButton type="button" label="Cerrar" icon="fa-times" (click)="closeDialog()"></button>
+        <!--<button pButton type="button" label="Cerrar" icon="fa-times" (click)="closeDialog()"></button>-->
     </p-footer>
 </p-dialog>
 

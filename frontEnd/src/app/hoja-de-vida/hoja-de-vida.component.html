@@ -7,16 +7,16 @@
         </div>-->
 
     <p-tabView>
-        <p-tabPanel header="Resumen Artistico">
+        <p-tabPanel header="Resumen Artístico">
             <fieldset>
                 <form [formGroup]="resumenForm" novalidate>
                     <fieldset>
-                        <h5>RESUMEN ARTISTICO</h5>
+                        <h6>RESUMEN ARTÍSTICO (Redacción en tercera persona)</h6>
                         <div class="row">
                             <div class="col-sm-12">
                                 <textarea rows="5" class="form-control" [formControl]="resumenForm.controls['resumen']" [(ngModel)]="resumen.resumen"
                                     maxlength="5000">
-                                                           </textarea>
+                                </textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -37,7 +37,7 @@
                     <thead>
                         <tr>
                             <th>Resumen Artístico</th>
-                            <th>Opcion</th>
+                            <th>Opción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,103 +54,15 @@
                 </table>
             </fieldset>
         </p-tabPanel>
-        <p-tabPanel header="Trayectoria Artistica">
+        <p-tabPanel header="Trayectoria Artística">
             <fieldset>
-                <div class="row">
-                    <div class="col-md-12">
-                        TRAYECTORIA NACIONAL
-                        <p-radioButton name="groupname" value="nacional" [(ngModel)]="tipo_artista"></p-radioButton>
-                        <br> TRAYECTORIA INTERNACIONAL
-                        <p-radioButton name="groupname" value="extranjero" [(ngModel)]="tipo_artista"></p-radioButton>
-                    </div>
-
-                </div>
-                <br>
-                <div *ngIf="tipo_artista == 'nacional'">
-                    <form [formGroup]="trayectoriaForm" novalidate>
-                        <fieldset>
-                            <h5>TRAYECTORIA ARTÍSTICA (Documentado)</h5>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Gestión </label>
-                                        <input type="text" class="form-control" [formControl]="trayectoriaForm.controls['gestion']" [(ngModel)]="trayectoria.gestion"
-                                            maxlength="4" />
-                                    </div>
-                                </div>
-
-                                <!--<div class="col-sm-3">
-                                                    <label>Fecha</label>
-                                                    <p-calendar [(ngModel)]="trayectoria.fecha" [formControl]="trayectoriaForm.controls['fecha']" dateFormat="dd/mm/yy"
-                                                        inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
-                                               </div>-->
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Lugar</label>
-                                        <input type="text" class="form-control" [formControl]="trayectoriaForm.controls['lugar']" [(ngModel)]="trayectoria.lugar"
-                                            maxlength="200" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label>Actividad </label>
-                                    <input type="text" class="form-control" [formControl]="trayectoriaForm.controls['actividad']" [(ngModel)]="trayectoria.actividad"
-                                        maxlength="200">
-                                    <!--<textarea rows="5" class="form-control" [formControl]="trayectoriaForm.controls['actividad']" [(ngModel)]="trayectoria.actividad" maxlength="5000">
-                                                            </textarea>-->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p-toolbar>
-                                        <div class="ui-toolbar-group-right">
-                                            <button pButton type="button" label="Guardar" icon="fa-save" (click)="saveTra()"></button>
-                                            <button pButton type="button" label="Limpiar" icon="fa-times" (click)="cancelTra()"></button>
-                                        </div>
-                                    </p-toolbar>
-                                </div>
-                            </div>
-
-                        </fieldset>
-                        <!--<pre>{{trayectoria| json}}</pre>-->
-                    </form>
-                    <table class="table table-striped table-bordered table-sm">
-                        <thead>
-                            <tr>
-                                <th>Gestion</th>
-                                <th>Lugar</th>
-                                <th>Actividad</th>
-                                <th>Opcion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let obj of listaTrayectoria;let i = index">
-                                <td class="form-group">
-                                    {{obj.gestion}}
-                                </td>
-                                <!--<td class="form-group">
-                                                    {{obj.fecha}}
-                                                </td>-->
-                                <td class="form-group">
-                                    {{obj.lugar}}
-                                </td>
-                                <td class="form-group">
-                                    {{obj.actividad}}
-                                </td>
-                                <td>
-                                    <button pButton type="button" label="Eliminar" icon="fa-trash" (click)="deleteTra(obj.id)"></button>
-                            </tr>
-                        </tbody>
-
-
-                    </table>
-                </div>
-                <div *ngIf="tipo_artista == 'extranjero'">
+                <div>
                     <form [formGroup]="repForm" novalidate>
                         <fieldset>
-                            <h5>REPRESENTACION EN EL EXTRANJERO</h5>
+                            <!--<h6>REPRESENTACIÓN EN EL EXTRANJERO</h6>-->
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <label>Fecha</label>
+                                    <label>Año</label>
                                     <p-calendar [(ngModel)]="rep.fecha" [formControl]="repForm.controls['fecha']" dateFormat="dd/mm/yy" inputStyleClass="form-control"
                                         placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
                                 </div>
@@ -160,18 +72,18 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label>Actividad </label>
-                                        <input type="text" class="form-control" [formControl]="repForm.controls['actividad']" [(ngModel)]="rep.actividad" maxlength="200"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Recursos</label>
+                                        <label>Actividad</label>
                                         <select class="form-control" [formControl]="repForm.controls['recursos']" [(ngModel)]="rep.recursos">
                                             <option value="">--Seleccione un valor--</option>
                                             <option *ngFor="let obj of recursos" [ngValue]="obj">{{obj}}</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Título/Detalle</label>
+                                        <input type="text" class="form-control" [formControl]="repForm.controls['actividad']" [(ngModel)]="rep.actividad" maxlength="200"
+                                        />
                                     </div>
                                 </div>
 
@@ -193,11 +105,11 @@
                     <table class="table table-striped table-bordered table-sm">
                         <thead>
                             <tr>
-                                <th>Fecha</th>
+                                <th>Año</th>
                                 <th>Lugar</th>
                                 <th>Actividad</th>
-                                <th>Recursos</th>
-                                <th>Opcion</th>
+                                <th>Título/Detalle</th>
+                                <th>Opción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -209,11 +121,12 @@
                                     {{obj.lugar}}
                                 </td>
                                 <td class="form-group">
-                                    {{obj.actividad}}
-                                </td>
-                                <td class="form-group">
                                     {{obj.recursos}}
                                 </td>
+                                <td class="form-group">
+                                    {{obj.actividad}}
+                                </td>
+                                
                                 <td>
                                     <button pButton type="button" label="Eliminar" icon="fa-trash" (click)="deleteTra(obj.id)"></button>
                             </tr>
@@ -309,14 +222,14 @@
         </p-tabPanel>-->
         <p-tabPanel header="Formación" *ngIf="tipo == 'IND'">
             <fieldset>
-                <h5>FORMACIÓN</h5>
+                <h6>FORMACIÓN</h6>
                 <div class="row">
                     <div class="col-md-12">
                         AUTODIDACTA
                         <p-radioButton name="groupname" value="autodidacta" [(ngModel)]="tipo_formacion"></p-radioButton>
                         <br> TRADICIONAL
                         <p-radioButton name="groupname" value="tradicional" [(ngModel)]="tipo_formacion"></p-radioButton>
-                        <br> ACADEMICA
+                        <br> ACADÉMICA
                         <p-radioButton name="groupname" value="academica" [(ngModel)]="tipo_formacion"></p-radioButton>
                         <br> CURSOS
                         <p-radioButton name="groupname" value="cursos" [(ngModel)]="tipo_formacion"></p-radioButton>
@@ -325,7 +238,10 @@
                 </div>
                 <div *ngIf="tipo_formacion =='autodidacta'">
                     <fieldset>
-                        <h5>RESUMEN AUTODIDACTA</h5>
+                        <h6>RESUMEN AUTODIDACTA</h6>
+                        
+                        
+                        
                         <div class="row">
                             <div class="col-sm-12">
                                 <textarea rows="5" class="form-control" [(ngModel)]="formacion.resumen" maxlength="5000">
@@ -346,7 +262,7 @@
                 </div>
                 <div *ngIf="tipo_formacion =='tradicional'">
                     <fieldset>
-                        <h5>RESUMEN TRADICIONAL</h5>
+                        <h6>RESUMEN TRADICIONAL</h6>
                         <div class="row">
                             <div class="col-sm-12">
                                 <textarea rows="5" class="form-control" [(ngModel)]="formacion.resumen" maxlength="5000">
@@ -369,11 +285,11 @@
 
                     <form [formGroup]="formacionForm" novalidate>
                         <fieldset>
-                            <h5>FORMACIÓN (Documentado)</h5>
+                            <h6>FORMACIÓN (Documentado)</h6>
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label>Centro de formación</label>
+                                        <label>Centro de Formación</label>
                                         <input type="text" class="form-control" [formControl]="formacionForm.controls['universidad']" [(ngModel)]="formacion.universidad"
                                             maxlength="200" />
                                     </div>
@@ -386,7 +302,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Fecha de Grado obtenido</label>
+                                    <label>Año</label>
                                     <p-calendar [(ngModel)]="formacion.fecha_emision" [formControl]="formacionForm.controls['fecha_emision']" dateFormat="dd/mm/yy"
                                         inputStyleClass="form-control" placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
                                 </div>
@@ -409,10 +325,10 @@
                     <table class="table table-striped table-bordered table-sm">
                         <thead>
                             <tr>
-                                <th>Centro de formación</th>
+                                <th>Centro de Formación</th>
                                 <th>Grado Obtenido</th>
-                                <th>Fecha de grado obtenido</th>
-                                <th>Opcion</th>
+                                <th>Año</th>
+                                <th>Opción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -439,24 +355,24 @@
                     <fieldset>
                         <form [formGroup]="cursoForm" novalidate>
                             <fieldset>
-                                <h5>CURSOS DE ESPECIALIZACIÓN/ACTUALIZACIÓN ARTÍSTICA (Documentado)</h5>
+                                <h6>CURSOS DE ESPECIALIZACIÓN/ACTUALIZACIÓN ARTÍSTICA (Documentado)</h6>
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Institución </label>
+                                            <label>Institución/Formador</label>
                                             <input type="text" class="form-control" [formControl]="cursoForm.controls['institucion']" [(ngModel)]="curso.institucion"
                                                 maxlength="200" />
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Nombre Específico del Curso</label>
+                                            <label>Descripción</label>
                                             <input type="text" class="form-control" [formControl]="cursoForm.controls['nombre_curso']" [(ngModel)]="curso.nombre_curso"
                                                 maxlength="200" />
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
-                                        <label>Gestión</label>
+                                        <label>Año</label>
                                         <p-calendar [(ngModel)]="curso.desde" [formControl]="cursoForm.controls['desde']" dateFormat="dd/mm/yy" inputStyleClass="form-control"
                                             placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
                                     </div>
@@ -478,10 +394,10 @@
                         <table class="table table-striped table-bordered table-sm">
                             <thead>
                                 <tr>
-                                    <th>Institución</th>
-                                    <th>Nombre Especifico del Curso</th>
-                                    <th>Gestión</th>
-                                    <th>Opcion</th>
+                                    <th>Institución/Formador</th>
+                                    <th>Descripción</th>
+                                    <th>Año</th> 
+                                    <th>Opción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -507,98 +423,11 @@
                 </div>
             </fieldset>
         </p-tabPanel>
-        <p-tabPanel header="Producción">
-            <fieldset>
-                <form [formGroup]="trayectoriaForm" novalidate>
-                    <fieldset>
-                        <h5>PRODUCCIÓN INTELECTUAL (Obras – Libros – Investigación – Producción Literaria - Producción Audiovisual
-                            – Producción Fonográfica, etc.)</h5>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Gestión </label>
-                                    <input type="text" class="form-control" [formControl]="produccionForm.controls['gestion']" [(ngModel)]="produccion.gestion"
-                                        maxlength="4" />
-                                </div>
-                            </div>
-
-                            <!--<div class="col-sm-3">
-                                <label>Fecha</label>
-                                <p-calendar [(ngModel)]="produccion.fecha" [formControl]="produccionForm.controls['fecha']" dateFormat="dd/mm/yy" inputStyleClass="form-control"
-                                    placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
-                            </div>-->
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Lugar</label>
-                                    <input type="text" class="form-control" [formControl]="produccionForm.controls['lugar']" [(ngModel)]="produccion.lugar" maxlength="100"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <label>Título</label>
-                                <input type="text" class="form-control" [formControl]="produccionForm.controls['actividad']" [(ngModel)]="produccion.act_pub_exp"
-                                    maxlength="100">
-                            </div>
-                            <div class="col-sm-3">
-                                <label>Bien / Obra Artística</label>
-                                <select class="form-control" [formControl]="produccionForm.controls['bien']" [(ngModel)]="produccion.bien">
-                                    <option value="">--Seleccione un valor--</option>
-                                    <option *ngFor="let obj of bienes" [ngValue]="obj">{{obj}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p-toolbar>
-                                    <div class="ui-toolbar-group-right">
-                                        <button pButton type="button" label="Guardar" icon="fa-save" (click)="savePro()"></button>
-                                        <button pButton type="button" label="Limpiar" icon="fa-times" (click)="cancelPro()"></button>
-                                    </div>
-                                </p-toolbar>
-                            </div>
-                        </div>
-
-                    </fieldset>
-                    <!--<pre>{{trayectoria| json}}</pre>-->
-                </form>
-                <table class="table table-striped table-bordered table-sm">
-                    <thead>
-                        <tr>
-                            <th>Gestion</th>
-                            <th>Lugar</th>
-                            <th>Actividad</th>
-                            <th>Bien / Obra Artística</th>
-                            <th>Opcion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let obj of listaProduccion;let i = index">
-                            <td class="form-group">
-                                {{obj.gestion}}
-                            </td>
-                            <td class="form-group">
-                                {{obj.lugar}}
-                            </td>
-                            <td class="form-group">
-                                {{obj.act_pub_exp}}
-                            </td>
-                            <td class="form-group">
-                                {{obj.bien}}
-                            </td>
-                            <td>
-                                <button pButton type="button" label="Eliminar" icon="fa-trash" (click)="deleteTra(obj.id)"></button>
-                        </tr>
-                    </tbody>
-
-
-                </table>
-            </fieldset>
-        </p-tabPanel>
         <p-tabPanel header="Premios">
             <fieldset>
                 <form [formGroup]="premioForm" novalidate>
                     <fieldset>
-                        <h5>PREMIOS Y DISTINCIONES</h5>
+                        <h6>PREMIOS Y DISTINCIONES</h6>
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
@@ -619,7 +448,7 @@
                                 <input type="text" class="form-control" [formControl]="premioForm.controls['lugar']" [(ngModel)]="premio.lugar" maxlength="200">
                             </div>
                             <div class="col-sm-3">
-                                <label>Fecha</label>
+                                <label>Año</label>
                                 <p-calendar [(ngModel)]="premio.fecha" [formControl]="premioForm.controls['fecha']" dateFormat="dd/mm/yy" inputStyleClass="form-control"
                                     placeholder="dd/mm/yyyy" [locale]="es"></p-calendar>
                             </div>
@@ -641,11 +470,11 @@
                 <table class="table table-striped table-bordered table-sm">
                     <thead>
                         <tr>
-                            <th>Gestion</th>
-                            <th>Fecha</th>
+                            <th>Institución</th>
+                            <th>Distinción</th>
                             <th>Lugar</th>
-                            <th>Actividad</th>
-                            <th>Opcion</th>
+                            <th>Año</th>
+                            <th>Opción</th>
                         </tr>
                     </thead>
                     <tbody>

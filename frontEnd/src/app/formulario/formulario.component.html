@@ -16,18 +16,36 @@ background-repeat: no-repeat; background-position: top center;"></div>
                 <div class="info-name">Fecha de Registro:
                   <span class="value">{{artista.d_fecha_registro}}</span>
                 </div>
+                <fieldset *ngIf="artista.tipo_artista == 'nacional'">
                 <div class="info-name">Departamento:
                   <span class="value">{{artista.Departamento}}</span>
                 </div>
-                <div class="info-name">Provincia:
-                  <span class="value">{{artista.Provincia}}</span>
-                </div>
-                <div class="info-name">Municipio:
-                  <span class="value">{{artista.Localidad}}</span>
-                </div>
+                </fieldset>
+                <fieldset *ngIf="artista.tipo_artista == 'extranjero'">
+                    <div class="info-name">Pais:
+                      <span class="value">{{artista.pais_nombre}}</span>
+                    </div>
+                </fieldset>
+                <fieldset *ngIf="artista.tipo_artista == 'nacional'">
+                  <div class="info-name">Provincia:
+                    <span class="value">{{artista.Provincia}}</span>
+                  </div>
+                </fieldset> 
+                <fieldset *ngIf="artista.tipo_artista == 'extranjero'">
+                    <div class="info-name">Ciudad:
+                      <span class="value">{{artista.e_pais_localidad}}</span>
+                    </div>
+                  </fieldset>  
+                <fieldset *ngIf="artista.tipo_artista == 'nacional'"> 
+                  <div class="info-name">Municipio:
+                    <span class="value">{{artista.Localidad}}</span>
+                  </div>
+                </fieldset>
+                <fieldset *ngIf="artista.tipo_artista == 'nacional'"> 
                 <div class="info-name">Auto Identificación Cultural:
                   <span class="value">{{artista.comunidad}}</span>
                 </div>
+                </fieldset>
                 <!--<div class="info-name">Residencia:
                   <span class="value">{{artista.Residencia}}</span>
                 </div>-->

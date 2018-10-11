@@ -46,7 +46,8 @@ export class HojaDeVidaComponent implements OnInit {
   tipo_artista: string;
   tipo_formacion: string;
 
-  recursos=["Propio", "Estatal", "Apoyo Internacional","Mixta"]
+  recursos=["Presentación Musical", "Presentación Teatral", "Presentación de Danza","Presentación Escénica","Producción Audiovisual","Producción Musical","Producción de Arte","Exposición","Publicación Literaria"]
+  //recursos=["Propio", "Estatal", "Apoyo Internacional","Mixta"]
   bienes=["Dramático Musicales","Descripción Escrita de Coreografía","Descripción Escrita de Pantomímicas","Composiciones Musicales con Letra","Composiciones Musicales Instrumentales","Cinematográfica","Videograma","Dibujo","Pintura","Escultura","Grabado","Litografía","Fotografía","Artes Aplicadas","Artesanía","Ilustraciones","Bocetos Escenográficos","Escenografías","Adaptaciones","Arreglos Musicales"];
 
   es: any;

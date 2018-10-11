@@ -188,6 +188,10 @@ export class FormularioService {
       .catch(this.handleError);
   }
 
+  deleteTrayectoria = function (id_tray) {
+    return this.http.delete(environment.urlApi + 'deleteTrayectoria?id_tray=' + id_tray)
+};
+
   saveCurso (data:any): Observable<any> {
     return this.http.post(environment.urlApi + 'insertCurso', data).map(this.extractData) 
       .catch(this.handleError);

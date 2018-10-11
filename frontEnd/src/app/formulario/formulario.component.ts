@@ -44,7 +44,9 @@ export class FormularioComponent implements OnInit {
             console.log(this.artista)
             this.imagePath = this.artista.d_foto;
             this.base64Foto = this.artista.d_foto;
-            this.qr = this.artista.d_nombres + this.artista.d_apellidos + this.artista.d_cedula
+            
+            this.qr = "Identificación:" + this.artista.d_cedula + "," + " "+  "Nombre:" + this.artista.d_nombres + " " + this.artista.d_apellidos+ "," + " " + "Sector:" + this.artista.d_desc_cat + "," + " " + "Actividad:" + this.artista.d_desc_sub_cat + "," + " " + "Especialidad:" + this.artista.d_desc_act
+            //this.qr = this.artista.d_nombres + this.artista.d_apellidos + this.artista.d_cedula
             //this.depto = this.getDepto(this.artista.d_nacimiento);
             this.nac = this.getNac(this.artista.d_nacimiento);
             this.exp = this.getExp(this.artista.d_exp);

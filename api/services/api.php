@@ -516,7 +516,8 @@ private function formularioIndividual(){
             tb_sub_cat.d_desc_sub_cat,
             tb_actividad.d_desc_act,
             tb_categoria.d_desc_cat,
-  localidades.Localidad
+  localidades.Localidad,
+tb_pais.pais_nombre
           FROM
             departamentos
             RIGHT OUTER JOIN tb_individual ON (departamentos.idDep = tb_individual.id_dpto)
@@ -525,6 +526,7 @@ private function formularioIndividual(){
             INNER JOIN tb_categoria ON (tb_individual.id_sector = tb_categoria.id_cat)
             INNER JOIN tb_sub_cat ON (tb_individual.id_sub_sector = tb_sub_cat.id_sub_cat)
             INNER JOIN tb_actividad ON (tb_individual.id_actividad = tb_actividad.id_actividad)
+ LEFT OUTER JOIN tb_pais ON (tb_individual.e_id_pais = tb_pais.id)
           WHERE
             tb_individual.id_individual = $id LIMIT 1";
  //$query="SELECT a.id_estado, a.numero_registro,a.d_fecha_registro, a.gestion, a.d_fecha_validez, a.comunidad, a.id_dpto, a.id_prov, a.id_mun, a.d_nombre_artistico, a.d_nombres, d_apellidos, a.d_cedula, a.d_exp,a.d_sexo,a.d_nacimiento,a.d_fecha_nacimiento, a.d_domicilio, a.d_telefono, a.d_celular, a.d_email, a.d_pagina_web, a.d_youtube, a.d_otros, a.d_institucion, a.id_sector, a.id_actividad, a.d_agrupaciones,  a.d_experiencia, a.d_foto, a.d_foto_artista, a.id_sector, a.id_sub_sector, a.id_actividad, a.id_especialidad, a.d_agrupaciones,  a.d_experiencia, a.vigencia, b.Departamento, c.Provincia, d.Localidad, e.d_desc_cat, f.d_desc_sub_cat, g.d_desc_act, h.d_desc_esp
@@ -584,6 +586,33 @@ private function listaIndividual(){
       }
       $this->response('',204);   // If no records "No Content" status
    }
+//// ultimo cambio para lista por dpto
+   private function listaIndividualByDpto(){
+      if($this->get_request_method() != "GET"){
+         $this->response('',406);
+      }
+      $dpto = (int)$this->_request['cod'];
+            if($dpto > 0){   
+            
+      $query="SELECT * FROM tb_individual WHERE id_estado IN ('ENVIADO','APROBADO') AND id_dpto ='$dpto' order by id_individual";
+      $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+      
+
+      if($r->num_rows > 0){
+         $result = array();
+         while($row = $r->fetch_assoc()){
+            $result[] = $row;
+         }
+         $this->response($this->json($result), 200); // send user details
+      }
+      else{
+            $error = array('status' => "empty", "msg" => "NO se encontraron datos");
+            $this->response($this->json($error), 202); // send user details  
+      }
+      }
+      $this->response('',204);   // If no records "No Content" status
+   }
+
 
 
    private function updateEstado(){
@@ -1297,6 +1326,32 @@ private function resetPassword(){
       $this->response($this->json($error), 400);
 }
 
+private function updatePassword(){
+
+      if($this->get_request_method() != "POST"){
+            $this->response('',406);
+      }
+         $obj = json_decode(file_get_contents("php://input"),true);
+         //$id = (int)$this->customer['id'];
+         $keys = array($obj);
+         foreach ($keys as $input)
+         {
+               $id     = $input['id'];
+               $pass     = $input['pass'];
+         }
+
+         $query="UPDATE usuarios SET pass_usuario='$passUsuario' WHERE ci_usuario='$id'";
+
+         if(!empty($obj)){
+            $r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+            $success = array('status' => "Success", "msg" => "Estado Actualizado Successfully.");
+            $this->response($this->json($success),200);
+         }else
+            $this->response($this->json($obj), 400);
+            //$this->response('error',204);   //"No Content" status
+
+   }
+
 private function profesiones(){
       if($this->get_request_method() != "GET"){
          $this->response('',406);
@@ -1745,7 +1800,7 @@ private function trayectoria(){
       $this->response('',204);   // If no records "No Content" status
    }
 
-
+   
    private function insertRep(){
       if($this->get_request_method() != "POST"){
          $this->response('',406);
